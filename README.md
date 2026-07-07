@@ -21,20 +21,23 @@ deterministic validators.
 | `docs/brainlift.md` | Research brainlift: theory, experts, insights, sources. |
 | `src/islm/` | The package: `vocab`, `validators`, `llm`, `datagen`, `eval`. |
 | `tests/` | Unit tests for the validators + an offline end-to-end smoke test. |
-| `data/vocab/` | Bundled sample word list (real datasets land in `data/generated/`, git-ignored). |
+| `data/vocab/<lang>/` | Per-language baseline + advanced word lists (real datasets land in `data/generated/`, git-ignored). |
 | `evals/` | Held-out scenarios (`scenarios/`) and results (`results/`, git-ignored). |
 
 ## Getting started
 
+Shipped languages: **English, Chinese, Japanese** (`--language en|zh|ja`); the pipeline is
+language-agnostic and any other language falls back to frequency bands + a generic tokenizer.
+
 ```bash
-python -m venv .venv && pip install -e .
-python -m spacy download en_core_web_sm     # recommended for real data
+python -m venv .venv && pip install -e .    # installs spaCy, jieba, fugashi, wordfreq, ...
+python -m spacy download en_core_web_sm     # recommended for English
 
 # Build a dataset and run the eval fully offline (mock teacher, no API key):
-python -m islm.datagen.pipeline --n 20 --mock --out data/generated
-python -m islm.eval.run --mock
+python -m islm.datagen.pipeline --n 20 --language zh --mock --out data/generated/zh
+python -m islm.eval.run --mock --language zh
 
-python -m pytest        # tests        (23 passing)
+python -m pytest        # tests (36 passing, incl. zh/ja)
 ruff check src tests    # lint
 ```
 

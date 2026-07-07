@@ -9,7 +9,7 @@ from ..config import DEFAULT_THRESHOLDS, Thresholds
 from ..datagen.scenarios import Scenario
 from ..llm.client import LLMClient
 from ..validators import validate_story
-from ..vocab.lemmatize import Lemmatizer, get_lemmatizer
+from ..vocab.lemmatize import Lemmatizer, get_analyzer
 from .cloze import cloze_inferability
 from .judge import DIMENSIONS, judge_story
 
@@ -76,11 +76,13 @@ def evaluate(
     lemmatizer: Lemmatizer | None = None,
     thresholds: Thresholds = DEFAULT_THRESHOLDS,
 ) -> EvalSummary:
-    lemmatizer = lemmatizer or get_lemmatizer()
+    analyzers: dict[str, Lemmatizer] = {}
     rows: list[EvalRow] = []
     for s in scenarios:
+        # Reuse one analyzer per language (segmenter init can be expensive).
+        lem = lemmatizer or analyzers.setdefault(s.language, get_analyzer(s.language))
         story = produce_story(s)
-        report = validate_story(story, s.known_set(), s.target_set(), lemmatizer, thresholds)
+        report = validate_story(story, s.known_set(), s.target_set(), lem, thresholds)
         rows.append(
             EvalRow(
                 scenario_id=s.id,

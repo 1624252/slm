@@ -1,4 +1,4 @@
-"""Scenarios: (level, known vocabulary, target words, theme) — the input the model writes from."""
+"""Scenarios: (language, known vocabulary, target words, theme) — the model's input."""
 
 from __future__ import annotations
 
@@ -7,56 +7,15 @@ import random
 from dataclasses import asdict, dataclass
 from pathlib import Path
 
-from ..vocab.wordlists import Vocabulary
-
-# Candidate words to teach. The sampler drops any that are already in the known list.
-DEFAULT_TARGET_POOL = [
-    "clue",
-    "whisker",
-    "shadow",
-    "treasure",
-    "secret",
-    "umbrella",
-    "lantern",
-    "puzzle",
-    "ribbon",
-    "feather",
-    "pumpkin",
-    "whistle",
-    "balloon",
-    "kitten",
-    "mustache",
-    "castle",
-    "dragon",
-    "wizard",
-    "ghost",
-    "robot",
-    "pocket",
-    "button",
-    "candle",
-    "basket",
-]
-
-# Narrow-reading themes (Krashen 2004): recurring worlds that recycle vocabulary.
-THEMES = [
-    "a cat detective",
-    "a lost key",
-    "a funny dog",
-    "a quiet garden",
-    "a rainy day",
-    "a new friend",
-    "a night in the old house",
-    "a bird and a tree",
-    "a mouse and the cheese",
-    "a walk in the park",
-]
+from ..vocab.languages import get_language
+from ..vocab.wordlists import Vocabulary, load_advanced, load_baseline
 
 
 @dataclass
 class Scenario:
     id: str
     language: str
-    level: str
+    level: str  # human label for the known tier(s), e.g. "A1-A2", "HSK1-HSK3", "N5-N4"
     theme: str
     target_words: list[str]
     known: list[str]
@@ -77,28 +36,33 @@ class Scenario:
 
 def sample_scenarios(
     n: int,
-    level: str = "A2",
-    seed: int = 0,
     language: str = "en",
-    vocab: Vocabulary | None = None,
-    target_pool: list[str] | None = None,
+    seed: int = 0,
     max_targets: int = 2,
+    known: Vocabulary | None = None,
+    target_pool: list[str] | None = None,
 ) -> list[Scenario]:
-    """Deterministically sample `n` scenarios for a level (seeded)."""
-    rng = random.Random(seed)
-    vocab = vocab or Vocabulary.from_csv(level_at_most=level)
-    known = sorted(vocab.lemmas)
-    pool = [w for w in (target_pool or DEFAULT_TARGET_POOL) if w.lower() not in vocab.lemmas]
-    if not pool:
-        raise ValueError("Target pool is empty after removing known words.")
+    """Deterministically sample `n` scenarios for a language (seeded).
 
+    Known vocabulary = the language's baseline tier; target pool = its advanced tier
+    (minus anything already known). Falls back to frequency bands for unlisted languages.
+    """
+    lang = get_language(language)
+    known_vocab = known or load_baseline(language)
+    known_list = sorted(known_vocab.lemmas)
+    pool = target_pool or sorted(load_advanced(language).lemmas - known_vocab.lemmas)
+    if not pool:
+        raise ValueError(f"No target words available for language '{language}'.")
+
+    level = "-".join(lang.baseline_tiers) or lang.level_scheme
+    rng = random.Random(seed)
     scenarios: list[Scenario] = []
     for i in range(n):
         k = rng.randint(1, max_targets)
         targets = rng.sample(pool, min(k, len(pool)))
-        theme = rng.choice(THEMES)
+        theme = rng.choice(lang.themes)
         scenarios.append(
-            Scenario(f"{language}-{level}-{i:04d}", language, level, theme, targets, known)
+            Scenario(f"{language}-{i:04d}", language, level, theme, targets, known_list)
         )
     return scenarios
 

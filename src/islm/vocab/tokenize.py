@@ -4,8 +4,9 @@ from __future__ import annotations
 
 import re
 
-# Split after ., !, ? followed by whitespace, or on blank lines.
-_SENT_SPLIT = re.compile(r"(?<=[.!?])\s+|\n+")
+# Split after Latin ., !, ? followed by whitespace; after CJK enders 。！？ (no space needed);
+# or on blank lines.
+_SENT_SPLIT = re.compile(r"(?<=[.!?])\s+|(?<=[。！？])|\n+")
 
 # A word is letters, optionally joined by an internal apostrophe or hyphen.
 _WORD = re.compile(r"[A-Za-z]+(?:['\u2019-][A-Za-z]+)*")

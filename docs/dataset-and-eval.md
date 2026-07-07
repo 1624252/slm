@@ -23,6 +23,29 @@ For real generation, copy `.env.example` to `.env` and add your key (the client 
 OpenAI-compatible, so `OPENAI_BASE_URL` can point at any provider or a local server). **Never
 commit `.env`.**
 
+## Languages
+
+Shipped: **English (`en`), Chinese (`zh`), Japanese (`ja`)**. The pipeline is language-agnostic —
+any other code falls back to `wordfreq` frequency bands + a generic Unicode tokenizer.
+
+| Language | Analyzer | Graded scheme | Known / to-learn tiers |
+| --- | --- | --- | --- |
+| en | spaCy (`en_core_web_sm`) or rule-based fallback | CEFR | A1–A2 / B1–C1 |
+| zh | jieba | HSK | HSK1–3 / HSK4–6 |
+| ja | fugashi + UniDic | JLPT | N5–N4 / N3–N1 |
+| other | generic Unicode tokenizer | frequency | top-N / next band |
+
+Vocabulary lives at `data/vocab/<lang>/{baseline,advanced}.csv` (`word,tier,source`). Small
+curated samples ship for offline use and tests; regenerate or expand from frequency with:
+
+```bash
+python -m islm.vocab.build_lists --language ja --from-frequency --overwrite
+```
+
+`jieba`, `fugashi`, and `unidic-lite` install via `pip install -e .`. Without them, ZH/JA fall
+back to a crude per-character tokenizer (fine for the smoke test, not for real data). Provenance
+and licenses of the graded lists are recorded in `data/vocab/SOURCES.md`.
+
 ## Package layout
 
 ```
@@ -62,16 +85,17 @@ Pipeline (`datagen/pipeline.py`), one scenario → one example:
    *and* the judge threshold.
 6. **Write** `train/val/test.jsonl` (scenario-level split) + `stats.json`.
 
-Offline smoke (mock teacher, no key):
+Offline smoke (mock teacher, no key); add `--language zh` or `--language ja` for other languages:
 
 ```bash
-python -m islm.datagen.pipeline --n 20 --mock --out data/generated
+python -m islm.datagen.pipeline --n 20 --language en --mock --out data/generated/en
+python -m islm.datagen.pipeline --n 20 --language zh --mock --out data/generated/zh
 ```
 
 Real run (teacher + judge from `.env`):
 
 ```bash
-python -m islm.datagen.pipeline --n 500 --model gpt-5 --judge-model claude-sonnet-5
+python -m islm.datagen.pipeline --n 500 --language zh --model gpt-5 --judge-model claude-sonnet-5
 ```
 
 ### Record schema (JSONL)
@@ -106,10 +130,10 @@ story with the validators + optional judge + optional cloze. `eval/report.py` re
 base-vs-tuned table; the win condition (PRD 15) is **tuned beats base on hard-check pass rate and
 judge spec-adherence**.
 
-Offline smoke (mock as both models — proves the harness end-to-end):
+Offline smoke (mock as both models — proves the harness end-to-end); pick a language:
 
 ```bash
-python -m islm.eval.run --mock
+python -m islm.eval.run --mock --language zh
 ```
 
 Real comparison (prompted base vs your fine-tuned model):
@@ -121,8 +145,9 @@ python -m islm.eval.run \
   --judge-model gpt-5
 ```
 
-Held-out scenarios are read from `evals/scenarios/heldout.jsonl` (committed for reproducibility;
-auto-created on first run if missing). Results are written to `evals/results/` (git-ignored).
+Held-out scenarios are read from `evals/scenarios/heldout_<lang>.jsonl` (committed for
+reproducibility; auto-created on first run if missing). Results go to `evals/results/`
+(git-ignored).
 
 ## Testing & linting
 
@@ -145,4 +170,7 @@ model download.
 - **Mock output is intentionally minimal** ("The cat is big.") — it exists to exercise the
   pipeline, not to be good writing. A real teacher produces real stories; the validators are
   identical either way.
-- **Non-English:** Chinese (New HSK 3.0) needs a segmenter; start with English (PRD 16 risks).
+- **Chinese/Japanese** need a segmenter (jieba / fugashi); coverage matches on lemma **or**
+  surface, which absorbs most segmentation and dictionary-form mismatches.
+- **Any other language** works via `wordfreq` bands + a generic tokenizer — lower quality, but
+  the same validators and eval apply unchanged.

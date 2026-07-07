@@ -7,6 +7,20 @@ name = "islm"
 version = "0.1.0"
 description = "i+1 Story SLM: comprehensible-input language-learning story generation, validators, and eval."
 requires-python = ">=3.10"
+dependencies = [
+    "spacy>=3.7",       # English lemmatization
+    "jieba>=0.42",      # Chinese segmentation
+    "fugashi>=1.3",     # Japanese morphological analysis
+    "unidic-lite>=1.0.8",  # dictionary for fugashi
+    "wordfreq>=3.1",    # frequency bands for any language
+    "openai>=1.40",     # OpenAI-compatible teacher/judge client
+    "python-dotenv>=1.0",
+    "pandas>=2.2",
+    "tqdm>=4.66",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=8.0", "ruff>=0.6"]
 
 [tool.setuptools.packages.find]
 where = ["src"]

@@ -7,6 +7,7 @@ forms and sentence-initial proper nouns that the rule-based fallback cannot.
 
 from __future__ import annotations
 
+import re
 from dataclasses import dataclass
 from typing import Protocol
 
@@ -199,10 +200,118 @@ class SpacyLemmatizer:
 
 
 def get_lemmatizer(prefer_spacy: bool = True, model: str = "en_core_web_sm") -> Lemmatizer:
-    """Return spaCy lemmatizer if available, else the rule-based fallback."""
+    """Return spaCy lemmatizer if available, else the rule-based fallback (English)."""
     if prefer_spacy:
         try:
             return SpacyLemmatizer(model)
         except Exception:
             pass
     return SimpleLemmatizer()
+
+
+# --- Chinese / Japanese / generic analyzers -------------------------------------------------
+
+
+def _is_cjk(ch: str) -> bool:
+    o = ord(ch)
+    return (
+        0x4E00 <= o <= 0x9FFF  # CJK unified ideographs
+        or 0x3400 <= o <= 0x4DBF  # extension A
+        or 0x3040 <= o <= 0x30FF  # hiragana + katakana
+    )
+
+
+class GenericAnalyzer:
+    """Unicode word tokenizer for space-delimited scripts; lemma = lowercase surface."""
+
+    _WORD = re.compile(r"\w+", re.UNICODE)
+
+    def analyze(self, sentence: str) -> list[LemmaToken]:
+        return [
+            LemmaToken(s, s.lower(), True, s[:1].isupper() and i > 0)
+            for i, s in enumerate(self._WORD.findall(sentence))
+        ]
+
+
+class CjkCharAnalyzer:
+    """Offline fallback for Chinese/Japanese: one token per CJK character.
+
+    Crude (misses multi-character words) but needs no external segmenter. Prefer
+    ChineseAnalyzer / JapaneseAnalyzer for real data.
+    """
+
+    def analyze(self, sentence: str) -> list[LemmaToken]:
+        return [LemmaToken(ch, ch, True, False) for ch in sentence if _is_cjk(ch)]
+
+
+class ChineseAnalyzer:
+    """Word segmentation via jieba, with POS-based proper-noun detection."""
+
+    def __init__(self):
+        import logging
+        import warnings
+
+        with warnings.catch_warnings():
+            warnings.simplefilter("ignore")
+            import jieba
+            import jieba.posseg as posseg
+        jieba.setLogLevel(logging.WARNING)
+        self._posseg = posseg
+
+    def analyze(self, sentence: str) -> list[LemmaToken]:
+        out: list[LemmaToken] = []
+        for tok in self._posseg.cut(sentence):
+            word = tok.word.strip()
+            if not word or not (any(_is_cjk(c) for c in word) or word.isalnum()):
+                continue  # skip punctuation / whitespace
+            is_proper = tok.flag.startswith(("nr", "ns", "nt", "nz"))
+            out.append(LemmaToken(word, word.lower(), True, is_proper))
+        return out
+
+
+class JapaneseAnalyzer:
+    """Morphological analysis via fugashi (MeCab + UniDic); lemma = dictionary form."""
+
+    _SKIP_POS = {"補助記号", "空白", "記号"}
+
+    def __init__(self):
+        import fugashi
+
+        self._tagger = fugashi.Tagger()
+
+    def analyze(self, sentence: str) -> list[LemmaToken]:
+        out: list[LemmaToken] = []
+        for word in self._tagger(sentence):
+            surface = word.surface.strip()
+            if not surface:
+                continue
+            feat = word.feature
+            pos1 = getattr(feat, "pos1", "") or ""
+            if pos1 in self._SKIP_POS:
+                continue
+            lemma = (getattr(feat, "lemma", None) or surface).split("-")[0]
+            is_proper = pos1 == "名詞" and getattr(feat, "pos2", "") == "固有名詞"
+            out.append(LemmaToken(surface, lemma.lower(), True, is_proper))
+        return out
+
+
+def get_analyzer(language: str = "en", prefer_external: bool = True) -> Lemmatizer:
+    """Return the best available analyzer for a language, degrading gracefully."""
+    lang = language.lower()
+    if lang == "en":
+        return get_lemmatizer(prefer_spacy=prefer_external)
+    if lang == "zh":
+        if prefer_external:
+            try:
+                return ChineseAnalyzer()
+            except Exception:
+                pass
+        return CjkCharAnalyzer()
+    if lang == "ja":
+        if prefer_external:
+            try:
+                return JapaneseAnalyzer()
+            except Exception:
+                pass
+        return CjkCharAnalyzer()
+    return GenericAnalyzer()

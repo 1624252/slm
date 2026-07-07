@@ -9,7 +9,7 @@ from ..config import DEFAULT_THRESHOLDS, Thresholds
 from ..llm.client import LLMClient
 from ..llm.prompts import generation_prompt, rewrite_prompt
 from ..validators import ValidationReport, validate_story
-from ..vocab.lemmatize import Lemmatizer, get_lemmatizer
+from ..vocab.lemmatize import Lemmatizer, get_analyzer
 from ..vocab.tokenize import split_sentences
 from .scenarios import Scenario
 
@@ -92,7 +92,7 @@ def make_example(
     temperature: float = 0.7,
 ) -> Example:
     """Generate, then run the validator-guided rewrite loop, then optionally judge."""
-    lemmatizer = lemmatizer or get_lemmatizer()
+    lemmatizer = lemmatizer or get_analyzer(scenario.language)
     known, target = scenario.known_set(), scenario.target_set()
 
     story = generate_story(scenario, client, thresholds, temperature)

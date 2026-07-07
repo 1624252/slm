@@ -1,6 +1,9 @@
 # Core (heavy deps are imported lazily; validators + tests run on the stdlib alone)
-spacy>=3.7            # tokenization + lemmatization (recommended for real data)
-wordfreq>=3.1         # frequency-band known-vocabulary (Nation's frequency bands)
+spacy>=3.7            # English tokenization + lemmatization (recommended for real data)
+jieba>=0.42           # Chinese word segmentation
+fugashi>=1.3          # Japanese morphological analysis (MeCab)
+unidic-lite>=1.0.8    # dictionary for fugashi (Japanese)
+wordfreq>=3.1         # frequency-band vocabulary for any language (Nation's bands)
 openai>=1.40          # OpenAI-compatible client for teacher/judge (any base_url)
 python-dotenv>=1.0    # load .env for API keys (never commit secrets)
 pandas>=2.2           # eval results tables

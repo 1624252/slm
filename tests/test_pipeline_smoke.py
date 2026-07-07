@@ -15,7 +15,7 @@ LEM = SimpleLemmatizer()
 
 def test_mock_generation_is_spec_compliant():
     client = MockLLM()
-    for scenario in sample_scenarios(4, level="A2", seed=1):
+    for scenario in sample_scenarios(4, language="en", seed=1):
         ex = make_example(
             scenario,
             client,
@@ -33,7 +33,7 @@ def test_mock_generation_is_spec_compliant():
 
 def test_eval_harness_runs_with_mock():
     client = MockLLM()
-    scenarios = sample_scenarios(4, level="A2", seed=2)
+    scenarios = sample_scenarios(4, language="en", seed=2)
     summary = evaluate(
         "mock",
         scenarios,

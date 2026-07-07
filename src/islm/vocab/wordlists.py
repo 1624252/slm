@@ -1,4 +1,9 @@
-"""Known/target vocabulary sources: CSV (CEFR-J style), frequency bands, bundled sample."""
+"""Known/target vocabulary sources.
+
+Per language we read curated tier files at ``data/vocab/<lang>/{baseline,advanced}.csv``
+(columns: ``word,tier,source``). If a file is missing we fall back to frequency bands via
+``wordfreq`` (which supports ~any language), so the system degrades gracefully everywhere.
+"""
 
 from __future__ import annotations
 
@@ -7,14 +12,16 @@ from dataclasses import dataclass, field
 from pathlib import Path
 
 from ..config import DATA_DIR
+from .languages import get_language
 
-_CEFR_ORDER = {"A1": 1, "A2": 2, "B1": 3, "B2": 4, "C1": 5, "C2": 6}
-SAMPLE_CSV = DATA_DIR / "vocab" / "sample_en.csv"
+VOCAB_DIR = DATA_DIR / "vocab"
+_WORD_COLS = ("word", "headword", "hanzi", "surface")
+_TIER_COLS = ("tier", "cefr", "level", "hsk", "jlpt")
 
 
 @dataclass
 class Vocabulary:
-    """A set of lowercase lemmas, optionally tagged with CEFR levels."""
+    """A set of lowercase lemmas, optionally tagged with tier labels."""
 
     lemmas: set[str] = field(default_factory=set)
     levels: dict[str, str] = field(default_factory=dict)
@@ -31,26 +38,31 @@ class Vocabulary:
         return Vocabulary(self.lemmas | other.lemmas, merged)
 
     @classmethod
-    def from_words(cls, words) -> Vocabulary:
-        return cls({w.strip().lower() for w in words if w and w.strip()})
+    def from_words(cls, words, tier: str | None = None) -> Vocabulary:
+        lemmas = {w.strip().lower() for w in words if w and w.strip()}
+        levels = {w: tier for w in lemmas} if tier else {}
+        return cls(lemmas, levels)
 
     @classmethod
-    def from_csv(cls, path: Path = SAMPLE_CSV, level_at_most: str | None = None) -> Vocabulary:
-        """Load a CSV with columns: headword, pos, cefr. `level_at_most` filters by CEFR band."""
-        cap = _CEFR_ORDER.get((level_at_most or "").upper(), 99)
+    def from_csv(cls, path: Path) -> Vocabulary:
+        """Load a CSV whose columns include a word column and (optionally) a tier column."""
         lemmas: set[str] = set()
         levels: dict[str, str] = {}
         with open(path, encoding="utf-8", newline="") as f:
-            for row in csv.DictReader(f):
-                word = (row.get("headword") or "").strip().lower()
+            reader = csv.DictReader(f)
+            word_col = _pick(reader.fieldnames, _WORD_COLS)
+            tier_col = _pick(reader.fieldnames, _TIER_COLS)
+            if word_col is None:
+                raise ValueError(f"{path}: no word column among {_WORD_COLS}")
+            for row in reader:
+                word = (row.get(word_col) or "").strip().lower()
                 if not word:
                     continue
-                level = (row.get("cefr") or "").strip().upper()
-                if level_at_most and _CEFR_ORDER.get(level, 99) > cap:
-                    continue
                 lemmas.add(word)
-                if level:
-                    levels[word] = level
+                if tier_col:
+                    tier = (row.get(tier_col) or "").strip()
+                    if tier:
+                        levels[word] = tier
         return cls(lemmas, levels)
 
     @classmethod
@@ -59,3 +71,33 @@ class Vocabulary:
         from wordfreq import top_n_list  # lazy: keep wordfreq optional
 
         return cls.from_words(top_n_list(language, top_n))
+
+
+def _pick(fieldnames, candidates) -> str | None:
+    if not fieldnames:
+        return None
+    lowered = {name.lower(): name for name in fieldnames}
+    for cand in candidates:
+        if cand in lowered:
+            return lowered[cand]
+    return None
+
+
+def load_baseline(language: str) -> Vocabulary:
+    """Common 'already known' vocabulary for a language (curated file or frequency fallback)."""
+    path = VOCAB_DIR / language / "baseline.csv"
+    if path.exists():
+        return Vocabulary.from_csv(path)
+    return Vocabulary.from_frequency(language, top_n=get_language(language).freq_baseline_n)
+
+
+def load_advanced(language: str) -> Vocabulary:
+    """Graded 'to-learn' vocabulary for a language (curated file or frequency-band fallback)."""
+    path = VOCAB_DIR / language / "advanced.csv"
+    if path.exists():
+        return Vocabulary.from_csv(path)
+    lang = get_language(language)
+    from wordfreq import top_n_list  # lazy
+
+    band = top_n_list(language, lang.freq_advanced_n)[lang.freq_baseline_n :]
+    return Vocabulary.from_words(band)

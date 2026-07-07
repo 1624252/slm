@@ -99,7 +99,13 @@ class MockLLM:
         known = {w.lower() for w in _field_list(text, "KNOWN_WORDS")}
         m = re.search(r"at least (\d+)", text)
         min_recurrence = int(m.group(1)) if m else 3
+        lm = re.search(r"^Language:\s*(\w+)", text, flags=re.MULTILINE)
+        language = lm.group(1).lower() if lm else "en"
+        if language == "en":
+            return self._english_story(known, targets, min_recurrence)
+        return self._generic_story(known, targets, min_recurrence, language)
 
+    def _english_story(self, known: set[str], targets: list[str], min_recurrence: int) -> str:
         art = "the" if "the" in known else ("a" if "a" in known else "")
         subj = _first_known(["cat", "dog", "bird", "mouse", "friend", "man", "woman"], known)
         subj = subj or ("it" if "it" in known else "")
@@ -114,6 +120,28 @@ class MockLLM:
         for t in targets:  # recurrence: repeat with known-only frames
             for _ in range(min_recurrence):
                 sentences.append(_sentence([art, t, is_, adj]))
+        return "\n".join(s for s in sentences if s)
+
+    def _generic_story(
+        self, known: set[str], targets: list[str], min_recurrence: int, language: str
+    ) -> str:
+        # Language-agnostic filler: two known words per sentence, separated so a segmenter
+        # (jieba / MeCab) won't merge them into an unintended word. Not good prose — it just
+        # exercises the validators offline.
+        cjk = language in ("zh", "ja")
+        sep, end = ("、", "。") if cjk else (" ", ".")
+        fillers = sorted(known)[:2] or ["x"]
+
+        def sent(parts: list[str]) -> str:
+            parts = [p for p in parts if p]
+            return sep.join(parts) + end if parts else ""
+
+        sentences = [sent(fillers)]
+        for t in targets:
+            sentences.append(sent([fillers[0], t]))
+        for t in targets:
+            for _ in range(min_recurrence):
+                sentences.append(sent([t, fillers[-1]]))
         return "\n".join(s for s in sentences if s)
 
     def _judge(self) -> str:

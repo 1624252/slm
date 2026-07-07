@@ -31,9 +31,9 @@ def _producer(client: LLMClient):
 
 def main() -> None:
     p = argparse.ArgumentParser(description="Base-vs-tuned eval for the i+1 story model.")
-    p.add_argument("--scenarios", type=Path, default=EVALS_DIR / "scenarios" / "heldout.jsonl")
+    p.add_argument("--scenarios", type=Path, default=None, help="Held-out scenarios JSONL.")
     p.add_argument("--n", type=int, default=12, help="Sampled if the scenarios file is missing.")
-    p.add_argument("--level", default="A2")
+    p.add_argument("--language", default="en", help="Language code, e.g. en, zh, ja.")
     p.add_argument("--seed", type=int, default=123)
     p.add_argument("--base-model", default=None)
     p.add_argument("--tuned-model", default=None)
@@ -42,11 +42,12 @@ def main() -> None:
     p.add_argument("--out", type=Path, default=EVALS_DIR / "results")
     args = p.parse_args()
 
-    if args.scenarios.exists():
-        scenarios = load_scenarios(args.scenarios)
+    scenarios_path = args.scenarios or EVALS_DIR / "scenarios" / f"heldout_{args.language}.jsonl"
+    if scenarios_path.exists():
+        scenarios = load_scenarios(scenarios_path)
     else:
-        scenarios = sample_scenarios(args.n, level=args.level, seed=args.seed)
-        save_scenarios(scenarios, args.scenarios)
+        scenarios = sample_scenarios(args.n, language=args.language, seed=args.seed)
+        save_scenarios(scenarios, scenarios_path)
 
     if args.mock:
         base_client = tuned_client = judge_client = get_client(mock=True)

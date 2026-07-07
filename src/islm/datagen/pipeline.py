@@ -18,7 +18,7 @@ from pathlib import Path
 
 from ..config import DATA_DIR, DEFAULT_THRESHOLDS, Thresholds
 from ..llm.client import LLMClient, get_client
-from ..vocab.lemmatize import get_lemmatizer
+from ..vocab.lemmatize import get_analyzer
 from .generate import Example, make_example
 from .scenarios import sample_scenarios
 
@@ -60,7 +60,7 @@ def _summarize(examples: list[Example]) -> dict:
 
 def build_dataset(
     n: int = 50,
-    level: str = "A2",
+    language: str = "en",
     seed: int = 0,
     out_dir: Path = DATA_DIR / "generated",
     client: LLMClient | None = None,
@@ -72,7 +72,7 @@ def build_dataset(
     """Build and write the dataset; return summary stats."""
     if client is None:
         client = get_client()
-    lemmatizer = get_lemmatizer()
+    lemmatizer = get_analyzer(language)
 
     judge_fn = None
     if judge_client is not None:
@@ -81,7 +81,7 @@ def build_dataset(
         def judge_fn(scenario, story):  # noqa: E731 - small closure over the judge client
             return judge_story(scenario, story, judge_client)
 
-    scenarios = sample_scenarios(n, level=level, seed=seed)
+    scenarios = sample_scenarios(n, language=language, seed=seed)
     examples = [
         make_example(s, client, lemmatizer, thresholds, max_rewrites, judge_fn) for s in scenarios
     ]
@@ -103,7 +103,7 @@ def build_dataset(
 def main() -> None:
     p = argparse.ArgumentParser(description="Build the i+1 story dataset.")
     p.add_argument("--n", type=int, default=50)
-    p.add_argument("--level", default="A2")
+    p.add_argument("--language", default="en", help="Language code, e.g. en, zh, ja.")
     p.add_argument("--seed", type=int, default=0)
     p.add_argument("--out", type=Path, default=DATA_DIR / "generated")
     p.add_argument("--model", default=None, help="Teacher model (defaults to TEACHER_MODEL).")
@@ -121,7 +121,7 @@ def main() -> None:
 
     stats = build_dataset(
         n=args.n,
-        level=args.level,
+        language=args.language,
         seed=args.seed,
         out_dir=args.out,
         client=client,

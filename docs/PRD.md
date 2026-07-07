@@ -122,12 +122,14 @@ overshooting while still producing enough volume and interest. We revisit this i
 
 ## 6. Target user and persona
 
-Start niche: **one persona, one language, one level band.**
+Start niche, then widen. The shipped languages are **English, Chinese (Mandarin), and
+Japanese**; the pipeline is **language-agnostic** (any other language falls back to frequency
+bands + a generic tokenizer).
 
 **Primary persona — "Maya," the intermediate self-studier.**
-- Adult, self-directed learner of **English as a second language** (MVP language).
-- Roughly **CEFR A2→B1**: can read and form simple sentences, so there is a vocabulary base to
-  build on (per `notes.txt`).
+- Adult, self-directed learner of **English, Chinese, or Japanese** as a second language.
+- Roughly **intermediate** (CEFR A2→B1 / HSK 3–4 / JLPT N4→N3): can read and form simple
+  sentences, so there is a vocabulary base to build on (per `notes.txt`).
 - Wants to grow vocabulary by **reading things she enjoys**, not grinding flashcards.
 - Frustrated that "graded" content is either too hard (native text) or too dull.
 - Reads on a phone/laptop; values short sessions and a sense of momentum.
@@ -135,8 +137,9 @@ Start niche: **one persona, one language, one level band.**
 **Secondary persona — the builder/researcher (you).** Needs the data, validators, and eval
 harness to be reproducible and publishable (HF Hub).
 
-**Domain boundary for MVP:** English L2, single level band, a single serialized story world
-(narrow reading). Other languages/levels are explicitly deferred (§9).
+**Domain boundary:** English, Chinese, and Japanese, each with a baseline (known) tier and a
+graded advanced (to-learn) tier, in a serialized story world (narrow reading). Languages beyond
+these three are supported by the architecture but not curated (§9).
 
 ---
 
@@ -166,7 +169,8 @@ harness to be reproducible and publishable (HF Hub).
 ## 8. MVP definition
 
 **In scope**
-- A fine-tuned ≤4B model that, from `(K, T, theme)`, emits one spec-compliant English story.
+- A fine-tuned ≤4B model that, from `(language, K, T, theme)`, emits one spec-compliant story in
+  the target language (English, Chinese, or Japanese).
 - Deterministic **validators** (coverage/OOV, ≤1-new-word, recurrence, inferability proxy).
 - A **data-generation pipeline** (teacher distillation + validator-guided rewrite + judge gate).
 - A published **dataset** (JSONL) and the **eval harness** with a base-vs-tuned results table.
@@ -176,7 +180,8 @@ harness to be reproducible and publishable (HF Hub).
 **Out of scope (MVP)**
 - Persistent learner accounts, long-horizon SRS scheduling across sessions, and vocabulary
   inference from usage (schema is defined in §13 but not the product surface).
-- Multi-language support, audio/vision, and conversational tutoring.
+- Languages beyond the shipped English/Chinese/Japanese (the design is language-agnostic, so
+  adding one is a data task, not a redesign); audio/vision; and conversational tutoring.
 - A polished web app; the demo is intentionally thin.
 
 ---
@@ -239,9 +244,9 @@ that filters data also grades outputs and guards inference.
 ## 11. Base model and tech stack
 
 **Base model.**
-- **Primary: `Qwen3-4B-Instruct`.** Chosen for strong **multilingual** coverage (English now,
-  Chinese/HSK later), an Instruct variant for fast SFT, and a size that fits a single 24 GB GPU
-  under QLoRA — matching `spec.md`'s stack guidance (Qwen3 0.6B/1.7B/4B as the current default).
+- **Primary: `Qwen3-4B-Instruct`.** Chosen for strong **multilingual** coverage (notably
+  English, Chinese, and Japanese), an Instruct variant for fast SFT, and a size that fits a
+  single 24 GB GPU under QLoRA — matching `spec.md`'s stack guidance (Qwen3 0.6B/1.7B/4B).
 - **Smaller fallback / edge target: `Qwen3-1.7B-Instruct`** (and `0.6B` as an on-device stretch)
   to test how small the behavior can go — the interesting research question (cf. SRS-Stories used
   a 70B; we ask whether it distills to ≤4B).
@@ -259,8 +264,8 @@ that filters data also grades outputs and guards inference.
 | --- | --- |
 | Fine-tuning | Unsloth + QLoRA (≈2× faster, ≈70% less VRAM); TRL/PEFT underneath |
 | Compute | Single A100/H100 via Colab / Modal / RunPod (`notes.txt`: Colab) |
-| Tokenize/lemmatize | spaCy (English); jieba + segmentation for Chinese (later) |
-| Word lists | CEFR-J (English); New HSK 3.0 (Chinese, later); `wordfreq` for frequency |
+| Tokenize/lemmatize | spaCy (English), jieba (Chinese), fugashi+UniDic (Japanese); generic Unicode fallback for other languages |
+| Word lists | CEFR (English), HSK (Chinese), JLPT (Japanese); `wordfreq` frequency bands for any language |
 | Data format | JSONL (chat-format SFT); preference pairs for optional DPO |
 | Eval | LLM-as-judge + deterministic validators; pandas for the results table |
 | Tracking | Weights & Biases (optional) or CSV |
@@ -278,8 +283,9 @@ a coherent story using (almost) only `K ∪ T`, with each `T` word appearing ≥
 unit the dataset teaches.
 
 **Sourcing (`notes.txt`).**
-1. **Word lists & levels:** CEFR-J graded word lists → per-level `K` banks and `T` pools;
-   `wordfreq` for frequency bands.
+1. **Word lists & levels:** graded lists per language — CEFR (English), HSK (Chinese), JLPT
+   (Japanese) → baseline `K` banks and advanced `T` pools; `wordfreq` frequency bands as a
+   universal fallback for any language.
 2. **Hugging Face:** existing graded-reader / story / CEFR datasets and any released SRS-Stories
    assets, used as seeds and style references.
 3. **Generation (primary):** distill from the frontier teacher — this is where most examples
@@ -344,7 +350,8 @@ in a later version (candidate: SQLite).
 ```
 
 **13.2 Vocabulary store (per language):** `word → { lemma, cefr_level, freq_rank, pos }`.
-Derived from CEFR-J + `wordfreq`; used by the validators and the scenario sampler.
+Stored per language at `data/vocab/<lang>/{baseline,advanced}.csv` (`word,tier,source`), derived
+from CEFR/HSK/JLPT + `wordfreq`; used by the validators and the scenario sampler.
 
 **13.3 Learner profile + SRS store (future SQLite schema):**
 
@@ -425,10 +432,10 @@ adversarial/robustness eval; (3) composed behavior (e.g., hold i+1 *and* a fixed
 
 | Risk | Mitigation |
 | --- | --- |
-| Tokenizer/lemmatizer errors inflate/deflate OOV (esp. Chinese) | Start English; use robust tools; unit-test validators; manual audit a sample |
+| Tokenizer/segmenter errors inflate/deflate OOV (esp. Chinese/Japanese) | Use jieba (zh) + fugashi/UniDic (ja); match on lemma OR surface; unit-test per language; manual audit a sample |
 | LLM-judge unreliability (moderate correlation) | Hard validators primary; humans for final; different judge vs teacher |
 | Small model can't hold all constraints | Scale 1.7B→4B; inference-time validate+rewrite loop; DPO stretch |
-| Scope creep to many languages | English-only MVP; other languages are explicit non-goals |
+| Scope creep to many languages | Curate EN/ZH/JA; any other language degrades gracefully to frequency bands + a generic tokenizer |
 | Data leakage between splits | Scenario-level splitting (level × theme × target combo) |
 | Krashen's "rough tuning" objection to engineered i+1 | Documented bet: controllable i+1 + volume; eval measures whether it holds |
 | "Learn vocab from usage" is hard | Deferred; schema defined but not built for MVP |
@@ -452,7 +459,7 @@ slm/
 │   └── brainlift.md           # research base
 ├── src/islm/
 │   ├── config.py              # thresholds + LLM settings
-│   ├── vocab/                 # tokenize, lemmatize (spaCy or rule-based), word lists
+│   ├── vocab/                 # languages, tokenize, analyzers (en/zh/ja/generic), word lists, build_lists
 │   ├── validators/            # coverage, ≤1-new-word, recurrence -> ValidationReport
 │   ├── llm/                   # OpenAI-compatible client, offline MockLLM, prompts
 │   ├── datagen/               # scenario sampler, generate + rewrite loop, pipeline CLI

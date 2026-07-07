@@ -5,7 +5,7 @@ from __future__ import annotations
 from dataclasses import asdict, dataclass
 
 from ..config import DEFAULT_THRESHOLDS, Thresholds
-from ..vocab.lemmatize import Lemmatizer, get_lemmatizer
+from ..vocab.lemmatize import Lemmatizer, get_analyzer
 from ..vocab.tokenize import split_sentences
 from .coverage import CoverageResult, coverage
 from .one_new_word import OneNewWordResult, one_new_word
@@ -71,9 +71,10 @@ def validate_story(
     target: set[str],
     lemmatizer: Lemmatizer | None = None,
     thresholds: Thresholds = DEFAULT_THRESHOLDS,
+    language: str = "en",
 ) -> ValidationReport:
     """Run all deterministic checks on a story. This is the pipeline's backbone."""
-    lemmatizer = lemmatizer or get_lemmatizer()
+    lemmatizer = lemmatizer or get_analyzer(language)
     known = {w.lower() for w in known}
     target = {w.lower() for w in target}
     sentences = [lemmatizer.analyze(s) for s in split_sentences(text)]
