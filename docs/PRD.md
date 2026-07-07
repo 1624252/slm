@@ -376,9 +376,11 @@ training data, plus the human-labeled gold subset.
 
 **14.2 Deterministic behavioral checks (the failures the spec forbids).**
 
+*OOV = out-of-vocabulary (a word not in `K ∪ T`); OOV rate = OOV ÷ total words; coverage = 1 − OOV rate.*
+
 | Check | Definition | Target (tuned) |
 | --- | --- | --- |
-| Coverage / OOV | % running words outside `K ∪ T` | ≤ 1% (stretch 0.6%, SRS-Stories) |
+| Coverage / OOV | % running words outside `K ∪ T` (out-of-vocabulary) | ≤ 1% (stretch 0.6%, SRS-Stories) |
 | ≤1-new-word rule | max new `T` words in any sentence | ≤ 1 in ≥ 95% of stories |
 | Recurrence | each `T` word appears ≥ 3× | satisfied for ≥ 90% of target words |
 | Inferability proxy | cloze: mask the target word, ask a judge/model to recover it from context | ≥ 60% recovered |

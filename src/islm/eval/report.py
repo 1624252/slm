@@ -16,6 +16,11 @@ _HARD_CHECKS = [
     ("mean_inferability", "Inferability (cloze)", True),
 ]
 
+_OOV_NOTE = (
+    "\n---\n_OOV = out-of-vocabulary: a word not in the learner's known (K) or target (T) "
+    "vocabulary. OOV rate = OOV / total words; coverage = 1 - OOV rate._"
+)
+
 
 def summary_metrics(summary: EvalSummary) -> dict:
     return summary.aggregate()
@@ -114,7 +119,7 @@ def single_model_markdown(summary: EvalSummary, adv: EvalSummary | None = None) 
         lines += [f"- `{reason}`: {count}" for reason, count in ea["reasons"].items()]
     else:
         lines.append(f"All {ea['n']} outputs passed the deterministic checks.")
-    return "\n".join(lines) + "\n"
+    return "\n".join(lines) + _OOV_NOTE + "\n"
 
 
 def results_markdown(
@@ -165,4 +170,4 @@ def results_markdown(
         "\n_Fill in: are the remaining failures a data problem (e.g. under-represented targets, "
         "themes that tempt off-vocab words)? What data change would fix them?_"
     )
-    return "\n".join(lines) + "\n"
+    return "\n".join(lines) + _OOV_NOTE + "\n"

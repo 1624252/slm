@@ -72,6 +72,9 @@ A story passes the deterministic gate (`ValidationReport.hard_pass`) when:
 | ≤1 new word per sentence | `validators/one_new_word.py` | max 1 (repeats don't count as new) |
 | Target recurrence | `validators/recurrence.py` | each target ≥ 3× |
 
+**OOV** = *out-of-vocabulary*: a word whose lemma/surface is not in `K ∪ T`. OOV rate = OOV ÷
+total words; coverage = 1 − OOV rate.
+
 Thresholds live in `islm.config.Thresholds`. The LLM judge (rubric) and cloze inferability are
 **secondary** signals in `eval/`, because human↔judge correlation is only moderate (PRD 14.6).
 

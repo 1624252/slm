@@ -16,3 +16,5 @@ Held-out scenarios: **8**.
 - `coverage`: 8
 - `one_new_word`: 8
 - `recurrence`: 7
+---
+_OOV = out-of-vocabulary: a word not in the learner's known (K) or target (T) vocabulary. OOV rate = OOV / total words; coverage = 1 - OOV rate._

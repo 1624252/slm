@@ -25,7 +25,8 @@ Per scenario `(language, K, T, theme)`:
    1–2 words from the advanced tier (not in `K`), a narrow-reading theme.
 2. **Generate** a story with a frontier **teacher** model (`llm/` client; prompt in
    `llm/prompts.py`).
-3. **Validate** with the deterministic backbone (coverage/OOV, ≤1-new-word, recurrence).
+3. **Validate** with the deterministic backbone (coverage/OOV — out-of-vocabulary words not in
+   `K ∪ T` — ≤1-new-word, recurrence).
 4. **Rewrite loop** (≤5 passes) feeding failures back to the teacher until `hard_pass` — no hard
    constrained decoding (SRS-Stories found it worst).
 5. **Per-item judge** (optional, different model family): keep only stories that pass the hard

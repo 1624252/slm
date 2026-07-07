@@ -28,9 +28,14 @@ The spec's minimum bar is three things; we implement all three plus robustness.
 
 Run on every output; these are the failures the spec forbids. Targets from PRD 14.2.
 
+**OOV** stands for **out-of-vocabulary**: a running word whose lemma (or surface form) is not in
+the learner's known set `K` or the target set `T`. **OOV rate** = OOV words ÷ total words, and
+**coverage** = 1 − OOV rate (the fraction of the story the learner can already understand). So
+"OOV ≤ 1%" means at most 1 word in 100 is outside the learner's vocabulary.
+
 | Check | What it verifies | Target (tuned) |
 | --- | --- | --- |
-| Coverage / OOV | words outside `K ∪ T` | OOV ≤ 1%, coverage ≥ 98% |
+| Coverage / OOV | fraction of words outside `K ∪ T` (out-of-vocabulary) | OOV ≤ 1%, coverage ≥ 98% |
 | ≤1 new word / sentence | pacing of new vocabulary | ≤ 1 in ≥ 95% of stories |
 | Recurrence | each target repeated for spaced repetition | each target ≥ 3× |
 | Inferability (cloze) | new word guessable from context | ≥ 60% recovered |
