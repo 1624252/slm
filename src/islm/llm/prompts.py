@@ -67,22 +67,35 @@ def rewrite_prompt(
     return system, user
 
 
-_JUDGE_DIMENSIONS = (
-    "spec_adherence",  # holds i+1 vocabulary + pacing + recurrence
-    "inferability",  # new words guessable from context
-    "engagement",  # compelling, worth reading
-    "coherence",  # a real, connected story
-    "consistency",  # stable behavior across the story
-    "seductive_detail_control",  # humor carries the word; lesson not announced
+# Rubric dimensions scored 0/1/2. The first four mirror spec.md Appendix A; the last two are
+# project-specific. SPEC_DIMENSIONS are the ones the win condition is judged on.
+JUDGE_DIMENSIONS = (
+    "spec_adherence",
+    "robustness",
+    "task_quality",
+    "consistency",
+    "inferability",
+    "seductive_detail_control",
 )
+SPEC_DIMENSIONS = ("spec_adherence", "robustness", "task_quality", "consistency")
+
+_RUBRIC = """Rubric - score each dimension 0 (fails), 1 (partial), or 2 (fully):
+- spec_adherence: only allowed words, <=1 new word per sentence, repeats each target.
+- robustness: holds the behavior even on hard, messy, or adversarial input.
+- task_quality: a genuinely good, coherent, engaging story.
+- consistency: stable behavior across the whole story.
+- inferability: each new word's meaning is guessable from its context.
+- seductive_detail_control: humor carries the target word; never announces the lesson."""
 
 
 def judge_prompt(scenario: Scenario, story: str) -> tuple[str, str]:
     system = (
         "TASK: JUDGE\n"
-        "You are a strict evaluator of comprehensible-input learner stories.\n"
-        "Score each dimension 0 (fails), 1 (partial), or 2 (fully). Return ONLY a JSON object "
-        "with integer scores for: " + ", ".join(_JUDGE_DIMENSIONS) + ", and a short 'rationale'."
+        "You are a strict evaluator of comprehensible-input (i+1) learner stories.\n"
+        + _RUBRIC
+        + "\nReturn ONLY a JSON object with integer scores for "
+        + ", ".join(JUDGE_DIMENSIONS)
+        + ' plus a short "rationale".'
     )
     user = (
         f"TARGET_WORDS: {', '.join(scenario.target_words)}\n\nStory:\n{story}\n\nReturn JSON only."

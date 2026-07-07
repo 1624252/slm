@@ -155,29 +155,23 @@ python -m islm.datagen.curate --in data/generated/seed --out data/curated/seed
 
 ## Evaluating (base vs tuned)
 
-`eval/harness.py` runs any *scenario → story* function over the held-out set and scores each
-story with the validators + optional judge + optional cloze. `eval/report.py` renders the
-base-vs-tuned table; the win condition (PRD 15) is **tuned beats base on hard-check pass rate and
-judge spec-adherence**.
+`eval/harness.py` runs any *scenario → story* generator (API model, local fine-tuned HF model,
+or mock) over the held-out and adversarial sets, scoring each story with the validators + judge +
+cloze. `eval/report.py` writes the base-vs-tuned results with deltas, a robustness table, the
+win-condition verdict (spec: **tuned beats base on Spec adherence and Robustness**), and an
+error-analysis section.
 
-Offline smoke (mock as both models — proves the harness end-to-end); pick a language:
-
-```bash
-python -m islm.eval.run --mock --language zh
-```
-
-Real comparison (prompted base vs your fine-tuned model):
+**Full details — the Behavior Spec, every eval check, the Appendix-A rubric, how to run a trained
+model, and the tests that cover the harness — are in [`EVALUATION.md`](EVALUATION.md).**
 
 ```bash
-python -m islm.eval.run \
-  --base-model qwen3-4b-instruct \
-  --tuned-model my-tuned-model \
-  --judge-model gpt-5
+python -m islm.eval.run --mock --language zh --adversarial          # offline smoke
+python -m islm.eval.run --base-model <base> --tuned-model <tuned> --judge-model <judge> --adversarial
+python -m islm.eval.run --base-path <base> --tuned-path <base> --tuned-adapter outputs/lora --judge-model <judge>
 ```
 
-Held-out scenarios are read from `evals/scenarios/heldout_<lang>.jsonl` (committed for
-reproducibility; auto-created on first run if missing). Results go to `evals/results/`
-(git-ignored).
+Held-out and adversarial scenarios live at `evals/scenarios/{heldout,adversarial}_<lang>.jsonl`
+(committed, scenario-level distinct from training). Results go to `evals/results/` (git-ignored).
 
 ## Testing & linting
 

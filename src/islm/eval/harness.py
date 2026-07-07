@@ -25,6 +25,9 @@ class EvalRow:
     coverage: float
     one_new_word_pass: bool
     recurrence_pass: bool
+    failures: list[str] = field(
+        default_factory=list
+    )  # tags: oov, coverage, one_new_word, recurrence
     judge: dict | None = None
     inferability: float | None = None
 
@@ -83,6 +86,15 @@ def evaluate(
         lem = lemmatizer or analyzers.setdefault(s.language, get_analyzer(s.language))
         story = produce_story(s)
         report = validate_story(story, s.known_set(), s.target_set(), lem, thresholds)
+        failures: list[str] = []
+        if report.coverage.oov_rate > thresholds.max_oov_rate:
+            failures.append("oov")
+        if report.coverage.coverage < thresholds.min_coverage:
+            failures.append("coverage")
+        if not report.one_new_word.passed:
+            failures.append("one_new_word")
+        if not report.recurrence.passed:
+            failures.append("recurrence")
         rows.append(
             EvalRow(
                 scenario_id=s.id,
@@ -91,6 +103,7 @@ def evaluate(
                 coverage=report.coverage.coverage,
                 one_new_word_pass=report.one_new_word.passed,
                 recurrence_pass=report.recurrence.passed,
+                failures=failures,
                 judge=judge_story(s, story, judge_client) if judge_client else None,
                 inferability=(
                     cloze_inferability(story, s.target_set(), cloze_client)["rate"]

@@ -148,10 +148,10 @@ class MockLLM:
         return json.dumps(
             {
                 "spec_adherence": 2,
-                "inferability": 2,
-                "engagement": 2,
-                "coherence": 2,
+                "robustness": 2,
+                "task_quality": 2,
                 "consistency": 2,
+                "inferability": 2,
                 "seductive_detail_control": 2,
                 "rationale": "mock judge: full marks",
             }

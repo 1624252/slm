@@ -16,6 +16,7 @@ deterministic validators.
 | --- | --- |
 | `docs/PRD.md` | Product Requirements Document — start here. |
 | `docs/dataset-and-eval.md` | How the dataset and evaluation work + how to run them. |
+| `docs/EVALUATION.md` | Behavior Spec, all eval checks + rubric, how to eval a trained model. |
 | `docs/DATA_CARD.md` | The data recipe: generation, two-pass curation, counts, licenses. |
 | `docs/design-constraints.md` | Constraint-first + representation analysis of the design. |
 | `docs/spec.md` | The one-week build brief this project is scoped against. |

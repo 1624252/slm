@@ -7,16 +7,12 @@ import re
 
 from ..datagen.scenarios import Scenario
 from ..llm.client import LLMClient
-from ..llm.prompts import judge_prompt
+from ..llm.prompts import JUDGE_DIMENSIONS, SPEC_DIMENSIONS, judge_prompt
 
-DIMENSIONS = (
-    "spec_adherence",
-    "inferability",
-    "engagement",
-    "coherence",
-    "consistency",
-    "seductive_detail_control",
-)
+# Re-exported for the harness/report. SPEC_DIMENSIONS drive the win condition (spec Appendix A).
+DIMENSIONS = JUDGE_DIMENSIONS
+
+__all__ = ["DIMENSIONS", "SPEC_DIMENSIONS", "judge_story"]
 
 
 def _extract_json(raw: str) -> dict:
