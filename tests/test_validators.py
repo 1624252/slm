@@ -66,3 +66,15 @@ def test_failures_report_lists_reasons():
     joined = " ".join(r.failures())
     assert "out-of-vocabulary" in joined
     assert "new word" in joined
+
+
+def test_is_known_cjk_character_decomposition():
+    from islm.validators.coverage import is_known
+    from islm.vocab.lemmatize import LemmaToken
+
+    # A multi-char CJK token counts as known iff every character is known.
+    assert is_known({"很", "大"}, LemmaToken("很大", "很大")) is True
+    assert is_known({"很"}, LemmaToken("很大", "很大")) is False
+    # Latin still matches on lemma/surface only (no decomposition).
+    assert is_known({"cat"}, LemmaToken("Cat", "cat")) is True
+    assert is_known({"c", "a", "t"}, LemmaToken("cat", "cat")) is False

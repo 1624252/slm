@@ -87,11 +87,12 @@ git-ignored; small curated CC0 samples ship in the repo.
 | --- | --- |
 | Vocabulary (en/zh/ja) | Real graded lists fetched (en ~2.3k/6.4k, zh ~2.2k/8.7k, ja ~1.3k/6.7k baseline/advanced) |
 | Curated CC0 samples | Committed (offline + tests) |
-| Human-authored English seed | 6 spec-passing stories (`islm.datagen.seed`), curation keeps 6/7 (drops 1 planted duplicate) |
+| Human-authored seed (en/zh/ja) | 28 spec-passing stories (16 en, 6 zh, 6 ja) via `islm.datagen.seed`; curation keeps 28/29 (drops 1 planted duplicate) |
 | Large teacher-generated corpus | **Pending model access** (see below) |
 
-The authored seed is genuine, spec-passing data that also exercises the two-pass curation on real
-prose. The thousands-scale corpus requires a teacher model.
+The authored seed is genuine, spec-passing data (hand-written by the model to the spec and
+validated) that also exercises the two-pass curation on real prose. Hand-authoring caps volume
+far below "thousands"; that scale requires a teacher model, but the same pipeline runs unchanged.
 
 ## Reproduce / scale
 
@@ -99,8 +100,9 @@ prose. The thousands-scale corpus requires a teacher model.
 # 1. Real vocabulary
 python -m islm.vocab.download --language all
 
-# 2. Human-authored English seed (no model needed)
-python -m islm.datagen.seed --out data/generated/en_seed
+# 2. Human-authored seed (en/zh/ja; no model needed), then curate it
+python -m islm.datagen.seed --out data/generated/seed
+python -m islm.datagen.curate --in data/generated/seed --out data/curated/seed
 
 # 3. Large generation with a teacher (needs .env with an OpenAI-compatible key)
 python -m islm.datagen.pipeline --n 4000 --language en \

@@ -80,7 +80,7 @@ def validate_story(
     sentences = [lemmatizer.analyze(s) for s in split_sentences(text)]
     return ValidationReport(
         coverage=coverage(sentences, known, target, thresholds.allow_proper_nouns),
-        one_new_word=one_new_word(sentences, known, thresholds.max_new_words_per_sentence),
+        one_new_word=one_new_word(sentences, known, target, thresholds.max_new_words_per_sentence),
         recurrence=recurrence(sentences, target, thresholds.min_recurrence),
         thresholds=thresholds,
     )

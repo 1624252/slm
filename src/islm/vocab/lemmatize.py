@@ -270,9 +270,13 @@ class ChineseAnalyzer:
 
 
 class JapaneseAnalyzer:
-    """Morphological analysis via fugashi (MeCab + UniDic); lemma = dictionary form."""
+    """Morphological analysis via fugashi (MeCab + UniDic); lemma = dictionary form.
 
-    _SKIP_POS = {"補助記号", "空白", "記号"}
+    Particles (助詞) and auxiliaries (助動詞) are skipped: they are grammar, not vocabulary,
+    and are not present in JLPT word lists, so counting them would create false OOV hits.
+    """
+
+    _SKIP_POS = {"補助記号", "空白", "記号", "助詞", "助動詞"}
 
     def __init__(self):
         import fugashi

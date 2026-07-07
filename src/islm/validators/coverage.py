@@ -20,10 +20,25 @@ class CoverageResult:
     oov_rate: float  # fraction outside known + target (+ proper nouns)
 
 
-def _member(vocab: set[str], token: LemmaToken) -> bool:
-    # Accept either the lemma or the raw lowercase surface, so imperfect
-    # lemmatization of a base-form word does not create false OOV hits.
-    return token.lemma in vocab or token.surface.lower() in vocab
+def _is_cjk(ch: str) -> bool:
+    o = ord(ch)
+    return 0x4E00 <= o <= 0x9FFF or 0x3400 <= o <= 0x4DBF or 0x3040 <= o <= 0x30FF
+
+
+def is_known(vocab: set[str], token: LemmaToken) -> bool:
+    """Is a token covered by a vocabulary?
+
+    Accepts the lemma or the raw lowercase surface (absorbs imperfect lemmatization). For a
+    multi-character CJK token, also accepts it when every character is individually known — this
+    bridges the gap between segmenter granularity (jieba/MeCab merge or split differently) and the
+    HSK/JLPT word-list granularity, so natural CJK text isn't falsely flagged OOV.
+    """
+    if token.lemma in vocab or token.surface.lower() in vocab:
+        return True
+    surface = token.surface
+    if len(surface) >= 2 and all(_is_cjk(c) for c in surface):
+        return all(c in vocab for c in surface)
+    return False
 
 
 def coverage(
@@ -41,9 +56,9 @@ def coverage(
             if not tok.is_word:
                 continue
             total += 1
-            if _member(target, tok):
+            if is_known(target, tok):
                 target_c += 1
-            elif _member(known, tok):
+            elif is_known(known, tok):
                 known_c += 1
             elif allow_proper_nouns and tok.is_proper:
                 proper_c += 1

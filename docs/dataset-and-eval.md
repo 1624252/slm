@@ -144,12 +144,13 @@ LLM re-judge is what removes "passes-the-rules-but-dull" content — see `docs/D
 
 ## Human-authored seed (no model needed)
 
-Where no teacher is available, `datagen/seed.py` builds a small set of genuinely good, spec-passing
-English stories (authored to the spec) so there is real data to inspect and to run curation on:
+Where no teacher is available, `datagen/seed.py` builds genuinely good, spec-passing stories in
+**English, Chinese, and Japanese** (authored to the spec, validated on build) so there is real
+data to inspect and to run curation on:
 
 ```bash
-python -m islm.datagen.seed --out data/generated/en_seed
-python -m islm.datagen.curate --in data/generated/en_seed --out data/curated/en_seed
+python -m islm.datagen.seed --out data/generated/seed      # 28 stories (16 en, 6 zh, 6 ja)
+python -m islm.datagen.curate --in data/generated/seed --out data/curated/seed
 ```
 
 ## Evaluating (base vs tuned)

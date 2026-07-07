@@ -59,6 +59,9 @@ word,tier,source
 誰,N5,curated-sample
 新しい,N5,curated-sample
 好き,N5,curated-sample
+見付ける,N4,curated-sample
+見つける,N4,curated-sample
+天気,N5,curated-sample
 きれい,N5,curated-sample
 綺麗,N5,curated-sample
 楽しい,N5,curated-sample

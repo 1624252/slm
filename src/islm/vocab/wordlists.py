@@ -83,30 +83,35 @@ def _pick(fieldnames, candidates) -> str | None:
     return None
 
 
-def _tier_path(language: str, tier: str):
-    """Prefer a downloaded full list over the small committed curated sample."""
+def _load_tier(language: str, tier: str) -> Vocabulary:
+    """Union of the downloaded full list and the committed curated sample (either may be absent)."""
+    vocab = Vocabulary()
     for name in (f"{tier}.full.csv", f"{tier}.csv"):
         path = VOCAB_DIR / language / name
         if path.exists():
-            return path
-    return None
+            vocab = vocab | Vocabulary.from_csv(path)
+    return vocab
 
 
 def load_baseline(language: str) -> Vocabulary:
-    """Common 'already known' vocabulary (curated/full file, else frequency fallback)."""
-    path = _tier_path(language, "baseline")
-    if path:
-        return Vocabulary.from_csv(path)
+    """Common 'already known' vocabulary (curated + full files, else frequency fallback)."""
+    vocab = _load_tier(language, "baseline")
+    if vocab.lemmas:
+        return vocab
     return Vocabulary.from_frequency(language, top_n=get_language(language).freq_baseline_n)
 
 
 def load_advanced(language: str) -> Vocabulary:
-    """Graded 'to-learn' vocabulary (curated/full file, else frequency-band fallback)."""
-    path = _tier_path(language, "advanced")
-    if path:
-        return Vocabulary.from_csv(path)
-    lang = get_language(language)
-    from wordfreq import top_n_list  # lazy
+    """Graded 'to-learn' vocabulary (curated + full files, else frequency-band fallback).
 
-    band = top_n_list(language, lang.freq_advanced_n)[lang.freq_baseline_n :]
-    return Vocabulary.from_words(band)
+    Anything already in the baseline is removed, so the tiers are always disjoint (a to-learn
+    word is never also a known word).
+    """
+    vocab = _load_tier(language, "advanced")
+    if not vocab.lemmas:
+        lang = get_language(language)
+        from wordfreq import top_n_list  # lazy
+
+        band = top_n_list(language, lang.freq_advanced_n)[lang.freq_baseline_n :]
+        vocab = Vocabulary.from_words(band)
+    return Vocabulary(vocab.lemmas - load_baseline(language).lemmas)

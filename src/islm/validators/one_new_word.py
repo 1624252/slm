@@ -11,6 +11,7 @@ from collections.abc import Iterable, Sequence
 from dataclasses import dataclass, field
 
 from ..vocab.lemmatize import LemmaToken
+from .coverage import is_known
 
 
 @dataclass
@@ -30,6 +31,7 @@ class OneNewWordResult:
 def one_new_word(
     sentences: Iterable[Sequence[LemmaToken]],
     known: set[str],
+    target: set[str] = frozenset(),
     max_per_sentence: int = 1,
 ) -> OneNewWordResult:
     seen: set[str] = set()  # non-known lemmas already introduced earlier
@@ -43,7 +45,9 @@ def one_new_word(
         for tok in tokens:
             if not tok.is_word or tok.is_proper:
                 continue
-            if tok.lemma in known or tok.surface.lower() in known:
+            # Target words are always "new" until first seen; other known words never are.
+            is_target = tok.lemma in target or tok.surface.lower() in target
+            if not is_target and is_known(known, tok):
                 continue
             if tok.lemma in seen or tok.lemma in new_set:
                 continue
