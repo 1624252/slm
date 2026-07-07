@@ -21,6 +21,8 @@ dependencies = [
 
 [project.optional-dependencies]
 dev = ["pytest>=8.0", "ruff>=0.6"]
+# Local inference for evaluating a trained/base model (islm.eval.generators.HFGenerator).
+hf = ["torch>=2.2", "transformers>=4.44", "accelerate>=0.30", "safetensors>=0.4", "peft>=0.11"]
 
 [tool.setuptools.packages.find]
 where = ["src"]

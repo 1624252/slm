@@ -82,6 +82,41 @@ def _win_condition(b: dict, t: dict, adv_b: dict | None, adv_t: dict | None) -> 
     )
 
 
+def single_model_markdown(summary: EvalSummary, adv: EvalSummary | None = None) -> str:
+    """Report one model's metrics + error analysis (e.g. a Day-1 base-model baseline)."""
+    agg = summary.aggregate()
+    lines = [
+        f"# Eval: {summary.model}",
+        f"\nHeld-out scenarios: **{agg.get('n', 0)}**.",
+        "\n## Behavioral checks (deterministic — the failures the spec forbids)",
+        "| Metric | Value |",
+        "| --- | --- |",
+    ]
+    for key, label, _ in _HARD_CHECKS:
+        if key in agg:
+            lines.append(f"| {label} | {_fmt(agg[key])} |")
+    judged = [f"judge_{d}" for d in DIMENSIONS if f"judge_{d}" in agg]
+    if judged:
+        lines += ["\n## LLM-as-judge rubric (0-2)", "| Dimension | Mean |", "| --- | --- |"]
+        lines += [f"| {k.removeprefix('judge_')} | {_fmt(agg[k])} |" for k in judged]
+    if adv is not None:
+        aagg = adv.aggregate()
+        lines += [
+            f"\n## Robustness (adversarial, n={aagg.get('n', 0)})",
+            "| Metric | Value |",
+            "| --- | --- |",
+            f"| Adversarial hard-check pass | {_fmt(aagg.get('hard_pass_rate'))} |",
+        ]
+    ea = error_analysis(summary)
+    lines.append("\n## Error analysis")
+    if ea["reasons"]:
+        lines.append(f"{ea['failing']}/{ea['n']} outputs failed a check. Most common:")
+        lines += [f"- `{reason}`: {count}" for reason, count in ea["reasons"].items()]
+    else:
+        lines.append(f"All {ea['n']} outputs passed the deterministic checks.")
+    return "\n".join(lines) + "\n"
+
+
 def results_markdown(
     base: EvalSummary,
     tuned: EvalSummary,

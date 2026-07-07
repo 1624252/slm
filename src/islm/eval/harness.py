@@ -28,6 +28,7 @@ class EvalRow:
     failures: list[str] = field(
         default_factory=list
     )  # tags: oov, coverage, one_new_word, recurrence
+    story: str = ""
     judge: dict | None = None
     inferability: float | None = None
 
@@ -104,6 +105,7 @@ def evaluate(
                 one_new_word_pass=report.one_new_word.passed,
                 recurrence_pass=report.recurrence.passed,
                 failures=failures,
+                story=story,
                 judge=judge_story(s, story, judge_client) if judge_client else None,
                 inferability=(
                     cloze_inferability(story, s.target_set(), cloze_client)["rate"]

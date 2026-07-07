@@ -9,7 +9,13 @@ from .cloze import cloze_inferability
 from .generators import HFGenerator, StoryGenerator, api_generator, client_rewriter, guarded
 from .harness import EvalRow, EvalSummary, evaluate
 from .judge import DIMENSIONS, SPEC_DIMENSIONS, judge_story
-from .report import base_vs_tuned_table, error_analysis, results_markdown, summary_metrics
+from .report import (
+    base_vs_tuned_table,
+    error_analysis,
+    results_markdown,
+    single_model_markdown,
+    summary_metrics,
+)
 
 __all__ = [
     "DIMENSIONS",
@@ -28,5 +34,6 @@ __all__ = [
     "judge_story",
     "make_adversarial_scenarios",
     "results_markdown",
+    "single_model_markdown",
     "summary_metrics",
 ]

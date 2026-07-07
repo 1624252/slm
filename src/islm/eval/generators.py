@@ -44,16 +44,18 @@ class HFGenerator:
         adapter_path: str | None = None,
         max_new_tokens: int = 512,
         temperature: float = 0.0,
-        device_map: str = "auto",
+        device_map: str | None = None,
+        chat_kwargs: dict | None = None,
     ):
         import torch
         from transformers import AutoModelForCausalLM, AutoTokenizer
 
         self._torch = torch
         self.tokenizer = AutoTokenizer.from_pretrained(model_path)
-        model = AutoModelForCausalLM.from_pretrained(
-            model_path, torch_dtype="auto", device_map=device_map
-        )
+        load_kwargs: dict = {}
+        if device_map:  # only when accelerate/GPU is available; CPU loads fine without it
+            load_kwargs = {"device_map": device_map, "torch_dtype": "auto"}
+        model = AutoModelForCausalLM.from_pretrained(model_path, **load_kwargs)
         if adapter_path:
             from peft import PeftModel
 
@@ -61,6 +63,8 @@ class HFGenerator:
         self.model = model.eval()
         self.max_new_tokens = max_new_tokens
         self.temperature = temperature
+        # e.g. {"enable_thinking": False} for Qwen3 to suppress <think> blocks.
+        self.chat_kwargs = chat_kwargs or {}
 
     def __call__(self, scenario: Scenario) -> str:
         system, user = generation_prompt(scenario)
@@ -68,6 +72,7 @@ class HFGenerator:
             [{"role": "system", "content": system}, {"role": "user", "content": user}],
             tokenize=False,
             add_generation_prompt=True,
+            **self.chat_kwargs,
         )
         inputs = self.tokenizer(prompt, return_tensors="pt").to(self.model.device)
         with self._torch.no_grad():
