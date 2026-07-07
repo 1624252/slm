@@ -30,13 +30,14 @@ Run on every output; these are the failures the spec forbids. Targets from PRD 1
 
 **OOV** stands for **out-of-vocabulary**: a running word whose lemma (or surface form) is not in
 the learner's known set `K` or the target set `T`. **OOV rate** = OOV words ÷ total words, and
-**coverage** = 1 − OOV rate (the fraction of the story the learner can already understand). So
-"OOV ≤ 1%" means at most 1 word in 100 is outside the learner's vocabulary.
+**coverage** = 1 − OOV rate (the fraction of the story the learner can already understand). The
+**ideal is 100% coverage** (0% OOV); the pass gate tolerates **OOV ≤ 2%** — at most 2 words in
+100 outside the learner's vocabulary (equivalently coverage ≥ 98%, since coverage = 1 − OOV rate).
 
 | Check | What it verifies | Target (tuned) |
 | --- | --- | --- |
-| Coverage / OOV | fraction of words outside `K ∪ T` (out-of-vocabulary) | OOV ≤ 1%, coverage ≥ 98% |
-| ≤1 new word / sentence | pacing of new vocabulary | ≤ 1 in ≥ 95% of stories |
+| Coverage / OOV | fraction of words outside `K ∪ T` (out-of-vocabulary) | ideal 100% coverage; gate OOV ≤ 2% (coverage ≥ 98%) |
+| ≤1 new word / sentence | pacing of new vocabulary | ≤ 1 new word in **100% of sentences** |
 | Recurrence | each target repeated for spaced repetition | each target ≥ 3× |
 | Inferability (cloze) | new word guessable from context | ≥ 60% recovered |
 
@@ -106,7 +107,7 @@ the training/seed data, so there is no leakage. Results go to `evals/results/` (
 ## Success criteria (PRD 15)
 
 - Tuned **beats prompted base on Spec adherence and Robustness** (primary).
-- OOV ≤ 1%, ≤1-new-word ≥ 95%, recurrence ≥ 90% — all higher than base.
+- OOV ≤ 2% (coverage → 100%), ≤1 new word in 100% of sentences, recurrence ≥ 90% — all better than base.
 - A reproducible results table + error-analysis paragraph.
 
 ## Automated tests for the eval harness

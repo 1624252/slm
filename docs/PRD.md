@@ -380,8 +380,8 @@ training data, plus the human-labeled gold subset.
 
 | Check | Definition | Target (tuned) |
 | --- | --- | --- |
-| Coverage / OOV | % running words outside `K ∪ T` (out-of-vocabulary) | ≤ 1% (stretch 0.6%, SRS-Stories) |
-| ≤1-new-word rule | max new `T` words in any sentence | ≤ 1 in ≥ 95% of stories |
+| Coverage / OOV | % running words outside `K ∪ T` (out-of-vocabulary) | ideal 100% coverage; gate OOV ≤ 2% (coverage ≥ 98%) |
+| ≤1-new-word rule | max new `T` words in any sentence | ≤ 1 in 100% of sentences |
 | Recurrence | each `T` word appears ≥ 3× | satisfied for ≥ 90% of target words |
 | Inferability proxy | cloze: mask the target word, ask a judge/model to recover it from context | ≥ 60% recovered |
 
@@ -408,7 +408,7 @@ comprehension ≠ acquisition, so we never trust felt quality alone).
 ## 15. Success criteria
 
 - Tuned model **beats prompted base on Spec adherence and Robustness** (primary, per spec).
-- OOV ≤ 1%, ≤1-new-word compliance ≥ 95%, recurrence satisfied ≥ 90% — all **higher than base**.
+- OOV ≤ 2% (coverage → 100%), ≤1-new-word in 100% of sentences, recurrence ≥ 90% — all **higher than base**.
 - A reproducible results table and error-analysis paragraph naming where the tuned model still
   fails and whether it's a data problem.
 

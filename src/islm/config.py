@@ -15,12 +15,15 @@ EVALS_DIR = REPO_ROOT / "evals"
 class Thresholds:
     """Pass/fail thresholds for the Behavior Spec (PRD 4, 14)."""
 
-    # Vocabulary control. Nation (2006): 98% coverage ~ 1 unknown word / 50 running words.
-    max_oov_rate: float = 0.01
+    # Vocabulary control. Target/ideal is 100% coverage (every word in-vocabulary); a story
+    # passes when OOV <= 2%. Since coverage = 1 - OOV rate, that pass gate == coverage >= 98%
+    # (100% coverage and 2% OOV cannot both be hard gates). Nation (2006): 98% ~ 1 unknown / 50.
+    max_oov_rate: float = 0.02
     min_coverage: float = 0.98
     allow_proper_nouns: bool = True
 
-    # i+1 pacing: at most one new word per sentence.
+    # i+1 pacing: at most one new word in EVERY sentence (a story passes only if 100% of its
+    # sentences comply).
     max_new_words_per_sentence: int = 1
 
     # Spaced repetition. SRS-Stories: >=3 per story; Waring & Takaki: ~8 across a series.

@@ -68,8 +68,8 @@ A story passes the deterministic gate (`ValidationReport.hard_pass`) when:
 
 | Check | Module | Threshold (default) |
 | --- | --- | --- |
-| OOV rate / coverage | `validators/coverage.py` | OOV ≤ 1%, coverage ≥ 98% |
-| ≤1 new word per sentence | `validators/one_new_word.py` | max 1 (repeats don't count as new) |
+| OOV rate / coverage | `validators/coverage.py` | ideal 100% coverage; gate OOV ≤ 2% |
+| ≤1 new word per sentence | `validators/one_new_word.py` | max 1 in every sentence (repeats don't count) |
 | Target recurrence | `validators/recurrence.py` | each target ≥ 3× |
 
 **OOV** = *out-of-vocabulary*: a word whose lemma/surface is not in `K ∪ T`. OOV rate = OOV ÷
