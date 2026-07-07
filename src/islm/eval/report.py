@@ -16,9 +16,12 @@ _HARD_CHECKS = [
     ("mean_inferability", "Inferability (cloze)", True),
 ]
 
-_OOV_NOTE = (
-    "\n---\n_OOV = out-of-vocabulary: a word not in the learner's known (K) or target (T) "
-    "vocabulary. OOV rate = OOV / total words; coverage = 1 - OOV rate._"
+_LEGEND = (
+    "\n---\n_Legend: rates are fractions in [0,1]; judge scores in [0,2] (0 = fails, 1 = partial, "
+    "2 = fully). Hard-check pass rate, <=1-new-word, recurrence, coverage: **higher is better** "
+    "(1.0 = every story passes). OOV rate: **lower is better** (0 = ideal; gate <= 0.02). "
+    "OOV = out-of-vocabulary (a word not in the learner's known K or target T set); "
+    "coverage = 1 - OOV rate._"
 )
 
 
@@ -119,7 +122,7 @@ def single_model_markdown(summary: EvalSummary, adv: EvalSummary | None = None) 
         lines += [f"- `{reason}`: {count}" for reason, count in ea["reasons"].items()]
     else:
         lines.append(f"All {ea['n']} outputs passed the deterministic checks.")
-    return "\n".join(lines) + _OOV_NOTE + "\n"
+    return "\n".join(lines) + _LEGEND + "\n"
 
 
 def results_markdown(
@@ -170,4 +173,4 @@ def results_markdown(
         "\n_Fill in: are the remaining failures a data problem (e.g. under-represented targets, "
         "themes that tempt off-vocab words)? What data change would fix them?_"
     )
-    return "\n".join(lines) + _OOV_NOTE + "\n"
+    return "\n".join(lines) + _LEGEND + "\n"

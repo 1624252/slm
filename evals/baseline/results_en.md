@@ -17,4 +17,4 @@ Held-out scenarios: **8**.
 - `one_new_word`: 8
 - `recurrence`: 7
 ---
-_OOV = out-of-vocabulary: a word not in the learner's known (K) or target (T) vocabulary. OOV rate = OOV / total words; coverage = 1 - OOV rate._
+_Legend: rates are fractions in [0,1]; judge scores in [0,2] (0 = fails, 1 = partial, 2 = fully). Hard-check pass rate, <=1-new-word, recurrence, coverage: **higher is better** (1.0 = every story passes). OOV rate: **lower is better** (0 = ideal; gate <= 0.02). OOV = out-of-vocabulary (a word not in the learner's known K or target T set); coverage = 1 - OOV rate._

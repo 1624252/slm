@@ -66,6 +66,28 @@ acquisition; PRD 14.6).
 **multiple, harder** targets, and **jargon-tempting** themes. Robustness = the hard-check pass
 rate on this set. A brittle model leaks OOV words here even if it looks fine on the clean set.
 
+## Reading the metrics (what each value means)
+
+All rates are fractions in **[0, 1]**; judge scores are in **[0, 2]**. In the base-vs-tuned
+tables, **Delta = tuned − base** and **Better** names the model that wins that row.
+
+| Metric (as shown in results) | Range | What the value means | Better |
+| --- | --- | --- | --- |
+| Hard-check pass rate | 0–1 | fraction of stories passing **all** deterministic checks (coverage + ≤1-new-word + recurrence). 1.0 = every story is spec-compliant. | higher |
+| OOV rate | 0–1 | fraction of words out-of-vocabulary (not in `K ∪ T`). 0.0 = ideal; pass gate ≤ 0.02. | lower |
+| Coverage (= 1 − OOV) | 0–1 | fraction of words the learner already knows. 1.0 = ideal. | higher |
+| ≤1 new word/sentence | 0–1 | fraction of stories in which **every** sentence adds ≤ 1 new word. 1.0 = all comply. | higher |
+| Recurrence satisfied | 0–1 | fraction of stories in which **every** target word recurs ≥ 3×. | higher |
+| Inferability (cloze) | 0–1 | fraction of target words a model recovers when the word is blanked (context-guessability). | higher |
+| Judge: `<dimension>` | 0–2 | mean rubric score across judged stories (0 = fails, 1 = partial, 2 = fully). | higher |
+| Judge: overall | 0–2 | mean across all judge dimensions. | higher |
+| Adversarial hard-check pass | 0–1 | hard-check pass rate on the stress set (this **is** the robustness number). | higher |
+
+Worked example (the committed English base): hard-check pass **0.000** (no story compliant),
+OOV **0.413** (41% of words unknown to the learner), ≤1-new-word **0.000** (no story kept the
+pacing), recurrence **0.125** (only ~1 story in 8 repeated its targets enough) — the base fails
+the behavior on every axis, which is the baseline fine-tuning must beat.
+
 ## Required outputs & win condition
 
 `islm.eval.run` writes `evals/results/results_<lang>.{md,json}` with:
