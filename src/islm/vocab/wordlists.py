@@ -83,18 +83,27 @@ def _pick(fieldnames, candidates) -> str | None:
     return None
 
 
+def _tier_path(language: str, tier: str):
+    """Prefer a downloaded full list over the small committed curated sample."""
+    for name in (f"{tier}.full.csv", f"{tier}.csv"):
+        path = VOCAB_DIR / language / name
+        if path.exists():
+            return path
+    return None
+
+
 def load_baseline(language: str) -> Vocabulary:
-    """Common 'already known' vocabulary for a language (curated file or frequency fallback)."""
-    path = VOCAB_DIR / language / "baseline.csv"
-    if path.exists():
+    """Common 'already known' vocabulary (curated/full file, else frequency fallback)."""
+    path = _tier_path(language, "baseline")
+    if path:
         return Vocabulary.from_csv(path)
     return Vocabulary.from_frequency(language, top_n=get_language(language).freq_baseline_n)
 
 
 def load_advanced(language: str) -> Vocabulary:
-    """Graded 'to-learn' vocabulary for a language (curated file or frequency-band fallback)."""
-    path = VOCAB_DIR / language / "advanced.csv"
-    if path.exists():
+    """Graded 'to-learn' vocabulary (curated/full file, else frequency-band fallback)."""
+    path = _tier_path(language, "advanced")
+    if path:
         return Vocabulary.from_csv(path)
     lang = get_language(language)
     from wordfreq import top_n_list  # lazy

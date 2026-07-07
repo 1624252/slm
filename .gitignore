@@ -19,6 +19,12 @@ credentials.json
 
 # Generated datasets & model artifacts (published to the HF Hub, not git)
 data/generated/
+
+# Downloaded full vocab lists (fetched on demand; see data/vocab/SOURCES.md for licenses)
+data/vocab/**/*.full.csv
+
+# Curated (second-pass) output — regenerated from generated data by islm.datagen.curate
+data/curated/
 *.parquet
 *.arrow
 checkpoints/

@@ -1,40 +1,40 @@
 # Vocabulary sources & licenses
 
-Each language has `data/vocab/<lang>/baseline.csv` and `advanced.csv` with columns
+Each language has baseline (known) and advanced (to-learn) tiers as CSVs with columns
 `word,tier,source`:
 
-- **baseline** — common words assumed already known (the learner's `K`).
-- **advanced** — graded "to-learn" words (the target pool `T`).
+- `data/vocab/<lang>/baseline.csv`, `advanced.csv` — small **curated samples** shipped in the
+  repo (original content, CC0) so the pipeline and tests run offline.
+- `data/vocab/<lang>/baseline.full.csv`, `advanced.full.csv` — **downloaded** graded lists
+  (git-ignored; run `python -m islm.vocab.download`). Loaders prefer these when present.
 
-## Shipped in this repo (committed)
+## Downloaded graded lists (`islm.vocab.download`)
 
-| Files | `source` value | What it is | License |
-| --- | --- | --- | --- |
-| `en/*.csv`, `zh/*.csv`, `ja/*.csv` | `curated-sample` | Small, hand-authored lists for offline use and tests. Not exhaustive. | Original to this repo (CC0) |
+All URLs were fetched and verified. Baseline/advanced tier split shown per language.
 
-These exist so the pipeline and tests run with no downloads. Replace/extend them with the
-fuller lists below for real data generation.
-
-## Generating fuller lists
-
-**Frequency bands (any language, no scraping).** Uses [`wordfreq`](https://github.com/rspeer/wordfreq)
-(code MIT; bundled data under permissive licenses):
-
-```bash
-python -m islm.vocab.build_lists --language <lang> --from-frequency --overwrite
-```
-
-Writes `tier=freq, source=wordfreq`. This is the language-agnostic default.
-
-## Graded lists (CEFR / HSK / JLPT)
-
-Sourced from the web by the language-scout subagents and fetched on demand by the downloader.
-Only lists whose license permits redistribution are committed; anything restrictive is fetched
-locally at build time instead. Verified sources and exact licenses are recorded here as they are
-integrated:
-
-| Language | Scheme | Source | License | Status |
+| Language | Scheme | Dataset (repo) | License (exact) | Tiers |
 | --- | --- | --- | --- | --- |
-| English | CEFR | _pending scout verification_ | — | curated-sample in use |
-| Chinese | HSK | _pending scout verification_ | — | curated-sample in use |
-| Japanese | JLPT | _pending scout verification_ | — | curated-sample in use |
+| English | CEFR | CEFR-J Vocabulary Profile 1.5 + Octanove C1/C2 (`openlanguageprofiles/olp-en-cefrj`) | CEFR-J: free research **and** commercial use **with citation** (© Tono Lab, TUFS); Octanove: **CC-BY-SA-4.0** | baseline A1–A2, advanced B1–C2 |
+| Chinese | HSK 3.0 | `ivankra/hsk30` | **MIT** | baseline HSK1–3, advanced HSK4–9 |
+| Japanese | JLPT | `evanclan/OpenJLPT` | **CC-BY-SA-4.0** (levels from Jonathan Waller/tanos.co.uk CC-BY; glosses from JMdict/EDICT) | baseline N5–N4, advanced N3–N1 |
+
+## Frequency baselines (`islm.vocab.build_lists --from-frequency`, any language)
+
+| Dataset | License |
+| --- | --- |
+| `hermitdave/FrequencyWords` (OpenSubtitles) — `en_50k`, `zh_cn_50k`, `ja` | code MIT / **content CC-BY-SA-4.0** |
+
+## Attribution & redistribution
+
+- **CC-BY-SA-4.0** (Octanove, JLPT levels, FrequencyWords content): attribute the source and keep
+  the ShareAlike license on any redistributed derivative.
+- **CEFR-J**: cite "CEFR-J Wordlist, Tono Lab, Tokyo University of Foreign Studies (TUFS)".
+- **FrequencyWords / OpenSubtitles**: link to `http://www.opensubtitles.org/` in reports.
+- **JLPT** is not an official word list; OpenJLPT is a community compilation.
+- The downloaded `*.full.csv` files are **git-ignored** to avoid re-licensing third-party data in
+  this repo; fetch them on demand. Only the CC0 curated samples are committed.
+
+## Avoided (license issues, flagged by scouts)
+
+`google-10000-english` (NOASSERTION/LDC-restricted), `gigacool/hanyu-shuiping-kaoshi` (data
+header says CC-BY-NC), and repos with no LICENSE file — not redistributable, not used.

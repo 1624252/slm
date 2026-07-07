@@ -67,8 +67,14 @@ def test_japanese_analyzer_lemmatizes():
 @pytest.mark.parametrize(("lang", "pkg"), [("zh", "jieba"), ("ja", "fugashi")])
 def test_mock_pipeline_per_language(lang, pkg):
     pytest.importorskip(pkg)
+    from islm.vocab.wordlists import VOCAB_DIR, Vocabulary
+
+    # Use the committed single-token curated lists, so the test is deterministic whether or
+    # not the (git-ignored) downloaded full lists are present.
     analyzer = get_analyzer(lang)
-    for scenario in sample_scenarios(3, language=lang, seed=2):
+    known = Vocabulary.from_csv(VOCAB_DIR / lang / "baseline.csv")
+    pool = sorted(Vocabulary.from_csv(VOCAB_DIR / lang / "advanced.csv").lemmas)
+    for scenario in sample_scenarios(3, language=lang, seed=2, known=known, target_pool=pool):
         ex = make_example(scenario, MockLLM(), lemmatizer=analyzer)
         assert ex.report.hard_pass, ex.report.failures()
         for word in scenario.target_set():

@@ -36,10 +36,12 @@ any other code falls back to `wordfreq` frequency bands + a generic Unicode toke
 | other | generic Unicode tokenizer | frequency | top-N / next band |
 
 Vocabulary lives at `data/vocab/<lang>/{baseline,advanced}.csv` (`word,tier,source`). Small
-curated samples ship for offline use and tests; regenerate or expand from frequency with:
+curated samples ship for offline use and tests. Fetch the real graded lists (CEFR-J/Octanove,
+HSK 3.0, JLPT) — written to `*.full.csv`, which the loaders prefer:
 
 ```bash
-python -m islm.vocab.build_lists --language ja --from-frequency --overwrite
+python -m islm.vocab.download --language all          # graded lists (git-ignored)
+python -m islm.vocab.build_lists --language ja --from-frequency --overwrite  # or frequency bands
 ```
 
 `jieba`, `fugashi`, and `unidic-lite` install via `pip install -e .`. Without them, ZH/JA fall
@@ -51,12 +53,14 @@ and licenses of the graded lists are recorded in `data/vocab/SOURCES.md`.
 ```
 src/islm/
 ├── config.py            # Thresholds (from the PRD) + LLM settings from env
-├── vocab/               # tokenize, lemmatize (spaCy or rule-based), word lists
+├── vocab/               # languages, tokenize, analyzers, word lists, download, build_lists
 ├── validators/          # coverage, one-new-word, recurrence -> ValidationReport  (the backbone)
 ├── llm/                 # OpenAI-compatible client, offline MockLLM, prompt templates
-├── datagen/             # scenario sampler, generate + rewrite loop, dataset pipeline
+├── datagen/             # sampler, generate + rewrite (pipeline), curate (2nd pass), seed
 └── eval/                # LLM judge, cloze inferability, base-vs-tuned harness + report
 ```
+
+See `docs/DATA_CARD.md` for the end-to-end data recipe, counts, and licenses.
 
 ## The Behavior Spec, in code
 
@@ -123,6 +127,31 @@ The training input (`system` + `user`) equals the inference input, so the model 
 within a provided allowed list (as in SRS-Stories). Generated data goes to `data/generated/`
 (git-ignored; publish the final dataset to the HF Hub).
 
+## Second pass: curation (`datagen/curate.py`)
+
+Generation is pass 1 (per-item). The plan is to generate **a lot**, then review the whole
+corpus and drop the bad ones. `curate` runs corpus-wide checks and writes a filtered dataset:
+
+```bash
+python -m islm.datagen.curate --in data/generated/en --out data/curated/en --judge-model gpt-5
+```
+
+Rejection reasons: `duplicate` / `near_duplicate`, `repetitive_sentences`, `low_lexical_variety`,
+`too_short`, `failed_revalidation`, and (with a judge) `judge_spec_adherence` / `judge_low_quality`.
+It writes kept `train/val/test.jsonl`, `rejects.jsonl` (annotated with reasons), and
+`curation_report.{md,json}`. Deterministic checks catch dups/repetition/coverage; the optional
+LLM re-judge is what removes "passes-the-rules-but-dull" content — see `docs/DATA_CARD.md`.
+
+## Human-authored seed (no model needed)
+
+Where no teacher is available, `datagen/seed.py` builds a small set of genuinely good, spec-passing
+English stories (authored to the spec) so there is real data to inspect and to run curation on:
+
+```bash
+python -m islm.datagen.seed --out data/generated/en_seed
+python -m islm.datagen.curate --in data/generated/en_seed --out data/curated/en_seed
+```
+
 ## Evaluating (base vs tuned)
 
 `eval/harness.py` runs any *scenario → story* function over the held-out set and scores each
@@ -165,8 +194,8 @@ model download.
 - **Lemmatizer:** `SimpleLemmatizer` is a rule-based fallback (imperfect on silent-e verbs);
   install spaCy for real data. Coverage checks both the lemma and the raw surface form, so a
   base-form word is never falsely flagged.
-- **Known vocabulary** can come from the bundled `data/vocab/sample_en.csv`, a CEFR-J CSV, or
-  frequency bands (`Vocabulary.from_frequency`, via `wordfreq`).
+- **Known vocabulary** comes from `data/vocab/<lang>/` (curated samples, downloaded graded
+  `*.full.csv`, or `wordfreq` frequency bands) — loaders prefer full > curated > frequency.
 - **Mock output is intentionally minimal** ("The cat is big.") — it exists to exercise the
   pipeline, not to be good writing. A real teacher produces real stories; the validators are
   identical either way.
