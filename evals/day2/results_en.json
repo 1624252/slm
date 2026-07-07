@@ -1,0 +1,235 @@
+{
+  "base": {
+    "model": "HuggingFaceTB/SmolLM2-135M-Instruct",
+    "n": 8,
+    "hard_pass_rate": 0.0,
+    "mean_oov_rate": 0.413,
+    "mean_coverage": 0.587,
+    "one_new_word_pass_rate": 0.0,
+    "recurrence_pass_rate": 0.125
+  },
+  "error_analysis": {
+    "base": {
+      "n": 8,
+      "failing": 8,
+      "reasons": {
+        "oov": 8,
+        "coverage": 8,
+        "one_new_word": 8,
+        "recurrence": 7
+      }
+    },
+    "tuned": {
+      "n": 8,
+      "failing": 8,
+      "reasons": {
+        "oov": 8,
+        "coverage": 8,
+        "one_new_word": 8,
+        "recurrence": 6
+      }
+    }
+  },
+  "base_rows": [
+    {
+      "id": "en-0000",
+      "hard_pass": false,
+      "oov_rate": 0.321,
+      "failures": [
+        "oov",
+        "coverage",
+        "one_new_word"
+      ],
+      "story": "The journey of a lifetime, filled with moments of joy and sorrow, and the thrill of discovery. A lost key, hidden in the depths of a forgotten book, had been waiting for its rightful owner for years. The journey was a journey of self-discovery, as the key was only unlocked when the person who had been searching for it finally found it.\n\nThe journey was a journey of self-discovery, as the person who had been searching for the key finally found it. The journey was a journey of self-discovery, as the person who had been searching for the key finally found it. The journey was a journey of self-discovery, as the person who had been searching for the key finally found it. The journey was a journey of self-discovery, as the person who had been searching for the key finally found it.\n\nThe journey was a journey of self-discovery, as the person who had been searching for the key finally found it. The journey was"
+    },
+    {
+      "id": "en-0001",
+      "hard_pass": false,
+      "oov_rate": 0.47,
+      "failures": [
+        "oov",
+        "coverage",
+        "one_new_word",
+        "recurrence"
+      ],
+      "story": "In the bustling streets of the castle, a cat detective named Emily navigated through the labyrinth of the castle's hidden passages. She had always been fascinated by the mysterious world of the castle's inhabitants, and her curiosity led her to explore every nook and cranny. As she ventured deeper into the castle's labyrinth, Emily encountered a peculiar creature that seemed to be hiding in plain sight. The creature was a small, furry cat with a long, curly tail and a mischievous grin.\n\nAs Emily approached the creature, she noticed that it was not a cat at all, but rather a small, furry creature with a long, curly tail. The creature was watching Emily from afar, its eyes fixed intently on her. Emily felt a thrill of excitement and curiosity, as if she had stumbled upon a long-lost treasure.\n\nAs Emily continued to explore the castle, she discovered that the creature was a small, furry cat with a long, curly tail. The creature was watching Emily from"
+    },
+    {
+      "id": "en-0002",
+      "hard_pass": false,
+      "oov_rate": 0.485,
+      "failures": [
+        "oov",
+        "coverage",
+        "one_new_word",
+        "recurrence"
+      ],
+      "story": "The sun was setting over the city, casting a warm orange glow over the bustling streets. The sound of children's laughter filled the air, and the smell of freshly baked bread wafted through the air. As the last rays of sunlight faded, the city transformed into a vibrant tapestry of colors, with the city lights casting a kaleidoscope of light on the buildings.\n\nA young girl, her eyes wide with wonder, wandered through the crowded streets, her footsteps echoing off the walls. She stopped at a small café, where a warm smile greeted her. The café was a cozy spot, filled with the sounds of sizzling food and the aroma of freshly brewed coffee. The café was a haven for people of all ages, and the young girl felt a sense of belonging.\n\nAs she sat down at the counter, a friendly waitress greeted her. \"Welcome to the café,\" she said, her voice warm and inviting. \"What can I get for you today?\""
+    },
+    {
+      "id": "en-0003",
+      "hard_pass": false,
+      "oov_rate": 0.366,
+      "failures": [
+        "oov",
+        "coverage",
+        "one_new_word",
+        "recurrence"
+      ],
+      "story": "The dog, brave, had been running around the yard for hours, his tail wagging wildly as he chased after the squirrels. He was a big, brown dog with a thick coat of fur that seemed to shimmer in the sunlight. His eyes were wide with excitement, and his ears were erect, ready to leap out of his skin.\n\nAs he ran, he stopped at a small, hidden path that led to a cozy little house. The house was a cozy little cottage, with a big, old wooden door that seemed to lead to a warm, cozy place. The door was wide open, and the air was filled with the sweet scent of blooming flowers.\n\nThe dog's tail wagged again, and he ran towards the door, his ears perked up. He was a big, brown dog, and he had a big, brown tail. He was a brave dog, and he was running around the yard, chasing after the squirrels.\n\nAs he ran,"
+    },
+    {
+      "id": "en-0004",
+      "hard_pass": false,
+      "oov_rate": 0.437,
+      "failures": [
+        "oov",
+        "coverage",
+        "one_new_word",
+        "recurrence"
+      ],
+      "story": "In the quiet garden, a small, cozy spot where the sun barely broke the horizon, a curious bird named Whisker wandered through the garden, its wings flapping wildly as it searched for its next meal. The air was filled with the sweet scent of blooming flowers, and the sound of birds chirping filled the air.\n\nAs Whisker sat on a nearby bench, its eyes fixed on a small, delicate flower, it felt a sense of peace wash over it. It had been a long day of exploring the garden, and now it was finally at peace. The garden was a haven, a place where the boundaries between life and death blurred.\n\nThe sun was setting, casting a warm glow over the garden. A small, old wooden sign creaked in the gentle breeze, inviting Whisker to join the others. The sign read \"The Garden of the Sun.\"\n\nAs Whisker sat there, lost in thought, the sound of birds chirping"
+    },
+    {
+      "id": "en-0005",
+      "hard_pass": false,
+      "oov_rate": 0.373,
+      "failures": [
+        "oov",
+        "coverage",
+        "one_new_word",
+        "recurrence"
+      ],
+      "story": "In the old house, where the sun shone brightly, a young girl named Lily sat on the porch, lost in thought. She had always been fascinated by the old house, its history and secrets hidden behind its weathered walls. The house was a cozy haven, with a warm bed and a comfortable chair, where Lily could sit and listen to the gentle rustle of leaves.\n\nAs the sun began to set, casting a warm glow over the house, Lily felt a sense of peace wash over her. She had always been drawn to the old house, and now, with the sun's warmth, she felt a sense of belonging. She had always been a curious child, always eager to explore the world around her.\n\nLily's mother, a kind and gentle woman, had always been a source of comfort and guidance. She had always been there for her when Lily needed it, and she had always been there for her when Lily needed her. They had a special bond, and Lily"
+    },
+    {
+      "id": "en-0006",
+      "hard_pass": false,
+      "oov_rate": 0.331,
+      "failures": [
+        "oov",
+        "coverage",
+        "one_new_word",
+        "recurrence"
+      ],
+      "story": "In the old house, a wizard sat on a bench, his eyes fixed on a small, mysterious book. The book was cluttered with strange symbols and strange words, but the wizard's eyes sparkled with a mischievous glint. He was a master of the arcane arts, and his books were filled with tales of magic and wonder.\n\nThe wizard's name was Zorvath, and he was known for his ability to communicate with the spirits of the land. He was a gentle soul, always smiling and always willing to listen. His books were filled with stories of the ancient ones, of the great deeds of the gods, and of the mysteries of the universe.\n\nOne day, Zorvath was sitting in his favorite armchair, surrounded by the books of his library. He was reading a book about the ancient ones, and the words seemed to shimmer and dance in the light. Suddenly, a strange noise caught his attention. A small,"
+    },
+    {
+      "id": "en-0007",
+      "hard_pass": false,
+      "oov_rate": 0.521,
+      "failures": [
+        "oov",
+        "coverage",
+        "one_new_word",
+        "recurrence"
+      ],
+      "story": "The sun was setting over the city, casting a warm orange glow over the bustling streets. The air was filled with the sweet scent of blooming flowers, and the sound of children's laughter filled the air. As the last rays of sunlight faded, the city transformed into a vibrant tapestry of colors, with the city lights casting a kaleidoscope of hues on the pavement.\n\nIn the heart of the city, a small café stood as a beacon of warmth and comfort. The café's owner, a kind-hearted woman named Emma, greeted everyone with a warm smile and a warm welcome. She introduced herself as Emma, a kind-hearted woman who had lived in the city her entire life. Emma's smile was warm and inviting, and she welcomed everyone with open arms.\n\nAs the sun dipped below the horizon, the city transformed into a vibrant tapestry of colors. The air was filled with the sweet scent of blooming flowers, and the sound of children's laughter filled the air. Emma"
+    }
+  ],
+  "tuned": {
+    "model": "HuggingFaceTB/SmolLM2-135M-Instruct",
+    "n": 8,
+    "hard_pass_rate": 0.0,
+    "mean_oov_rate": 0.4057,
+    "mean_coverage": 0.5943,
+    "one_new_word_pass_rate": 0.0,
+    "recurrence_pass_rate": 0.25
+  },
+  "tuned_rows": [
+    {
+      "id": "en-0000",
+      "hard_pass": false,
+      "oov_rate": 0.443,
+      "failures": [
+        "oov",
+        "coverage",
+        "one_new_word"
+      ],
+      "story": "The journey of a lifetime, filled with moments of joy and sorrow, and the thrill of discovery. A journey that begins in the morning, as the sun rises over the city, and ends in the evening, as the sun sets over the horizon. The journey is a constant, unending one, with each step, each step, each step, a reminder of the journey's purpose.\n\nThe journey begins with the morning, as the sun rises over the city, casting a warm glow over the city. The journey is a journey of discovery, as the sun sets over the horizon, casting a warm glow over the city. The journey is a journey of discovery, as the sun sets over the horizon, casting a warm glow over the city. The journey is a journey of discovery, as the sun sets over the horizon, casting a warm glow over the city.\n\nThe journey is a journey of discovery, as the sun sets over the horizon, casting a warm glow over the city"
+    },
+    {
+      "id": "en-0001",
+      "hard_pass": false,
+      "oov_rate": 0.434,
+      "failures": [
+        "oov",
+        "coverage",
+        "one_new_word",
+        "recurrence"
+      ],
+      "story": "In the bustling streets of the city, a cat detective named Emily navigated through the crowded alleys, her eyes scanning the crowded sidewalks for the elusive thief. She had been hired by a wealthy businessman to track down the thief, but the thief was a cunning one, always staying one step ahead of the detective. Emily's eyes scanned the crowded sidewalks, searching for the thief's identity, and finally spotted the thief, a man with a black hoodie and a black coat.\n\nEmily's first move was to call the detective, who was standing at the corner of the street, looking at the man with a mixture of curiosity and suspicion. Emily asked the detective if he was a thief, and the detective replied that he was a thief, but he was also a detective. Emily asked the detective if he was a thief, and the detective replied that he was a detective, but he was also a thief. Emily asked the detective if he was a thief, and the detective replied that he was"
+    },
+    {
+      "id": "en-0002",
+      "hard_pass": false,
+      "oov_rate": 0.478,
+      "failures": [
+        "oov",
+        "coverage",
+        "one_new_word",
+        "recurrence"
+      ],
+      "story": "The sun was setting over the city, casting a warm orange glow over the bustling streets. The sound of children's laughter filled the air as they played in the park, their faces a warm smile. A small, furry animal, a cat, sat on a bench, its eyes fixed on the sky. The cat's eyes sparkled with a mischievous glint, and it was a perfect example of the cat's playful nature.\n\nAs the sun dipped below the horizon, the sky transformed into a kaleidoscope of colors. The sky was a deep shade of blue, with a few wispy clouds drifting lazily across the sky. The air was filled with the sweet scent of blooming flowers, and the scent of blooming flowers filled the air.\n\nThe cat's eyes sparkled with a mischievous glint, and it was a perfect example of the cat's playful nature. The cat's eyes sparkled with a mischievous glint, and it was a perfect example of the cat's"
+    },
+    {
+      "id": "en-0003",
+      "hard_pass": false,
+      "oov_rate": 0.317,
+      "failures": [
+        "oov",
+        "coverage",
+        "one_new_word",
+        "recurrence"
+      ],
+      "story": "The dog, brave, had been running around the yard for hours, his tail wagging wildly as he chased after the squirrels. He was a big dog, with a thick coat of fur that seemed to shimmer in the sunlight. His eyes were wide with excitement, and his ears were twitching with energy. He was a good dog, always ready to play and get into mischief.\n\nAs he ran, he stopped at a small, hidden path that led to a cozy little house. The house was a cozy little place, with soft walls and a warm smell of wood and dust. The dog was happy to be in the house, and he was eager to explore. He wandered around the house, sniffing the air, and finding all sorts of interesting things.\n\nOne day, the dog decided to visit the local park. He was a big dog, and he loved to run around in the park. He was a good dog, always ready to play and get into mischief."
+    },
+    {
+      "id": "en-0004",
+      "hard_pass": false,
+      "oov_rate": 0.416,
+      "failures": [
+        "oov",
+        "coverage",
+        "one_new_word",
+        "recurrence"
+      ],
+      "story": "In the quiet garden, a small, cozy spot where the sun barely broke the horizon, a curious bird named Whisker strolled, its wings flapping softly as it explored the garden's hidden corners. The air was filled with the sweet scent of blooming flowers, and the gentle chirping of birds filled the air.\n\nAs Whisker wandered, she noticed a small, old wooden box tucked away in a corner. It was a favorite of her, and she had always been curious about its contents. The box was adorned with a delicate, silver lock, and it seemed to be waiting for Whisker to open it.\n\nAs Whisker opened the box, she saw that it contained a small, golden key. She carefully opened the key, and the key slipped out of her fingers, revealing a small, ornate lock. The lock was made of a soft, silver material, and it was adorned with a small, delicate, silver pendant.\n\nWh"
+    },
+    {
+      "id": "en-0005",
+      "hard_pass": false,
+      "oov_rate": 0.419,
+      "failures": [
+        "oov",
+        "coverage",
+        "one_new_word",
+        "recurrence"
+      ],
+      "story": "In the old house, where the sun shone brightly, a young girl named Lily sat on the porch, watching the birds play. She loved to listen to their songs and watch them soar through the trees. One day, she heard a bird call, and she ran to the window to see what it was.\n\n\"Hello, little one,\" the bird said, its voice like a gentle breeze. \"What brings you to our house today?\"\n\nLily's eyes widened as she listened, and she felt a sense of excitement. She had never heard such a beautiful song before.\n\n\"I'm so glad you like the bird,\" the bird said, its voice soft and soothing. \"It's a special song for us, and it's a good way to start our day.\"\n\nLily's heart skipped a beat as she realized that the bird was a kind and gentle soul. She decided to take a moment to appreciate the bird's song and to share it with her friends"
+    },
+    {
+      "id": "en-0006",
+      "hard_pass": false,
+      "oov_rate": 0.305,
+      "failures": [
+        "oov",
+        "coverage",
+        "one_new_word"
+      ],
+      "story": "In the old house, a wizard sat on a bench, his eyes fixed on the window, his hands clasped together in a silent prayer. The sun beat down on the windows, casting a warm glow over the room. A small, old wooden table sat in the corner, its surface worn smooth by years of use. A small, wooden chair sat in the corner, its seat worn and worn. A small, wooden door stood in the corner, its hinges creaking softly in the breeze.\n\nThe wizard's eyes were fixed on the window, his hands clasped together in a silent prayer. He was a wizard, a mystic, and he was here to pray. He was a wizard, a mystic, and he was here to pray. He was a wizard, a mystic, and he was here to pray. He was a wizard, a mystic, and he was here to pray. He was a wizard,"
+    },
+    {
+      "id": "en-0007",
+      "hard_pass": false,
+      "oov_rate": 0.435,
+      "failures": [
+        "oov",
+        "coverage",
+        "one_new_word",
+        "recurrence"
+      ],
+      "story": "The sun was setting over the rolling hills, casting a warm glow over the sleepy town. The streets were bustling with people, their faces a mix of excitement and nervousness. A young boy, his eyes wide with wonder, stood at the edge of the park, his eyes fixed on the horizon. He was a little boy, but his eyes were bright and curious.\n\nAs the sun dipped below the horizon, the townspeople began to stir. A group of children, their faces a mix of excitement and worry, gathered around a small, wooden table. They were all sitting in a circle, their hands clasped together, and their eyes fixed on the horizon.\n\nThe boy, who was a little boy himself, looked up at the horizon and smiled. He was a little boy, but his eyes were bright and curious. He was a little boy, but his eyes were bright and curious.\n\nThe boy's eyes sparkled as he looked at the horizon. He"
+    }
+  ]
+}

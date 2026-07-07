@@ -57,10 +57,11 @@ src/islm/
 ├── validators/          # coverage, one-new-word, recurrence -> ValidationReport  (the backbone)
 ├── llm/                 # OpenAI-compatible client, offline MockLLM, prompt templates
 ├── datagen/             # sampler, generate + rewrite (pipeline), curate (2nd pass), seed
-└── eval/                # LLM judge, cloze inferability, base-vs-tuned harness + report
+├── eval/                # LLM judge, cloze inferability, base-vs-tuned harness + report
+└── train/               # QLoRA/LoRA SFT (sft.py) -> LoRA adapter
 ```
 
-See `docs/DATA_CARD.md` for the end-to-end data recipe, counts, and licenses.
+See `docs/DATA_CARD.md` for the data recipe and `docs/TRAINING.md` for fine-tuning.
 
 ## The Behavior Spec, in code
 

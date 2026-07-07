@@ -17,12 +17,14 @@ deterministic validators.
 | `docs/PRD.md` | Product Requirements Document — start here. |
 | `docs/dataset-and-eval.md` | How the dataset and evaluation work + how to run them. |
 | `docs/EVALUATION.md` | Behavior Spec, all eval checks + rubric, how to eval a trained model. |
+| `docs/TRAINING.md` | QLoRA/LoRA fine-tuning: install, data, run, then eval the adapter. |
 | `docs/DAY1.md` | Day-1 checkpoint: env/inference, brainlift, and the base-model baseline. |
+| `docs/DAY2.md` | Day-2 checkpoint: the full generate → train → eval loop end to end. |
 | `docs/DATA_CARD.md` | The data recipe: generation, two-pass curation, counts, licenses. |
 | `docs/design-constraints.md` | Constraint-first + representation analysis of the design. |
 | `docs/spec.md` | The one-week build brief this project is scoped against. |
 | `docs/brainlift.md` | Research brainlift: theory, experts, insights, sources. |
-| `src/islm/` | The package: `vocab`, `validators`, `llm`, `datagen`, `eval`. |
+| `src/islm/` | The package: `vocab`, `validators`, `llm`, `datagen`, `eval`, `train`. |
 | `tests/` | Unit tests for the validators + an offline end-to-end smoke test. |
 | `data/vocab/<lang>/` | Per-language baseline + advanced word lists (real datasets land in `data/generated/`, git-ignored). |
 | `evals/` | Held-out scenarios (`scenarios/`) and results (`results/`, git-ignored). |
@@ -60,6 +62,6 @@ dataset design, and evaluation plan.
 
 ## Status
 
-The dataset pipeline and evaluation harness are built and runnable end-to-end (offline via a
-mock teacher), before any training — as the spec requires. Next up: real teacher generation, the
-QLoRA fine-tune, and the base-vs-tuned results table.
+The full loop — **generate → train → eval** — runs end to end (offline smoke: mock teacher +
+LoRA on a tiny model + base-vs-tuned eval), and the base-model baseline is on the board. Next up:
+real teacher generation + a real QLoRA run on a GPU for the first real base-vs-tuned numbers.
