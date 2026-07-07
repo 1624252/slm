@@ -15,11 +15,30 @@ deterministic validators.
 | Path | Contents |
 | --- | --- |
 | `docs/PRD.md` | Product Requirements Document — start here. |
+| `docs/dataset-and-eval.md` | How the dataset and evaluation work + how to run them. |
 | `docs/spec.md` | The one-week build brief this project is scoped against. |
 | `docs/brainlift.md` | Research brainlift: theory, experts, insights, sources. |
-| `src/` | Data-generation, validators, training, and inference code. |
-| `data/` | Generated datasets (git-ignored; published to the HF Hub). |
-| `evals/` | Evaluation harness and results (base vs. tuned). |
+| `src/islm/` | The package: `vocab`, `validators`, `llm`, `datagen`, `eval`. |
+| `tests/` | Unit tests for the validators + an offline end-to-end smoke test. |
+| `data/vocab/` | Bundled sample word list (real datasets land in `data/generated/`, git-ignored). |
+| `evals/` | Held-out scenarios (`scenarios/`) and results (`results/`, git-ignored). |
+
+## Getting started
+
+```bash
+python -m venv .venv && pip install -e .
+python -m spacy download en_core_web_sm     # recommended for real data
+
+# Build a dataset and run the eval fully offline (mock teacher, no API key):
+python -m islm.datagen.pipeline --n 20 --mock --out data/generated
+python -m islm.eval.run --mock
+
+python -m pytest        # tests        (23 passing)
+ruff check src tests    # lint
+```
+
+For real generation, copy `.env.example` to `.env` and add your key (never commit it). See
+`docs/dataset-and-eval.md` for the full workflow, CLI flags, and the record schema.
 
 ## Theoretical core
 
@@ -34,5 +53,6 @@ dataset design, and evaluation plan.
 
 ## Status
 
-Planning / pre-build. The dataset and the evaluation harness are the primary deliverables and
-are built before any training run.
+The dataset pipeline and evaluation harness are built and runnable end-to-end (offline via a
+mock teacher), before any training — as the spec requires. Next up: real teacher generation, the
+QLoRA fine-tune, and the base-vs-tuned results table.

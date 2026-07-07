@@ -1,0 +1,14 @@
+# Core (heavy deps are imported lazily; validators + tests run on the stdlib alone)
+spacy>=3.7            # tokenization + lemmatization (recommended for real data)
+wordfreq>=3.1         # frequency-band known-vocabulary (Nation's frequency bands)
+openai>=1.40          # OpenAI-compatible client for teacher/judge (any base_url)
+python-dotenv>=1.0    # load .env for API keys (never commit secrets)
+pandas>=2.2           # eval results tables
+tqdm>=4.66            # progress bars
+
+# Dev
+pytest>=8.0
+ruff>=0.6
+
+# After install, download the spaCy English model for high-quality lemmatization:
+#   python -m spacy download en_core_web_sm

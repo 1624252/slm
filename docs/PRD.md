@@ -442,19 +442,30 @@ adversarial/robustness eval; (3) composed behavior (e.g., hold i+1 *and* a fixed
 slm/
 ├── README.md
 ├── .gitignore
-├── requirements.txt          # (to be added at build start)
+├── .env.example               # LLM keys template (.env is git-ignored)
+├── requirements.txt
+├── pyproject.toml             # package metadata + ruff + pytest config
 ├── docs/
 │   ├── PRD.md                 # this document
+│   ├── dataset-and-eval.md    # how the dataset + eval work and how to run them
 │   ├── spec.md                # build brief
 │   └── brainlift.md           # research base
-├── src/
-│   ├── vocab/                 # CEFR-J / HSK loaders, frequency, lemmatization
-│   ├── validators/            # coverage, ≤1-new-word, recurrence, inferability
-│   ├── datagen/               # scenario sampler, teacher calls, rewrite loop, judge gate
-│   ├── train/                 # Unsloth/QLoRA scripts + configs
-│   └── infer/                 # inference + inference-time validators + demo
-├── data/                      # datasets (git-ignored; published to HF Hub)
-└── evals/                     # harness, held-out scenarios, results tables
+├── src/islm/
+│   ├── config.py              # thresholds + LLM settings
+│   ├── vocab/                 # tokenize, lemmatize (spaCy or rule-based), word lists
+│   ├── validators/            # coverage, ≤1-new-word, recurrence -> ValidationReport
+│   ├── llm/                   # OpenAI-compatible client, offline MockLLM, prompts
+│   ├── datagen/               # scenario sampler, generate + rewrite loop, pipeline CLI
+│   ├── eval/                  # LLM judge, cloze, base-vs-tuned harness + report
+│   ├── train/                 # (planned) Unsloth/QLoRA scripts + configs
+│   └── infer/                 # (planned) inference + inference-time validators + demo
+├── tests/                     # validator unit tests + offline end-to-end smoke test
+├── data/
+│   ├── vocab/                 # bundled sample word list (tracked)
+│   └── generated/             # datasets (git-ignored; published to HF Hub)
+└── evals/
+    ├── scenarios/             # held-out scenarios (tracked, reproducible)
+    └── results/               # base-vs-tuned outputs (git-ignored)
 ```
 
 ---
