@@ -88,7 +88,7 @@ git-ignored; small curated CC0 samples ship in the repo.
 | --- | --- |
 | Vocabulary (en/zh/ja) | Real graded lists fetched (en ~2.3k/6.4k, zh ~2.2k/8.7k, ja ~1.3k/6.7k baseline/advanced) |
 | Curated CC0 samples | Committed (offline + tests) |
-| Human-authored seed (en/zh/ja) | 28 spec-passing stories (16 en, 6 zh, 6 ja) via `islm.datagen.seed`; curation keeps 28/29 (drops 1 planted duplicate) |
+| Human-authored seed (en/zh/ja) | 28 unique spec-passing stories (16 en, 6 zh, 6 ja) via `islm.datagen.seed`; curation keeps 28/29 (drops 1 planted duplicate). Each record's `KNOWN_WORDS` is scoped to the curated baseline + the story's own words (~150), so prompts fit a small window. |
 | Large teacher-generated corpus | **Pending model access** (see below) |
 
 The authored seed is genuine, spec-passing data (hand-written by the model to the spec and

@@ -20,9 +20,30 @@ from pathlib import Path
 from ..config import DATA_DIR
 from ..validators import validate_story
 from ..vocab.lemmatize import get_analyzer
-from ..vocab.wordlists import load_baseline
+from ..vocab.wordlists import VOCAB_DIR, Vocabulary
 from .generate import Example
 from .scenarios import Scenario
+
+
+def _compact_known(story: str, targets: list[str], language: str, analyzer) -> list[str]:
+    """A small, story-scoped KNOWN_WORDS list: the curated baseline sample plus the story's own
+    content words (minus the target), so the prompt is a few hundred tokens instead of >10k.
+
+    The full baseline is ~2.3k words, which renders each training record to 5k-12k tokens; since
+    the story (the completion we train on) sits at the end, that forces truncation that drops
+    TARGET_WORDS and the rules. Scoping the known list to what the story actually uses keeps the
+    whole record inside a small window and matches the eval's `--curated` setup.
+    """
+    base = VOCAB_DIR / language / "baseline.csv"
+    known = Vocabulary.from_csv(base).lemmas if base.exists() else set()
+    target_set = {t.lower() for t in targets}
+    # Add every content word the story uses (except the target). Include tokens the lemmatizer
+    # tags as proper nouns too: a sentence-initial function word ("Every", "Who") is mis-tagged
+    # proper, and we still need it covered so the story's own vocabulary never reads as OOV.
+    for tok in analyzer.analyze(story):
+        if tok.is_word and tok.lemma not in target_set:
+            known.add(tok.lemma)
+    return sorted(known)
 
 # language -> list of (target_words, story). Stories are simple by design (comprehensible input).
 SEED: dict[str, list[tuple[list[str], str]]] = {
@@ -214,22 +235,22 @@ def _build_records(languages: list[str]) -> tuple[list[dict], dict]:
     kept: list[dict] = []
     stats: dict = {}
     for lang in languages:
-        known = load_baseline(lang)
         analyzer = get_analyzer(lang)
         passing, failures = 0, []
         stories = list(SEED[lang])
         if _DUPLICATE[0] == lang:
             stories.append(SEED[lang][_DUPLICATE[1]])  # planted duplicate
         for i, (targets, story) in enumerate(stories):
+            compact = _compact_known(story, targets, lang, analyzer)
             scenario = Scenario(
                 id=f"{lang}-seed-{i:03d}",
                 language=lang,
                 level="baseline",
                 theme="seed",
                 target_words=targets,
-                known=sorted(known.lemmas),
+                known=compact,
             )
-            report = validate_story(story, known.lemmas, set(targets), analyzer, language=lang)
+            report = validate_story(story, set(compact), set(targets), analyzer, language=lang)
             if report.hard_pass:
                 kept.append(Example(scenario, story, report, 0, kept=True).to_record())
                 passing += 1
