@@ -19,7 +19,6 @@ deterministic validators.
 | `docs/EVALUATION.md` | Behavior Spec, all eval checks + rubric, how to eval a trained model. |
 | `docs/TRAINING.md` | QLoRA/LoRA fine-tuning: install, data, run, then eval the adapter. |
 | `docs/DAY1.md` | Day-1 checkpoint: env/inference, brainlift, and the base-model baseline. |
-| `docs/DAY2.md` | Day-2 checkpoint: the full generate → train → eval loop end to end. |
 | `docs/DAY3.md` | Day-3 checkpoint: real v1 dataset, first real (CPU) train, first base-vs-tuned numbers. |
 | `docs/DATA_CARD.md` | The data recipe: generation, two-pass curation, counts, licenses. |
 | `docs/design-constraints.md` | Constraint-first + representation analysis of the design. |
