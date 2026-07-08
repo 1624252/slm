@@ -76,6 +76,8 @@ JUDGE_DIMENSIONS = (
     "consistency",
     "inferability",
     "seductive_detail_control",
+    "coherence",
+    "interestingness",
 )
 SPEC_DIMENSIONS = ("spec_adherence", "robustness", "task_quality", "consistency")
 
@@ -107,7 +109,15 @@ _RUBRIC = """Rubric - score each dimension 0, 1, or 2 using these exact anchors:
 - seductive_detail_control:
     2 = the interest/humor lands ON the target-word sentence; never announces a lesson.
     1 = interesting detail sits away from the target, OR a mild "let's learn" aside.
-    0 = explicitly announces teaching, or labels the target words."""
+    0 = explicitly announces teaching, or labels the target words.
+- coherence:
+    2 = sentences follow logically; a consistent subject/setting; nothing contradicts earlier text.
+    1 = mostly follows, but one non-sequitur, contradiction, or abrupt jump.
+    0 = disjointed or self-contradicting; sentences could be shuffled with no loss.
+- interestingness:
+    2 = has a genuine hook — a surprise, twist, or vivid image a learner would remember.
+    1 = pleasant but predictable; no moment that stands out.
+    0 = dull or purely mechanical (e.g. filler sentences to hit a length)."""
 
 
 def judge_prompt(scenario: Scenario, story: str) -> tuple[str, str]:

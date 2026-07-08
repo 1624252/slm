@@ -145,17 +145,12 @@ class MockLLM:
         return "\n".join(s for s in sentences if s)
 
     def _judge(self) -> str:
-        return json.dumps(
-            {
-                "spec_adherence": 2,
-                "robustness": 2,
-                "task_quality": 2,
-                "consistency": 2,
-                "inferability": 2,
-                "seductive_detail_control": 2,
-                "rationale": "mock judge: full marks",
-            }
-        )
+        # Full marks on whatever the current rubric dimensions are (kept in sync automatically).
+        from .prompts import JUDGE_DIMENSIONS
+
+        scores = {dim: 2 for dim in JUDGE_DIMENSIONS}
+        scores["rationale"] = "mock judge: full marks"
+        return json.dumps(scores)
 
     def _cloze(self, user: str) -> str:
         # Cannot truly infer offline; return a placeholder so the metric is reported, not gating.

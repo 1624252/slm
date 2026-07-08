@@ -31,7 +31,7 @@ import json
 from collections.abc import Callable
 from pathlib import Path
 
-from ..config import EVALS_DIR, SHIPPED_LANGUAGES
+from ..config import EVALS_DIR, SHIPPED_LANGUAGES, LLMConfig
 from ..datagen.scenarios import Scenario, load_scenarios, sample_scenarios, save_scenarios
 from ..llm.client import get_client
 from ..vocab.wordlists import VOCAB_DIR, Vocabulary
@@ -105,7 +105,10 @@ def main() -> None:
     p.add_argument("--tuned-path", default=None, help="Local HF path for the tuned model.")
     p.add_argument("--base-adapter", default=None, help="LoRA adapter path for the base.")
     p.add_argument("--tuned-adapter", default=None, help="LoRA adapter path for the tuned model.")
-    p.add_argument("--judge-model", default=None, help="API judge model; omit to skip judging.")
+    p.add_argument(
+        "--judge-model", default=None, help="Override judge model (default: JUDGE_MODEL from .env)."
+    )
+    p.add_argument("--no-judge", action="store_true", help="Skip the LLM judge (deterministic).")
     p.add_argument("--mock", action="store_true", help="Use the offline MockLLM for every role.")
     p.add_argument("--adversarial", action="store_true", help="Also run the adversarial set.")
     p.add_argument("--adv-n", type=int, default=12)
@@ -169,17 +172,28 @@ def _run_language(lang: str, args, p) -> None:
         elif args.guard:
             print("warning: --guard needs an API/mock client to rewrite; running the HF model raw.")
 
+    # Judge (Layer 5 rubric) + cloze inferability run whenever an LLM is available. Auto-enable
+    # from the configured JUDGE_MODEL when an API key is set; --judge-model overrides the model;
+    # --no-judge forces the deterministic-only path.
     judge_client = None
     if args.mock:
         judge_client = get_client(mock=True)
-    elif args.judge_model:
-        judge_client = get_client(args.judge_model)
+    elif not args.no_judge:
+        cfg = LLMConfig.from_env()
+        model = args.judge_model or cfg.judge_model
+        if cfg.api_key and model:
+            judge_client = get_client(model)
+        elif args.judge_model:
+            p.error("--judge-model needs OPENAI_API_KEY (set it in .env) or use --mock.")
+    if judge_client is None and not args.mock:
+        print("note: no judge (set OPENAI_API_KEY + JUDGE_MODEL in .env to score the rubric).")
 
     base_name = args.base_path or args.base_model or ("mock" if args.mock else "base")
     tuned_name = args.tuned_path or args.tuned_model or ("mock" if args.mock else "tuned")
 
     def run(name: str, scenarios: list[Scenario], gen: StoryGenerator):
-        return evaluate(name, scenarios, gen, judge_client)
+        # Same client scores the rubric (judge) and the cloze inferability proxy.
+        return evaluate(name, scenarios, gen, judge_client, cloze_client=judge_client)
 
     base = run(base_name, held, base_gen)
     adv = adv_base = adv_tuned = tuned = None
