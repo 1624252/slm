@@ -26,6 +26,7 @@ from dataclasses import asdict, dataclass, field
 from datetime import datetime, timezone
 from pathlib import Path
 
+from ..config import DEFAULT_THRESHOLDS as _TH
 from ..config import EVALS_DIR
 
 RUNS_PATH = EVALS_DIR / "runs.jsonl"
@@ -193,17 +194,18 @@ def leaderboard_markdown(runs: list[dict]) -> str:
     if not runs:
         return header + "\n\n_No runs recorded yet._\n"
 
+    # Targets in headers come from the Behavior-Spec thresholds (config.Thresholds).
     cols = [
         "When",
         "Label",
         "Lang",
         "n",
-        "Hard-pass",
-        "OOV",
-        "<=1-new",
-        "Recurrence",
-        "Judge",
-        "Adv",
+        "Hard-pass (→1.000)",
+        f"OOV (→<={_TH.max_oov_rate:.2f})",
+        "<=1-new (→1.000)",
+        "Recurrence (→1.000)",
+        f"Judge (→>={_TH.judge_min_mean:.1f})",
+        "Adv (→1.000)",
         "Data",
         "Commit",
     ]

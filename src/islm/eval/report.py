@@ -4,16 +4,22 @@ from __future__ import annotations
 
 from collections import Counter
 
+from ..config import DEFAULT_THRESHOLDS as _TH
 from .harness import EvalSummary
 from .judge import DIMENSIONS
 
-# Deterministic behavioral checks (PRD 14.2). (metric key, label, higher-is-better)
+# Target (ideal) value per criterion, from the Behavior-Spec thresholds (config.Thresholds).
+# Shown in table headers so each number is read against its goal.
+_OOV_TARGET = f"target <={_TH.max_oov_rate:.2f}"  # lower is better
+_JUDGE_TARGET = f"target >={_TH.judge_min_mean:.1f}"  # mean rubric score
+
+# Deterministic behavioral checks (PRD 14.2). (metric key, label-with-target, higher-is-better)
 _HARD_CHECKS = [
-    ("hard_pass_rate", "Hard-check pass rate", True),
-    ("mean_oov_rate", "OOV rate", False),
-    ("one_new_word_pass_rate", "<=1 new word/sentence", True),
-    ("recurrence_pass_rate", "Recurrence satisfied", True),
-    ("mean_inferability", "Inferability (cloze)", True),
+    ("hard_pass_rate", "Hard-check pass rate (target 1.000)", True),
+    ("mean_oov_rate", f"OOV rate ({_OOV_TARGET})", False),
+    ("one_new_word_pass_rate", "<=1 new word/sentence (target 1.000)", True),
+    ("recurrence_pass_rate", "Recurrence satisfied (target 1.000)", True),
+    ("mean_inferability", "Inferability (cloze; target 1.000)", True),
 ]
 
 _LEGEND = (
@@ -66,7 +72,9 @@ def _rows(base: dict, tuned: dict, specs) -> list[str]:
 def base_vs_tuned_table(base: EvalSummary, tuned: EvalSummary) -> str:
     """Compact base-vs-tuned table (hard checks + judge dimensions)."""
     b, t = base.aggregate(), tuned.aggregate()
-    specs = _HARD_CHECKS + [(f"judge_{d}", f"Judge: {d}", True) for d in DIMENSIONS]
+    specs = _HARD_CHECKS + [
+        (f"judge_{d}", f"Judge: {d} ({_JUDGE_TARGET})", True) for d in DIMENSIONS
+    ]
     header = [
         f"| Metric | Base ({base.model}) | Tuned ({tuned.model}) | Delta | Better |",
         "| --- | --- | --- | --- | --- |",
@@ -143,7 +151,7 @@ def results_markdown(
         *_rows(b, t, _HARD_CHECKS),
         "\n## LLM-as-judge rubric (0-2; first four are spec Appendix A)",
         *hdr,
-        *_rows(b, t, [(f"judge_{d}", d, True) for d in DIMENSIONS]),
+        *_rows(b, t, [(f"judge_{d}", f"{d} ({_JUDGE_TARGET})", True) for d in DIMENSIONS]),
     ]
 
     if adv_base is not None and adv_tuned is not None:

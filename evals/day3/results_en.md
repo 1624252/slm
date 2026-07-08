@@ -5,10 +5,10 @@ Held-out scenarios: **8**.
 ## Behavioral checks (deterministic — the failures the spec forbids)
 | Metric | Base | Tuned | Delta | Better |
 | --- | --- | --- | --- | --- |
-| Hard-check pass rate | 0.000 | 0.000 | +0.000 | base |
-| OOV rate | 0.413 | 0.170 | -0.243 | tuned |
-| <=1 new word/sentence | 0.000 | 0.000 | +0.000 | base |
-| Recurrence satisfied | 0.125 | 0.125 | +0.000 | base |
+| Hard-check pass rate (target 1.000) | 0.000 | 0.000 | +0.000 | base |
+| OOV rate (target <=0.02) | 0.413 | 0.170 | -0.243 | tuned |
+| <=1 new word/sentence (target 1.000) | 0.000 | 0.000 | +0.000 | base |
+| Recurrence satisfied (target 1.000) | 0.125 | 0.125 | +0.000 | base |
 
 ## LLM-as-judge rubric (0-2; first four are spec Appendix A)
 | Metric | Base | Tuned | Delta | Better |

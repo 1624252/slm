@@ -43,16 +43,31 @@ fits a 768-token window uncut, and matches the eval's `--curated` setup.
 
 ### 2026-07-08 — `day3-seed-lora-v2` (the data fix lands)
 
-**Config.** Base `SmolLM2-135M-Instruct` + LoRA (r=16, α=32, lr=2e-4), CPU, **3 epochs / 66 steps**,
-grad-accum 1, `--max-seq-len 768`, on the compact-prompt curated seed (22 train). Final train loss
-**1.63** (down from 2.33 when records were truncated). Eval: 8 held-out `--curated` scenarios per
-language, temperature 0, `--max-new-tokens 220`.
+**Iterations & hyperparameters** (from `outputs/day3_lora/train_summary.json`):
 
-| Lang | OOV (base→tuned) | Hard-pass | ≤1-new | Recurrence |
+| Setting | Value | | Setting | Value |
+| --- | --- | --- | --- | --- |
+| Base model | `SmolLM2-135M-Instruct` | | LoRA rank `r` | 16 |
+| Method | LoRA (not QLoRA; CPU) | | LoRA `alpha` | 32 |
+| Device | CPU | | LoRA `dropout` | 0.05 |
+| Train examples | 22 | | `target_modules` | all-linear |
+| **Epochs** | **3** | | Learning rate | 2e-4 |
+| **Optimizer steps (iterations)** | **66** | | LR schedule | linear (TRL default) |
+| Per-device batch size | 1 | | Optimizer | adamw_torch (TRL default) |
+| Gradient accumulation | 1 | | Seed | 0 |
+| Effective batch size | 1 | | Max sequence length | 768 (left-truncated) |
+| Final train loss | **1.63** | | (was 2.33 when records were truncated) | |
+
+Eval: 8 held-out `--curated` scenarios per language, temperature 0, `--max-new-tokens 220`.
+Reproduce command is in `docs/DAY3.md` → Reproduce.
+
+Targets in parentheses are the Behavior-Spec thresholds (`config.Thresholds`).
+
+| Lang | OOV (→ ≤0.02) | Hard-pass (→ 1.000) | ≤1-new (→ 1.000) | Recurrence (→ 1.000) |
 | --- | --- | --- | --- | --- |
 | en | 0.413 → **0.170** (−0.243) | 0.000 → 0.000 | 0.000 → 0.000 | 0.125 → 0.125 |
-| zh | 0.856 → **0.439** (−0.417) | 0.000 → **0.250** | 0.000 → 0.000 | 0.125 → **0.375** |
-| ja | 1.000 → **0.874** (−0.126) | 0.000 → 0.000 | 0.000 → 0.000 | 0.000 → 0.000 |
+| zh | 0.856 → **0.439** (−0.417) | 0.000 → **0.250** | 0.000 → **0.250** | 0.125 → **0.375** |
+| ja | 1.000 → **0.874** (−0.126) | 0.000 → 0.000 | 0.000 → **0.125** | 0.000 → 0.000 |
 
 **Read.** The eval improved on every language. OOV fell **12×** more than the old truncated run
 (en −0.243 vs −0.020), and **zh produced the project's first non-zero hard-pass (0.25)** — direct

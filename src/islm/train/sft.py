@@ -166,17 +166,24 @@ def train(config: TrainConfig) -> Path:
     trainer.model.save_pretrained(str(config.output_dir))
     tokenizer.save_pretrained(str(config.output_dir))
 
-    # Small, human-readable record of what produced this adapter (for the run log / DAY docs).
+    # Full, human-readable record of what produced this adapter (for the run log / DAY docs).
+    # `optimizer_steps` is the actual iteration count trainer ran (epochs*examples/(batch*accum),
+    # or max_steps if capped) — the "number of iterations" for reproducibility.
     summary = {
         "base_model": config.base_model,
         "data_dir": str(config.data_dir),
         "train_examples": len(texts),
         "epochs": config.epochs,
         "max_steps": config.max_steps,
+        "optimizer_steps": trainer.state.global_step,
+        "per_device_batch_size": config.per_device_batch_size,
+        "grad_accum": config.grad_accum,
         "max_seq_len": config.max_seq_len,
         "learning_rate": config.learning_rate,
         "lora_r": config.lora_r,
         "lora_alpha": config.lora_alpha,
+        "lora_dropout": config.lora_dropout,
+        "seed": config.seed,
         "qlora": config.qlora and on_gpu,
         "device": "cuda" if on_gpu else "cpu",
         "final_train_loss": round(train_loss, 4) if train_loss is not None else None,

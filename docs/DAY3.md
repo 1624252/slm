@@ -23,7 +23,9 @@ is the next lever and needs the deferred cloud/API access (see "Deviations").
 Base (`SmolLM2-135M-Instruct`, prompted) vs the same model + the Day-3 LoRA adapter, 8 held-out
 scenarios per language (curated small vocab, temperature 0):
 
-| Lang | OOV (base→tuned) | Hard-pass | ≤1-new | Recurrence |
+Targets in parentheses are the Behavior-Spec thresholds (`config.Thresholds`).
+
+| Lang | OOV (→ ≤0.02) | Hard-pass (→ 1.000) | ≤1-new (→ 1.000) | Recurrence (→ 1.000) |
 | --- | --- | --- | --- | --- |
 | en | 0.413 → **0.170** (−0.243) | 0.000 → 0.000 | 0.000 → 0.000 | 0.125 → 0.125 |
 | zh | 0.856 → **0.439** (−0.417) | 0.000 → **0.250** | 0.000 → **0.250** | 0.125 → **0.375** |
