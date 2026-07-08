@@ -20,6 +20,7 @@ deterministic validators.
 | `docs/TRAINING.md` | QLoRA/LoRA fine-tuning: install, data, run, then eval the adapter. |
 | `docs/DAY1.md` | Day-1 checkpoint: env/inference, brainlift, and the base-model baseline. |
 | `docs/DAY2.md` | Day-2 checkpoint: the full generate → train → eval loop end to end. |
+| `docs/DAY3.md` | Day-3 checkpoint: real v1 dataset, first real (CPU) train, first base-vs-tuned numbers. |
 | `docs/DATA_CARD.md` | The data recipe: generation, two-pass curation, counts, licenses. |
 | `docs/design-constraints.md` | Constraint-first + representation analysis of the design. |
 | `docs/spec.md` | The one-week build brief this project is scoped against. |
@@ -27,7 +28,7 @@ deterministic validators.
 | `src/islm/` | The package: `vocab`, `validators`, `llm`, `datagen`, `eval`, `train`. |
 | `tests/` | Unit tests for the validators + an offline end-to-end smoke test. |
 | `data/vocab/<lang>/` | Per-language baseline + advanced word lists (real datasets land in `data/generated/`, git-ignored). |
-| `evals/` | Held-out scenarios (`scenarios/`) and results (`results/`, git-ignored). |
+| `evals/` | Held-out scenarios (`scenarios/`), per-run results, and the cross-run `LEADERBOARD.md` (+ `runs.jsonl` history). |
 
 ## Getting started
 
@@ -42,7 +43,7 @@ python -m spacy download en_core_web_sm     # recommended for English
 python -m islm.datagen.pipeline --n 20 --language zh --mock --out data/generated/zh
 python -m islm.eval.run --mock --language zh
 
-python -m pytest        # tests (36 passing, incl. zh/ja)
+python -m pytest        # tests (62 passing, incl. zh/ja + tracker)
 ruff check src tests    # lint
 ```
 
@@ -62,6 +63,9 @@ dataset design, and evaluation plan.
 
 ## Status
 
-The full loop — **generate → train → eval** — runs end to end (offline smoke: mock teacher +
-LoRA on a tiny model + base-vs-tuned eval), and the base-model baseline is on the board. Next up:
-real teacher generation + a real QLoRA run on a GPU for the first real base-vs-tuned numbers.
+The full loop — **generate → train → eval** — runs end to end, and the first **base-vs-tuned
+numbers are on the board** (Day-3 midweek gate). Day 3 was run locally on CPU over the genuine
+authored seed (`data/curated/seed`), with results tracked across runs in `evals/LEADERBOARD.md`
+(Day-1 → Day-2 → Day-3). The tuned model already nudges OOV down on real data; a real *win* needs
+the deferred cloud pieces: a **teacher-generated corpus** and a **GPU QLoRA** run. See
+`docs/DAY3.md`.

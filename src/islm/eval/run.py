@@ -33,6 +33,7 @@ from .adversarial import make_adversarial_scenarios
 from .generators import HFGenerator, StoryGenerator, api_generator, client_rewriter, guarded
 from .harness import evaluate
 from .report import error_analysis, results_markdown, single_model_markdown, summary_metrics
+from .track import track_results
 
 
 def _build_generator(model, path, adapter, mock, max_new_tokens, no_think):
@@ -107,6 +108,15 @@ def main() -> None:
     p.add_argument("--max-new-tokens", type=int, default=512)
     p.add_argument("--no-think", action="store_true", help="Disable thinking mode (e.g. Qwen3).")
     p.add_argument("--out", type=Path, default=EVALS_DIR / "results")
+    p.add_argument(
+        "--track", action="store_true", help="Append this run to the results leaderboard."
+    )
+    p.add_argument("--run-label", default=None, help="Name for the tracked run (with --track).")
+    p.add_argument("--dataset", default=None, help="Training dataset dir, recorded with --track.")
+    p.add_argument(
+        "--epochs", type=float, default=None, help="Train epochs, recorded with --track."
+    )
+    p.add_argument("--notes", default=None, help="Free-text note recorded with --track.")
     args = p.parse_args()
 
     lang = args.language
@@ -184,9 +194,27 @@ def main() -> None:
         payload["adversarial"] = {"base": summary_metrics(adv_base)}
         if adv_tuned is not None:
             payload["adversarial"]["tuned"] = summary_metrics(adv_tuned)
-    with open(args.out / f"results_{lang}.json", "w", encoding="utf-8") as f:
+    results_path = args.out / f"results_{lang}.json"
+    with open(results_path, "w", encoding="utf-8") as f:
         json.dump(payload, f, indent=2, ensure_ascii=False)
     print(md)
+
+    if args.track:
+        label = args.run_label or f"{Path(tuned_name).name if has_tuned else Path(base_name).name}"
+        rec = track_results(
+            results_path,
+            label=label,
+            language=lang,
+            dataset=args.dataset,
+            base_model=base_name,
+            tuned_model=tuned_name if has_tuned else None,
+            tuned_adapter=args.tuned_adapter,
+            epochs=args.epochs,
+            notes=args.notes,
+        )
+        print(
+            f"\ntracked run '{rec.label}' -> leaderboard updated ({EVALS_DIR / 'LEADERBOARD.md'})"
+        )
 
 
 if __name__ == "__main__":

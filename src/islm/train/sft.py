@@ -65,13 +65,33 @@ def render_plain(messages: list[dict]) -> str:
     return "\n".join(f"{m['role']}: {m['content']}" for m in messages)
 
 
-def load_texts(data_dir: Path, tokenizer=None) -> list[str]:
-    """Render each chat record to one training string via the tokenizer's chat template."""
+def fit_to_end(text: str, tokenizer, max_tokens: int) -> str:
+    """Left-truncate so the assistant story (at the end) survives the context window.
+
+    The prompt embeds the full KNOWN_WORDS list, so a record can be >10k tokens. TRL only
+    truncates from the start (`keep_start`), which would drop the completion we actually train
+    on. So keep the last `max_tokens` tokens here instead, before TRL ever sees the text.
+    """
+    ids = tokenizer(text, add_special_tokens=False)["input_ids"]
+    if len(ids) <= max_tokens:
+        return text
+    return tokenizer.decode(ids[-max_tokens:])
+
+
+def load_texts(data_dir: Path, tokenizer=None, max_tokens: int | None = None) -> list[str]:
+    """Render each chat record to one training string via the tokenizer's chat template.
+
+    With a tokenizer and `max_tokens`, over-long records are left-truncated (see `fit_to_end`)
+    so the target story is not truncated away.
+    """
     texts = []
     for rec in read_records(data_dir):
         messages = rec["messages"]
         if tokenizer is not None:
-            texts.append(tokenizer.apply_chat_template(messages, tokenize=False))
+            text = tokenizer.apply_chat_template(messages, tokenize=False)
+            if max_tokens is not None:
+                text = fit_to_end(text, tokenizer, max_tokens)
+            texts.append(text)
         else:
             texts.append(render_plain(messages))
     return texts
@@ -112,7 +132,8 @@ def train(config: TrainConfig) -> Path:
         target_modules="all-linear",
     )
 
-    dataset = Dataset.from_dict({"text": load_texts(config.data_dir, tokenizer)})
+    texts = load_texts(config.data_dir, tokenizer, max_tokens=config.max_seq_len)
+    dataset = Dataset.from_dict({"text": texts})
     args = SFTConfig(
         output_dir=str(config.output_dir),
         num_train_epochs=config.epochs,
@@ -128,12 +149,41 @@ def train(config: TrainConfig) -> Path:
         seed=config.seed,
         bf16=on_gpu,
     )
-    trainer = SFTTrainer(model=model, args=args, train_dataset=dataset, peft_config=peft_config)
+    # Pass our tokenizer so training uses the same rendering/truncation we fit the texts to.
+    trainer = SFTTrainer(
+        model=model,
+        args=args,
+        train_dataset=dataset,
+        peft_config=peft_config,
+        processing_class=tokenizer,
+    )
     trainer.train()
+    train_loss = (
+        trainer.state.log_history[-1].get("train_loss") if trainer.state.log_history else None
+    )
 
     config.output_dir.mkdir(parents=True, exist_ok=True)
     trainer.model.save_pretrained(str(config.output_dir))
     tokenizer.save_pretrained(str(config.output_dir))
+
+    # Small, human-readable record of what produced this adapter (for the run log / DAY docs).
+    summary = {
+        "base_model": config.base_model,
+        "data_dir": str(config.data_dir),
+        "train_examples": len(texts),
+        "epochs": config.epochs,
+        "max_steps": config.max_steps,
+        "max_seq_len": config.max_seq_len,
+        "learning_rate": config.learning_rate,
+        "lora_r": config.lora_r,
+        "lora_alpha": config.lora_alpha,
+        "qlora": config.qlora and on_gpu,
+        "device": "cuda" if on_gpu else "cpu",
+        "final_train_loss": round(train_loss, 4) if train_loss is not None else None,
+    }
+    with open(config.output_dir / "train_summary.json", "w", encoding="utf-8") as f:
+        json.dump(summary, f, indent=2)
+    print(f"final train loss: {summary['final_train_loss']}")
     return config.output_dir
 
 
@@ -144,6 +194,8 @@ def main() -> None:
     p.add_argument("--out", type=Path, default=Path("outputs/lora"))
     p.add_argument("--epochs", type=float, default=1.0)
     p.add_argument("--max-steps", type=int, default=-1)
+    p.add_argument("--max-seq-len", type=int, default=1024, help="Context window (left-truncated).")
+    p.add_argument("--grad-accum", type=int, default=8, help="Gradient accumulation steps.")
     p.add_argument("--qlora", action="store_true", help="4-bit QLoRA (needs a CUDA GPU).")
     p.add_argument("--smoke", action="store_true", help="Tiny settings for a CPU loop smoke.")
     args = p.parse_args()
@@ -154,6 +206,8 @@ def main() -> None:
         output_dir=args.out,
         epochs=args.epochs,
         max_steps=args.max_steps,
+        max_seq_len=args.max_seq_len,
+        grad_accum=args.grad_accum,
         qlora=args.qlora,
     )
     if args.smoke:

@@ -25,14 +25,27 @@ the full rendered text.)
 python -m islm.train.sft --data data/generated/en --base Qwen/Qwen3-4B-Instruct --qlora \
     --out outputs/lora
 
+# Real CPU run on the curated seed (no GPU; Day-3 local run):
+python -m islm.train.sft --data data/curated/seed \
+    --base HuggingFaceTB/SmolLM2-135M-Instruct --epochs 3 --out outputs/day3_lora
+
 # End-to-end smoke (CPU, tiny model, a few steps) — proves the loop:
 python -m islm.train.sft --data data/generated/day2_smoke \
     --base HuggingFaceTB/SmolLM2-135M-Instruct --smoke --out outputs/day2_lora
 ```
 
-Key flags: `--epochs`, `--max-steps`, `--qlora` (needs a CUDA GPU), `--smoke` (tiny CPU settings).
-LoRA rank/alpha/lr and sequence length live in `TrainConfig` (`src/islm/train/sft.py`). Adapters
-are written to `--out` (git-ignored; publish to the HF Hub).
+Key flags: `--epochs`, `--max-steps`, `--max-seq-len`, `--qlora` (needs a CUDA GPU), `--smoke`
+(tiny CPU settings). LoRA rank/alpha/lr live in `TrainConfig` (`src/islm/train/sft.py`). Adapters
+are written to `--out` (git-ignored; publish to the HF Hub), alongside a `train_summary.json`
+(base model, examples, epochs, final train loss) for the run log.
+
+### Sequence length & the completion (why we left-truncate)
+
+Each record's prompt embeds the full `KNOWN_WORDS` list, so a rendered example can exceed **12k
+tokens** — but the target we train on (the assistant story) is at the *end*. TRL only truncates
+from the start (`keep_start`), which would drop the story. So `load_texts` **left-truncates** to
+`--max-seq-len` (keeping the last tokens) before training, guaranteeing the story stays in the
+window. On CPU keep the window modest (default 1024); a GPU run can raise it.
 
 ## Then evaluate the adapter (closes the loop)
 
@@ -42,6 +55,10 @@ python -m islm.eval.run --language en \
     --tuned-path HuggingFaceTB/SmolLM2-135M-Instruct --tuned-adapter outputs/day2_lora \
     --curated --judge-model <judge> --adversarial --out evals/results
 ```
+
+Add `--track --run-label <name> --dataset data/curated/seed --epochs 3` to append the run to the
+results leaderboard (`evals/LEADERBOARD.md`), so numbers accumulate over time. See
+`docs/EVALUATION.md` → "Tracking results over time".
 
 This is the full **generate → train → eval** loop. See `docs/EVALUATION.md` for the metrics.
 

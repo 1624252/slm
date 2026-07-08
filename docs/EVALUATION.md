@@ -126,6 +126,31 @@ Held-out and adversarial scenarios live at `evals/scenarios/{heldout,adversarial
 (committed for reproducibility; auto-created on first run). They are scenario-level distinct from
 the training/seed data, so there is no leakage. Results go to `evals/results/` (git-ignored).
 
+## Tracking results over time
+
+A single eval writes a one-off report; to see whether the model is getting **better across runs
+and days**, add `--track` (PRD 11's lightweight "CSV/JSONL" tracking option). Each tracked run
+appends one line to `evals/runs.jsonl` (an append-only history) and regenerates
+`evals/LEADERBOARD.md` (a compact base-vs-tuned table, newest first). Both are committed, so the
+progression stays in the repo.
+
+```bash
+# Evaluate and record the run in one step:
+python -m islm.eval.run --language en --curated \
+    --base-path HuggingFaceTB/SmolLM2-135M-Instruct \
+    --tuned-path HuggingFaceTB/SmolLM2-135M-Instruct --tuned-adapter outputs/day3_lora \
+    --track --run-label day3-seed-lora --dataset data/curated/seed --epochs 3 --out evals/day3
+
+# Or record a finished results file / rebuild the board from history:
+python -m islm.eval.track --results evals/day3/results_en.json --run-label day3-seed-lora \
+    --dataset data/curated/seed
+python -m islm.eval.track --rebuild
+```
+
+Each leaderboard cell is `base→tuned (delta)`; delta = tuned − base (higher is better except OOV,
+where lower is better). Blank cells mean "not measured that run" (e.g. the judge is skipped when
+no API key is set). The tracker is unit-tested in `tests/test_track.py`.
+
 ## Success criteria (PRD 15)
 
 - Tuned **beats prompted base on Spec adherence and Robustness** (primary).

@@ -16,6 +16,13 @@ from .report import (
     single_model_markdown,
     summary_metrics,
 )
+from .track import (
+    RunRecord,
+    leaderboard_markdown,
+    record_from_results,
+    track_results,
+    write_leaderboard,
+)
 
 __all__ = [
     "DIMENSIONS",
@@ -23,6 +30,7 @@ __all__ = [
     "EvalRow",
     "EvalSummary",
     "HFGenerator",
+    "RunRecord",
     "StoryGenerator",
     "api_generator",
     "base_vs_tuned_table",
@@ -32,8 +40,12 @@ __all__ = [
     "evaluate",
     "guarded",
     "judge_story",
+    "leaderboard_markdown",
     "make_adversarial_scenarios",
+    "record_from_results",
     "results_markdown",
     "single_model_markdown",
     "summary_metrics",
+    "track_results",
+    "write_leaderboard",
 ]
