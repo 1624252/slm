@@ -35,10 +35,16 @@ python -m islm.train.sft --data data/curated/seed \
     --base HuggingFaceTB/SmolLM2-135M-Instruct --smoke --out outputs/smoke_lora
 ```
 
-Key flags: `--epochs`, `--max-steps`, `--max-seq-len`, `--qlora` (needs a CUDA GPU), `--smoke`
-(tiny CPU settings). LoRA rank/alpha/lr live in `TrainConfig` (`src/islm/train/sft.py`). Adapters
-are written to `--out` (git-ignored; publish to the HF Hub), alongside a `train_summary.json`
-(base model, examples, epochs, final train loss) for the run log.
+Key flags: `--epochs`, `--max-steps`, `--max-seq-len`, `--lr`, `--lora-r`, `--lora-alpha`,
+`--grad-accum`, `--qlora` (needs a CUDA GPU), `--merge` (merge the adapter into an fp16 base for
+upload/deploy), `--smoke` (tiny CPU settings). Adapters are written to `--out` (git-ignored;
+publish to the HF Hub), alongside a `train_summary.json` (all hyperparameters + optimizer_steps +
+final train loss) for the run log.
+
+**QLoRA recipe.** The trainer follows the standard QLoRA/TRL recipe: 4-bit nf4 with double
+quantization, LoRA on all linear layers, **cosine LR schedule with 3% warmup**, weight decay 0.001,
+gradient clipping at 0.3, and `paged_adamw_32bit` (GPU) — matching the reference Colab notebook.
+On CPU it falls back to plain `adamw_torch` and skips gradient checkpointing.
 
 ### Sequence length & the completion (why we left-truncate)
 

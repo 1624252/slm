@@ -64,9 +64,10 @@ A `notebooks/train_colab.ipynb` should do, in order:
     --epochs 1 --lr 2e-4 --lora-r 16 --max-seq-len 2048 --out outputs/sweep_lr2e4
 # ... repeat for lr 1e-4, rank 32, then eval each with islm.eval.run --track
 
-# 4. Full run (Phase 3) — switch runtime to A100, winning config, more epochs
+# 4. Full run (Phase 3) — switch runtime to A100, winning config, more epochs.
+#    --merge writes a standalone fp16 model (outputs/qwen3_4b_qlora-merged) for eval/upload.
 !python -m islm.train.sft --data data/curated/en --base Qwen/Qwen3-4B-Instruct --qlora \
-    --epochs 3 --lr <best> --lora-r <best> --max-seq-len 2048 --out outputs/qwen3_4b_qlora
+    --epochs 3 --lr <best> --lora-r <best> --max-seq-len 2048 --merge --out outputs/qwen3_4b_qlora
 
 # 5. Eval everything, tracked (Phase 4)
 !python -m islm.eval.run --base-path Qwen/Qwen3-4B-Instruct \

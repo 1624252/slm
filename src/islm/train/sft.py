@@ -51,6 +51,13 @@ class TrainConfig:
     lora_dropout: float = 0.05
     qlora: bool = False
     seed: int = 0
+    # Optimizer/schedule — matches the standard QLoRA recipe (cosine + warmup + clip + decay).
+    lr_scheduler_type: str = "cosine"
+    warmup_ratio: float = 0.03
+    weight_decay: float = 0.001
+    max_grad_norm: float = 0.3
+    gradient_checkpointing: bool = True
+    merge: bool = False  # after training, merge the adapter into fp16 base (for upload/deploy)
 
 
 def read_records(data_dir: Path) -> list[dict]:
@@ -134,6 +141,8 @@ def train(config: TrainConfig) -> Path:
 
     texts = load_texts(config.data_dir, tokenizer, max_tokens=config.max_seq_len)
     dataset = Dataset.from_dict({"text": texts})
+    # paged_adamw_32bit needs bitsandbytes (GPU); fall back to plain adamw on CPU.
+    optim = "paged_adamw_32bit" if (config.qlora and on_gpu) else "adamw_torch"
     args = SFTConfig(
         output_dir=str(config.output_dir),
         num_train_epochs=config.epochs,
@@ -148,6 +157,13 @@ def train(config: TrainConfig) -> Path:
         report_to=[],
         seed=config.seed,
         bf16=on_gpu,
+        # Training-stability settings from the standard QLoRA recipe.
+        optim=optim,
+        lr_scheduler_type=config.lr_scheduler_type,
+        warmup_ratio=config.warmup_ratio,
+        weight_decay=config.weight_decay,
+        max_grad_norm=config.max_grad_norm,
+        gradient_checkpointing=config.gradient_checkpointing and on_gpu,
     )
     # Pass our tokenizer so training uses the same rendering/truncation we fit the texts to.
     trainer = SFTTrainer(
@@ -186,12 +202,42 @@ def train(config: TrainConfig) -> Path:
         "seed": config.seed,
         "qlora": config.qlora and on_gpu,
         "device": "cuda" if on_gpu else "cpu",
+        "lr_scheduler_type": config.lr_scheduler_type,
+        "warmup_ratio": config.warmup_ratio,
+        "weight_decay": config.weight_decay,
+        "max_grad_norm": config.max_grad_norm,
+        "optim": optim,
         "final_train_loss": round(train_loss, 4) if train_loss is not None else None,
     }
     with open(config.output_dir / "train_summary.json", "w", encoding="utf-8") as f:
         json.dump(summary, f, indent=2)
     print(f"final train loss: {summary['final_train_loss']}")
+
+    if config.merge:
+        _merge_adapter(config)
     return config.output_dir
+
+
+def _merge_adapter(config: TrainConfig) -> Path:
+    """Merge the LoRA adapter into the base weights → a standalone fp16 model (for upload/deploy).
+
+    Mirrors the reference notebook's final step: reload the base in fp16, apply the adapter,
+    `merge_and_unload()`, and save to `<output_dir>-merged`. Skipped by default (adapters are
+    smaller); use --merge on the GPU when you want a self-contained model.
+    """
+    import torch
+    from peft import PeftModel
+    from transformers import AutoModelForCausalLM, AutoTokenizer
+
+    merged_dir = Path(str(config.output_dir) + "-merged")
+    base = AutoModelForCausalLM.from_pretrained(
+        config.base_model, low_cpu_mem_usage=True, return_dict=True, torch_dtype=torch.float16
+    )
+    model = PeftModel.from_pretrained(base, str(config.output_dir)).merge_and_unload()
+    model.save_pretrained(str(merged_dir))
+    AutoTokenizer.from_pretrained(config.base_model).save_pretrained(str(merged_dir))
+    print(f"merged model -> {merged_dir}")
+    return merged_dir
 
 
 def main() -> None:
@@ -207,6 +253,7 @@ def main() -> None:
     p.add_argument("--lora-r", type=int, default=16, help="LoRA rank.")
     p.add_argument("--lora-alpha", type=int, default=32, help="LoRA alpha.")
     p.add_argument("--qlora", action="store_true", help="4-bit QLoRA (needs a CUDA GPU).")
+    p.add_argument("--merge", action="store_true", help="Merge adapter into fp16 base after train.")
     p.add_argument("--smoke", action="store_true", help="Tiny settings for a CPU loop smoke.")
     args = p.parse_args()
 
@@ -222,6 +269,7 @@ def main() -> None:
         lora_r=args.lora_r,
         lora_alpha=args.lora_alpha,
         qlora=args.qlora,
+        merge=args.merge,
     )
     if args.smoke:
         for key, value in SMOKE.items():
