@@ -18,6 +18,7 @@ deterministic validators.
 | `docs/dataset-and-eval.md` | How the dataset and evaluation work + how to run them. |
 | `docs/EVALUATION.md` | Behavior Spec, all eval checks + rubric, how to eval a trained model. |
 | `docs/TRAINING.md` | QLoRA/LoRA fine-tuning: install, data, run, then eval the adapter. |
+| `docs/COLAB_PLAN.md` | How to spend the $10 Colab credit: Qwen3-4B QLoRA, budget, steps. |
 | `docs/DAY1.md` | Day-1 checkpoint: env/inference, brainlift, and the base-model baseline. |
 | `docs/DAY3.md` | Day-3 checkpoint: real v1 dataset, first real (CPU) train, first base-vs-tuned numbers. |
 | `evals/RESULTS_LOG.md` | Narrative results log: what changed each run, why, and what the eval did. |
