@@ -40,3 +40,28 @@ fits a 768-token window uncut, and matches the eval's `--curated` setup.
 ## Runs
 
 <!-- newest first; append a block per run -->
+
+### 2026-07-08 — `day3-seed-lora-v2` (the data fix lands)
+
+**Config.** Base `SmolLM2-135M-Instruct` + LoRA (r=16, α=32, lr=2e-4), CPU, **3 epochs / 66 steps**,
+grad-accum 1, `--max-seq-len 768`, on the compact-prompt curated seed (22 train). Final train loss
+**1.63** (down from 2.33 when records were truncated). Eval: 8 held-out `--curated` scenarios per
+language, temperature 0, `--max-new-tokens 220`.
+
+| Lang | OOV (base→tuned) | Hard-pass | ≤1-new | Recurrence |
+| --- | --- | --- | --- | --- |
+| en | 0.413 → **0.170** (−0.243) | 0.000 → 0.000 | 0.000 → 0.000 | 0.125 → 0.125 |
+| zh | 0.856 → **0.439** (−0.417) | 0.000 → **0.250** | 0.000 → 0.000 | 0.125 → **0.375** |
+| ja | 1.000 → **0.874** (−0.126) | 0.000 → 0.000 | 0.000 → 0.000 | 0.000 → 0.000 |
+
+**Read.** The eval improved on every language. OOV fell **12×** more than the old truncated run
+(en −0.243 vs −0.020), and **zh produced the project's first non-zero hard-pass (0.25)** — direct
+evidence the model now sees `TARGET_WORDS` + the rules during training. `hard_pass` stays low overall
+because the gate is OOV ≤ 0.02, which a 135M model on CPU LoRA won't clear; that ceiling is a
+model/compute limit, not the data bug we just fixed.
+
+**Win condition:** still FAIL (spec bar unchanged) — expected pre-GPU.
+
+**Next levers (need Colab GPU / teacher key, deferred):** (1) a teacher-generated corpus for volume
+beyond the 28-story seed; (2) a real multi-epoch **QLoRA** run on a larger base (e.g. Qwen3-4B);
+(3) ja is the laggard (OOV still 0.87) — more ja seed stories + a JLPT-scoped known list.

@@ -20,6 +20,7 @@ deterministic validators.
 | `docs/TRAINING.md` | QLoRA/LoRA fine-tuning: install, data, run, then eval the adapter. |
 | `docs/DAY1.md` | Day-1 checkpoint: env/inference, brainlift, and the base-model baseline. |
 | `docs/DAY3.md` | Day-3 checkpoint: real v1 dataset, first real (CPU) train, first base-vs-tuned numbers. |
+| `evals/RESULTS_LOG.md` | Narrative results log: what changed each run, why, and what the eval did. |
 | `docs/DATA_CARD.md` | The data recipe: generation, two-pass curation, counts, licenses. |
 | `docs/design-constraints.md` | Constraint-first + representation analysis of the design. |
 | `docs/spec.md` | The one-week build brief this project is scoped against. |
@@ -65,6 +66,7 @@ dataset design, and evaluation plan.
 The full loop — **generate → train → eval** — runs end to end, and the first **base-vs-tuned
 numbers are on the board** (Day-3 midweek gate). Day 3 was run locally on CPU over the genuine
 authored seed (`data/curated/seed`), with results tracked across runs in `evals/LEADERBOARD.md`
-(Day-1 → Day-2 → Day-3). The tuned model already nudges OOV down on real data; a real *win* needs
-the deferred cloud pieces: a **teacher-generated corpus** and a **GPU QLoRA** run. See
+and narrated in `evals/RESULTS_LOG.md`. The tuned model improves the eval on all three languages
+(e.g. English OOV 0.41 → 0.17; Chinese posts the first non-zero hard-pass, 0.25). A full spec
+*win* needs the deferred cloud pieces: a **teacher-generated corpus** and a **GPU QLoRA** run. See
 `docs/DAY3.md`.

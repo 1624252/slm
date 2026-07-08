@@ -9,8 +9,8 @@ trains on the JSONL chat records produced by `datagen`/`seed` (the `messages` fi
         --qlora --out outputs/lora
 
     # End-to-end smoke (CPU, tiny model, a few steps):
-    python -m islm.train.sft --data data/generated/day2_smoke \
-        --base HuggingFaceTB/SmolLM2-135M-Instruct --smoke --out outputs/day2_lora
+    python -m islm.train.sft --data data/curated/seed \
+        --base HuggingFaceTB/SmolLM2-135M-Instruct --smoke --out outputs/smoke_lora
 
 Adapters are written to `--out` (git-ignored; publish to the HF Hub). Evaluate with:
     python -m islm.eval.run --base-path <base> --tuned-path <base> --tuned-adapter <out> ...

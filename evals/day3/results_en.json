@@ -1,0 +1,236 @@
+{
+  "base": {
+    "model": "HuggingFaceTB/SmolLM2-135M-Instruct",
+    "n": 8,
+    "hard_pass_rate": 0.0,
+    "mean_oov_rate": 0.4131,
+    "mean_coverage": 0.5869,
+    "one_new_word_pass_rate": 0.0,
+    "recurrence_pass_rate": 0.125
+  },
+  "error_analysis": {
+    "base": {
+      "n": 8,
+      "failing": 8,
+      "reasons": {
+        "oov": 8,
+        "coverage": 8,
+        "one_new_word": 8,
+        "recurrence": 7
+      }
+    },
+    "tuned": {
+      "n": 8,
+      "failing": 8,
+      "reasons": {
+        "oov": 8,
+        "coverage": 8,
+        "one_new_word": 8,
+        "recurrence": 7
+      }
+    }
+  },
+  "base_rows": [
+    {
+      "id": "en-0000",
+      "hard_pass": false,
+      "oov_rate": 0.324,
+      "failures": [
+        "oov",
+        "coverage",
+        "one_new_word"
+      ],
+      "story": "The journey of a lifetime, filled with moments of joy and sorrow, and the thrill of discovery. A lost key, hidden in the depths of a forgotten book, had been waiting for its rightful owner for years. The journey was a journey of self-discovery, as the key was only unlocked when the person who had been searching for it finally found it.\n\nThe journey was a journey of self-discovery, as the person who had been searching for the key finally found it. The journey was a journey of self-discovery, as the person who had been searching for the key finally found it. The journey was a journey of self-discovery, as the person who had been searching for the key finally found it. The journey was a journey of self-discovery, as the person who had been searching for the key finally found it.\n\nThe journey was a journey of self-discovery, as the person who had been searching for the key finally found it. The journey was a journey of self-discovery, as the person who had been searching for the key finally found it"
+    },
+    {
+      "id": "en-0001",
+      "hard_pass": false,
+      "oov_rate": 0.481,
+      "failures": [
+        "oov",
+        "coverage",
+        "one_new_word",
+        "recurrence"
+      ],
+      "story": "In the bustling streets of the castle, a cat detective named Emily navigated through the labyrinth of the castle's hidden passages. She had always been fascinated by the mysterious world of the castle's inhabitants, and her curiosity led her to explore every nook and cranny. As she ventured deeper into the castle's labyrinth, Emily encountered a peculiar creature that seemed to be hiding in plain sight. The creature was a small, furry cat with a long, curly tail and a mischievous grin.\n\nAs Emily approached the creature, she noticed that it was not a cat at all, but rather a small, furry creature with a long, curly tail. The creature was watching Emily from afar, its eyes fixed intently on her. Emily felt a thrill of excitement and curiosity, as if she had stumbled upon a long-lost treasure.\n\nAs Emily continued to explore the castle, she discovered that the creature was a small, furry cat with a long, curly tail. The creature was watching Emily from afar, its eyes fixed intently on her. Emily felt a sense of wonder and excitement, as if"
+    },
+    {
+      "id": "en-0002",
+      "hard_pass": false,
+      "oov_rate": 0.486,
+      "failures": [
+        "oov",
+        "coverage",
+        "one_new_word",
+        "recurrence"
+      ],
+      "story": "The sun was setting over the city, casting a warm orange glow over the bustling streets. The sound of children's laughter filled the air, and the smell of freshly baked bread wafted through the air. As the last rays of sunlight faded, the city transformed into a vibrant tapestry of colors, with the city lights casting a kaleidoscope of light on the buildings.\n\nA young girl, her eyes wide with wonder, wandered through the crowded streets, her footsteps echoing off the walls. She stopped at a small café, where a warm smile greeted her. The café was a cozy spot, filled with the sounds of sizzling food and the aroma of freshly brewed coffee. The café was a haven for people of all ages, and the young girl felt a sense of belonging.\n\nAs she sat down at the counter, a friendly waitress greeted her. \"Welcome to the café,\" she said, her voice warm and inviting. \"What can I get for you today?\"\n\nThe young girl hesitated, her eyes wide with curiosity. \"I'm looking for something to"
+    },
+    {
+      "id": "en-0003",
+      "hard_pass": false,
+      "oov_rate": 0.363,
+      "failures": [
+        "oov",
+        "coverage",
+        "one_new_word",
+        "recurrence"
+      ],
+      "story": "The dog, brave, had been running around the yard for hours, his tail wagging wildly as he chased after the squirrels. He was a big, brown dog with a thick coat of fur that seemed to shimmer in the sunlight. His eyes were wide with excitement, and his ears were erect, ready to leap out of his skin.\n\nAs he ran, he stopped at a small, hidden path that led to a cozy little house. The house was a cozy little cottage, with a big, old wooden door that seemed to lead to a warm, cozy place. The door was wide open, and the air was filled with the sweet scent of blooming flowers.\n\nThe dog's tail wagged again, and he ran towards the door, his ears perked up. He was a big, brown dog, and he had a big, brown tail. He was a brave dog, and he was running around the yard, chasing after the squirrels.\n\nAs he ran, he stopped at a small, hidden path that led to a cozy little cottage. The cottage was a"
+    },
+    {
+      "id": "en-0004",
+      "hard_pass": false,
+      "oov_rate": 0.431,
+      "failures": [
+        "oov",
+        "coverage",
+        "one_new_word",
+        "recurrence"
+      ],
+      "story": "In the quiet garden, a small, cozy spot where the sun barely broke the horizon, a curious bird named Whisker wandered through the garden, its wings flapping wildly as it searched for its next meal. The air was filled with the sweet scent of blooming flowers, and the sound of birds chirping filled the air.\n\nAs Whisker sat on a nearby bench, its eyes fixed on a small, delicate flower, it felt a sense of peace wash over it. It had been a long day of exploring the garden, and now it was finally at peace. The garden was a haven, a place where the boundaries between life and death blurred.\n\nThe sun was setting, casting a warm glow over the garden. A small, old wooden sign creaked in the gentle breeze, inviting Whisker to join the others. The sign read \"The Garden of the Sun.\"\n\nAs Whisker sat there, lost in thought, the sound of birds chirping filled the air. It was a peaceful moment, one that reminded Whisker of the beauty and"
+    },
+    {
+      "id": "en-0005",
+      "hard_pass": false,
+      "oov_rate": 0.378,
+      "failures": [
+        "oov",
+        "coverage",
+        "one_new_word",
+        "recurrence"
+      ],
+      "story": "In the old house, where the sun shone brightly, a young girl named Lily sat on the porch, lost in thought. She had always been fascinated by the old house, its history and secrets hidden behind its weathered walls. The house was a cozy haven, with a warm bed and a comfortable chair, where Lily could sit and listen to the gentle rustle of leaves.\n\nAs the sun began to set, casting a warm glow over the house, Lily felt a sense of peace wash over her. She had always been drawn to the old house, and now, with the sun's warmth, she felt a sense of belonging. She had always been a curious child, always eager to explore the world around her.\n\nLily's mother, a kind and gentle woman, had always been a source of comfort and guidance. She had always been there for her when Lily needed it, and she had always been there for her when Lily needed her. They had a special bond, and Lily felt grateful to have them by her side.\n\nAs the sun began to set, the sky"
+    },
+    {
+      "id": "en-0006",
+      "hard_pass": false,
+      "oov_rate": 0.341,
+      "failures": [
+        "oov",
+        "coverage",
+        "one_new_word",
+        "recurrence"
+      ],
+      "story": "In the old house, a wizard sat on a bench, his eyes fixed on a small, mysterious book. The book was cluttered with strange symbols and strange words, but the wizard's eyes sparkled with a mischievous glint. He was a master of the arcane arts, and his books were filled with tales of magic and wonder.\n\nThe wizard's name was Zorvath, and he was known for his ability to communicate with the spirits of the land. He was a gentle soul, always smiling and always willing to listen. His books were filled with stories of the ancient ones, of the great deeds of the gods, and of the mysteries of the universe.\n\nOne day, Zorvath was sitting in his favorite armchair, surrounded by the books of his library. He was reading a book about the ancient ones, and the words seemed to shimmer and dance in the light. Suddenly, a strange noise caught his attention. A small, furry creature was moving around the room, its eyes darting between the books and the floor."
+    },
+    {
+      "id": "en-0007",
+      "hard_pass": false,
+      "oov_rate": 0.5,
+      "failures": [
+        "oov",
+        "coverage",
+        "one_new_word",
+        "recurrence"
+      ],
+      "story": "The sun was setting over the city, casting a warm orange glow over the bustling streets. The air was filled with the sweet scent of blooming flowers, and the sound of children's laughter filled the air. As the last rays of sunlight faded, the city transformed into a vibrant tapestry of colors, with the city lights casting a kaleidoscope of hues on the pavement.\n\nIn the heart of the city, a small café stood as a beacon of warmth and comfort. The café's owner, a kind-hearted woman named Emma, greeted everyone with a warm smile and a warm welcome. She introduced herself as Emma, a kind-hearted woman who had lived in the city her entire life. Emma's smile was warm and inviting, and she welcomed everyone with open arms.\n\nAs the sun dipped below the horizon, the city transformed into a vibrant tapestry of colors. The air was filled with the sweet scent of blooming flowers, and the sound of children's laughter filled the air. Emma's smile was warm and inviting, and she welcomed everyone with open arms.\n\nThe sun was"
+    }
+  ],
+  "tuned": {
+    "model": "HuggingFaceTB/SmolLM2-135M-Instruct",
+    "n": 8,
+    "hard_pass_rate": 0.0,
+    "mean_oov_rate": 0.1699,
+    "mean_coverage": 0.8301,
+    "one_new_word_pass_rate": 0.0,
+    "recurrence_pass_rate": 0.125
+  },
+  "tuned_rows": [
+    {
+      "id": "en-0000",
+      "hard_pass": false,
+      "oov_rate": 0.209,
+      "failures": [
+        "oov",
+        "coverage",
+        "one_new_word",
+        "recurrence"
+      ],
+      "story": "Jessica and her friends are on a journey to find a lost key. They need the key to unlock their room, but they can't find it. They ask their friend, Alex, if he knows where the key is. Alex says that he knows where the key is, but he can't find it. Jessica and Alex decide to ask their friend, Alex, to help them find the key."
+    },
+    {
+      "id": "en-0001",
+      "hard_pass": false,
+      "oov_rate": 0.133,
+      "failures": [
+        "oov",
+        "coverage",
+        "one_new_word"
+      ],
+      "story": "The journey is a cat's home, and the castle is the cat's home. The cat is brave and loves the journey. The cat is brave and loves the castle. The cat is brave and loves the journey. The cat is brave and loves the castle."
+    },
+    {
+      "id": "en-0002",
+      "hard_pass": false,
+      "oov_rate": 0.151,
+      "failures": [
+        "oov",
+        "coverage",
+        "one_new_word",
+        "recurrence"
+      ],
+      "story": "The little cat, little umbrella, always looks for the big umbrella. It always looks for the big umbrella. It always looks for the big umbrella. It always looks for the big umbrella. It always looks for the big umbrella. It always looks for the big umbrella. It always looks for the big umbrella. It always looks for the big umbrella. It always looks for the big umbrella. It always looks for the big umbrella. It always looks for the big umbrella. It always looks for the big umbrella. It always looks for the big umbrella. It always looks for the big umbrella. It always looks for the big umbrella. It always looks for the big umbrella. It always looks for the big umbrella. It always looks for the big umbrella. It always looks for the big umbrella. It always looks for the big umbrella. It always looks for the big umbrella. It always looks for the big umbrella. It always looks for the big umbrella. It always looks for the big umbrella. It always looks for the big umbrella. It always looks for the big umbrella. It always looks for the big"
+    },
+    {
+      "id": "en-0003",
+      "hard_pass": false,
+      "oov_rate": 0.271,
+      "failures": [
+        "oov",
+        "coverage",
+        "one_new_word",
+        "recurrence"
+      ],
+      "story": "One day, a brave dog discovers a hidden room in his house. The room is filled with strange toys and puzzles, but the dog is not happy. The dog asks his owner, \"Why are the toys so strange?\" The owner replies, \"They're just like the toys in the room, but they're not mine. They're my own.\" The dog is sad and wants to know why the toys are so strange."
+    },
+    {
+      "id": "en-0004",
+      "hard_pass": false,
+      "oov_rate": 0.198,
+      "failures": [
+        "oov",
+        "coverage",
+        "one_new_word",
+        "recurrence"
+      ],
+      "story": "One day, a little girl named Lily lives in a quiet garden. She has a big blue umbrella and a big brown umbrella. She always has a big brown umbrella with her. Sometimes, she has a big brown umbrella with her and her friend. Sometimes, she has a big brown umbrella with her and her friend and her friend. Sometimes, she has a big brown umbrella with her and her friend and her friend. Sometimes, she has a big brown umbrella with her and her friend and her friend and her friend. Sometimes, she has a big brown umbrella with her and her friend and her friend and her friend. Sometimes, she has a big brown umbrella with her and her friend and her friend and her friend. Sometimes, she has a big brown umbrella with her and her friend and her friend and her friend. Sometimes, she has a big brown umbrella with her and her friend and her friend and her friend. Sometimes, she has a big brown umbrella with her and her friend and her friend and her friend. Sometimes, she has a big brown umbrella with her and her friend and her friend"
+    },
+    {
+      "id": "en-0005",
+      "hard_pass": false,
+      "oov_rate": 0.2,
+      "failures": [
+        "oov",
+        "coverage",
+        "one_new_word",
+        "recurrence"
+      ],
+      "story": "One day, a little boy named Timmy runs into a big house. The house is very scary. The boy is scared and wants to go inside. The boy asks the little girl, \"Do you like to go to the big house?\" The little girl says, \"No, I don't like to go to the big house.\" The boy is sad and scared. He asks the little girl, \"Do you like to go to the big house?\" The little girl says, \"Yes, I like to go to the big house.\" The boy is happy and wants to go to the big house."
+    },
+    {
+      "id": "en-0006",
+      "hard_pass": false,
+      "oov_rate": 0.16,
+      "failures": [
+        "oov",
+        "coverage",
+        "one_new_word",
+        "recurrence"
+      ],
+      "story": "One day, a young girl named Lily lives in a big house with her family. She loves to play with her friends in the garden. One day, her friend, Max, comes to visit. Max says that he wants to learn how to play with the big house. Lily is so happy that she wants to learn too. She starts playing with Max, and soon, she starts playing with the big house. Max says that he wants to learn too, and Lily starts playing with him. They play together, and Lily starts to learn how to play with the big house."
+    },
+    {
+      "id": "en-0007",
+      "hard_pass": false,
+      "oov_rate": 0.037,
+      "failures": [
+        "oov",
+        "coverage",
+        "one_new_word",
+        "recurrence"
+      ],
+      "story": "One day, a little boy named Timmy runs into a big park. He sees a big tree with a big tree in it. He asks the tree, \"What is this big tree?\" The tree says, \"I am a big tree. I am very big.\" Timmy asks, \"What is this big tree?\" The tree says, \"I am a big tree. I am very big.\" Timmy asks, \"What is this big tree?\" The tree says, \"I am a big tree. I am very big.\""
+    }
+  ]
+}

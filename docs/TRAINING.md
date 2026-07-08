@@ -2,7 +2,7 @@
 
 Supervised fine-tuning of a small open base model on the generated i+1 story dataset
 (`src/islm/train`). Per the spec stack, the intended path is **QLoRA on a single GPU**; on CPU
-or without bitsandbytes it falls back to plain **LoRA** (used for the Day-2 end-to-end smoke).
+or without bitsandbytes it falls back to plain **LoRA** (used for the local CPU runs).
 
 ## Install
 
@@ -27,11 +27,12 @@ python -m islm.train.sft --data data/generated/en --base Qwen/Qwen3-4B-Instruct 
 
 # Real CPU run on the curated seed (no GPU; Day-3 local run):
 python -m islm.train.sft --data data/curated/seed \
-    --base HuggingFaceTB/SmolLM2-135M-Instruct --epochs 3 --out outputs/day3_lora
+    --base HuggingFaceTB/SmolLM2-135M-Instruct \
+    --epochs 3 --grad-accum 1 --max-seq-len 768 --out outputs/day3_lora
 
 # End-to-end smoke (CPU, tiny model, a few steps) — proves the loop:
-python -m islm.train.sft --data data/generated/day2_smoke \
-    --base HuggingFaceTB/SmolLM2-135M-Instruct --smoke --out outputs/day2_lora
+python -m islm.train.sft --data data/curated/seed \
+    --base HuggingFaceTB/SmolLM2-135M-Instruct --smoke --out outputs/smoke_lora
 ```
 
 Key flags: `--epochs`, `--max-steps`, `--max-seq-len`, `--qlora` (needs a CUDA GPU), `--smoke`
@@ -53,7 +54,7 @@ window. On CPU keep the window modest (default 1024); a GPU run can raise it.
 # Omitting --language evals all shipped languages (en, zh, ja); add --language en for one.
 python -m islm.eval.run \
     --base-path HuggingFaceTB/SmolLM2-135M-Instruct \
-    --tuned-path HuggingFaceTB/SmolLM2-135M-Instruct --tuned-adapter outputs/day2_lora \
+    --tuned-path HuggingFaceTB/SmolLM2-135M-Instruct --tuned-adapter outputs/day3_lora \
     --curated --judge-model <judge> --adversarial --out evals/results
 ```
 
