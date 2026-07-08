@@ -25,6 +25,8 @@ dev = ["pytest>=8.0", "ruff>=0.6"]
 hf = ["torch>=2.2", "transformers>=4.44", "accelerate>=0.30", "safetensors>=0.4", "peft>=0.11"]
 # QLoRA/LoRA fine-tuning (islm.train). Add `bitsandbytes` on a CUDA GPU for 4-bit QLoRA.
 train = ["torch>=2.2", "transformers>=4.44", "trl>=0.9", "peft>=0.11", "datasets>=2.19", "accelerate>=0.30"]
+# Push the golden set + eval runs to LangSmith for dataset/experiment tracking (needs a key).
+langsmith = ["langsmith>=0.1"]
 
 [tool.setuptools.packages.find]
 where = ["src"]
