@@ -130,6 +130,19 @@ Held-out and adversarial scenarios live at `evals/scenarios/{heldout,adversarial
 (committed for reproducibility; auto-created on first run). They are scenario-level distinct from
 the training/seed data, so there is no leakage. Results go to `evals/results/` (git-ignored).
 
+### Per-word-list coverage (incl. exam-level English)
+
+Every shipped word list is exercised by an eval so none can silently rot — CEFR (en), HSK (zh),
+JLPT (ja), and the **GRE/SAT/ACT exam words** (en). `tests/test_wordlist_evals.py` runs one eval
+category per set through the real harness; the English exam category is required and uses the
+GRE/SAT/ACT words as the *to-learn* targets. A committed exam scenario set,
+`evals/scenarios/heldout_exam_en.jsonl`, lets you evaluate any model on exam-level vocabulary:
+
+```bash
+python -m islm.eval.run --language en --scenarios evals/scenarios/heldout_exam_en.jsonl \
+    --base-path HuggingFaceTB/SmolLM2-135M-Instruct --out evals/exam
+```
+
 ## Tracking results over time
 
 A single eval writes a one-off report; to see whether the model is getting **better across runs

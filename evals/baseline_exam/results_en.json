@@ -1,0 +1,121 @@
+{
+  "base": {
+    "model": "HuggingFaceTB/SmolLM2-135M-Instruct",
+    "n": 8,
+    "hard_pass_rate": 0.0,
+    "mean_oov_rate": 0.4301,
+    "mean_coverage": 0.5699,
+    "one_new_word_pass_rate": 0.0,
+    "recurrence_pass_rate": 0.0
+  },
+  "error_analysis": {
+    "base": {
+      "n": 8,
+      "failing": 8,
+      "reasons": {
+        "oov": 8,
+        "coverage": 8,
+        "one_new_word": 8,
+        "recurrence": 8
+      }
+    }
+  },
+  "base_rows": [
+    {
+      "id": "en-0000",
+      "hard_pass": false,
+      "oov_rate": 0.428,
+      "failures": [
+        "oov",
+        "coverage",
+        "one_new_word",
+        "recurrence"
+      ],
+      "story": "The mouse, a curious creature, had been exploring the garden for hours, its eyes scanning the colorful flowers and lush greenery. As it wandered, it noticed a small, old wooden box tucked away in the corner. The mouse, eager to find something to eat, cautiously approached the box, its paws digging into the wood.\n\n\"Hello there, mouse,\" the box's owner, a friendly neighbor, said, \"I see you're looking for something to eat. What brings you to our garden today?\"\n\nThe mouse, intrigued, looked up at the owner, its eyes wide with curiosity. \"I'm looking for a special treat,\" it said, \"something to eat for my friend, the dog, who loves to play with him.\"\n\nThe owner, a kind-hearted neighbor, smiled and said, \"I see you're looking for a special treat. That's a great idea. Let's find something tasty and fun for your friend.\"\n\nThe mouse,"
+    },
+    {
+      "id": "en-0001",
+      "hard_pass": false,
+      "oov_rate": 0.52,
+      "failures": [
+        "oov",
+        "coverage",
+        "one_new_word",
+        "recurrence"
+      ],
+      "story": "As she walked through the park, the warm sunlight danced through the trees, casting a golden glow over the lush green grass. The sound of birdsong filled the air, and the scent of blooming flowers wafted through the air, enticing her to take a moment to appreciate the beauty around her.\n\nShe stopped at a small bench, where a friendly squirrel perched on a branch, its tail twitching with curiosity. The squirrel's eyes sparkled with mischief, and the squirrel's tail twitched in a playful dance. As she watched, the squirrel began to play, and the squirrel's tail twitched again, this time with a mischievous grin.\n\nThe squirrel continued to play, and the squirrel's tail twitched again, this time with a mischievous twinkle. The squirrel's tail twitched again, and the squirrel's tail twitched again, this time with a mischievous twinkle. The squirrel's tail twitched again, and the squirrel's tail twitched again,"
+    },
+    {
+      "id": "en-0002",
+      "hard_pass": false,
+      "oov_rate": 0.484,
+      "failures": [
+        "oov",
+        "coverage",
+        "one_new_word",
+        "recurrence"
+      ],
+      "story": "The bird and the tree were both quiet and peaceful, their leaves rustling softly in the breeze. The bird, a gentle sparrow, perched on a branch, its feathers a soft, warm blanket. The tree, a sturdy oak, stood tall and proud, its branches reaching towards the sky like a giant's. The bird, a sparrow, perched on the trunk, its wings flapping gently as it flew.\n\nAs the bird and tree sat together, the sun began to set, casting a warm glow over the forest. The leaves on the tree were a deep, rich green, and the bird's feathers were soft and gentle. The bird's wings were beating, and the tree's branches seemed to stretch towards the sky.\n\nThe bird and tree were both quiet and peaceful, their leaves rustling softly in the breeze. The bird, a gentle sparrow, perched on a branch, its feathers a soft, warm blanket. The tree, a sturdy oak, stood tall and proud"
+    },
+    {
+      "id": "en-0003",
+      "hard_pass": false,
+      "oov_rate": 0.438,
+      "failures": [
+        "oov",
+        "coverage",
+        "one_new_word",
+        "recurrence"
+      ],
+      "story": "As she walked through the park, the soft glow of the luminescent trees seemed to dance in the sunlight, casting a warm, golden light on the ground. The air was filled with the sweet scent of blooming flowers, and the sound of birds chirping filled the air. She stopped at a bench, where a small, old wooden bench sat, its surface covered in a soft, moss-covered carpet. The bench was a favorite spot for her, and she often sat there, watching the birds and the flowers.\n\nAs she sat there, she noticed a small, old wooden chair in the corner, its surface covered in a soft, moss-covered carpet. She smiled, feeling a sense of peace wash over her. She had always been drawn to the quiet, peaceful moments in nature.\n\nSuddenly, a bird flew into the air, and it landed on the bench. The bird chirped, and the bench was filled with the sweet scent of its song. The bird"
+    },
+    {
+      "id": "en-0004",
+      "hard_pass": false,
+      "oov_rate": 0.441,
+      "failures": [
+        "oov",
+        "coverage",
+        "one_new_word",
+        "recurrence"
+      ],
+      "story": "The rain poured down like a relentless drumbeat, a constant reminder of the rainy day that had just passed. The streets were empty, the only sound the distant hum of the city. A lone figure emerged from the shadows, their eyes fixed on the window as they took in the vibrant colors of the city. They were a small, curious person, eager to explore the world around them.\n\nAs they walked, the rain seemed to wash away the dust of their surroundings, leaving only the faint scent of the city's scent. They stopped at a small café, where a warm cup of coffee was served. The aroma of freshly brewed coffee filled their lungs, and they felt a sense of peace wash over them.\n\nThe person in the corner of the café, however, was different. They were a tall, slender man with a kind face and a warm smile. He was sitting at a table, nursing a cup of coffee, and he was staring at a small, ornate box on"
+    },
+    {
+      "id": "en-0005",
+      "hard_pass": false,
+      "oov_rate": 0.287,
+      "failures": [
+        "oov",
+        "coverage",
+        "one_new_word",
+        "recurrence"
+      ],
+      "story": "The cat detective, a man with a heart of gold, was on the hunt for his missing cat. He had been searching for months, but the cat had vanished into thin air. As he frantically searched the house, he couldn't shake the feeling that he was being watched. His eyes, filled with a mix of fear and determination, scanned the room, searching for any sign of the missing cat.\n\nAs he walked through the garden, he noticed a small, furry creature in the corner. It was a cat, but it was different. The cat was eating its food, and the cat was moving slowly. The cat was watching him, but it was not watching him. It was watching the cat, and it was watching him.\n\nThe cat detective's eyes landed on the cat, and he knew that he had to find it. He called out to the cat, and the cat, sensing the danger, began to run. The cat ran quickly, but the cat"
+    },
+    {
+      "id": "en-0006",
+      "hard_pass": false,
+      "oov_rate": 0.488,
+      "failures": [
+        "oov",
+        "coverage",
+        "one_new_word",
+        "recurrence"
+      ],
+      "story": "In the quiet garden, a small, cozy space, the sun's rays danced across the leaves, casting a warm glow over the flowers. The air was filled with the sweet scent of blooming flowers, and the sound of birds chirping filled the air. A gentle breeze rustled the leaves, and the soft chirping of crickets filled the air.\n\nAs the sun began to set, the garden transformed into a peaceful oasis. The garden was a haven for the birds, their songs filling the air. The trees, with their leaves rustling softly, provided a soothing background melody. The garden was a haven for the insects, their buzzing and chirping creating a symphony of life.\n\nThe garden was a place of quiet contemplation, where the mind was free to wander. The garden was a place of reflection, where the mind could quiet its thoughts and focus on the present moment. The garden was a place of peace, where the worries of the world were forgotten.\n\nAs the"
+    },
+    {
+      "id": "en-0007",
+      "hard_pass": false,
+      "oov_rate": 0.356,
+      "failures": [
+        "oov",
+        "coverage",
+        "one_new_word",
+        "recurrence"
+      ],
+      "story": "The sun was setting over the city, casting a warm orange glow over the bustling streets. The sound of birdsong filled the air, and the gentle hum of conversation filled the air. A young boy, with a bright smile, sat on the edge of the park, watching the sunset with a sense of wonder. He was a good friend, and his presence was a reminder of the simple joys in life.\n\nAs the sun dipped below the horizon, the boy's eyes lit up with excitement. He was a good friend, and his presence was a reminder of the simple joys in life. He was a good friend, and his presence was a reminder of the simple joys in life. He was a good friend, and his presence was a reminder of the simple joys in life. He was a good friend, and his presence was a reminder of the simple joys in life. He was a good friend, and his presence was a reminder of the simple joys in life. He was a good"
+    }
+  ]
+}

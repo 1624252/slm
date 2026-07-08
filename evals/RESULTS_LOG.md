@@ -41,6 +41,24 @@ fits a 768-token window uncut, and matches the eval's `--curated` setup.
 
 <!-- newest first; append a block per run -->
 
+### 2026-07-08 — `exam-baseline` (GRE/SAT/ACT targets, prompted base model)
+
+**What.** Base `SmolLM2-135M-Instruct` (prompted, no fine-tune) on 8 held-out English scenarios
+whose to-learn targets are **GRE/SAT/ACT exam words** (`evals/scenarios/heldout_exam_en.jsonl`),
+temperature 0, `--max-new-tokens 200`.
+
+| Metric | Value | Target |
+| --- | --- | --- |
+| Hard-pass | 0.000 | 1.000 |
+| OOV | 0.430 | ≤0.02 |
+| ≤1-new | 0.000 | 1.000 |
+| Recurrence | 0.000 | 1.000 |
+
+**Read.** The base model fails exam-vocabulary scenarios about the same as CEFR ones (OOV 0.430 vs
+0.413) — it ignores the allowed-word list either way. This is the **baseline to beat** once the
+harder targets flow into training. It confirms the exam words load, sample as targets, and run
+through the real harness end to end. Reproduce: `docs/EVALUATION.md` → "Per-word-list coverage".
+
 ### 2026-07-08 — `day3-seed-lora-v2` (the data fix lands)
 
 **Iterations & hyperparameters** (from `outputs/day3_lora/train_summary.json`):
