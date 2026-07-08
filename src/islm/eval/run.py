@@ -1,6 +1,12 @@
 """Run the base-vs-tuned evaluation over held-out (and optional adversarial) scenarios.
 
-Offline smoke (mock for every role):
+Runs on all shipped languages (en, zh, ja) by default; pass --language to pick a subset.
+
+Offline smoke (mock for every role), all three languages:
+
+    python -m islm.eval.run --mock --adversarial
+
+One language only:
 
     python -m islm.eval.run --mock --language zh --adversarial
 
@@ -15,7 +21,7 @@ Local fine-tuned checkpoint — the "once we have a trained model" path:
         --tuned-path Qwen/Qwen3-4B-Instruct --tuned-adapter outputs/lora \
         --judge-model gpt-5 --adversarial
 
-Results are written to evals/results/results_<lang>.{md,json}.
+Results are written per language to evals/results/results_<lang>.{md,json}.
 """
 
 from __future__ import annotations
@@ -25,7 +31,7 @@ import json
 from collections.abc import Callable
 from pathlib import Path
 
-from ..config import EVALS_DIR
+from ..config import EVALS_DIR, SHIPPED_LANGUAGES
 from ..datagen.scenarios import Scenario, load_scenarios, sample_scenarios, save_scenarios
 from ..llm.client import get_client
 from ..vocab.wordlists import VOCAB_DIR, Vocabulary
@@ -83,7 +89,11 @@ def _sampler(language: str, n: int, seed: int, curated: bool):
 
 def main() -> None:
     p = argparse.ArgumentParser(description="Base-vs-tuned eval for the i+1 story model.")
-    p.add_argument("--language", default="en")
+    p.add_argument(
+        "--language",
+        default=",".join(SHIPPED_LANGUAGES),
+        help="Comma-separated languages to eval (default: all shipped — en,zh,ja).",
+    )
     p.add_argument(
         "--scenarios", type=Path, default=None, help="Held-out JSONL (else per-lang default)."
     )
@@ -119,7 +129,16 @@ def main() -> None:
     p.add_argument("--notes", default=None, help="Free-text note recorded with --track.")
     args = p.parse_args()
 
-    lang = args.language
+    args.out.mkdir(parents=True, exist_ok=True)
+    languages = [w.strip() for w in args.language.split(",") if w.strip()]
+    if args.scenarios and len(languages) > 1:
+        p.error("--scenarios pins one file; pass a single --language with it.")
+    for lang in languages:
+        _run_language(lang, args, p)
+
+
+def _run_language(lang: str, args, p) -> None:
+    """Evaluate one language: load scenarios, score base (+tuned/adv), write reports, track."""
     default_name = f"heldout_small_{lang}.jsonl" if args.curated else f"heldout_{lang}.jsonl"
     held = _load_or_sample(
         args.scenarios or EVALS_DIR / "scenarios" / default_name,
@@ -179,7 +198,6 @@ def main() -> None:
     else:
         md = single_model_markdown(base, adv_base)
 
-    args.out.mkdir(parents=True, exist_ok=True)
     (args.out / f"results_{lang}.md").write_text(md, encoding="utf-8")
     payload: dict = {
         "base": summary_metrics(base),

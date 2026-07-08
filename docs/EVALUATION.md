@@ -104,9 +104,13 @@ the behavior on every axis, which is the baseline fine-tuning must beat.
 
 The model under test is any `StoryGenerator`, so swapping models needs no harness change.
 
+By default the eval runs on **all shipped languages (en, zh, ja)** in one invocation, writing
+`results_<lang>.{md,json}` for each — so no language is silently skipped. Pass
+`--language en` (or `--language en,zh`) to restrict to a subset.
+
 ```bash
-# Offline smoke (mock for every role) — proves the harness end to end:
-python -m islm.eval.run --mock --language en --adversarial
+# Offline smoke (mock for every role), all three languages — proves the harness end to end:
+python -m islm.eval.run --mock --adversarial
 
 # API models (OpenAI-compatible):
 python -m islm.eval.run --base-model qwen3-4b-instruct --tuned-model my-tuned \
@@ -135,8 +139,8 @@ appends one line to `evals/runs.jsonl` (an append-only history) and regenerates
 progression stays in the repo.
 
 ```bash
-# Evaluate and record the run in one step:
-python -m islm.eval.run --language en --curated \
+# Evaluate and record the run in one step (all three languages -> one row each on the board):
+python -m islm.eval.run --curated \
     --base-path HuggingFaceTB/SmolLM2-135M-Instruct \
     --tuned-path HuggingFaceTB/SmolLM2-135M-Instruct --tuned-adapter outputs/day3_lora \
     --track --run-label day3-seed-lora --dataset data/curated/seed --epochs 3 --out evals/day3

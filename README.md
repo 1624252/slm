@@ -41,7 +41,7 @@ python -m spacy download en_core_web_sm     # recommended for English
 
 # Build a dataset and run the eval fully offline (mock teacher, no API key):
 python -m islm.datagen.pipeline --n 20 --language zh --mock --out data/generated/zh
-python -m islm.eval.run --mock --language zh
+python -m islm.eval.run --mock            # evals all shipped languages (en, zh, ja)
 
 python -m pytest        # tests (62 passing, incl. zh/ja + tracker)
 ruff check src tests    # lint

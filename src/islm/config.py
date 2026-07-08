@@ -10,6 +10,10 @@ REPO_ROOT = Path(__file__).resolve().parents[2]
 DATA_DIR = REPO_ROOT / "data"
 EVALS_DIR = REPO_ROOT / "evals"
 
+# Languages with curated word lists + committed scenarios. Evals run on all of these by default
+# so no language is silently skipped; the pipeline still supports any language via fallbacks.
+SHIPPED_LANGUAGES = ("en", "zh", "ja")
+
 
 @dataclass(frozen=True)
 class Thresholds:

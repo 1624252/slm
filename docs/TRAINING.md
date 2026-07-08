@@ -50,7 +50,8 @@ window. On CPU keep the window modest (default 1024); a GPU run can raise it.
 ## Then evaluate the adapter (closes the loop)
 
 ```bash
-python -m islm.eval.run --language en \
+# Omitting --language evals all shipped languages (en, zh, ja); add --language en for one.
+python -m islm.eval.run \
     --base-path HuggingFaceTB/SmolLM2-135M-Instruct \
     --tuned-path HuggingFaceTB/SmolLM2-135M-Instruct --tuned-adapter outputs/day2_lora \
     --curated --judge-model <judge> --adversarial --out evals/results

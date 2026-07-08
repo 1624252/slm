@@ -169,7 +169,7 @@ error-analysis section.
 model, and the tests that cover the harness — are in [`EVALUATION.md`](EVALUATION.md).**
 
 ```bash
-python -m islm.eval.run --mock --language zh --adversarial          # offline smoke
+python -m islm.eval.run --mock --adversarial                       # offline smoke (all langs: en,zh,ja)
 python -m islm.eval.run --base-model <base> --tuned-model <tuned> --judge-model <judge> --adversarial
 python -m islm.eval.run --base-path <base> --tuned-path <base> --tuned-adapter outputs/lora --judge-model <judge>
 ```
