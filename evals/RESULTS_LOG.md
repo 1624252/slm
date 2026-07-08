@@ -41,6 +41,40 @@ fits a 768-token window uncut, and matches the eval's `--curated` setup.
 
 <!-- newest first; append a block per run -->
 
+### 2026-07-08 — `day3-seed-lora-v3` (more epochs + capacity; beats v2)
+
+**Iterations & hyperparameters** (from `outputs/day3_lora_v3/train_summary.json`):
+
+| Setting | Value | | Setting | Value |
+| --- | --- | --- | --- | --- |
+| Base model | `SmolLM2-135M-Instruct` | | LoRA rank `r` | **32** (v2: 16) |
+| Method | LoRA (CPU) | | LoRA `alpha` | **64** (v2: 32) |
+| **Epochs** | **5** (v2: 3) | | LoRA `dropout` | 0.05 |
+| **Optimizer steps** | **110** (v2: 66) | | Learning rate | 2e-4 |
+| Batch / grad-accum | 1 / 1 | | Max sequence length | 768 |
+| Final train loss | **0.86** (v2: 1.63) | | Seed | 0 |
+
+**Change from v2:** 5 epochs (was 3) and double the LoRA capacity (r=32/α=64 vs 16/32). Rationale:
+on 22 examples the cheap levers are more passes + more adapter capacity to absorb the constrained
+style.
+
+| Lang | OOV (base→tuned) | Hard-pass (→1.000) | ≤1-new (→1.000) | Recurrence (→1.000) | vs v2 |
+| --- | --- | --- | --- | --- | --- |
+| en | 0.413 → **0.096** (−0.317) | 0.000 → **0.125** | 0.000 → **0.500** | 0.125 → 0.125 | better (v2 OOV 0.170, hard 0) |
+| zh | 0.856 → **0.279** (−0.577) | 0.000 → 0.000 | 0.000 → 0.000 | 0.125 → **0.875** | mixed (better OOV/recur; lost v2's hard 0.25) |
+| ja | 1.000 → **0.167** (−0.833) | 0.000 → **0.250** | 0.000 → **0.625** | 0.000 → **0.500** | far better (v2 OOV 0.874) |
+
+**Read.** v3 beats v2 clearly: English and Japanese post their first hard-passes, OOV drops hard
+across all three languages, and ≤1-new-word/recurrence move up substantially. The one regression is
+zh hard-pass (0.25 → 0), even though zh OOV and recurrence improved — the tighter fit helped most
+checks but pushed a couple of zh stories just over a gate. Net: the highest-leverage cheap knobs
+(epochs + LoRA capacity) worked. Win condition still FAIL (OOV ≤ 0.02 gate needs the GPU run).
+
+**Exam set** (`day3-v3-exam`, GRE/SAT/ACT targets, `heldout_exam_en`): OOV 0.430 → **0.169**,
+≤1-new 0.000 → **0.500**, recurrence 0.000 → 0.125, hard-pass 0.000 → 0.000. The v3 adapter
+generalizes to hard exam-vocabulary targets it never trained on — OOV more than halves — even
+though no story clears every gate yet.
+
 ### 2026-07-08 — `exam-baseline` (GRE/SAT/ACT targets, prompted base model)
 
 **What.** Base `SmolLM2-135M-Instruct` (prompted, no fine-tune) on 8 held-out English scenarios
