@@ -203,6 +203,9 @@ def main() -> None:
     p.add_argument("--max-steps", type=int, default=-1)
     p.add_argument("--max-seq-len", type=int, default=1024, help="Context window (left-truncated).")
     p.add_argument("--grad-accum", type=int, default=8, help="Gradient accumulation steps.")
+    p.add_argument("--lr", type=float, default=2e-4, help="Learning rate.")
+    p.add_argument("--lora-r", type=int, default=16, help="LoRA rank.")
+    p.add_argument("--lora-alpha", type=int, default=32, help="LoRA alpha.")
     p.add_argument("--qlora", action="store_true", help="4-bit QLoRA (needs a CUDA GPU).")
     p.add_argument("--smoke", action="store_true", help="Tiny settings for a CPU loop smoke.")
     args = p.parse_args()
@@ -215,6 +218,9 @@ def main() -> None:
         max_steps=args.max_steps,
         max_seq_len=args.max_seq_len,
         grad_accum=args.grad_accum,
+        learning_rate=args.lr,
+        lora_r=args.lora_r,
+        lora_alpha=args.lora_alpha,
         qlora=args.qlora,
     )
     if args.smoke:
