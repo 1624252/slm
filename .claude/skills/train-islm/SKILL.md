@@ -81,21 +81,38 @@ PYTHONPATH=src python -m islm.eval.run --language en \
     --track --run-label day3-v<N>-exam --dataset data/curated/seed --epochs 5 --out evals/day3_v<N>_exam
 ```
 
-Metrics (all deterministic, no AI grader): `hard_pass_rate` (all checks at once), `mean_oov_rate`
-(out-of-vocab, lower better, gate ≤0.02), `one_new_word_pass_rate`, `recurrence_pass_rate`. Pull
-per-language numbers from the `results_*.json` (`base` vs `tuned` dicts).
+Golden set (the every-commit correctness target — run the model ON it, all criteria):
+
+```bash
+PYTHONPATH=src python -m islm.eval.run --golden \
+    --base-path HuggingFaceTB/SmolLM2-135M-Instruct \
+    --tuned-path HuggingFaceTB/SmolLM2-135M-Instruct --tuned-adapter outputs/day3_lora_v<N> \
+    --track --run-label golden-v<N> --dataset data/curated/seed --epochs 5 --out evals/golden_v<N>
+```
+
+**The eval reports THREE families of criteria, each with base and tuned values:**
+1. **Deterministic** (no AI): `hard_pass_rate` (all checks at once), `mean_oov_rate` (out-of-vocab,
+   lower better, gate ≤0.02), `one_new_word_pass_rate`, `recurrence_pass_rate`.
+2. **LLM-judge rubric** (8 dims, 0–2): spec_adherence, robustness, task_quality, consistency,
+   inferability, seductive_detail_control, **coherence**, **interestingness**. Runs automatically
+   when `OPENAI_API_KEY` + `JUDGE_MODEL` are in `.env`; `--no-judge` to skip.
+3. **Cloze inferability**: `mean_inferability` — can the target be recovered from context.
+
+Pull per-language numbers from `results_*.json` (`base` vs `tuned` dicts). Run held-out + exam +
+golden targets so all three surfaces are covered.
 
 ## Step 5 — Document (REQUIRED — do not skip)
 
 Add a newest-first entry to `evals/RESULTS_LOG.md` under `## Runs`. Include:
 
 - **Iterations & hyperparameters table** — copy from `train_summary.json`: base model, epochs,
-  optimizer_steps, batch/grad-accum, lr, lora_r/alpha/dropout, max_seq_len, seed, device, final loss.
-  Note what changed vs the previous run and why.
-- **Results table** — per language (+ exam): OOV, hard-pass, ≤1-new, recurrence, each `base→tuned`,
-  with targets in the header (`OOV (→ ≤0.02)`, `Hard-pass (→ 1.000)`, …).
-- **Read** — 2–3 sentences: did it beat the prior best? any regressions (flag honestly)? win
-  condition still PASS/FAIL and why.
+  optimizer_steps, batch/grad-accum, lr, lora_r/alpha/dropout, max_seq_len, seed, device, final
+  loss, and the scheduler/optim recipe fields.
+- **Results table(s)** — per language + target (held-out, exam, golden): ALL criteria as
+  `base→tuned` — the 4 deterministic checks, cloze inferability, and all 8 judge dims. Show the
+  base-model scores explicitly (they're in each results JSON's `base` block), not just deltas.
+- **Read** — 2–3 sentences: did it beat the prior best? any regressions (flag honestly, e.g. a
+  coherence/interestingness drop)? win condition still PASS/FAIL and why.
 
 See the existing entries in `evals/RESULTS_LOG.md` for the exact format. The leaderboard
 (`evals/LEADERBOARD.md`) is regenerated automatically by `--track`; never hand-edit it.

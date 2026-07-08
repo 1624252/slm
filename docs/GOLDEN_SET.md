@@ -59,6 +59,26 @@ python -m pytest tests/test_golden.py -v
 metadata), checks the size range, the required metadata, that all three languages and the exam
 tier are represented, and that no gold story leaks from the training seed.
 
+## Two distinct uses (don't confuse them)
+
+1. **Reference validation** (`pytest tests/test_golden.py`) — checks the *committed reference
+   stories* still pass every validator. No model involved; the every-commit regression gate.
+2. **Evaluating a model ON the golden set** (`--golden`) — runs the base and tuned model on the
+   golden *inputs* and scores their output against **every criterion**: the deterministic checks,
+   the 8-dimension LLM-judge rubric (incl. coherence + interestingness), and cloze inferability.
+
+```bash
+# Evaluate base vs tuned on the golden set (all languages), judge auto-enabled from .env:
+python -m islm.eval.run --golden \
+    --base-path HuggingFaceTB/SmolLM2-135M-Instruct \
+    --tuned-path HuggingFaceTB/SmolLM2-135M-Instruct --tuned-adapter outputs/day3_lora_v5 \
+    --track --run-label golden-v5 --out evals/golden_v5
+# -> evals/golden_v5/results_golden_<lang>.{md,json}, with base + tuned values per criterion.
+```
+
+The model's golden scores will be **low** (a 135M CPU model won't reproduce hand-authored
+spec-passing prose) — that is the intended regression signal, not a failure of the set.
+
 ## Rules (PDF Layer-1 discipline)
 
 - **Run on every commit** — it's a regression test (wired via `tests/test_golden.py`).

@@ -11,7 +11,7 @@ a concrete, shipped artifact in this repo:
 
 | # | Layer | What it answers | Artifact | Run |
 | --- | --- | --- | --- | --- |
-| 1 | **Golden sets** | Does it work? (correctness) | `evals/golden/golden.jsonl` (55 held-out cases), `docs/GOLDEN_SET.md` | `pytest tests/test_golden.py` (every commit) |
+| 1 | **Golden sets** | Does it work? (correctness) | `evals/golden/golden.jsonl` (55 held-out cases), `docs/GOLDEN_SET.md` | `pytest tests/test_golden.py` (validate refs); `eval.run --golden` (score a model, all criteria) |
 | 2 | **Behavioral coverage** | Does it work for all types? | tagged golden cases → `evals/golden/coverage.md` | `python -m islm.eval.coverage_matrix` |
 | 3 | **Error analysis** | Where does it break? | `docs/ERROR_ANALYSIS.md` taxonomy + `error_analysis()` tally | read traces weekly |
 | 4 | **Replay harnesses** | Re-score without re-running | `src/islm/eval/replay.py` | `python -m islm.eval.replay --results ...` |
