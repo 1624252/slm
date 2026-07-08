@@ -4,7 +4,10 @@ Each language has baseline (known) and advanced (to-learn) tiers as CSVs with co
 `word,tier,source`:
 
 - `data/vocab/<lang>/baseline.csv`, `advanced.csv` — small **curated samples** shipped in the
-  repo (original content, CC0) so the pipeline and tests run offline.
+  repo so the pipeline and tests run offline. Each row carries its `source`: `curated-sample`
+  rows are original content (CC0); other rows are individual words with their CEFR level taken
+  from the graded lists below (`cefr-j-1.5`, `octanove-c1c2-1.0`) and are covered by those
+  sources' licenses. English `advanced.csv` spans B1–C2 (skewed to harder C1/C2 targets).
 - `data/vocab/<lang>/baseline.full.csv`, `advanced.full.csv` — **downloaded** graded lists
   (git-ignored; run `python -m islm.vocab.download`). Loaders prefer these when present.
 
