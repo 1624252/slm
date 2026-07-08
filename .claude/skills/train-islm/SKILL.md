@@ -100,6 +100,12 @@ Add a newest-first entry to `evals/RESULTS_LOG.md` under `## Runs`. Include:
 See the existing entries in `evals/RESULTS_LOG.md` for the exact format. The leaderboard
 (`evals/LEADERBOARD.md`) is regenerated automatically by `--track`; never hand-edit it.
 
+Optional — push the run to LangSmith (augment tracking, needs `LANGSMITH_API_KEY` in `.env`):
+```bash
+python -m islm.eval.langsmith_sync results --results evals/day3_v<N>/results_en.json \
+    --experiment day3-seed-lora-v<N>
+```
+
 ## Step 6 — Commit
 
 ```bash
@@ -119,9 +125,18 @@ entry are the durable record. End the commit body with the project's Co-Authored
 - Local ceiling: a 135M CPU model on 22 examples **will not** clear the OOV ≤ 0.02 gate. Real wins
   need the GPU run in `docs/COLAB_PLAN.md`. Don't burn hours chasing a gate the setup can't reach.
 
+## Regression gate (run before/after every training change)
+
+The golden set (Layer 1) must stay green — it's the "all must pass" correctness gate:
+```bash
+python -m pytest tests/test_golden.py -q
+```
+If it fails, stop: a validator or the data regressed, not the model.
+
 ## Related docs
 
 - `docs/TRAINING.md` — training flags and the truncation rationale.
-- `docs/EVALUATION.md` — every metric, the rubric, per-word-list coverage.
+- `docs/EVALUATION.md` — every metric, the rubric, and the six eval layers.
+- `docs/GOLDEN_SET.md` / `docs/ERROR_ANALYSIS.md` — the golden gate and failure taxonomy.
 - `docs/COLAB_PLAN.md` — the GPU (Qwen3-4B QLoRA) plan and budget.
 - `evals/RESULTS_LOG.md` — the run history this skill appends to.
