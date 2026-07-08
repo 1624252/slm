@@ -16,7 +16,9 @@ deterministic validators.
 | --- | --- |
 | `docs/PRD.md` | Product Requirements Document — start here. |
 | `docs/dataset-and-eval.md` | How the dataset and evaluation work + how to run them. |
-| `docs/EVALUATION.md` | Behavior Spec, all eval checks + rubric, how to eval a trained model. |
+| `docs/EVALUATION.md` | Behavior Spec, all eval checks + rubric, the six eval layers, how to eval. |
+| `docs/GOLDEN_SET.md` | The held-out golden set (Layer 1): format, count, provenance. |
+| `docs/ERROR_ANALYSIS.md` | Failure taxonomy + human-review process (Layer 3). |
 | `docs/TRAINING.md` | QLoRA/LoRA fine-tuning: install, data, run, then eval the adapter. |
 | `docs/COLAB_PLAN.md` | How to spend the $10 Colab credit: Qwen3-4B QLoRA, budget, steps. |
 | `docs/DAY1.md` | Day-1 checkpoint: env/inference, brainlift, and the base-model baseline. |

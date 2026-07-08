@@ -4,6 +4,25 @@ How we measure whether the fine-tuned model actually beats the prompted base at 
 behavior. Per `spec.md`, the eval is **built before any training** — it is the make-or-break
 piece. It implements the spec's minimum bar and Appendix A rubric (PRD 14–15).
 
+## The six eval layers
+
+The eval stack maps to the 6-layer eval maturity model ("Evals That Actually Work"). Each layer is
+a concrete, shipped artifact in this repo:
+
+| # | Layer | What it answers | Artifact | Run |
+| --- | --- | --- | --- | --- |
+| 1 | **Golden sets** | Does it work? (correctness) | `evals/golden/golden.jsonl` (55 held-out cases), `docs/GOLDEN_SET.md` | `pytest tests/test_golden.py` (every commit) |
+| 2 | **Behavioral coverage** | Does it work for all types? | tagged golden cases → `evals/golden/coverage.md` | `python -m islm.eval.coverage_matrix` |
+| 3 | **Error analysis** | Where does it break? | `docs/ERROR_ANALYSIS.md` taxonomy + `error_analysis()` tally | read traces weekly |
+| 4 | **Replay harnesses** | Re-score without re-running | `src/islm/eval/replay.py` | `python -m islm.eval.replay --results ...` |
+| 5 | **Rubrics** | How good, not just pass/fail | anchored `_RUBRIC` + `calibration.py` | `python -m islm.eval.calibration --scores ...` |
+| 6 | **Experiments** | Which change is better? | `evals/LEADERBOARD.md` + `RESULTS_LOG.md` + `--track` | `train-islm` skill (one var/run) |
+
+**Binary first, scores second.** The deterministic validators (Layers 1–2) are the primary gate;
+the LLM-judge rubric (Layer 5) is the quality layer and is trusted only after calibration ≥ 0.8.
+Results also push to **LangSmith** for dataset/experiment tracking (`langsmith_sync.py`, augment
+mode — the committed JSONL stays the source of truth).
+
 ## The Behavior Spec (what we grade against)
 
 > For a given known-vocabulary list `K`, target-word set `T`, and theme, the model returns a short
