@@ -1,0 +1,17 @@
+{
+  "_comment": "Example paired human-vs-judge scores for judge calibration (Layer 5). Replace with real scores from a Colab judge run: score ~20 stories by hand, run islm.eval.judge on the same stories, then run `python -m islm.eval.calibration --scores <this file>`. Each list entry is one story's 0-2 scores per rubric dimension.",
+  "human": [
+    {"spec_adherence": 2, "robustness": 2, "task_quality": 2, "consistency": 2, "inferability": 2, "seductive_detail_control": 1},
+    {"spec_adherence": 1, "robustness": 1, "task_quality": 2, "consistency": 1, "inferability": 2, "seductive_detail_control": 2},
+    {"spec_adherence": 0, "robustness": 0, "task_quality": 1, "consistency": 0, "inferability": 1, "seductive_detail_control": 0},
+    {"spec_adherence": 2, "robustness": 1, "task_quality": 1, "consistency": 2, "inferability": 2, "seductive_detail_control": 1},
+    {"spec_adherence": 1, "robustness": 2, "task_quality": 0, "consistency": 1, "inferability": 0, "seductive_detail_control": 2}
+  ],
+  "judge": [
+    {"spec_adherence": 2, "robustness": 2, "task_quality": 2, "consistency": 2, "inferability": 2, "seductive_detail_control": 2},
+    {"spec_adherence": 1, "robustness": 1, "task_quality": 2, "consistency": 1, "inferability": 1, "seductive_detail_control": 2},
+    {"spec_adherence": 0, "robustness": 0, "task_quality": 1, "consistency": 1, "inferability": 1, "seductive_detail_control": 0},
+    {"spec_adherence": 2, "robustness": 1, "task_quality": 1, "consistency": 2, "inferability": 2, "seductive_detail_control": 1},
+    {"spec_adherence": 1, "robustness": 2, "task_quality": 0, "consistency": 1, "inferability": 1, "seductive_detail_control": 2}
+  ]
+}

@@ -79,13 +79,35 @@ JUDGE_DIMENSIONS = (
 )
 SPEC_DIMENSIONS = ("spec_adherence", "robustness", "task_quality", "consistency")
 
-_RUBRIC = """Rubric - score each dimension 0 (fails), 1 (partial), or 2 (fully):
-- spec_adherence: only allowed words, <=1 new word per sentence, repeats each target.
-- robustness: holds the behavior even on hard, messy, or adversarial input.
-- task_quality: a genuinely good, coherent, engaging story.
-- consistency: stable behavior across the whole story.
-- inferability: each new word's meaning is guessable from its context.
-- seductive_detail_control: humor carries the target word; never announces the lesson."""
+# Falsifiable anchors: every score has a concrete, checkable condition, so two judges (or a human
+# and the LLM) land on the same number. Vague terms like "good quality" are banned on purpose —
+# see docs/EVALUATION.md (Layer 5) and calibration.py.
+_RUBRIC = """Rubric - score each dimension 0, 1, or 2 using these exact anchors:
+
+- spec_adherence:
+    2 = every word is allowed (K or T), no sentence adds >1 new word, each target repeats >=3x.
+    1 = exactly one of those three rules is broken, once.
+    0 = two or more rules broken, or any rule broken repeatedly.
+- robustness (judge only under a hard/adversarial prompt):
+    2 = holds every spec rule despite the pressure (jargon theme, tiny vocab, many targets).
+    1 = holds most rules but leaks 1-2 off-vocab words under pressure.
+    0 = abandons the behavior (switches register, floods OOV words).
+- task_quality:
+    2 = a coherent story with a beginning/middle/end and a clear point; a learner would enjoy it.
+    1 = readable but flat or slightly disjointed; no real arc.
+    0 = incoherent, or a degenerate loop of repeated sentences.
+- consistency:
+    2 = the same behavior holds from first sentence to last.
+    1 = one clear drop-off (e.g. fine early, leaks OOV near the end).
+    0 = behavior varies sentence to sentence.
+- inferability:
+    2 = every new target's meaning is guessable from its sentence alone.
+    1 = at least one target is guessable only with outside knowledge.
+    0 = targets are not inferable from context at all.
+- seductive_detail_control:
+    2 = the interest/humor lands ON the target-word sentence; never announces a lesson.
+    1 = interesting detail sits away from the target, OR a mild "let's learn" aside.
+    0 = explicitly announces teaching, or labels the target words."""
 
 
 def judge_prompt(scenario: Scenario, story: str) -> tuple[str, str]:
