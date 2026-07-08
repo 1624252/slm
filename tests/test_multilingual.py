@@ -50,6 +50,32 @@ def test_sampler_multilingual(lang):
             assert t not in known  # targets are genuinely new
 
 
+def test_exam_wordlist_disjoint_and_labeled():
+    """GRE/SAT/ACT exam words are committed, exam-tiered, and disjoint from the baseline."""
+    from islm.vocab.download import load_exam_rows
+    from islm.vocab.wordlists import load_baseline
+
+    rows = load_exam_rows()
+    assert len(rows) > 500  # the committed set is a few hundred words
+    tiers = {tier for _, tier, _ in rows}
+    assert tiers <= {"GRE", "SAT", "ACT"}
+    base = load_baseline("en").lemmas
+    assert not any(word in base for word, _, _ in rows)  # never a known word
+    # Classic exam words the CEFR-J/Octanove lists missed are present.
+    words = {word for word, _, _ in rows}
+    assert {"ubiquitous", "cacophony", "obsequious", "laconic"} <= words
+
+
+def test_exam_merge_preserves_cefr_tier():
+    """When a word is both CEFR-graded and in the exam list, dedup keeps the CEFR tier."""
+    from islm.vocab.download import _dedupe
+
+    graded = [("pragmatic", "C1", "octanove-c1c2-1.0")]
+    merged = _dedupe(graded + [("pragmatic", "GRE", "exam"), ("ubiquitous", "GRE", "exam")])
+    assert merged["pragmatic"][1] == "C1"  # graded first -> CEFR wins
+    assert merged["ubiquitous"][1] == "GRE"  # exam-only word keeps its exam tier
+
+
 def test_chinese_analyzer():
     pytest.importorskip("jieba")
     surfaces = [t.surface for t in get_analyzer("zh").analyze("我喜欢猫")]

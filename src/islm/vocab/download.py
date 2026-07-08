@@ -5,6 +5,7 @@ files are git-ignored (fetched on demand) — see ``data/vocab/SOURCES.md`` for 
 
 Sources (all verified open + machine-readable):
 - en: CEFR-J Vocabulary Profile 1.5 + Octanove C1/C2  (openlanguageprofiles/olp-en-cefrj)
+      plus the committed GRE/SAT/ACT list (data/vocab/en/exam.csv) for exam-level hard words
 - zh: HSK 3.0                                          (ivankra/hsk30, MIT)
 - ja: JLPT N5-N1                                       (evanclan/OpenJLPT, CC-BY-SA-4.0)
 
@@ -74,6 +75,23 @@ def _dedupe(rows: list[tuple[str, str, str]]) -> dict[str, tuple[str, str, str]]
     return out
 
 
+def load_exam_rows() -> list[tuple[str, str, str]]:
+    """Committed GRE/SAT/ACT words from `data/vocab/en/exam.csv` (empty if the file is absent).
+
+    These are exam-level hard words the CEFR-J/Octanove lists miss. Appended AFTER the graded
+    rows so `_dedupe` keeps a word's CEFR tier when it already has one (see `download_en`).
+    """
+    path = VOCAB_DIR / "en" / "exam.csv"
+    if not path.exists():
+        return []
+    rows: list[tuple[str, str, str]] = []
+    for row in _rows(path.read_text(encoding="utf-8")):
+        word = (row.get("word") or "").strip().lower()
+        if _EN_RE.match(word):
+            rows.append((word, (row.get("tier") or "EXAM").strip(), row.get("source") or "exam"))
+    return rows
+
+
 def download_en() -> dict[str, int]:
     tiers: dict[str, list] = {"baseline": [], "advanced": []}
     for url, src in ((_CEFRJ, "cefr-j-1.5"), (_OCTANOVE, "octanove-c1c2-1.0")):
@@ -85,6 +103,8 @@ def download_en() -> dict[str, int]:
                     continue
                 bucket = "baseline" if level in _EN_BASELINE else "advanced"
                 tiers[bucket].append((word, level, src))
+    # Exam words extend the advanced tier; graded rows come first so CEFR tiers win on dedup.
+    tiers["advanced"].extend(load_exam_rows())
     return _write("en", tiers)
 
 
