@@ -14,7 +14,8 @@ Every reference story is validated on build; only spec-passing items are written
 
 The output `golden.jsonl` shares the training record schema (id/language/level/theme/target_words/
 messages/metadata) so the eval harness and loaders read it unchanged; `metadata` additionally
-carries `tone`, `keywords`, `target_tier`, and `source: golden-authored`.
+carries `tone`, `keywords`, `target_tier`, coverage tags (`category`/`subcategory`/`difficulty`),
+and `source: golden-authored`. Currently 55 items (en 39 / zh 8 / ja 8). See docs/GOLDEN_SET.md.
 """
 
 from __future__ import annotations
@@ -211,6 +212,28 @@ GOLD: dict[str, list[tuple[list[str], str, list[str], str]]] = {
          "Animals sleep in the warm barn. The horse lives in the barn at night. "
          "Hay fills the top of the barn. The children play in the barn. "
          "The barn is the best place on the farm."),
+        # --- ambiguous: two new words (pace both, one per sentence) ---
+        (["meadow", "beacon"], "hopeful", ["walk", "light", "hill"],
+         "The girl walks up the green hill. At the top she finds a meadow. "
+         "The meadow is soft and full of flowers. She rests in the quiet meadow. "
+         "At night she sees a beacon far away. The beacon is a small bright light. "
+         "The beacon shows the way home. She leaves the meadow and walks to the beacon."),
+        (["lantern", "cellar"], "mysterious", ["dark", "under", "night"],
+         "The old house is dark at night. The boy takes a lantern. "
+         "The lantern gives a warm light. He goes down into the cellar. "
+         "The cellar is cold and full of boxes. With the lantern he sees the whole cellar. "
+         "The lantern keeps the cellar from being scary. He likes the quiet cellar now."),
+        (["harbor", "voyage"], "adventurous", ["boat", "sea", "long"],
+         "The little boat sleeps in the harbor. The harbor is calm and safe. "
+         "One morning the boat leaves the harbor. It begins a long voyage. "
+         "The voyage takes the boat far over the sea. After the voyage, the boat is tired. "
+         "It comes back to the harbor. The harbor is home after every voyage."),
+        # --- edge: three new words to introduce and pace ---
+        (["orchard", "ravenous", "fossil"], "curious", ["find", "eat", "old"],
+         "Behind the house is an orchard. The orchard is full of apple trees. "
+         "The boy is ravenous, so he eats a sweet apple. A ravenous dog wants an apple too. "
+         "Under a tree they find a fossil. The fossil is a very old bone. "
+         "The ravenous dog forgets the fossil. The boy keeps the old fossil from the orchard."),
     ],
     "zh": [
         (["灯塔"], "hopeful", ["sea", "light"],

@@ -21,8 +21,10 @@ Each item pairs:
 - **File:** `evals/golden/golden.jsonl` — one JSON object per line, in the training record schema
   (`id`, `language`, `level`, `theme`, `target_words`, `messages` [system/user/assistant],
   `metadata`). A companion `evals/golden/golden_report.json` holds the counts.
-- **Count:** **51 items** — **35 English, 8 Chinese, 8 Japanese**. (Within the 50–200 range; the
-  PDF's 10–20 is a floor, we hold more to span three languages and difficulty bands.)
+- **Count:** **55 items** — **39 English, 8 Chinese, 8 Japanese**. (Within the 50–200 range; the
+  PDF's 10–20 is a floor, we hold more to span three languages and difficulty bands.) English
+  spans all three difficulty levels (1/2/3-target); zh/ja are single-target so far — a visible gap
+  in the coverage matrix (`evals/golden/coverage.md`), which is the point of Layer 2.
 - **Provenance:** hand-authored (`source: golden-authored`), **distinct from the training seed**
   (`datagen/seed.py`) so scoring a model on the golden set never leaks training data. Built and
   validated by `src/islm/eval/golden.py`; every story is checked on build and only spec-passing

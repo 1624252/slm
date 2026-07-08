@@ -30,6 +30,14 @@ DATASET_PREFIX = "islm"  # dataset names: "islm-golden", "islm-heldout-en", ...
 
 def _client():
     """Return a LangSmith Client, or None if no key / package (augment mode is optional)."""
+    try:  # load .env if present so LANGSMITH_API_KEY is picked up (optional convenience)
+        from dotenv import load_dotenv
+
+        from ..config import REPO_ROOT
+
+        load_dotenv(REPO_ROOT / ".env")
+    except Exception:
+        pass
     if not os.getenv("LANGSMITH_API_KEY"):
         return None
     try:
@@ -91,10 +99,10 @@ def push_golden(golden_path: Path, dataset_name: str = f"{DATASET_PREFIX}-golden
             "Set LANGSMITH_API_KEY (and pip install -e .[langsmith]) to push."
         )
         return 0
+    # Idempotent: recreate the dataset so repeated pushes don't accumulate duplicates.
     if client.has_dataset(dataset_name=dataset_name):
-        ds = client.read_dataset(dataset_name=dataset_name)
-    else:
-        ds = client.create_dataset(dataset_name, description="i+1 story golden set (Layer 1)")
+        client.delete_dataset(dataset_name=dataset_name)
+    ds = client.create_dataset(dataset_name, description="i+1 story golden set (Layer 1)")
     client.create_examples(
         inputs=[e["inputs"] for e in examples],
         outputs=[e["outputs"] for e in examples],

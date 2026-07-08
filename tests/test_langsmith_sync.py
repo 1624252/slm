@@ -23,10 +23,12 @@ def test_golden_to_examples_shape(tmp_path):
 
 
 def test_push_golden_is_noop_without_key(tmp_path, monkeypatch):
+    # Neutralize both sources of the key: the env var and the .env autoload in _client().
     monkeypatch.delenv("LANGSMITH_API_KEY", raising=False)
+    monkeypatch.setattr("islm.eval.langsmith_sync._client", lambda: None)
     out = tmp_path / "golden"
     build(out, list(GOLD))
-    # No key -> dry run -> returns 0, never touches the network.
+    # No client -> dry run -> returns 0, never touches the network.
     assert push_golden(out / "golden.jsonl") == 0
 
 
