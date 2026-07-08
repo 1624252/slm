@@ -15,7 +15,7 @@ a concrete, shipped artifact in this repo:
 | 2 | **Behavioral coverage** | Does it work for all types? | tagged golden cases → `evals/golden/coverage.md` | `python -m islm.eval.coverage_matrix` |
 | 3 | **Error analysis** | Where does it break? | `docs/ERROR_ANALYSIS.md` taxonomy + `error_analysis()` tally | read traces weekly |
 | 4 | **Replay harnesses** | Re-score without re-running | `src/islm/eval/replay.py` | `python -m islm.eval.replay --results ...` |
-| 5 | **Rubrics** | How good, not just pass/fail | anchored `_RUBRIC` + `calibration.py` | `python -m islm.eval.calibration --scores ...` |
+| 5 | **Rubrics** | How good, not just pass/fail | 8-dim anchored `_RUBRIC` (live judge: `claude-sonnet-4-6`) + `calibration.py` | judge runs by default in `eval.run`; `calibration --scores ...` |
 | 6 | **Experiments** | Which change is better? | `evals/LEADERBOARD.md` + `RESULTS_LOG.md` + `--track` | `train-islm` skill (one var/run) |
 
 **Binary first, scores second.** The deterministic validators (Layers 1–2) are the primary gate;
@@ -63,21 +63,32 @@ the learner's known set `K` or the target set `T`. **OOV rate** = OOV words ÷ t
 Coverage matches on lemma **or** surface, and for CJK on character decomposition, so natural
 Chinese/Japanese text isn't falsely flagged (see `docs/dataset-and-eval.md`).
 
-### 2. LLM-as-judge rubric (spec Appendix A; each 0/1/2)
+### 2. LLM-as-judge rubric (spec Appendix A + project dims; each 0/1/2)
+
+Every dimension has **falsifiable 0/1/2 anchors** in `llm/prompts.py` `_RUBRIC` (a concrete,
+checkable condition per score — no vague "good quality"), so two judges land on the same number.
 
 | Dimension | 0 | 1 | 2 |
 | --- | --- | --- | --- |
-| `spec_adherence` | violates the target behavior | partially follows | fully embodies the spec |
-| `robustness` | breaks on messy/adversarial input | wobbles | holds under pressure |
-| `task_quality` | wrong or useless | acceptable | genuinely good |
-| `consistency` | differs across similar inputs | mostly stable | reliable every time |
-| `inferability` (extra) | new word not guessable | — | clearly guessable |
-| `seductive_detail_control` (extra) | off-target humor / announces lesson | — | humor carries the word |
+| `spec_adherence` | ≥2 spec rules broken | one rule broken once | all words allowed, ≤1 new/sentence, targets recur ≥3× |
+| `robustness` | abandons behavior under pressure | leaks 1–2 OOV | holds every rule despite a hard prompt |
+| `task_quality` | incoherent / degenerate loop | readable but flat | coherent arc a learner enjoys |
+| `consistency` | varies sentence to sentence | one clear drop-off | same behavior first to last |
+| `inferability` | targets not guessable | one needs outside knowledge | every new word guessable from context |
+| `seductive_detail_control` | announces / labels the lesson | interest sits off-target | humor lands on the target word |
+| `coherence` (new) | disjointed / self-contradicting | one non-sequitur | logical flow, consistent setting |
+| `interestingness` (new) | dull / mechanical filler | pleasant but predictable | a real hook, surprise, or vivid image |
 
-The first four are the spec dimensions; the win condition is judged on them. The judge is a
-**secondary** signal — human↔judge correlation is only moderate (SRS-Stories r≈0.46–0.56), so the
-deterministic checks are primary and a human should spot-check (Loschky: comprehension ≠
-acquisition; PRD 14.6).
+The first four are the **spec dimensions** — the win condition is judged on them. `coherence`
+(does the story hold together?) and `interestingness` (is it worth reading?) were added as
+separate signals so "compelling input" is measured, not assumed. The judge is a **secondary**
+signal — human↔judge correlation is only moderate (SRS-Stories r≈0.46–0.56), so the deterministic
+checks stay primary and the judge is trusted only after calibration ≥ 0.8 (`calibration.py`).
+
+**The judge model.** Set by `JUDGE_MODEL` in `.env` (default `claude-group/claude-sonnet-4-6` via
+the OpenAI-compatible endpoint in `OPENAI_BASE_URL`). It runs **by default** whenever a key is
+present; `--no-judge` forces the deterministic-only path, and `--judge-model` overrides the model.
+Deliberately a different family from the teacher, to reduce self-preference bias (PRD 11).
 
 ### 3. Robustness / adversarial (spec Appendix A "Robustness", PRD 14.5)
 
@@ -127,19 +138,21 @@ By default the eval runs on **all shipped languages (en, zh, ja)** in one invoca
 `results_<lang>.{md,json}` for each — so no language is silently skipped. Pass
 `--language en` (or `--language en,zh`) to restrict to a subset.
 
+The judge (Layer 5 rubric) + cloze inferability run **automatically** when `OPENAI_API_KEY` and
+`JUDGE_MODEL` are set in `.env`; add `--no-judge` for a deterministic-only run.
+
 ```bash
 # Offline smoke (mock for every role), all three languages — proves the harness end to end:
 python -m islm.eval.run --mock --adversarial
 
-# API models (OpenAI-compatible):
-python -m islm.eval.run --base-model qwen3-4b-instruct --tuned-model my-tuned \
-    --judge-model gpt-5 --adversarial
-
-# A local fine-tuned checkpoint (base + LoRA adapter) — the trained-model path:
+# Local fine-tuned checkpoint (base + LoRA adapter), judge auto-enabled from .env:
 python -m islm.eval.run \
-    --base-path Qwen/Qwen3-4B-Instruct \
-    --tuned-path Qwen/Qwen3-4B-Instruct --tuned-adapter outputs/lora \
-    --judge-model gpt-5 --adversarial
+    --base-path HuggingFaceTB/SmolLM2-135M-Instruct \
+    --tuned-path HuggingFaceTB/SmolLM2-135M-Instruct --tuned-adapter outputs/day3_lora_v3 \
+    --adversarial --out evals/results
+
+# Deterministic only (no LLM judge), e.g. a quick regression check:
+python -m islm.eval.run --base-path <base> --tuned-path <base> --tuned-adapter <out> --no-judge
 
 # Add --guard to evaluate the deployed system (inference-time validate-and-rewrite), not just
 # the raw model.
