@@ -10,7 +10,7 @@ import json
 import pytest
 
 from islm.datagen.seed import SEED
-from islm.eval.golden import GOLD, build_items
+from islm.eval.golden import GOLD, build, build_items, load_golden_scenarios
 from islm.validators import validate_story
 from islm.vocab.lemmatize import get_analyzer
 
@@ -92,3 +92,41 @@ def test_golden_jsonl_on_disk_matches_build(tmp_path):
     disk = [json.loads(line) for line in open(path, encoding="utf-8") if line.strip()]
     assert len(disk) == len(_ITEMS)
     assert all(r["metadata"]["hard_pass"] for r in disk)
+
+
+# --- Evaluating a MODEL on the golden set (the gap the golden eval fills) -------------------
+
+def test_golden_scenarios_load_as_scenarios(tmp_path):
+    """Golden records round-trip to runnable Scenarios (target + known reconstructed)."""
+    out = tmp_path / "golden"
+    build(out, list(GOLD))
+    scns = load_golden_scenarios(out / "golden.jsonl")
+    assert len(scns) == len(_ITEMS)
+    s = scns[0]
+    assert s.target_words and s.known  # inputs present so a model can be run on them
+    assert not (s.target_set() & s.known_set())  # target genuinely new
+
+
+def test_golden_language_filter(tmp_path):
+    out = tmp_path / "golden"
+    build(out, list(GOLD))
+    en = load_golden_scenarios(out / "golden.jsonl", language="en")
+    assert en and all(s.language == "en" for s in en)
+
+
+def test_model_runs_on_golden_set_all_criteria(tmp_path):
+    """Run a (mock) model on golden inputs through the harness; every criterion is reported."""
+    from islm.eval import api_generator, evaluate
+    from islm.llm.client import MockLLM
+
+    out = tmp_path / "golden"
+    build(out, list(GOLD))
+    scns = [s for s in load_golden_scenarios(out / "golden.jsonl", language="en")][:4]
+    summary = evaluate(
+        "mock", scns, api_generator(mock=True), judge_client=MockLLM(), cloze_client=MockLLM()
+    )
+    agg = summary.aggregate()
+    # deterministic + judge (incl. new dims) + cloze all present:
+    for key in ("hard_pass_rate", "mean_oov_rate", "recurrence_pass_rate",
+                "judge_coherence", "judge_interestingness", "mean_inferability"):
+        assert key in agg, f"missing {key}"

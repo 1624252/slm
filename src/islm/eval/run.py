@@ -118,6 +118,10 @@ def main() -> None:
     p.add_argument(
         "--curated", action="store_true", help="Small curated vocab (short prompts, CPU)."
     )
+    p.add_argument(
+        "--golden", action="store_true",
+        help="Evaluate on the golden set (evals/golden/golden.jsonl), not held-out scenarios.",
+    )
     p.add_argument("--max-new-tokens", type=int, default=512)
     p.add_argument("--no-think", action="store_true", help="Disable thinking mode (e.g. Qwen3).")
     p.add_argument("--out", type=Path, default=EVALS_DIR / "results")
@@ -142,11 +146,20 @@ def main() -> None:
 
 def _run_language(lang: str, args, p) -> None:
     """Evaluate one language: load scenarios, score base (+tuned/adv), write reports, track."""
-    default_name = f"heldout_small_{lang}.jsonl" if args.curated else f"heldout_{lang}.jsonl"
-    held = _load_or_sample(
-        args.scenarios or EVALS_DIR / "scenarios" / default_name,
-        _sampler(lang, args.n, args.seed, args.curated),
-    )
+    # tag distinguishes golden vs held-out output files (results_<tag><lang>.{md,json}).
+    tag = "golden_" if args.golden else ""
+    if args.golden:
+        from .golden import load_golden_scenarios
+
+        held = load_golden_scenarios(EVALS_DIR / "golden" / "golden.jsonl", language=lang)
+        if not held:
+            return  # no golden items for this language
+    else:
+        default_name = f"heldout_small_{lang}.jsonl" if args.curated else f"heldout_{lang}.jsonl"
+        held = _load_or_sample(
+            args.scenarios or EVALS_DIR / "scenarios" / default_name,
+            _sampler(lang, args.n, args.seed, args.curated),
+        )
 
     base_gen, _ = _build_generator(
         args.base_model,
@@ -212,7 +225,7 @@ def _run_language(lang: str, args, p) -> None:
     else:
         md = single_model_markdown(base, adv_base)
 
-    (args.out / f"results_{lang}.md").write_text(md, encoding="utf-8")
+    (args.out / f"results_{tag}{lang}.md").write_text(md, encoding="utf-8")
     payload: dict = {
         "base": summary_metrics(base),
         "error_analysis": {"base": error_analysis(base)},
@@ -226,7 +239,7 @@ def _run_language(lang: str, args, p) -> None:
         payload["adversarial"] = {"base": summary_metrics(adv_base)}
         if adv_tuned is not None:
             payload["adversarial"]["tuned"] = summary_metrics(adv_tuned)
-    results_path = args.out / f"results_{lang}.json"
+    results_path = args.out / f"results_{tag}{lang}.json"
     with open(results_path, "w", encoding="utf-8") as f:
         json.dump(payload, f, indent=2, ensure_ascii=False)
     print(md)

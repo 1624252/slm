@@ -290,6 +290,44 @@ GOLD: dict[str, list[tuple[list[str], str, list[str], str]]] = {
 }
 
 
+def load_golden_scenarios(path: Path | str, language: str | None = None) -> list[Scenario]:
+    """Load golden records as `Scenario`s so a model can be *run* on the golden inputs.
+
+    The golden set stores each item in the training record schema (its assistant message is the
+    reference story). To evaluate a model on the golden set, we reconstruct the input `Scenario`:
+    `target_words` is a top-level field; `KNOWN_WORDS`/`Level` are parsed from the user message
+    (they round-trip exactly, since `generation_prompt` wrote them). `language` filters if given.
+    """
+    scenarios: list[Scenario] = []
+    for line in Path(path).read_text(encoding="utf-8").splitlines():
+        if not line.strip():
+            continue
+        rec = json.loads(line)
+        if language and rec["language"] != language:
+            continue
+        user = next(m["content"] for m in rec["messages"] if m["role"] == "user")
+        known = _field(user, "KNOWN_WORDS")
+        scenarios.append(
+            Scenario(
+                id=rec["id"],
+                language=rec["language"],
+                level=rec.get("level", "baseline"),
+                theme=rec.get("theme", ""),
+                target_words=rec["target_words"],
+                known=known,
+            )
+        )
+    return scenarios
+
+
+def _field(text: str, label: str) -> list[str]:
+    """Parse a comma-separated `LABEL: a, b, c` line from a rendered prompt (KNOWN/TARGET_WORDS)."""
+    import re
+
+    m = re.search(rf"^{label}:\s*(.+)$", text, flags=re.MULTILINE)
+    return [w.strip() for w in m.group(1).split(",") if w.strip()] if m else []
+
+
 def _tier_index(language: str) -> dict[str, str]:
     """word -> tier (CEFR/HSK/JLPT/exam) from the committed curated + exam lists, for metadata."""
     index: dict[str, str] = {}
