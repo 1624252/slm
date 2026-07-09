@@ -58,6 +58,8 @@ class TrainConfig:
     max_grad_norm: float = 0.3
     gradient_checkpointing: bool = True
     merge: bool = False  # after training, merge the adapter into fp16 base (for upload/deploy)
+    resume_adapter: str | None = None  # continue an existing adapter (local path or HF hub id)
+    push_to_hub: str | None = None  # after training, push adapter+tokenizer to this HF Hub repo id
 
 
 def read_records(data_dir: Path) -> list[dict]:
@@ -130,14 +132,26 @@ def train(config: TrainConfig) -> Path:
         model_kwargs["torch_dtype"] = torch.bfloat16
     model = AutoModelForCausalLM.from_pretrained(config.base_model, **model_kwargs)
 
-    peft_config = LoraConfig(
-        r=config.lora_r,
-        lora_alpha=config.lora_alpha,
-        lora_dropout=config.lora_dropout,
-        bias="none",
-        task_type="CAUSAL_LM",
-        target_modules="all-linear",
-    )
+    if config.resume_adapter:
+        # Continue an existing adapter (keep training the best model) instead of a fresh one.
+        from peft import PeftModel
+
+        if config.qlora and on_gpu:
+            from peft import prepare_model_for_kbit_training
+
+            model = prepare_model_for_kbit_training(model)
+        model = PeftModel.from_pretrained(model, config.resume_adapter, is_trainable=True)
+        peft_config = None  # model is already a PEFT model; don't wrap a new adapter
+        print(f"resuming training from adapter: {config.resume_adapter}")
+    else:
+        peft_config = LoraConfig(
+            r=config.lora_r,
+            lora_alpha=config.lora_alpha,
+            lora_dropout=config.lora_dropout,
+            bias="none",
+            task_type="CAUSAL_LM",
+            target_modules="all-linear",
+        )
 
     texts = load_texts(config.data_dir, tokenizer, max_tokens=config.max_seq_len)
     dataset = Dataset.from_dict({"text": texts})
@@ -213,9 +227,35 @@ def train(config: TrainConfig) -> Path:
         json.dump(summary, f, indent=2)
     print(f"final train loss: {summary['final_train_loss']}")
 
+    if config.push_to_hub:
+        _push_to_hub(config)
     if config.merge:
         _merge_adapter(config)
     return config.output_dir
+
+
+def _push_to_hub(config: TrainConfig) -> None:
+    """Push the saved adapter + tokenizer to an HF Hub repo (needs HF_TOKEN with write scope).
+
+    Uploads the adapter files but skips `checkpoint-*/` (optimizer state) to keep the repo small.
+    The pushed adapter can later be continued with `--resume-adapter <repo_id>`.
+    """
+    import os
+
+    token = os.getenv("HF_TOKEN") or os.getenv("HUGGING_FACE_HUB_TOKEN")
+    if not token:
+        print("push-to-hub skipped: set HF_TOKEN (write scope) to enable.")
+        return
+    from huggingface_hub import HfApi
+
+    api = HfApi(token=token)
+    api.create_repo(config.push_to_hub, private=True, exist_ok=True)
+    api.upload_folder(
+        repo_id=config.push_to_hub,
+        folder_path=str(config.output_dir),
+        ignore_patterns=["checkpoint-*", "checkpoint-*/*"],  # skip optimizer state
+    )
+    print(f"pushed adapter -> https://huggingface.co/{config.push_to_hub}")
 
 
 def _merge_adapter(config: TrainConfig) -> Path:
@@ -254,6 +294,14 @@ def main() -> None:
     p.add_argument("--lora-alpha", type=int, default=32, help="LoRA alpha.")
     p.add_argument("--qlora", action="store_true", help="4-bit QLoRA (needs a CUDA GPU).")
     p.add_argument("--merge", action="store_true", help="Merge adapter into fp16 base after train.")
+    p.add_argument(
+        "--resume-adapter", default=None,
+        help="Continue an existing adapter (local path or HF hub id) instead of a fresh one.",
+    )
+    p.add_argument(
+        "--push-to-hub", default=None,
+        help="Push the adapter to this HF Hub repo id after training (needs HF_TOKEN write scope).",
+    )
     p.add_argument("--smoke", action="store_true", help="Tiny settings for a CPU loop smoke.")
     args = p.parse_args()
 
@@ -270,6 +318,8 @@ def main() -> None:
         lora_alpha=args.lora_alpha,
         qlora=args.qlora,
         merge=args.merge,
+        resume_adapter=args.resume_adapter,
+        push_to_hub=args.push_to_hub,
     )
     if args.smoke:
         for key, value in SMOKE.items():
