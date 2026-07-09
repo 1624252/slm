@@ -28,4 +28,10 @@ examples has low ceiling (v3→v4→v5 showed it). The real lever is **more + mo
   summary — do not start a run that can't finish + commit in time.
 
 ## Progress log (update as we go)
-- v6 (epochs 3): training…
+- v6 (epochs 3): DONE — NEGATIVE result, worse than v5 on golden (zh/ja OOV regressed). Committed.
+  Confirms coherence/interestingness collapse is model-capacity, not over-fitting.
+- Teacher throughput measured: **~28s/scenario, 40% keep** (unbuffered `python -u`). Low CPU is
+  normal (API-bound) — don't mistake it for a stall.
+- Data plan: en=80 (→~32 kept) generating; then zh/ja if budget allows. Combine with 22-record
+  seed → train v7 on the larger corpus.
+- Budget ~02:05, ~5.9h left. Reserve: v7 train ~2h + eval ~40m + summary 20m. Data-gen window ~2h.
