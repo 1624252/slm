@@ -247,9 +247,13 @@ def _push_to_hub(config: TrainConfig) -> None:
         print("push-to-hub skipped: set HF_TOKEN (write scope) to enable.")
         return
     from huggingface_hub import HfApi
+    from huggingface_hub.utils import HfHubHTTPError
 
     api = HfApi(token=token)
-    api.create_repo(config.push_to_hub, private=True, exist_ok=True)
+    try:  # create is idempotent; if the API flakes, assume a pre-created repo and upload anyway
+        api.create_repo(config.push_to_hub, private=True, exist_ok=True)
+    except HfHubHTTPError as e:
+        print(f"create_repo failed ({e}); assuming the repo exists and uploading...")
     api.upload_folder(
         repo_id=config.push_to_hub,
         folder_path=str(config.output_dir),
