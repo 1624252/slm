@@ -55,7 +55,15 @@ PYTHONPATH=src python -m islm.train.sft --data data/curated/seed \
 ```
 
 Tunable knobs (all CLI flags): `--epochs`, `--lr`, `--lora-r`, `--lora-alpha`, `--max-seq-len`,
-`--grad-accum`, `--max-steps`, `--qlora` (GPU only). `--smoke` = tiny fast loop (plumbing only).
+`--grad-accum`, `--max-steps`, `--qlora` (GPU only), `--merge` (GPU; fp16 merged model for deploy).
+`--smoke` = tiny fast loop (plumbing only).
+
+**Recipe (baked into `sft.py` defaults — matches the reference QLoRA Colab notebook).** Every run
+already uses: 4-bit nf4 + double-quant (under `--qlora`), LoRA on all-linear, **cosine LR schedule
++ 3% warmup**, weight_decay 0.001, max_grad_norm 0.3, `paged_adamw_32bit` on GPU (`adamw_torch` on
+CPU), gradient checkpointing on GPU. Don't re-implement these — they're the config defaults, so any
+run through `islm.train.sft` follows the notebook recipe automatically. On Colab add `--qlora`
+(and `--merge`); see `docs/COLAB_PLAN.md` and `docs/TRAINING.md`.
 
 Timing: on CPU, optimizer_steps = `epochs * train_examples / (batch * grad_accum)`; ~90 s each.
 5 epochs × 22 ≈ 110 steps ≈ 2.5–3 h. **Run in background and Monitor** the log for
