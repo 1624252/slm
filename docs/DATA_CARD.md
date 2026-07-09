@@ -146,7 +146,9 @@ python -m islm.datagen.synth --n 115000 --language en --seed 42 --out data/gener
 python -m islm.datagen.synth --n 15000  --language zh --seed 43 --out data/generated/synth_zh
 python -m islm.datagen.synth --n 15000  --language ja --seed 44 --out data/generated/synth_ja
 for L in en zh ja; do
-  python -m islm.datagen.curate --in data/generated/synth_$L --out data/curated/synth_$L
+  # --fast uses the rule-based lemmatizer (skip spaCy/jieba/fugashi); ~60x faster where spaCy
+  # models are installed (e.g. Colab). Drop it to use the higher-fidelity analyzers.
+  python -m islm.datagen.curate --in data/generated/synth_$L --out data/curated/synth_$L --fast
 done
 mkdir -p data/dataset_v1
 for S in train val test; do
