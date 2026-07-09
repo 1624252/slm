@@ -1,0 +1,239 @@
+{
+  "base": {
+    "model": "HuggingFaceTB/SmolLM2-135M-Instruct",
+    "n": 8,
+    "hard_pass_rate": 0.0,
+    "mean_oov_rate": 1.0,
+    "mean_coverage": 0.0,
+    "one_new_word_pass_rate": 0.0,
+    "recurrence_pass_rate": 0.0,
+    "judge_spec_adherence": 0.0,
+    "judge_robustness": 0.0,
+    "judge_task_quality": 0.5,
+    "judge_consistency": 0.0,
+    "judge_inferability": 0.0,
+    "judge_seductive_detail_control": 0.0,
+    "judge_coherence": 0.875,
+    "judge_interestingness": 0.125,
+    "judge_overall": 0.188,
+    "mean_inferability": 0.0
+  },
+  "error_analysis": {
+    "base": {
+      "n": 8,
+      "failing": 8,
+      "reasons": {
+        "oov": 8,
+        "coverage": 8,
+        "one_new_word": 8,
+        "recurrence": 8
+      }
+    },
+    "tuned": {
+      "n": 8,
+      "failing": 6,
+      "reasons": {
+        "oov": 4,
+        "coverage": 4,
+        "one_new_word": 4,
+        "recurrence": 3
+      }
+    }
+  },
+  "base_rows": [
+    {
+      "id": "ja-gold-000",
+      "hard_pass": false,
+      "oov_rate": 1.0,
+      "failures": [
+        "oov",
+        "coverage",
+        "one_new_word",
+        "recurrence"
+      ],
+      "story": "In the bustling streets of Tokyo, a young woman named Akira walked through the crowded alleys, her eyes scanning the vibrant colors of the city. She was a talented artist, and her work was a reflection of the city's vibrant spirit. As she walked, she noticed the bustling streets, the colorful lights, and the sounds of the city. She felt a sense of excitement and curiosity, as if she was about to discover something new and exciting.\n\nAkira stopped at a small café, where a friendly waitress greeted her with a warm smile. She ordered a coffee and a plate of sushi, and as she waited, she began to read the newspaper. The headlines were filled with stories about the latest fashion trends, the latest news from the world, and the latest news about the city.\n\nAkira's eyes landed on a photograph of a young woman, her face serene and beautiful. She felt a sense of connection to this person, and as she looked at the photograph, she realized that she was about to discover something new and exciting.\n\nAs she continued to"
+    },
+    {
+      "id": "ja-gold-001",
+      "hard_pass": false,
+      "oov_rate": 1.0,
+      "failures": [
+        "oov",
+        "coverage",
+        "one_new_word",
+        "recurrence"
+      ],
+      "story": "In the midst of a serene morning, a young woman named Aiko stood at the edge of the forest, her eyes fixed on the vibrant flowers that bloomed in the morning light. The air was filled with the sweet scent of blooming flowers, and the sound of birds chirping filled the air. Aiko's heart was filled with joy, and she felt a sense of peace wash over her.\n\nAs she walked, the trees seemed to sway in the gentle breeze, their leaves rustling softly in the breeze. Aiko's eyes wandered to the small clearing where a young boy, Takashi, sat on a bench, watching the world go by. Aiko's heart was filled with love and gratitude, and she felt a deep sense of connection to Takashi.\n\nAiko's gaze landed on a small, delicate flower that bloomed in the center of the clearing. Aiko's heart was filled with joy, and she felt a sense of peace wash over her. She smiled and said, \"I see you're so beautiful. I wish I could see you more often"
+    },
+    {
+      "id": "ja-gold-002",
+      "hard_pass": false,
+      "oov_rate": 1.0,
+      "failures": [
+        "oov",
+        "coverage",
+        "one_new_word",
+        "recurrence"
+      ],
+      "story": "In the gentle world of Japanese, the art of storytelling is a delicate dance between words and the world around us. The Japanese language, with its rich vocabulary and complex grammar, is uniquely suited to convey the nuances of human emotion and the fleeting moments of life.\n\nThe story begins with a gentle breeze rustling the leaves of a small, serene forest. The trees, with their delicate leaves and vibrant colors, seem to whisper secrets to one another, as if sharing a secret. The air is filled with the scent of blooming flowers and the soft chirping of birds.\n\nAs the story unfolds, the protagonist, a young woman named Aiko, stumbles upon a small, hidden garden. The garden, with its lush greenery and vibrant flowers, seems to be a haven for the gentle breeze. Aiko, who is a skilled gardener, decides to spend her days tending to the garden, and the garden itself becomes a symbol of her own connection to nature.\n\nOne day, Aiko meets a young boy named Kaito, who is fascinated by the garden. Kait"
+    },
+    {
+      "id": "ja-gold-003",
+      "hard_pass": false,
+      "oov_rate": 1.0,
+      "failures": [
+        "oov",
+        "coverage",
+        "one_new_word",
+        "recurrence"
+      ],
+      "story": "The sun was setting over the mountains, casting a warm orange glow over the landscape. The air was filled with the sweet scent of blooming flowers, and the sound of birdsong filled the air. As the last rays of sunlight faded, the sky transformed into a canvas of vibrant colors, with hues of pink, orange, and purple bleeding into each other.\n\nThe villagers, weary from the long journey, gathered around the fire, their faces set in a determined gaze. They had been traveling for days, carrying the burdens of their families and the weight of their own hopes and fears. The villagers had come to this place to find solace, to find peace, and to find a sense of belonging.\n\nAs the sun dipped below the horizon, casting a golden light over the landscape, the villagers began to sing. The music was a joyful blend of laughter, music, and the gentle rustle of leaves. The villagers sang of the beauty of nature, of the beauty of the world, and of the beauty of love.\n\nThe villagers sang of the beauty of the mountains, of"
+    },
+    {
+      "id": "ja-gold-004",
+      "hard_pass": false,
+      "oov_rate": 1.0,
+      "failures": [
+        "oov",
+        "coverage",
+        "one_new_word",
+        "recurrence"
+      ],
+      "story": "In the bustling streets of Tokyo, a young woman named Akira walked the streets of her hometown, her eyes scanning the crowded alleys for the perfect moment to strike up a conversation with a stranger. She had always been fascinated by the vibrant culture of the city, and the vibrant atmosphere of the streets was a perfect backdrop for her to explore.\n\nAkira's eyes landed on a young man, a tall, slender man with a bushy beard and a kind smile. He was a shopkeeper, and he was always willing to share his knowledge with the young woman. Akira's eyes widened as she approached him, and she asked, \"What brings you to our humble town?\"\n\nAkira's eyes widened as she asked, \"I'm looking for a new friend. I've heard that you're a shopkeeper.\"\n\nAkira's eyes widened as she asked, \"What's your name?\"\n\nAkira's eyes widened as she asked, \"My name is Akira.\"\n\nAkira's eyes widened as she asked, \"What's your name"
+    },
+    {
+      "id": "ja-gold-005",
+      "hard_pass": false,
+      "oov_rate": 1.0,
+      "failures": [
+        "oov",
+        "coverage",
+        "one_new_word",
+        "recurrence"
+      ],
+      "story": "In the midst of a serene autumn evening, a young woman named Aiko stood at the edge of a tranquil forest, her eyes fixed on the vibrant colors of the leaves. The air was alive with the sweet scent of blooming flowers and the gentle rustle of leaves. Aiko's heart was filled with joy, and she felt a deep connection to the natural world.\n\nAs she walked, the trees seemed to sway in the breeze, their branches reaching towards the sky like a gentle breeze. Aiko's fingers danced across the leaves, feeling the softness of the forest floor beneath her fingertips. She breathed deeply, feeling the cool breeze on her skin, and noticed the way the sunlight filtered through the leaves, casting dappled shadows on the forest floor.\n\nAiko's eyes wandered to the small clearing where a young boy, Takashi, sat on a bench, watching the world go by. He was a shy boy, but Aiko knew that he was a bright and curious one. Aiko's heart was filled with wonder, and she felt a deep connection to the"
+    },
+    {
+      "id": "ja-gold-006",
+      "hard_pass": false,
+      "oov_rate": 1.0,
+      "failures": [
+        "oov",
+        "coverage",
+        "one_new_word",
+        "recurrence"
+      ],
+      "story": "In the quiet morning, I sat on the bench, watching the sun rise over the city. The birds sang their sweet melodies, and the air was filled with the scent of blooming flowers. I was a curious soul, always eager to explore the world around me.\n\nAs I sat there, I noticed a young woman, her eyes wide with wonder, standing at the edge of the bench. She was a shy one, but her curiosity was infectious. I felt a pang of envy, for I had always been the one who was shy, but I had always been drawn to her.\n\nI took a deep breath, trying to calm my nerves. I had always been drawn to the quiet, the peaceful, and the unknown. I decided to take a walk, to explore the city, and to see what hidden gems lay just beneath the surface.\n\nAs I walked, I noticed a small, old, wooden door on the other side of the bench. It was old, but it was sturdy, and it seemed to be a door that could be opened. I pushed it"
+    },
+    {
+      "id": "ja-gold-007",
+      "hard_pass": false,
+      "oov_rate": 1.0,
+      "failures": [
+        "oov",
+        "coverage",
+        "one_new_word",
+        "recurrence"
+      ],
+      "story": "In the sleepy town of Kusatsu, where the sun dipped below the horizon, a young woman named Akira found herself lost in the labyrinth of her own thoughts. She had always been fascinated by the mysterious world of dreams, and the whispers of the wind in her hair seemed to whisper secrets to her.\n\nOne day, as she wandered through the winding streets, she stumbled upon a small, antique shop tucked away in a quiet alley. The shopkeeper, a kind-eyed woman with a warm smile, noticed Akira's fascination and approached her with a gentle hand.\n\n\"Ah, young one,\" she said, \"I see you've been pondering the mysteries of the subconscious. Dreams are a window into your deepest thoughts and desires. I've been studying the ancient texts, and I've come to believe that the key lies in the subtle connections between the physical and the spiritual realms. The wind in your hair, the whispers of the wind, and the secrets of the past all point to the same place: the realm of the subconscious.\"\n\nAkira's eyes widened"
+    }
+  ],
+  "tuned": {
+    "model": "HuggingFaceTB/SmolLM2-135M-Instruct",
+    "n": 8,
+    "hard_pass_rate": 0.25,
+    "mean_oov_rate": 0.1172,
+    "mean_coverage": 0.8828,
+    "one_new_word_pass_rate": 0.5,
+    "recurrence_pass_rate": 0.625,
+    "judge_spec_adherence": 0.125,
+    "judge_robustness": 0.0,
+    "judge_task_quality": 0.0,
+    "judge_consistency": 0.125,
+    "judge_inferability": 0.125,
+    "judge_seductive_detail_control": 0.0,
+    "judge_coherence": 0.0,
+    "judge_interestingness": 0.0,
+    "judge_overall": 0.047,
+    "mean_inferability": 0.125
+  },
+  "tuned_rows": [
+    {
+      "id": "ja-gold-000",
+      "hard_pass": false,
+      "oov_rate": 0.296,
+      "failures": [
+        "oov",
+        "coverage",
+        "one_new_word"
+      ],
+      "story": "灯台はあなたのは、あなたの名前があります。灯台はあるというかです。灯台はあるときは、あるときは、ある名前があります。灯台はあるときは、ある名前がありま�arts.jarで使用されます。"
+    },
+    {
+      "id": "ja-gold-001",
+      "hard_pass": false,
+      "oov_rate": 0.111,
+      "failures": [
+        "oov",
+        "coverage",
+        "one_new_word"
+      ],
+      "story": "雨がくとうございて、あなたは虹です。虹ですが、虹ですが、虹ですが、虹ですが、虹ですが、虹ですが、虹ですが、虹ですが、虹ですが、虹ですが、虹ですが、虹ですが、虹ですが、虹ですが、虹ですが、虹ですが、虹ですが、虹ですが、虹ですが、虹ですが、虹です�"
+    },
+    {
+      "id": "ja-gold-002",
+      "hard_pass": false,
+      "oov_rate": 0.0,
+      "failures": [
+        "recurrence"
+      ],
+      "story": "蝶は、あなたのと、あると、あると、あると、あると、あると、あると、あると、あると、あると、あると、あると、あると、あると、あると、あると、あると、あると、あると、あると、あると、あると、あると、あると、あると、あると、あると、あると、あると、あると、あると、あると、あると、あると、あると、"
+    },
+    {
+      "id": "ja-gold-003",
+      "hard_pass": false,
+      "oov_rate": 0.267,
+      "failures": [
+        "oov",
+        "coverage",
+        "one_new_word",
+        "recurrence"
+      ],
+      "story": "火山はあなたのは、火があるというかが発見される。火はあるというかが発見される。火はあるとなるというかが発見される。火はあるとなるというかが発見される。火はあるとなるというかが発見される。"
+    },
+    {
+      "id": "ja-gold-004",
+      "hard_pass": false,
+      "oov_rate": 0.0,
+      "failures": [
+        "recurrence"
+      ],
+      "story": "あなたは、あると、あると、あると、あると、あると、あると、あると、あると、あると、あると、あると、あると、あると、あると、あると、あると、あると、あると、あると、あると、あると、あると、あると、あると、あると、あると、あると、あると、あると、あると、あると、あると、あると、あると、あると、�"
+    },
+    {
+      "id": "ja-gold-005",
+      "hard_pass": true,
+      "oov_rate": 0.0,
+      "failures": [],
+      "story": "砂漠は、あなたのとは、猫です。猫は、砂漠です。猫は、砂漠です。猫は、砂漠です。猫は、砂漠です。猫は、砂漠です。猫は、砂漠です。猫は、砂漠です。猫は、砂漠です。猫は、砂漠です。猫は、砂漠です。猫は、砂漠です。猫は、砂漠です。"
+    },
+    {
+      "id": "ja-gold-006",
+      "hard_pass": false,
+      "oov_rate": 0.263,
+      "failures": [
+        "oov",
+        "coverage",
+        "one_new_word"
+      ],
+      "story": "雪と鏡は、雨と鏡は、雨が、鏡が、雨があるので、雨がいい。このとは、鏡と鏡は、鏡が、鏡が、鏡があるので、鏡がいい。"
+    },
+    {
+      "id": "ja-gold-007",
+      "hard_pass": true,
+      "oov_rate": 0.0,
+      "failures": [],
+      "story": "日は星です。日は星です。日は星です。日は星です。日は星です。日は星です。日は星です。日は星です。日は星です。日は星です。日は星です。日は星です。日は星です。日は星です。日は星です。日は星です。日は星です。日は星です。日は星です。日は星です。日は星です。日は星です。"
+    }
+  ]
+}

@@ -1,0 +1,249 @@
+{
+  "base": {
+    "model": "HuggingFaceTB/SmolLM2-135M-Instruct",
+    "n": 8,
+    "hard_pass_rate": 0.0,
+    "mean_oov_rate": 0.8561,
+    "mean_coverage": 0.1439,
+    "one_new_word_pass_rate": 0.0,
+    "recurrence_pass_rate": 0.125,
+    "judge_spec_adherence": 0.0,
+    "judge_robustness": 0.0,
+    "judge_task_quality": 0.25,
+    "judge_consistency": 0.0,
+    "judge_inferability": 0.0,
+    "judge_seductive_detail_control": 0.0,
+    "judge_coherence": 0.25,
+    "judge_interestingness": 0.25,
+    "judge_overall": 0.094,
+    "mean_inferability": 0.0
+  },
+  "error_analysis": {
+    "base": {
+      "n": 8,
+      "failing": 8,
+      "reasons": {
+        "oov": 8,
+        "coverage": 8,
+        "one_new_word": 8,
+        "recurrence": 7
+      }
+    },
+    "tuned": {
+      "n": 8,
+      "failing": 8,
+      "reasons": {
+        "oov": 7,
+        "coverage": 7,
+        "one_new_word": 7,
+        "recurrence": 3
+      }
+    }
+  },
+  "base_rows": [
+    {
+      "id": "zh-0000",
+      "hard_pass": false,
+      "oov_rate": 1.0,
+      "failures": [
+        "oov",
+        "coverage",
+        "one_new_word",
+        "recurrence"
+      ],
+      "story": "Title: A Lost Key\n\nIntroduction:\n\nIn a small village, a young boy named Liam found a mysterious key hidden in a dusty old book. He was so excited to find it that he decided to go to the local library to find out more about it. As he wandered through the library, he stumbled upon a small, mysterious book with strange symbols and markings.\n\nThe story goes that the book contained a hidden message that was meant to be read by Liam. He was determined to decipher the message and unlock the key to his family's past.\n\nThe story then goes on to describe the journey Liam took to find the key. He spent hours searching for the book, but he couldn't find it anywhere. He even went to the library, but the book was nowhere to be found.\n\nAs Liam continued to search, he discovered that the book was a rare and ancient text. It was written in a language that was unknown to him, and it had a special significance for him.\n\nThe story ends with Liam finding the key"
+    },
+    {
+      "id": "zh-0001",
+      "hard_pass": false,
+      "oov_rate": 0.51,
+      "failures": [
+        "oov",
+        "coverage",
+        "one_new_word"
+      ],
+      "story": "Title: A Cat Detective\n\nTitle: A Cat Detective\n\nLevel: HSK1-HSK2-HSK3\n\nTheme: A cat detective\n\nTarget words: 宝藏, 南瓜\n\nKNOWN words: 宝藏, 南瓜\n\nTASK: Generate 8-14 sentences\n\nSentences:\n1. 宝藏 南瓜 宝藏 南瓜 南瓜 南瓜 南瓜 南瓜 南瓜 南瓜 南瓜 南瓜 南瓜 南瓜 南瓜 南瓜 南瓜 南瓜 南瓜 南瓜 南瓜"
+    },
+    {
+      "id": "zh-0002",
+      "hard_pass": false,
+      "oov_rate": 1.0,
+      "failures": [
+        "oov",
+        "coverage",
+        "one_new_word",
+        "recurrence"
+      ],
+      "story": "Title: A New Friend\n\nTitle: A New Friend\n\nTitle: A New Friend\n\nTitle: A New Friend\n\nTitle: A New Friend\n\nTitle: A New Friend\n\nTitle: A New Friend\n\nTitle: A New Friend\n\nTitle: A New Friend\n\nTitle: A New Friend\n\nTitle: A New Friend\n\nTitle: A New Friend\n\nTitle: A New Friend\n\nTitle: A New Friend\n\nTitle: A New Friend\n\nTitle: A New Friend\n\nTitle: A New Friend\n\nTitle: A New Friend\n\nTitle: A New Friend\n\nTitle: A New Friend\n\nTitle: A New Friend\n\nTitle: A New Friend\n\nTitle: A New Friend\n\nTitle: A New Friend\n\nTitle: A New Friend\n\nTitle: A New Friend\n\nTitle: A New Friend\n\nTitle: A New Friend\n\nTitle: A New Friend\n\nTitle: A New Friend\n\nTitle: A New Friend\n\nTitle: A"
+    },
+    {
+      "id": "zh-0003",
+      "hard_pass": false,
+      "oov_rate": 0.339,
+      "failures": [
+        "oov",
+        "coverage",
+        "one_new_word",
+        "recurrence"
+      ],
+      "story": "Title: A Funny Dog\n\nTitle: A Funny Dog\n\nLevel: HSK1-HSK2-HSK3\n\nTheme: a funny dog\n\nTarget words: 口袋\n\nKNOWN words: 不, 也, 书, 人, 什么, 今天, 他, 会, 你, 你们, 做, 冷, 去, 吃, 听, 和, 喜欢, 喝, 在, 多, 大, 天, 女孩, 她, 好, 学习, 学生, 孩子, 家, 小, 少, 山, 很, 快, 想, 慢, 我, 我们,"
+    },
+    {
+      "id": "zh-0004",
+      "hard_pass": false,
+      "oov_rate": 1.0,
+      "failures": [
+        "oov",
+        "coverage",
+        "one_new_word",
+        "recurrence"
+      ],
+      "story": "In the quiet garden, a young woman named Mei walked through the garden, her eyes scanning the flowers and plants. She was a beautiful young woman, with long, curly hair and bright green eyes. Mei was a good student, and she loved to learn about the world around her. She was always curious and eager to explore, and she loved to spend time with her friends. Mei was a good friend, and she always made sure to spend time with her friends. She was a good friend, and she always made sure to spend time with her friends. She was a good friend, and she always made sure to spend time with her friends. She was a good friend, and she always made sure to spend time with her friends. She was a good friend, and she always made sure to spend time with her friends. She was a good friend, and she always made sure to spend time with her friends. She was a good friend, and she always made sure to spend time with her friends. She was a good friend, and she always made sure to spend time with her friends."
+    },
+    {
+      "id": "zh-0005",
+      "hard_pass": false,
+      "oov_rate": 1.0,
+      "failures": [
+        "oov",
+        "coverage",
+        "one_new_word",
+        "recurrence"
+      ],
+      "story": "Title: A Night in the Old House\n\nIntroduction:\n\nIn the old house, where the sun sets over the mountains, a night of quiet and peaceful moments unfolded. The old house, a cozy and warm place, was filled with the soft glow of candles and the gentle breeze. The air was filled with the scent of old books and the soft hum of conversation.\n\nThe story begins with a young girl, a bright and curious one, who wandered into the old house. She was drawn to the old wooden door, which seemed to lead to a world of secrets and stories. As she approached, she noticed the old wooden sign, which read \"The House of Dreams.\" The sign was worn and faded, but it seemed to hold a special significance.\n\nThe girl's eyes widened as she saw the old wooden door, which was adorned with intricate carvings of leaves and flowers. The carvings seemed to shimmer and glow in the dim light. The girl's curiosity was piqued, and she decided to explore the house.\n\nAs she wandered through the old house, she noticed"
+    },
+    {
+      "id": "zh-0006",
+      "hard_pass": false,
+      "oov_rate": 1.0,
+      "failures": [
+        "oov",
+        "coverage",
+        "one_new_word",
+        "recurrence"
+      ],
+      "story": "Zhāng yǒu yǒu yǒu yǒu yǒu yǒu yǒu yǒu yǒu yǒu yǒu yǒu yǒu yǒu yǒu yǒu yǒu yǒu yǒu yǒu yǒu yǒu yǒu yǒu yǒu yǒu yǒu yǒu yǒu yǒu yǒu yǒu yǒu yǒu yǒu yǒu yǒu yǒu yǒu yǒu yǒu yǒu yǒu yǒu yǒu yǒu yǒu yǒu yǒu yǒu yǒu yǒu yǒu yǒu"
+    },
+    {
+      "id": "zh-0007",
+      "hard_pass": false,
+      "oov_rate": 1.0,
+      "failures": [
+        "oov",
+        "coverage",
+        "one_new_word",
+        "recurrence"
+      ],
+      "story": "Title: A New Friend\n\nTitle: A New Friend\n\nTitle: A New Friend\n\nTitle: A New Friend\n\nTitle: A New Friend\n\nTitle: A New Friend\n\nTitle: A New Friend\n\nTitle: A New Friend\n\nTitle: A New Friend\n\nTitle: A New Friend\n\nTitle: A New Friend\n\nTitle: A New Friend\n\nTitle: A New Friend\n\nTitle: A New Friend\n\nTitle: A New Friend\n\nTitle: A New Friend\n\nTitle: A New Friend\n\nTitle: A New Friend\n\nTitle: A New Friend\n\nTitle: A New Friend\n\nTitle: A New Friend\n\nTitle: A New Friend\n\nTitle: A New Friend\n\nTitle: A New Friend\n\nTitle: A New Friend\n\nTitle: A New Friend\n\nTitle: A New Friend\n\nTitle: A New Friend\n\nTitle: A New Friend\n\nTitle: A New Friend\n\nTitle: A New Friend\n\nTitle: A"
+    }
+  ],
+  "tuned": {
+    "model": "HuggingFaceTB/SmolLM2-135M-Instruct",
+    "n": 8,
+    "hard_pass_rate": 0.0,
+    "mean_oov_rate": 0.2453,
+    "mean_coverage": 0.7547,
+    "one_new_word_pass_rate": 0.125,
+    "recurrence_pass_rate": 0.625,
+    "judge_spec_adherence": 0.375,
+    "judge_robustness": 0.25,
+    "judge_task_quality": 0.0,
+    "judge_consistency": 0.25,
+    "judge_inferability": 0.375,
+    "judge_seductive_detail_control": 0.125,
+    "judge_coherence": 0.0,
+    "judge_interestingness": 0.0,
+    "judge_overall": 0.172,
+    "mean_inferability": 0.062
+  },
+  "tuned_rows": [
+    {
+      "id": "zh-0000",
+      "hard_pass": false,
+      "oov_rate": 0.194,
+      "failures": [
+        "oov",
+        "coverage",
+        "one_new_word"
+      ],
+      "story": "玉子在宝藏中有一个宝藏。宝藏是一个狗，宝藏有一个宝藏。宝藏有一个宝藏。宝藏的宝藏是一个宝藏。宝藏的宝藏是一个宝藏。宝藏的宝藏是一个宝藏。宝藏的宝藏是一个宝藏。宝藏的宝藏是一个宝藏。宝藏的宝藏是一个宝藏。宝藏的宝藏是一个宝藏。宝藏的宝藏是一个宝藏。宝藏的宝藏是一个"
+    },
+    {
+      "id": "zh-0001",
+      "hard_pass": false,
+      "oov_rate": 0.392,
+      "failures": [
+        "oov",
+        "coverage",
+        "one_new_word",
+        "recurrence"
+      ],
+      "story": "玉瓜是一个宝藏的南瓜。宝藏是一个美好的南瓜。宝藏有两个子女。宝藏的子女有一个名字，宝藏是一个宝藏。宝藏的子女有一个名字，宝藏是一个宝藏。宝藏的子女有一个名字，宝藏是一个宝藏。宝藏的子女有一个名字，宝藏是一个宝藏。宝藏的子女有一个名字，宝藏是一个宝藏。宝藏的子女有一个名字，宝藏是一个宝藏。宝藏的子"
+    },
+    {
+      "id": "zh-0002",
+      "hard_pass": false,
+      "oov_rate": 0.0,
+      "failures": [
+        "recurrence"
+      ],
+      "story": "女孩在看眼睛。看眼睛是女孩的秘密。女孩看眼睛的是好多的秘密。看眼睛是女孩的秘密。看眼睛是女孩的秘密。看眼睛是女孩的秘密。看眼睛是女孩的秘密。看眼睛是女孩的秘密。看眼睛是女孩的秘密。看眼睛是女孩的秘密。看眼睛是女孩的秘密。"
+    },
+    {
+      "id": "zh-0003",
+      "hard_pass": false,
+      "oov_rate": 0.436,
+      "failures": [
+        "oov",
+        "coverage",
+        "one_new_word"
+      ],
+      "story": "口袋是一个小的发热口。口袋有一只小的发热口。口袋有一只小的发热口。口袋有一只小的发热口。口袋有一只小的发热口。口袋有一只小的发热口。口袋有一只小的发热口。口袋有一只小的发热口。口袋有一只小的发热口。口袋有一只小的发热口。口袋有一只小的发热口。口"
+    },
+    {
+      "id": "zh-0004",
+      "hard_pass": false,
+      "oov_rate": 0.16,
+      "failures": [
+        "oov",
+        "coverage",
+        "one_new_word",
+        "recurrence"
+      ],
+      "story": "男孩在秘密中说话。男孩是幽灵。男孩在秘密中说话。男孩是秘密。男孩是秘密。男孩是秘密。男孩是秘密。"
+    },
+    {
+      "id": "zh-0005",
+      "hard_pass": false,
+      "oov_rate": 0.235,
+      "failures": [
+        "oov",
+        "coverage",
+        "one_new_word"
+      ],
+      "story": "丝带是一个女孩，他的丝带是一个家，他的丝带是一个家。丝带是一个家，丝带是一个家。丝带是一个家，丝带是一个家。丝带是一个家，丝带是一个家。丝带是一个家，丝带是一个家。丝带是一个家，丝带是一个家。丝带是一个家，丝带是一个家。丝带是一个家，丝带是一个家。丝带是一个家，丝带是一个家。丝带是一个家，丝带是一个家。丝带是一个家，丝带是一个家。丝带是"
+    },
+    {
+      "id": "zh-0006",
+      "hard_pass": false,
+      "oov_rate": 0.368,
+      "failures": [
+        "oov",
+        "coverage",
+        "one_new_word"
+      ],
+      "story": "女孩在线索上有一个白色的线。他看见她，因为她是一个白色的孩子。女孩看见线索，因为女孩是白色的孩子。他看见线索，因为他是白色的孩子。他看见线索，因为他是白色的孩子。他看见线索，因为他是白色的孩子。他看见线索，因为他是白色的孩子。他看见线索，因"
+    },
+    {
+      "id": "zh-0007",
+      "hard_pass": false,
+      "oov_rate": 0.177,
+      "failures": [
+        "oov",
+        "coverage",
+        "one_new_word"
+      ],
+      "story": "丝带是一个女孩。丝带有一个好名言。丝带和她有一个好友。丝带和她有一个好朋友。丝带和她有一个好名言。丝带和她有一个好朋友。丝带和她有一个好朋友。丝带和她有一个好朋友。丝带和她有一个好朋友。丝带和她有一个好朋友。丝带和她有一个好朋友。丝带和她有一个好朋友。丝带和她有一个好朋友。丝带和她有一个好朋友。丝带和她有"
+    }
+  ]
+}

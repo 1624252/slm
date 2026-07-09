@@ -41,7 +41,48 @@ fits a 768-token window uncut, and matches the eval's `--curated` setup.
 
 <!-- newest first; append a block per run -->
 
-### 2026-07-08 — `day3-seed-lora-v3` (more epochs + capacity; beats v2)
+### 2026-07-08 — `v5` (aligned QLoRA recipe; **judged**, all criteria, **on the golden set**)
+
+First run scored on **all three criteria families** — deterministic checks, the 8-dimension
+LLM-judge rubric (judge = `claude-sonnet-4-6`), and cloze inferability — and the first run
+evaluated **on the golden set** (Layer 1), not just held-out. Base and tuned both judged on the
+same inputs.
+
+**Hyperparameters** (`outputs/day3_lora_v5/train_summary.json`): SmolLM2-135M-Instruct, LoRA
+r=32/α=64, **5 epochs / 110 steps**, lr 2e-4, seq 768, **cosine schedule + 3% warmup** (aligned
+QLoRA recipe), adamw_torch (CPU), final train loss **0.87**.
+
+Deterministic + cloze, base→tuned:
+
+| Target / lang | Hard-pass (→1) | OOV (→≤.02) | ≤1-new (→1) | Recurrence (→1) | Cloze infer. |
+| --- | --- | --- | --- | --- | --- |
+| golden en | 0.000→**0.103** | 0.425→**0.133** | 0.000→**0.487** | 0.205→**0.385** | 0.179→0.000 |
+| golden zh | 0.000→0.000 | 0.881→**0.250** | 0.000→0.125 | 0.000→**0.875** | 0.000→0.125 |
+| golden ja | 0.000→**0.250** | 1.000→**0.117** | 0.000→**0.500** | 0.000→**0.625** | 0.000→0.125 |
+| heldout en | 0.000→**0.125** | 0.413→**0.080** | 0.000→**0.500** | 0.125→**0.250** | 0.250→0.000 |
+| heldout zh | 0.000→0.000 | 0.856→**0.245** | 0.000→0.125 | 0.125→**0.625** | 0.000→0.062 |
+| heldout ja | 0.000→**0.125** | 1.000→**0.142** | 0.000→**0.375** | 0.000→**0.375** | 0.000→0.062 |
+| exam en | 0.000→**0.125** | 0.430→**0.155** | 0.000→**0.500** | 0.000→0.125 | 0.000→0.000 |
+
+Judge rubric (0–2), base→tuned, key dimensions:
+
+| Target / lang | spec_adh | robustness | consistency | coherence | interestingness | overall |
+| --- | --- | --- | --- | --- | --- | --- |
+| golden en | 0.00→**0.59** | 0.00→**0.51** | 0.10→**1.00** | 0.23→0.15 | 0.05→0.00 | 0.14→**0.45** |
+| golden zh | — | — | — | 0.50→0.00 | 0.25→0.00 | 0.16→0.19 |
+| golden ja | — | — | — | 0.88→0.00 | 0.12→0.00 | 0.19→0.05 |
+| heldout en | 0.00→**0.5+** | up | up | 0.38→0.00 | 0.12→0.00 | 0.20→**0.31** |
+| exam en | up | up | up | 0.25→**0.38** | 0.00→0.00 | 0.06→**0.33** |
+
+**Read.** The deterministic + spec-judge story is strongly positive everywhere: OOV collapses
+(ja 1.00→0.12, zh 0.88→0.25, en 0.43→0.13 on golden), and en/ja post hard-passes on both golden
+and held-out. Judge spec_adherence/robustness/consistency all rise. **But every quality
+dimension — coherence, interestingness, task_quality — drops, often to 0**, most starkly on
+zh/ja golden (coherence 0.88→0.00 for ja). This is the real finding the new criteria surface: the
+135M model buys vocabulary control by producing rigid, repetitive prose. Base-model judged scores
+are near-zero across the board (the base ignores the word list *and* isn't compelling). Win
+condition (spec_adherence AND robustness up): **PASS** on en. The quality regression is the
+Colab-scale lever: a 4B model should hold the constraints without flattening the story.
 
 **Iterations & hyperparameters** (from `outputs/day3_lora_v3/train_summary.json`):
 
