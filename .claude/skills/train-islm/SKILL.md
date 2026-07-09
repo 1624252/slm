@@ -1,6 +1,6 @@
 ---
 name: train-islm
-description: Run a full fine-tuning iteration for the i+1 Story SLM — regenerate/curate data, train a LoRA/QLoRA adapter, evaluate base-vs-tuned on all languages plus the exam set, track results, and document hyperparameters + deltas. Use when the user asks to train, retrain, run a training iteration, tune hyperparameters, or "do a Day-N run" for this project.
+description: Run a full fine-tuning iteration for the i+1 Story SLM — regenerate/curate data, train a LoRA/QLoRA adapter, evaluate base-vs-tuned on held-out + exam + golden sets with all three criteria families (deterministic checks, 8-dim LLM judge, cloze), track results, and document hyperparameters + deltas. Use when the user asks to train, retrain, run a training iteration, tune hyperparameters, or "do a Day-N run" for this project.
 ---
 
 # Train the i+1 Story SLM
@@ -9,14 +9,16 @@ A training iteration is not just `train.sft`. It is the full loop, and **every r
 documented** so progress is comparable across runs and reproducible on the GPU later. Follow the
 workflow below in order. Run long steps in the background and monitor them.
 
-## The loop (always all six steps)
+## The loop (always all these steps)
 
 1. **Regenerate + curate data** (unless reusing an unchanged dataset)
 2. **Train** an adapter with explicit hyperparameters
-3. **Eval** base-vs-tuned on all shipped languages, tracked
-4. **Eval on the exam set** (GRE/SAT/ACT targets), tracked
-5. **Document** the run: hyperparameters + eval deltas in `evals/RESULTS_LOG.md`
-6. **Commit** (conventional-commit message; never commit keys)
+3. **Eval** base-vs-tuned, tracked, on all three surfaces: **held-out** (all langs), **exam**
+   (GRE/SAT/ACT), and **golden** (`--golden`). The judge (8-dim rubric) + cloze run automatically
+   when the key is set — so every run reports the three criteria families (see Steps 3 & 4).
+4. **Document** the run: hyperparameters + **all criteria** (deterministic + judge + cloze),
+   base→tuned, in `evals/RESULTS_LOG.md`
+5. **Commit** (conventional-commit message; never commit keys)
 
 All commands run from the repo root. Prefix with `PYTHONPATH=src` unless the package is
 `pip install -e .`'d. On Windows use the Bash tool for these POSIX commands.
@@ -24,7 +26,9 @@ All commands run from the repo root. Prefix with `PYTHONPATH=src` unless the pac
 ## Environment facts (don't rediscover these)
 
 - Package is **not** installed; use `PYTHONPATH=src`.
-- No `.env`/teacher key locally → use the **authored seed** (`data/curated/seed`), not API generation.
+- No **teacher** key for data generation → use the **authored seed** (`data/curated/seed`). But a
+  **judge** key IS configured in `.env` (`OPENAI_API_KEY` + `JUDGE_MODEL=claude-...`), so the LLM
+  judge + cloze run by default; pass `--no-judge` only for a quick deterministic-only check.
 - No CUDA GPU locally → plain **LoRA on CPU** (~90 s/optimizer-step). `--qlora` needs a GPU (Colab).
 - Base model for local runs: `HuggingFaceTB/SmolLM2-135M-Instruct`. Intended GPU base: `Qwen/Qwen3-4B-Instruct` (see `docs/COLAB_PLAN.md`).
 - Prompts embed `KNOWN_WORDS`; the seed scopes it to ~150 words so records fit a 768-token window. Keep `--max-seq-len` ≥ 768 locally.
@@ -59,7 +63,7 @@ Timing: on CPU, optimizer_steps = `epochs * train_examples / (batch * grad_accum
 `outputs/.../train_summary.json` with every hyperparameter + `optimizer_steps` + final loss — this
 is the machine record; do not hand-transcribe it wrong.
 
-## Steps 3 & 4 — Eval (run in background; tracked)
+## Step 3 — Eval (run in background; tracked) — held-out + exam + golden
 
 All languages (writes `evals/day3_v<N>/results_{en,zh,ja}.{md,json}`, appends leaderboard rows):
 
@@ -101,7 +105,7 @@ PYTHONPATH=src python -m islm.eval.run --golden \
 Pull per-language numbers from `results_*.json` (`base` vs `tuned` dicts). Run held-out + exam +
 golden targets so all three surfaces are covered.
 
-## Step 5 — Document (REQUIRED — do not skip)
+## Step 4 — Document (REQUIRED — do not skip)
 
 Add a newest-first entry to `evals/RESULTS_LOG.md` under `## Runs`. Include:
 
@@ -123,10 +127,11 @@ python -m islm.eval.langsmith_sync results --results evals/day3_v<N>/results_en.
     --experiment day3-seed-lora-v<N>
 ```
 
-## Step 6 — Commit
+## Step 5 — Commit
 
 ```bash
-git add evals/day3_v<N> evals/day3_v<N>_exam evals/runs.jsonl evals/LEADERBOARD.md evals/RESULTS_LOG.md
+git add evals/day3_v<N> evals/day3_v<N>_exam evals/golden_v<N> \
+    evals/runs.jsonl evals/LEADERBOARD.md evals/RESULTS_LOG.md
 git commit -m "eval(day3): v<N> (<one-line change>) — <headline delta>"
 ```
 `outputs/` is git-ignored, so the adapter itself isn't committed — the numbers and `RESULTS_LOG`
