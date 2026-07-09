@@ -90,15 +90,17 @@ git-ignored; small curated CC0 samples ship in the repo.
 | Curated CC0 samples | Committed (offline + tests) |
 | Human-authored seed (en/zh/ja) | 28 unique spec-passing stories via `islm.datagen.seed`; the hand-crafted quality core. |
 | Teacher-generated corpus | ~80 curated records via `islm.datagen.pipeline` (frontier teacher); quality, small (API/time-bound). |
-| **Dataset v1 (the large deliverable)** | **135,761 spec-passing records** (en 108,986 / zh 13,478 / ja 13,297) via `islm.datagen.synth` (programmatic) + two-pass `curate`. See below. |
+| **Dataset v1 (the large deliverable)** | **144,748 spec-passing records**, each teaching **2–3 target words** (en 114,753 / zh 15,000 / ja 14,995) via `islm.datagen.synth` (programmatic) + two-pass `curate`. See below. |
 
 ## Dataset v1 — the large corpus (`data/dataset_v1/`)
 
-**135,761 elements** — train 110,019 / val 12,963 / test 12,779; by language en 108,986 / zh
-13,478 / ja 13,297; by target part-of-speech noun 96k / adj 26k / verb 14k. **Every record is
-spec-passing** (validated: ≤2% OOV, ≤1 new word/sentence, target recurs ≥3×). Same chat-record
-schema as the seed (system rules + user scenario + assistant story; `metadata` carries the
-validator scores, `source`, and `target_pos`).
+**144,748 elements** — train 115,801 / val 14,479 / test 14,468; by language en 114,753 / zh
+15,000 / ja 14,995. **Each story teaches 2–3 target words** (avg 2.33; 96,710 two-target + 48,038
+three-target → 337,534 total target mentions). **Every record is spec-passing** (validated: ≤2%
+OOV, ≤1 new word/sentence, **each** target recurs ≥3×, and each target's first appearance is in its
+own sentence so ≤1 new word/sentence holds). Same chat-record schema as the seed (system rules +
+user scenario + assistant story; `metadata` carries validator scores, `source`, and `target_pos`
+— a list, one POS per target).
 
 **How it was built (the "make a lot, then filter" process):**
 1. **First pass — programmatic generation** (`islm.datagen.synth`): compose stories from large
@@ -107,16 +109,19 @@ validator scores, `source`, and `target_pos`).
    target) so coverage passes by construction and the target is the only "new" word. Generated
    ~145k candidates.
 2. **Second pass — curation** (`islm.datagen.curate`): dedup (exact + near-dup), reject degenerate
-   repetition / too-short / low-lexical-variety, re-validate. Kept 135,761 (~94% of en; CJK deduped
-   more). **Zero train/test leakage** (dedup is global across splits).
+   repetition / too-short / low-lexical-variety, re-validate. Kept 144,748 (en 99.8% — multi-target
+   composition makes near-duplicates vanishingly rare; only 1 near-dup + 246 low-variety dropped).
+   **Zero train/test leakage** (dedup is global across splits).
 
 **Honest characterization (read this).** This is **programmatically generated**, not
 teacher-distilled — a deliberate choice to reach 100k+ in a day (real teacher distillation at this
 scale is days + large API cost). Consequences:
 - ✅ 100% spec-compliant i+1 data by construction; grammatical (POS-routed); no leakage.
-- ⚠️ **Limited lexical/structural diversity**: it teaches **283 unique target words** across a
-  handful of story arcs, so prose patterns repeat (varied by character/setting/target, not by deep
-  narrative variety). A model trained on it may learn the *template*, not open-ended storytelling.
+- ⚠️ **Limited lexical/structural diversity**: it teaches **279 unique (language, target) pairs**
+  (2–3 per story) across a handful of story arcs, so prose patterns repeat (varied by
+  character/setting/targets, not by deep narrative variety). A model trained on it may learn the
+  *template*, not open-ended storytelling. Multi-target composition does widen combinatorial
+  variety substantially (each story now interleaves 2–3 target beats).
 - ⚠️ CJK is **noun-target only** (safest for grammaticality); en covers noun/adj/verb.
 - The teacher-distilled corpus (smaller, higher prose quality) and this synthetic corpus are
   **complementary**; the strongest training mix is teacher-core + synthetic-bulk.
