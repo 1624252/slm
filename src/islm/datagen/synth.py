@@ -53,112 +53,90 @@ def _a(word: str) -> str:
     return "an" if word[:1].lower() in "aeiou" else "a"
 
 
-def _en_noun_arcs(c, t, p, a1, a2, mv, c2):
-    """Target is a concrete noun -> 'a/an {t}', 'the {t}'. Introduced once, recurs >=3x."""
-    at = _a(t)
-    return [
-        [f"The {c} {mv} in the {p}.", f"It is a {a1} day.", f"Then the {c} sees {at} {t}.",
-         f"The {t} is {a2} and {a1}.", f"The {c} looks at the {t}.",
-         f"The {t} is a good friend.", f"Now the {c} and the {t} play in the {p}."],
-        [f"The {c} has a {c2}.", f"They live near the {p}.", f"One day they find {at} {t}.",
-         f"The {t} is {a1}.", f"The {c} keeps the {t} safe.", f"The {c2} wants the {t} too.",
-         f"They love the little {t}."],
-        [f"The {c} is {a1}.", f"The {c} looks in the {p}.", f"The {c} needs {at} {t}.",
-         f"At last the {c} finds the {t}.", f"The {t} is {a2}.", f"The {t} helps the {c}.",
-         f"Now the {c} is happy with the {t}."],
-        [f"It is night in the {p}.", f"The {c} can not sleep.",
-         f"The {c} sees {at} {t} in the dark.",
-         f"The {t} is {a1} and {a2}.", f"The {c} is not afraid of the {t}.",
-         f"The {t} sits by the {c}.", f"They sleep by the {t}."],
-        [f"The {c} {mv} up the {p}.", "The way is long.", f"On the way the {c} sees {at} {t}.",
-         f"The {t} is {a1}.", f"The {c} takes the {t} home.", f"The {t} is now with the {c}.",
-         f"The {c} likes the new {t}."],
-    ]
+def _en_beat(rng, pos, t, c, c2, ad):
+    """3 sentences for ONE target: [intro (the 1 new word), develop, develop]. Recurs 3x, in its
+    own sentences, so ordering multiple beats keeps <=1 new word per sentence."""
+    a1, a2 = ad
+    if pos == "noun":
+        at = _a(t)
+        intro = rng.choice([
+            f"Then the {c} sees {at} {t}.", f"The {c} finds {at} {t}.",
+            f"Here is {at} {t}.", f"The {c} has {at} {t}."])
+        devs = rng.sample([
+            f"The {t} is {a1}.", f"The {c} likes the {t}.", f"The {t} is {a1} and {a2}.",
+            f"The {c} holds the {t}.", f"The {t} is a good friend.", f"The little {t} is {a2}."], 2)
+    elif pos == "adj":
+        at = _a(t)
+        intro = rng.choice([f"The {c} is {t}.", f"The {c} feels {t}.", f"The {c} looks {t}."])
+        devs = rng.sample([
+            f"{at.capitalize()} {t} {c} is happy.", f"The {c} is very {t}.",
+            f"To be {t} is good.", f"The {c} is {t} and {a1}."], 2)
+    else:  # verb (base form; plural or modal to avoid conjugation)
+        intro = rng.choice([
+            f"The {c} likes to {t}.", f"The {c} starts to {t}.", f"The {c} wants to {t}."])
+        devs = rng.sample([
+            f"The {c} and the {c2} {t}.", f"It is good to {t}.", f"To {t} is fun.",
+            f"They {t} all day."], 2)
+    return [intro, *devs]
 
 
-def _en_adj_arcs(c, t, p, a1, a2, mv, c2):
-    """Target is an adjective -> '{c} is {t}'. Describes the character/scene; recurs >=3x."""
-    at = _a(t)  # article agrees with the adjective it precedes ("a brave cat", "an ominous hen")
-    return [
-        [f"The {c} {mv} in the {p}.", f"The {c} is very {t}.",
-         f"{at.capitalize()} {t} {c} is not {a1}.",
-         f"The {c2} sees the {t} {c}.", f"The {c2} likes the {t} {c}.",
-         f"They play in the {p}.", f"Now both are {t} and {a2}."],
-        [f"The {c} has a {c2}.", f"The {c2} is {t} today.",
-         f"{at.capitalize()} {t} {c2} is a good friend.",
-         f"The {c} helps the {t} {c2}.", "The day is warm.", f"They rest by the {p}.",
-         f"The {t} {c2} is happy."],
-        [f"It is a {a1} day in the {p}.", f"The {c} feels {t}.", f"To be {t} is good.",
-         f"{at.capitalize()} {t} {c} sings.", f"The {c2} is {t} too.", f"They are {t} together.",
-         f"The {p} is full of {t} friends."],
-    ]
-
-
-def _en_verb_arcs(c, t, p, a1, a2, mv, c2):
-    """Target is a base-form verb -> 'to {t}', 'they {t}' (no conjugation). Recurs >=3x."""
-    return [
-        [f"The {c} likes to {t}.", f"Every {a1} day the {c} wants to {t}.",
-         f"The {c} and the {c2} {t} in the {p}.", f"They {t} all day.",
-         f"It is good to {t}.", f"To {t} is fun.", f"Now they {t} together."],
-        [f"The {c} is in the {p}.", f"The {c} starts to {t}.", f"The {p} is a good place to {t}.",
-         f"The {c2} sees the {c} {t}.", f"Soon they both {t}.", f"They {t} and {t} again.",
-         f"To {t} makes them happy."],
-    ]
-
-
-_EN_ARC_BY_POS = {"noun": _en_noun_arcs, "adj": _en_adj_arcs, "verb": _en_verb_arcs}
-
-
-def _gen_en(rng: random.Random, target: str, pos: str) -> str:
+def _gen_en(rng: random.Random, targets: list[tuple[str, str]]) -> str:
+    """targets = [(pos, word), ...] (2-3 of them). Story: opener + a beat per target + closer."""
     c, c2 = rng.sample(EN["char"], 2)
     p = rng.choice(EN["place"])
-    a1, a2 = rng.sample(EN["adj"], 2)
+    a1, a2, a3 = rng.sample(EN["adj"], 3)
     mv = rng.choice(EN["move"])
-    arcs = _EN_ARC_BY_POS[pos](c, target, p, a1, a2, mv, c2)
-    return " ".join(rng.choice(arcs))
+    opener = rng.choice([
+        f"The {c} {mv} in the {p}.", f"It is a {a3} day in the {p}.",
+        f"The {c} is in the {p}.", f"One {a3} day, the {c} {mv}."])
+    closer = rng.choice([
+        f"Now the {c} is happy.", f"They all rest in the {p}.",
+        f"It is a good day for the {c}.", f"The {c} goes home."])
+    beats = []
+    for pos, t in targets:
+        beats += _en_beat(rng, pos, t, c, c2, (a1, a2))
+    return " ".join([opener, *beats, closer])
 
 
 # ------------------------------------------------------------------ CJK building blocks --------
-# Parameterized frames; {t} = target. Common words only; known set is scoped per story.
+# Noun-only targets (safest for grammaticality). Each target gets a beat (intro + 2 develops).
 ZH = {
     "char": ["小猫", "小狗", "女孩", "男孩", "小鸟", "老人", "朋友", "孩子"],
     "place": ["花园", "森林", "山上", "河边", "家里", "外面", "房间"],
-    "adj": ["大", "小", "红", "蓝", "冷", "暖和", "旧", "新", "快", "高兴"],
-    "arcs": [
-        ["{c}在{p}。", "它看见一个{t}。", "{t}很{a}。", "{c}很喜欢这个{t}。", "现在{c}每天看{t}。"],
-        ["{c}和朋友在{p}。", "他们找到一个{t}。", "这个{t}很{a}。", "{c}把{t}拿回家。",
-         "他们都喜欢{t}。"],
-        ["晚上，{c}在{p}。", "{c}看见{t}。", "{t}很{a}。", "{c}不怕{t}。", "{t}和{c}是朋友。"],
-    ],
+    "adj": ["大", "小", "红", "蓝", "冷", "暖和", "旧", "新", "快", "美"],
+    "open": ["{c}在{p}。", "晚上，{c}在{p}。", "{c}和朋友在{p}。"],
+    "intro": ["{c}看见{t}。", "{c}找到一个{t}。", "这里有一个{t}。"],
+    "dev": ["{t}很{a}。", "{c}很喜欢{t}。", "这个{t}很{a}。", "{c}不怕{t}。"],
+    "close": ["现在{c}很高兴。", "他们都在{p}。", "{c}回家了。"],
 }
 JA = {
     "char": ["猫", "犬", "女の子", "男の子", "鳥", "おじいさん", "友達", "子供"],
     "place": ["庭", "森", "山", "川", "家", "外", "部屋"],
     "adj": ["大きい", "小さい", "赤い", "青い", "寒い", "暖かい", "古い", "新しい", "速い"],
-    "arcs": [
-        ["{c}は{p}にいます。", "{t}を見ます。", "{t}は{a}です。", "{c}は{t}が好きです。",
-         "今、{c}は毎日{t}を見ます。"],
-        ["{c}と友達は{p}にいます。", "{t}を見つけます。", "この{t}は{a}です。",
-         "{c}は{t}を家に持って帰ります。", "みんな{t}が好きです。"],
-        ["夜、{c}は{p}にいます。", "{c}は{t}を見ます。", "{t}は{a}です。",
-         "{c}は{t}が怖くないです。", "{t}と{c}は友達です。"],
-    ],
+    "open": ["{c}は{p}にいます。", "夜、{c}は{p}にいます。", "{c}と友達は{p}にいます。"],
+    "intro": ["{c}は{t}を見ます。", "{c}は{t}を見つけます。", "ここに{t}があります。"],
+    "dev": ["{t}は{a}です。", "{c}は{t}が好きです。", "この{t}は{a}です。",
+            "{c}は{t}が怖くないです。"],
+    "close": ["今、{c}は嬉しいです。", "みんな{p}にいます。", "{c}は家に帰ります。"],
 }
 
 
-def _gen_cjk(rng: random.Random, target: str, pos: str, pack: dict) -> str:
-    # CJK targets are nouns only (safest for grammaticality); pos is accepted for a uniform API.
+def _gen_cjk(rng: random.Random, targets: list[tuple[str, str]], pack: dict) -> str:
     c = rng.choice(pack["char"])
     p = rng.choice(pack["place"])
-    a = rng.choice(pack["adj"])
-    arc = rng.choice(pack["arcs"])
-    return "".join(s.format(c=c, p=p, a=a, t=target) for s in arc)
+    parts = [rng.choice(pack["open"]).format(c=c, p=p)]
+    for _pos, t in targets:
+        parts.append(rng.choice(pack["intro"]).format(c=c, p=p, t=t))
+        for d in rng.sample(pack["dev"], 2):
+            parts.append(d.format(c=c, p=p, a=rng.choice(pack["adj"]), t=t))
+    parts.append(rng.choice(pack["close"]).format(c=c, p=p))
+    return "".join(parts)
 
 
 _GENERATORS = {
     "en": _gen_en,
-    "zh": lambda r, t, pos: _gen_cjk(r, t, pos, ZH),
-    "ja": lambda r, t, pos: _gen_cjk(r, t, pos, JA),
+    "zh": lambda r, targets: _gen_cjk(r, targets, ZH),
+    "ja": lambda r, targets: _gen_cjk(r, targets, JA),
 }
 
 # POS-typed target pools — sensible, mostly graded (CEFR/HSK/JLPT/exam) to-learn words, each placed
@@ -190,11 +168,11 @@ TARGET_POOLS: dict[str, dict[str, list[str]]] = {
             "restless", "cheerful", "grumpy", "clever", "gentle", "swift", "sleepy", "hungry",
             "curious", "playful", "loyal", "proud", "humble", "merry", "weary", "bright",
         ],
+        # Action/motion verbs that read naturally with an animate subject (the character).
         "verb": [
-            "wander", "vanish", "soar", "tremble", "shiver", "drift", "glisten", "flicker",
-            "crumble", "scatter", "gallop", "pounce", "prowl", "meander", "plunge", "linger",
-            "wobble", "tumble", "glide", "creep", "dash", "roam", "leap", "float", "sparkle",
-            "rustle", "shimmer", "sway", "whirl", "bounce",
+            "wander", "soar", "tremble", "shiver", "gallop", "pounce", "prowl", "meander",
+            "plunge", "linger", "wobble", "tumble", "glide", "creep", "dash", "roam", "leap",
+            "sway", "whirl", "bounce", "hurry", "rest", "wait", "hide", "float", "climb",
         ],
     },
     "zh": {"noun": [
@@ -212,21 +190,24 @@ TARGET_POOLS: dict[str, dict[str, list[str]]] = {
 }
 
 
-def _compact_known(story: str, target: str, analyzer) -> list[str]:
-    """Known set = the story's own content words, minus the target (coverage passes by build)."""
+def _compact_known(story: str, targets: set[str], analyzer) -> list[str]:
+    """Known set = the story's own content words, minus the targets (coverage passes by build)."""
     known = set()
-    tl = target.lower()
+    tl = {t.lower() for t in targets}
     for tok in analyzer.analyze(story):
-        if tok.is_word and tok.lemma != tl and tok.surface.lower() != tl:
+        if tok.is_word and tok.lemma not in tl and tok.surface.lower() not in tl:
             known.add(tok.lemma)
             known.add(tok.surface.lower())
     return sorted(known)
 
 
 def generate(language: str, n: int, out_dir: Path, seed: int = 0) -> dict:
-    """Generate n spec-passing synthetic stories; write train/val/test (80/10/10). Returns stats."""
+    """Generate n spec-passing multi-target stories; write train/val/test (80/10/10).
+
+    Each story teaches 2-3 target words (en: any POS; CJK: nouns), each introduced in its own
+    sentence and recurring >=3x, so <=1 new word per sentence holds.
+    """
     analyzer = get_analyzer(language)
-    # POS-typed targets so each is placed in a grammatical frame; (pos, target) pairs.
     pools = TARGET_POOLS[language]
     typed = [(pos, w) for pos, words in pools.items() for w in words]
     gen = _GENERATORS[language]
@@ -236,20 +217,25 @@ def generate(language: str, n: int, out_dir: Path, seed: int = 0) -> dict:
     attempts = 0
     while kept < n and attempts < n * 4:
         attempts += 1
-        pos, target = rng.choice(typed)
-        story = gen(rng, target, pos)
-        known = _compact_known(story, target, analyzer)
-        report = validate_story(story, set(known), {target.lower()}, analyzer, language=language)
+        k = rng.choice([2, 2, 3])  # 2-3 targets per story (bias to 2)
+        targets = rng.sample(typed, k)  # distinct (pos, word) pairs
+        words = [w for _, w in targets]
+        if len({w.lower() for w in words}) != k:  # avoid same word twice
+            continue
+        story = gen(rng, targets)
+        known = _compact_known(story, set(words), analyzer)
+        report = validate_story(story, set(known), {w.lower() for w in words}, analyzer,
+                                language=language)
         if not report.hard_pass:
             failed += 1
             continue
         scenario = Scenario(
             id=f"{language}-synth-{kept:06d}", language=language, level="baseline",
-            theme="synthetic", target_words=[target], known=known,
+            theme="synthetic", target_words=words, known=known,
         )
         rec = Example(scenario, story, report, 0, kept=True).to_record()
         rec["metadata"]["source"] = "synthetic-v1"
-        rec["metadata"]["target_pos"] = pos
+        rec["metadata"]["target_pos"] = [pos for pos, _ in targets]
         records.append(rec)
         kept += 1
 
