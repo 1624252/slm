@@ -39,6 +39,7 @@ class CurationConfig:
     min_unique_sentence_ratio: float = 0.6  # reject "X is big. X is big. X is big."
     min_type_token_ratio: float = 0.30  # lexical variety of content
     revalidate: bool = True  # re-run the hard validators
+    fast_lemmatizer: bool = False  # skip spaCy/jieba/fugashi; use the fast rule-based fallback
     judge_min_spec_adherence: int = 2
     judge_min_mean: float = 1.5
 
@@ -116,7 +117,9 @@ def curate(
     for split in _SPLITS:
         for record in records_by_split.get(split, []):
             lang = record.get("language", "en")
-            lemmatizer = analyzers.setdefault(lang, get_analyzer(lang))
+            lemmatizer = analyzers.setdefault(
+                lang, get_analyzer(lang, prefer_external=not config.fast_lemmatizer)
+            )
             story = _story_of(record)
             reasons: list[str] = []
 
@@ -238,16 +241,22 @@ def main() -> None:
     p.add_argument("--out", dest="out_dir", type=Path, required=True)
     p.add_argument("--judge-model", default=None, help="Optional stricter LLM re-judge.")
     p.add_argument("--mock", action="store_true", help="Use the offline MockLLM for judging.")
+    p.add_argument(
+        "--fast", action="store_true",
+        help="Use the fast rule-based lemmatizer (skip spaCy/jieba/fugashi). ~60x faster where "
+        "spaCy models ship (e.g. Colab); coverage still matches via surface form.",
+    )
     args = p.parse_args()
 
+    config = CurationConfig(fast_lemmatizer=args.fast)
     judge_client = None
     if args.mock:
         judge_client = get_client(mock=True)
     elif args.judge_model:
         judge_client = get_client(args.judge_model)
 
-    result = curate(_read_splits(args.in_dir), judge_client=judge_client)
-    stats = _write_results(args.out_dir, result, CurationConfig())
+    result = curate(_read_splits(args.in_dir), config=config, judge_client=judge_client)
+    stats = _write_results(args.out_dir, result, config)
     print(json.dumps(stats, indent=2, ensure_ascii=False))
 
 

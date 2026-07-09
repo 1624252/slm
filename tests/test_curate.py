@@ -32,7 +32,7 @@ def _curate(records):
     # Force the deterministic English analyzer for reproducibility.
     import islm.datagen.curate as c
 
-    c.get_analyzer = lambda lang: SimpleLemmatizer()
+    c.get_analyzer = lambda lang, **kwargs: SimpleLemmatizer()
     return curate({"train": records}, CurationConfig())
 
 

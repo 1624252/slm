@@ -52,4 +52,8 @@ Thumbs.db
 # The dataset itself is large + regenerable (HF Hub, not git), like other data/.
 data/generated/synth_*/
 data/curated/synth_*/
-data/dataset_v1/
+# dataset_v1: ship the gzipped splits + stats so Colab can use them without regenerating.
+# Raw .jsonl stays ignored (train.jsonl is ~193 MB, over GitHub's 100 MB file limit).
+data/dataset_v1/*
+!data/dataset_v1/*.jsonl.gz
+!data/dataset_v1/stats.json
