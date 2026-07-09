@@ -35,3 +35,9 @@ examples has low ceiling (v3→v4→v5 showed it). The real lever is **more + mo
 - Data plan: en=80 (→~32 kept) generating; then zh/ja if budget allows. Combine with 22-record
   seed → train v7 on the larger corpus.
 - Budget ~02:05, ~5.9h left. Reserve: v7 train ~2h + eval ~40m + summary 20m. Data-gen window ~2h.
+- Teacher yields: en 48/80 (60%), zh 30/40 (75%), ja 4/40 (10% — CJK is hard for the teacher too).
+- **Teacher KNOWN_WORDS bug found + fixed**: teacher recs were ~5.2k tokens (full baseline); new
+  `islm.datagen.compact` shrinks to ~830 tok. MUST compact teacher data before training.
+- **v7 corpus** = compact teacher(en+zh+ja) + seed = **87 train** (en50/zh30/ja7), 4× the seed.
+- **v7 training** (~03:15): 3 epochs capped at **--max-steps 200** (budget), seq 1024, else = v5
+  (r32/a64/lr2e-4). DATA is the only real variable. ~3h → done ~06:15, leaves eval+summary time.
