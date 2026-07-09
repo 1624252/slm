@@ -33,8 +33,10 @@ class OpenAIClient:
                 "OPENAI_API_KEY is not set. Copy .env.example to .env and add your key "
                 "(never commit it), or use MockLLM for offline runs."
             )
+        # max_retries: the SDK retries transient errors (connection drops, 429, 5xx) with backoff,
+        # so a brief network blip during a long batch doesn't abort the whole run.
         self._client = OpenAI(
-            api_key=cfg.api_key, base_url=cfg.base_url, timeout=cfg.request_timeout
+            api_key=cfg.api_key, base_url=cfg.base_url, timeout=cfg.request_timeout, max_retries=6
         )
         self.model = model
 

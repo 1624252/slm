@@ -82,9 +82,16 @@ def build_dataset(
             return judge_story(scenario, story, judge_client)
 
     scenarios = sample_scenarios(n, language=language, seed=seed)
-    examples = [
-        make_example(s, client, lemmatizer, thresholds, max_rewrites, judge_fn) for s in scenarios
-    ]
+    # Resilient: a scenario that still errors after the client's retries is skipped, not fatal —
+    # a long overnight batch shouldn't be lost to one bad call.
+    examples = []
+    for i, s in enumerate(scenarios):
+        try:
+            examples.append(make_example(s, client, lemmatizer, thresholds, max_rewrites, judge_fn))
+        except Exception as exc:  # noqa: BLE001 - log and continue over any per-scenario failure
+            print(f"skip {s.id} ({i + 1}/{len(scenarios)}): {type(exc).__name__}: {exc}")
+    if not examples:
+        raise RuntimeError("all scenarios failed to generate (check the API endpoint / key)")
 
     out_dir.mkdir(parents=True, exist_ok=True)
     by_split = _assign_splits(examples, splits, seed)
