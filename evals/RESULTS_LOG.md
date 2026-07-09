@@ -49,11 +49,16 @@ teacher(en/zh/ja) + the 22-record seed. Same hyperparameters as v5 (r32/α64, lr
 **except** steps: an overnight CPU slowdown (~150 s/step) forced `--max-steps 40` to fit the budget
 (v5 ran 110). Final train loss **1.99** (v5: 0.87) — i.e. **under-trained**.
 
-Golden set, tuned v5 → v7 (en; zh/ja pending at cutoff):
+Golden set, tuned v5 → v7 (ja still running at cutoff):
 
 | lang | OOV | hard-pass | ≤1-new | coherence | judge overall |
 | --- | --- | --- | --- | --- | --- |
 | en | 0.133 → 0.222 | 0.103 → **0.000** | 0.487 → **0.026** | 0.15 → 0.20 | 0.45 → **0.16** |
+| zh | 0.250 → 0.359 | 0.000 → **0.125** | 0.125 → **0.500** | 0.00 → 0.00 | 0.19 → 0.03 |
+
+(zh is mixed — OOV worse but hard-pass and ≤1-new actually *up*, a hint that more zh data helped
+even at 40 steps. en clearly worse. Net: v7 does not beat v5, but the zh signal supports the
+"data helps, just needs GPU steps" reading.)
 
 **Verdict: v7 does NOT beat v5** — worse OOV, lost hard-passes, ≤1-new collapsed. But this is a
 **confounded test**, not evidence against data scaling: 40 steps (loss 1.99) is far too few for the

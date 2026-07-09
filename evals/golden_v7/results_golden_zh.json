@@ -1,0 +1,244 @@
+{
+  "base": {
+    "model": "HuggingFaceTB/SmolLM2-135M-Instruct",
+    "n": 8,
+    "hard_pass_rate": 0.0,
+    "mean_oov_rate": 0.881,
+    "mean_coverage": 0.119,
+    "one_new_word_pass_rate": 0.0,
+    "recurrence_pass_rate": 0.0,
+    "judge_spec_adherence": 0.0,
+    "judge_robustness": 0.0,
+    "judge_task_quality": 0.5,
+    "judge_consistency": 0.0,
+    "judge_inferability": 0.0,
+    "judge_seductive_detail_control": 0.0,
+    "judge_coherence": 0.5,
+    "judge_interestingness": 0.125,
+    "judge_overall": 0.141,
+    "mean_inferability": 0.0
+  },
+  "error_analysis": {
+    "base": {
+      "n": 8,
+      "failing": 8,
+      "reasons": {
+        "oov": 8,
+        "coverage": 8,
+        "one_new_word": 8,
+        "recurrence": 8
+      }
+    },
+    "tuned": {
+      "n": 8,
+      "failing": 7,
+      "reasons": {
+        "oov": 5,
+        "coverage": 5,
+        "recurrence": 5,
+        "one_new_word": 4
+      }
+    }
+  },
+  "base_rows": [
+    {
+      "id": "zh-gold-000",
+      "hard_pass": false,
+      "oov_rate": 1.0,
+      "failures": [
+        "oov",
+        "coverage",
+        "one_new_word",
+        "recurrence"
+      ],
+      "story": "In the bustling streets of the city, a young woman named Mei Ling walked through the crowded alleys, her eyes scanning the crowded stalls for the perfect shopping opportunity. She had always been drawn to the vibrant colors and lively atmosphere of the city, and the smell of fresh-cut flowers and the sound of the city's bustling streets filled her senses. Mei Ling had always been fascinated by the world of art, and the city was a treasure trove of creative possibilities. She had always dreamed of traveling to the city, to explore its hidden gems and discover new things.\n\nAs she walked, she noticed a group of people gathered near a small café, where a young man was sitting alone, sipping his coffee. Mei Ling approached him and asked, \"Excuse me, sir. What brings you to our city?\" The young man smiled and replied, \"I'm a traveler, I'm just looking for a place to rest my head after a long day of work.\" Mei Ling felt a pang of curiosity, and she decided to ask him about his experiences in the city.\n\nAs they"
+    },
+    {
+      "id": "zh-gold-001",
+      "hard_pass": false,
+      "oov_rate": 1.0,
+      "failures": [
+        "oov",
+        "coverage",
+        "one_new_word",
+        "recurrence"
+      ],
+      "story": "In the vibrant streets of Shanghai, where the sun beats down relentlessly, a young woman named Mei Ling wandered through the bustling alleys. Her eyes scanned the colorful stalls, each one a treasure trove of exotic spices and stories. As she walked, the air was filled with the sweet scent of blooming flowers and the soft hum of conversation. Mei Ling's heart was filled with joy, and her eyes sparkled with a sense of wonder.\n\nAs she walked, she noticed the bustling market stalls, each one a testament to the city's rich history. The smell of fresh bread wafted from the stalls, enticing her to try some of the local delicacies. Mei Ling's eyes widened as she spotted a vendor selling a traditional Chinese dish, a delicate dish that was both familiar and exotic.\n\nAs she continued her stroll, she came across a small, hidden room in a nearby alley. The room was filled with an assortment of peculiar objects, each one a treasure trove of knowledge. Mei Ling's curiosity was piqued, and she decided to explore the room.\n\nShe entered"
+    },
+    {
+      "id": "zh-gold-002",
+      "hard_pass": false,
+      "oov_rate": 1.0,
+      "failures": [
+        "oov",
+        "coverage",
+        "one_new_word",
+        "recurrence"
+      ],
+      "story": "Title: The Sun's Eclipse\n\nIn the vast expanse of the sky, a celestial event unfolded like a celestial ballet. The sun, a fiery orb, had been eclipsed by the moon, a celestial body that was a mirror of the sun's power. The moon, a gentle, silvery-white orb, had been a gentle companion to the sun, a gentle lover to the sun's power.\n\nAs the sun's light faded, the moon's light shone brightly, a celestial dance of light and shadow. The moon, a gentle, silvery-white orb, had been a gentle lover to the sun's power, a celestial lover to the sun's power. The sun, a fiery, fiery orb, had been a fiery lover to the moon's power, a celestial lover to the sun's power.\n\nThe sun's light had been a gentle lover to the moon's power, a celestial lover to the sun's power. The sun, a fiery, fiery orb, had been a fiery lover to the moon's power, a celestial lover to the sun's"
+    },
+    {
+      "id": "zh-gold-003",
+      "hard_pass": false,
+      "oov_rate": 1.0,
+      "failures": [
+        "oov",
+        "coverage",
+        "one_new_word",
+        "recurrence"
+      ],
+      "story": "The sun was setting over the mountains, casting a warm glow over the valley below. The air was filled with the sweet scent of blooming flowers, and the sound of birdsong filled the air. As the sun dipped below the horizon, the sky transformed into a canvas of colors, with hues of pink, orange, and purple bleeding into the sky.\n\nThe villagers gathered around the campfire, sharing stories of their lives and the beauty of nature. A young boy, lost in thought, asked his mother, \"What brings you to this place today?\" His mother smiled and replied, \"It's a tradition, my child. We gather here to honor the spirits of the land and to share our love of the outdoors.\"\n\nAs the night wore on, the villagers began to sing and dance, their laughter and music filling the air. The stars began to twinkle in the night sky, and the stars began to twinkle in the sky, creating a celestial ballet that seemed to mirror the changing of the seasons.\n\nThe villagers spent the night watching the stars, their eyes shining with"
+    },
+    {
+      "id": "zh-gold-004",
+      "hard_pass": false,
+      "oov_rate": 0.048,
+      "failures": [
+        "oov",
+        "coverage",
+        "one_new_word",
+        "recurrence"
+      ],
+      "story": "Zhāo, 家里有一台钢琴，你可以看到，这台钢琴是一台，不是也是也，也是也，也是也，也是也，也是也，也是也，也是也，也是也，也是也，也是也，也是也，也是也，也是也，也是也，也是也，也是也，也是也，也是也，也是也，也是也，也是也，也是也，也是也，也是也，也是也，也是也，也是也，也是也，也是也，也"
+    },
+    {
+      "id": "zh-gold-005",
+      "hard_pass": false,
+      "oov_rate": 1.0,
+      "failures": [
+        "oov",
+        "coverage",
+        "one_new_word",
+        "recurrence"
+      ],
+      "story": "Zhāo zhèng, 宫水, 宫水, 宫水, 宫水, 宫水, 宫水, 宫水, 宫水, 宫水, 宫水, 宫水, 宫水, 宫水, 宫水, 宫水, 宫水, 宫水, 宫水, 宫水, 宫水, 宫水, 宫水, 宫水, 宫水, 宫水, 宫水, 宫水, 宫水, 宫水, 宫水, �"
+    },
+    {
+      "id": "zh-gold-006",
+      "hard_pass": false,
+      "oov_rate": 1.0,
+      "failures": [
+        "oov",
+        "coverage",
+        "one_new_word",
+        "recurrence"
+      ],
+      "story": "Zhāo zhèng yī zhèng yī zhèng yī zhèng yī zhèng yī zhèng yī zhèng yī zhèng yī zhèng yī zhèng yī zhèng yī zhèng yī zhèng yī zhèng yī zhèng yī zhèng yī zhèng yī zhèng yī zhèng yī zhèng yī zhèng yī zhèng yī zhèng yī zhèng yī zhèng yī zhèng yī zhèng yī zhèng yī zhèng yī zhèng yī zhèng yī zhèng yī zhèng yī zhèng yī zhèng yī zhèng yī"
+    },
+    {
+      "id": "zh-gold-007",
+      "hard_pass": false,
+      "oov_rate": 1.0,
+      "failures": [
+        "oov",
+        "coverage",
+        "one_new_word",
+        "recurrence"
+      ],
+      "story": "In the cozy town of Willow Creek, where the sun dipped into the horizon, a young girl named Lily wandered the streets, lost in the world of her imagination. She had always been drawn to the vibrant colors of the flowers and the soft sounds of the birds, but her parents had always encouraged her to explore the world beyond the familiar.\n\nOne day, as Lily walked through the bustling market, she noticed a sign that read \"The Whispering Woods.\" She had heard stories of the ancient trees and the gentle whispers of the forest, but nothing could have prepared her for the real thing. As she approached the tree, Lily felt a sense of peace wash over her. The trees seemed to be speaking to her, and she felt a deep connection to the natural world.\n\nLily spent hours exploring the woods, listening to the birdsong, and watching the wildflowers bloom. She discovered that the Whispering Woods was home to a secret world of magic and wonder. The trees were alive, and the creatures that lived there were all connected to the forest. Lily felt a sense of"
+    }
+  ],
+  "tuned": {
+    "model": "HuggingFaceTB/SmolLM2-135M-Instruct",
+    "n": 8,
+    "hard_pass_rate": 0.125,
+    "mean_oov_rate": 0.3587,
+    "mean_coverage": 0.6413,
+    "one_new_word_pass_rate": 0.5,
+    "recurrence_pass_rate": 0.375,
+    "judge_spec_adherence": 0.125,
+    "judge_robustness": 0.0,
+    "judge_task_quality": 0.0,
+    "judge_consistency": 0.0,
+    "judge_inferability": 0.125,
+    "judge_seductive_detail_control": 0.0,
+    "judge_coherence": 0.0,
+    "judge_interestingness": 0.0,
+    "judge_overall": 0.031,
+    "mean_inferability": 0.125
+  },
+  "tuned_rows": [
+    {
+      "id": "zh-gold-000",
+      "hard_pass": false,
+      "oov_rate": 0.038,
+      "failures": [
+        "oov",
+        "coverage",
+        "one_new_word"
+      ],
+      "story": "灯塔灯塔灯塔灯塔塔塔塔塔塔塔塔塔塔塔塔塔塔塔塔塔塔塔塔塔塔塔塔塔塔塔塔塔塔塔塔塔塔塔塔塔塔塔塔塔塔塔塔塔塔塔塔塔塔塔塔塔塔塔塔塔塔塔塔塔塔塔塔塔塔�"
+    },
+    {
+      "id": "zh-gold-001",
+      "hard_pass": false,
+      "oov_rate": 0.798,
+      "failures": [
+        "oov",
+        "coverage",
+        "one_new_word",
+        "recurrence"
+      ],
+      "story": "如果你看到这个词词，那么你就可以看出这个词词是一个词词，该词词是一个词词，该词词是一个词词，该词词是一个词词，该词词是一个词词，该词词是一个词词，该词词是一个词词，该词词是一个词词，该词词是一个词词，该词词是一个词词，该词词是一个词词，该词词是一个词词，该词词是一个词词，该词词是一个词词，该词词是"
+    },
+    {
+      "id": "zh-gold-002",
+      "hard_pass": false,
+      "oov_rate": 1.0,
+      "failures": [
+        "oov",
+        "coverage",
+        "one_new_word",
+        "recurrence"
+      ],
+      "story": "蝴蝶花草草草草草草草草草草草草草草草草草草草草草草草草草草草草草草草草草草草草草草草草草草草草草草草草草草草草草草草草草草草草草草草草草草草草草草�"
+    },
+    {
+      "id": "zh-gold-003",
+      "hard_pass": false,
+      "oov_rate": 0.0,
+      "failures": [
+        "recurrence"
+      ],
+      "story": "火山火火火火火火火火火火火火火火火火火火火火火火火火火火火火火火火火火火火火火火火火火火火火火火火火火火火火火火火火火火火火火火火火火火火火火火火�"
+    },
+    {
+      "id": "zh-gold-004",
+      "hard_pass": true,
+      "oov_rate": 0.0,
+      "failures": [],
+      "story": "一台钢琴\n一台钢琴\n一台钢琴\n一台钢琴\n一台钢琴\n一台钢琴\n一台钢琴\n一台钢琴\n一台钢琴\n一台钢琴\n一台钢琴\n一台钢琴\n一台钢琴\n一台钢琴\n一台钢琴\n一台钢琴\n一台钢琴\n一台钢琴\n一台钢琴\n一台钢琴\n一台钢琴\n一台钢琴\n一台钢琴\n一台钢琴\n一台�"
+    },
+    {
+      "id": "zh-gold-005",
+      "hard_pass": false,
+      "oov_rate": 0.0,
+      "failures": [
+        "recurrence"
+      ],
+      "story": "一片\n一片\n一片\n一片\n一片\n一片\n一片\n一片\n一片\n一片\n一片\n一片\n一片\n一片\n一片\n一片\n一片\n一片\n一片\n一片\n一片\n一片\n一片\n一片\n一片\n一片\n一片\n一片\n一片\n一片\n一片\n一片\n一片\n一片\n一片\n一片\n一片\n一片\n一片\n一片\n一片\n一片\n一片\n一片\n一片\n一片\n一片\n一片\n一片\n一片\n一片\n一片\n一片\n一片\n一片"
+    },
+    {
+      "id": "zh-gold-006",
+      "hard_pass": false,
+      "oov_rate": 0.533,
+      "failures": [
+        "oov",
+        "coverage",
+        "one_new_word"
+      ],
+      "story": "如果你看到这个词语，那么你需要在该词语中提供一个新的target word。这个新target word可以是一个, 具体的词语，或者是一个, 具体的词语，或者是一个, 具体的词语，或者是一个, 具体的词语，或者是一个, 具体的词语。\n\n例如, 当你说 \"镜子\" 时，你可以提供一个, 具体的词语, 是 \"镜子\" 的词语。如果你说 \"镜子\" 的词语, �"
+    },
+    {
+      "id": "zh-gold-007",
+      "hard_pass": false,
+      "oov_rate": 0.5,
+      "failures": [
+        "oov",
+        "coverage",
+        "recurrence"
+      ],
+      "story": "喜欢篷\n喜欢篷\n喜欢篷\n喜欢篷\n喜欢篷\n喜欢篷\n喜欢篷\n喜欢篷\n喜欢篷\n喜欢篷\n喜欢篷\n喜欢篷\n喜欢篷\n喜欢篷\n喜欢篷\n喜欢篷\n喜欢篷\n喜欢篷\n喜欢篷\n喜欢篷\n喜欢篷\n喜欢篷"
+    }
+  ]
+}
