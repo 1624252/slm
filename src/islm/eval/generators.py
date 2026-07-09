@@ -45,6 +45,7 @@ class HFGenerator:
         max_new_tokens: int = 512,
         temperature: float = 0.0,
         device_map: str | None = None,
+        load_in_4bit: bool = False,
         chat_kwargs: dict | None = None,
     ):
         import torch
@@ -55,6 +56,16 @@ class HFGenerator:
         load_kwargs: dict = {}
         if device_map:  # only when accelerate/GPU is available; CPU loads fine without it
             load_kwargs = {"device_map": device_map, "torch_dtype": "auto"}
+            if load_in_4bit:  # match QLoRA training precision; fits 2x4B on a 16-24GB GPU
+                from transformers import BitsAndBytesConfig
+
+                load_kwargs["quantization_config"] = BitsAndBytesConfig(
+                    load_in_4bit=True,
+                    bnb_4bit_quant_type="nf4",
+                    bnb_4bit_compute_dtype=torch.bfloat16,
+                    bnb_4bit_use_double_quant=True,
+                )
+                load_kwargs["torch_dtype"] = torch.bfloat16
         model = AutoModelForCausalLM.from_pretrained(model_path, **load_kwargs)
         if adapter_path:
             from peft import PeftModel

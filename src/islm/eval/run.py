@@ -48,9 +48,13 @@ def _build_generator(model, path, adapter, mock, max_new_tokens, no_think):
         client = get_client(mock=True)
         return api_generator(client=client), client
     if path:
+        import torch
+
+        on_gpu = torch.cuda.is_available()  # use the GPU (in 4-bit) when present; CPU otherwise
         chat_kwargs = {"enable_thinking": False} if no_think else None
         return HFGenerator(
-            path, adapter, max_new_tokens=max_new_tokens, chat_kwargs=chat_kwargs
+            path, adapter, max_new_tokens=max_new_tokens, chat_kwargs=chat_kwargs,
+            device_map="auto" if on_gpu else None, load_in_4bit=on_gpu,
         ), None
     client = get_client(model)
     return api_generator(client=client), client
