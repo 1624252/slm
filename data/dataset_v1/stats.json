@@ -1,0 +1,24 @@
+{
+  "name": "islm i+1 story dataset v1 (multi-target)",
+  "total_elements": 144748,
+  "by_split": {
+    "train": 115801,
+    "val": 14479,
+    "test": 14468
+  },
+  "by_language": {
+    "en": 114753,
+    "zh": 15000,
+    "ja": 14995
+  },
+  "targets_per_story": {
+    "3": 48038,
+    "2": 96710
+  },
+  "avg_targets_per_story": 2.33,
+  "total_target_mentions": 337534,
+  "unique_lang_target_pairs": 279,
+  "provenance": "programmatic (islm.datagen.synth, multi-target) + two-pass curation",
+  "all_spec_passing": true,
+  "schema": "chat records system+user+assistant; metadata has validator scores, source, target_pos (list)"
+}
