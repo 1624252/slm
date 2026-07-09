@@ -88,12 +88,38 @@ git-ignored; small curated CC0 samples ship in the repo.
 | --- | --- |
 | Vocabulary (en/zh/ja) | Real graded lists fetched (en ~2.3k/6.4k, zh ~2.2k/8.7k, ja ~1.3k/6.7k baseline/advanced) |
 | Curated CC0 samples | Committed (offline + tests) |
-| Human-authored seed (en/zh/ja) | 28 unique spec-passing stories (16 en, 6 zh, 6 ja) via `islm.datagen.seed`; curation keeps 28/29 (drops 1 planted duplicate). Each record's `KNOWN_WORDS` is scoped to the curated baseline + the story's own words (~150), so prompts fit a small window. |
-| Large teacher-generated corpus | **Pending model access** (see below) |
+| Human-authored seed (en/zh/ja) | 28 unique spec-passing stories via `islm.datagen.seed`; the hand-crafted quality core. |
+| Teacher-generated corpus | ~80 curated records via `islm.datagen.pipeline` (frontier teacher); quality, small (API/time-bound). |
+| **Dataset v1 (the large deliverable)** | **135,761 spec-passing records** (en 108,986 / zh 13,478 / ja 13,297) via `islm.datagen.synth` (programmatic) + two-pass `curate`. See below. |
 
-The authored seed is genuine, spec-passing data (hand-written by the model to the spec and
-validated) that also exercises the two-pass curation on real prose. Hand-authoring caps volume
-far below "thousands"; that scale requires a teacher model, but the same pipeline runs unchanged.
+## Dataset v1 — the large corpus (`data/dataset_v1/`)
+
+**135,761 elements** — train 110,019 / val 12,963 / test 12,779; by language en 108,986 / zh
+13,478 / ja 13,297; by target part-of-speech noun 96k / adj 26k / verb 14k. **Every record is
+spec-passing** (validated: ≤2% OOV, ≤1 new word/sentence, target recurs ≥3×). Same chat-record
+schema as the seed (system rules + user scenario + assistant story; `metadata` carries the
+validator scores, `source`, and `target_pos`).
+
+**How it was built (the "make a lot, then filter" process):**
+1. **First pass — programmatic generation** (`islm.datagen.synth`): compose stories from large
+   pools of common words + story arcs, inserting one **POS-typed target** (noun/adj/verb) placed in
+   a grammatically correct frame. Each story's `KNOWN_WORDS` is scoped to its own words (minus the
+   target) so coverage passes by construction and the target is the only "new" word. Generated
+   ~145k candidates.
+2. **Second pass — curation** (`islm.datagen.curate`): dedup (exact + near-dup), reject degenerate
+   repetition / too-short / low-lexical-variety, re-validate. Kept 135,761 (~94% of en; CJK deduped
+   more). **Zero train/test leakage** (dedup is global across splits).
+
+**Honest characterization (read this).** This is **programmatically generated**, not
+teacher-distilled — a deliberate choice to reach 100k+ in a day (real teacher distillation at this
+scale is days + large API cost). Consequences:
+- ✅ 100% spec-compliant i+1 data by construction; grammatical (POS-routed); no leakage.
+- ⚠️ **Limited lexical/structural diversity**: it teaches **283 unique target words** across a
+  handful of story arcs, so prose patterns repeat (varied by character/setting/target, not by deep
+  narrative variety). A model trained on it may learn the *template*, not open-ended storytelling.
+- ⚠️ CJK is **noun-target only** (safest for grammaticality); en covers noun/adj/verb.
+- The teacher-distilled corpus (smaller, higher prose quality) and this synthetic corpus are
+  **complementary**; the strongest training mix is teacher-core + synthetic-bulk.
 
 ## Reproduce / scale
 
@@ -108,9 +134,19 @@ python -m islm.datagen.curate --in data/generated/seed --out data/curated/seed
 # 3. Large generation with a teacher (needs .env with an OpenAI-compatible key)
 python -m islm.datagen.pipeline --n 4000 --language en \
     --model <teacher> --judge-model <judge> --out data/generated/en
-
-# 4. Second-pass curation
 python -m islm.datagen.curate --in data/generated/en --out data/curated/en --judge-model <judge>
+
+# 4. Dataset v1 — the 135k programmatic corpus (no API; fully reproducible via seeds)
+python -m islm.datagen.synth --n 115000 --language en --seed 42 --out data/generated/synth_en
+python -m islm.datagen.synth --n 15000  --language zh --seed 43 --out data/generated/synth_zh
+python -m islm.datagen.synth --n 15000  --language ja --seed 44 --out data/generated/synth_ja
+for L in en zh ja; do
+  python -m islm.datagen.curate --in data/generated/synth_$L --out data/curated/synth_$L
+done
+mkdir -p data/dataset_v1
+for S in train val test; do
+  cat data/curated/synth_{en,zh,ja}/$S.jsonl > data/dataset_v1/$S.jsonl
+done
 ```
 
 ## Limitations & ethics

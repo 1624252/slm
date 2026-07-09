@@ -49,3 +49,7 @@ runs/
 Thumbs.db
 .idea/
 .vscode/
+# The dataset itself is large + regenerable (HF Hub, not git), like other data/.
+data/generated/synth_*/
+data/curated/synth_*/
+data/dataset_v1/
