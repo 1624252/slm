@@ -152,6 +152,11 @@ entry are the durable record. End the commit body with the project's Co-Authored
 - **Not improved / regressed** → change one knob and rerun. Cheap high-leverage knobs on this tiny
   dataset: more `--epochs`, higher `--lora-r`/`--lora-alpha` (capacity), lower `--lr` (if a language
   regressed — usually over-fit). Log every attempt, including the ones that didn't help.
+- **Keep only the best adapter on disk.** Once a run wins, delete the superseded `outputs/*` dirs —
+  do not accumulate one dir per version. Every attempt's *numbers* live in `RESULTS_LOG.md` /
+  leaderboard (the durable record); the adapter files are regenerable, so only the current best is
+  worth the disk. Train fresh runs to a temp/versioned dir, compare, then keep the winner and
+  remove the rest.
 - Local ceiling: a 135M CPU model on 22 examples **will not** clear the OOV ≤ 0.02 gate. Real wins
   need the GPU run in `docs/COLAB_PLAN.md`. Don't burn hours chasing a gate the setup can't reach.
 
