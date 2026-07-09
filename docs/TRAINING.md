@@ -22,7 +22,7 @@ the full rendered text.)
 
 ```bash
 # Real run (GPU, QLoRA 4-bit):
-python -m islm.train.sft --data data/generated/en --base Qwen/Qwen3-4B-Instruct --qlora \
+python -m islm.train.sft --data data/generated/en --base Qwen/Qwen3-4B-Instruct-2507 --qlora \
     --out outputs/lora
 
 # Real CPU run on the curated seed (no GPU; Day-3 local run):

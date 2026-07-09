@@ -244,7 +244,7 @@ that filters data also grades outputs and guards inference.
 ## 11. Base model and tech stack
 
 **Base model.**
-- **Primary: `Qwen3-4B-Instruct`.** Chosen for strong **multilingual** coverage (notably
+- **Primary: `Qwen3-4B-Instruct-2507`.** Chosen for strong **multilingual** coverage (notably
   English, Chinese, and Japanese), an Instruct variant for fast SFT, and a size that fits a
   single 24 GB GPU under QLoRA — matching `spec.md`'s stack guidance (Qwen3 0.6B/1.7B/4B).
 - **Smaller fallback / edge target: `Qwen3-1.7B-Instruct`** (and `0.6B` as an on-device stretch)

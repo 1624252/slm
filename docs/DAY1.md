@@ -46,7 +46,7 @@ prompting one. Full artifact: `evals/baseline/results_en.md` (+ per-story detail
   same eval runs on the real base with one command once a GPU / HF token / API is available:
 
   ```bash
-  python -m islm.eval.run --language en --base-path Qwen/Qwen3-4B-Instruct --no-think \
+  python -m islm.eval.run --language en --base-path Qwen/Qwen3-4B-Instruct-2507 --no-think \
       --curated --judge-model <judge> --adversarial --out evals/baseline
   ```
 

@@ -4,7 +4,7 @@
 
 The local CPU runs proved the loop and moved the eval (English OOV 0.41 → 0.17), but they can't
 clear the spec: a 135M model on 22 hand-authored examples caps out well short of the OOV ≤ 0.02
-gate. The PRD's actual target is **Qwen3-4B-Instruct fine-tuned with QLoRA on a single 24 GB GPU**
+gate. The PRD's actual target is **Qwen3-4B-Instruct-2507 fine-tuned with QLoRA on a single 24 GB GPU**
 (PRD §11). That needs a GPU we don't have locally. We have **$10 of Colab credit** — enough for the
 first real base-vs-tuned *win*, if spent deliberately. This plan says how.
 
@@ -56,26 +56,26 @@ A `notebooks/train_colab.ipynb` should do, in order:
 !git clone <repo> && cd slm && pip install -e . && pip install bitsandbytes unsloth
 
 # 2. Smoke (Phase 0) — cheap sanity before the real burn
-!python -m islm.train.sft --data data/curated/seed --base Qwen/Qwen3-4B-Instruct \
+!python -m islm.train.sft --data data/curated/seed --base Qwen/Qwen3-4B-Instruct-2507 \
     --qlora --smoke --out outputs/colab_smoke
 
 # 3. Sweep (Phase 2) — short runs, vary one knob at a time, eval each
-!python -m islm.train.sft --data data/curated/en --base Qwen/Qwen3-4B-Instruct --qlora \
+!python -m islm.train.sft --data data/curated/en --base Qwen/Qwen3-4B-Instruct-2507 --qlora \
     --epochs 1 --lr 2e-4 --lora-r 16 --max-seq-len 2048 --out outputs/sweep_lr2e4
 # ... repeat for lr 1e-4, rank 32, then eval each with islm.eval.run --track
 
 # 4. Full run (Phase 3) — switch runtime to A100, winning config, more epochs.
 #    --merge writes a standalone fp16 model (outputs/qwen3_4b_qlora-merged) for eval/upload.
-!python -m islm.train.sft --data data/curated/en --base Qwen/Qwen3-4B-Instruct --qlora \
+!python -m islm.train.sft --data data/curated/en --base Qwen/Qwen3-4B-Instruct-2507 --qlora \
     --epochs 3 --lr <best> --lora-r <best> --max-seq-len 2048 --merge --out outputs/qwen3_4b_qlora
 
 # 5. Eval everything, tracked (Phase 4)
-!python -m islm.eval.run --base-path Qwen/Qwen3-4B-Instruct \
-    --tuned-path Qwen/Qwen3-4B-Instruct --tuned-adapter outputs/qwen3_4b_qlora \
+!python -m islm.eval.run --base-path Qwen/Qwen3-4B-Instruct-2507 \
+    --tuned-path Qwen/Qwen3-4B-Instruct-2507 --tuned-adapter outputs/qwen3_4b_qlora \
     --adversarial --track --run-label colab-qwen3-4b --dataset data/curated/en \
     --out evals/colab
 !python -m islm.eval.run --language en --scenarios evals/scenarios/heldout_exam_en.jsonl \
-    --base-path Qwen/Qwen3-4B-Instruct --tuned-path Qwen/Qwen3-4B-Instruct \
+    --base-path Qwen/Qwen3-4B-Instruct-2507 --tuned-path Qwen/Qwen3-4B-Instruct-2507 \
     --tuned-adapter outputs/qwen3_4b_qlora --track --run-label colab-qwen3-4b-exam --out evals/colab
 ```
 Everything above already exists in the repo — the CLI flags (`--qlora`, `--lr`, `--lora-r`,
