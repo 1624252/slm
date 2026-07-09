@@ -25,6 +25,9 @@ data/vocab/**/*.full.csv
 
 # Curated (second-pass) output — regenerated from generated data by islm.datagen.curate
 data/curated/
+# Compacted teacher data + combined training corpora (regenerated: islm.datagen.compact + concat)
+data/compact/
+data/v7_corpus/
 *.parquet
 *.arrow
 checkpoints/
