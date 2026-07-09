@@ -41,6 +41,27 @@ fits a 768-token window uncut, and matches the eval's `--curated` setup.
 
 <!-- newest first; append a block per run -->
 
+### 2026-07-09 — `v6` (epochs 3 vs v5's 5) — NEGATIVE RESULT, v5 still best
+
+**One variable changed** from v5: epochs 5→3 (r32/α64, lr2e-4, aligned recipe). Hypothesis: the
+coherence/interestingness collapse is over-fitting, so less training should preserve prose quality.
+Final train loss 1.27 (v5: 0.87). Judge = claude-sonnet-4-6.
+
+Golden set, base→tuned (the canonical target):
+
+| lang | OOV (v6) | OOV (v5) | hard (v6/v5) | coherence (v6/v5) |
+| --- | --- | --- | --- | --- |
+| en | 0.425→**0.127** | →0.133 | 0.051 / **0.103** | 0.23 / 0.15 |
+| zh | 0.881→0.377 | →**0.250** | 0.125 / 0.000 | 0.00 / 0.00 |
+| ja | 1.000→0.480 | →**0.117** | 0.000 / **0.250** | 0.00 / 0.00 |
+
+**Verdict: v6 does NOT beat v5.** Fewer epochs nudged English coherence up (0.15→0.23) but
+**regressed OOV badly on zh (0.25→0.38) and ja (0.12→0.48)** and lost ja's hard-passes. Held-out
+was roughly comparable to v5, but golden — the correctness target — is clearly worse. Interpretation:
+the quality collapse is a **model-capacity limit, not over-fitting**; epoch count isn't the lever.
+This is why the overnight plan pivots to **scaling the dataset** (v7): a 135M model on 22 examples
+is near its ceiling regardless of hyperparameters. v5 remains the best adapter.
+
 ### 2026-07-08 — `v5` (aligned QLoRA recipe; **judged**, all criteria, **on the golden set**)
 
 First run scored on **all three criteria families** — deterministic checks, the 8-dimension

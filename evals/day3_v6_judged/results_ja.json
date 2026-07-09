@@ -1,0 +1,242 @@
+{
+  "base": {
+    "model": "HuggingFaceTB/SmolLM2-135M-Instruct",
+    "n": 8,
+    "hard_pass_rate": 0.0,
+    "mean_oov_rate": 1.0,
+    "mean_coverage": 0.0,
+    "one_new_word_pass_rate": 0.0,
+    "recurrence_pass_rate": 0.0,
+    "judge_spec_adherence": 0.0,
+    "judge_robustness": 0.0,
+    "judge_task_quality": 0.0,
+    "judge_consistency": 0.0,
+    "judge_inferability": 0.0,
+    "judge_seductive_detail_control": 0.0,
+    "judge_coherence": 0.0,
+    "judge_interestingness": 0.0,
+    "judge_overall": 0.0,
+    "mean_inferability": 0.0
+  },
+  "error_analysis": {
+    "base": {
+      "n": 8,
+      "failing": 8,
+      "reasons": {
+        "oov": 8,
+        "coverage": 8,
+        "one_new_word": 8,
+        "recurrence": 8
+      }
+    },
+    "tuned": {
+      "n": 8,
+      "failing": 6,
+      "reasons": {
+        "oov": 6,
+        "coverage": 6,
+        "one_new_word": 4,
+        "recurrence": 2
+      }
+    }
+  },
+  "base_rows": [
+    {
+      "id": "ja-0000",
+      "hard_pass": false,
+      "oov_rate": 1.0,
+      "failures": [
+        "oov",
+        "coverage",
+        "one_new_word",
+        "recurrence"
+      ],
+      "story": "In the bustling streets of Tokyo, a lost key was found. The key was a small, intricately carved wooden box with a delicate lock. The box was worn and faded, but it held a special significance. The key was a gift from a young woman named Yumi, who had been searching for a way to unlock the secrets of the city.\n\nYumi had been searching for a way to unlock the city's hidden treasures, and the key was the key to unlocking the city's secrets. The key was a gift from a young woman named Yumi, who had been searching for a way to unlock the city's hidden treasures.\n\nYumi had been searching for a way to unlock the city's hidden treasures, and the key was the key to unlocking the city's hidden treasures. The key was a gift from a young woman named Yumi, who had been searching for a way to unlock the city's hidden treasures.\n\nYumi had been searching for a way to unlock the city's hidden treasures, and the key was the key to unlocking the city's hidden"
+    },
+    {
+      "id": "ja-0001",
+      "hard_pass": false,
+      "oov_rate": 1.0,
+      "failures": [
+        "oov",
+        "coverage",
+        "one_new_word",
+        "recurrence"
+      ],
+      "story": "Title: A Cat Detective\n\nIn the sleepy town of Kuroshio, where the sun never sets and the misty mountains never rise, a young detective named Akira lived. She was a quiet, observant cat who had spent her whole life studying the intricacies of the world around her. Akira was a cat detective, and she had spent her entire life studying the mysteries of the world.\n\nOne day, a mysterious stranger walked into the town, and the townspeople were all in a state of shock. Akira, who had been studying the cat world, was the only one who could help the stranger. She had spent years studying the cat world, and she had learned that the stranger was a cat detective.\n\nAkira's first task was to find the stranger. She spent hours in the library, studying the cat world, and talking to the townspeople. She was determined to find the stranger and bring him to justice.\n\nOne day, Akira met a young man named Kaito. Kaito was a young man"
+    },
+    {
+      "id": "ja-0002",
+      "hard_pass": false,
+      "oov_rate": 1.0,
+      "failures": [
+        "oov",
+        "coverage",
+        "one_new_word",
+        "recurrence"
+      ],
+      "story": "The sun was setting over the mountains, casting a warm orange glow over the sleepy village. A lone figure emerged from the shadows, their eyes fixed on the horizon, as if lost in the vast expanse of the sky. They were a young woman, her hair tied back in a loose ponytail, and her eyes, a deep shade of indigo, seemed to hold a thousand secrets.\n\nAs she walked, the villagers watched with a mix of curiosity and trepidation, their faces set in a determined expression. The villagers, however, were not deterred. They had been waiting for this moment for years, and now, with the sun setting, they were ready to take the leap.\n\nThe villagers' faces were a mix of wonder and trepidation, as they watched the young woman's eyes, and the way her eyes seemed to hold a thousand secrets. They were a family, a family of sorts, and they were ready to take the leap.\n\nThe villagers' eyes were a mix of wonder and trepidation, as they watched the young woman's eyes"
+    },
+    {
+      "id": "ja-0003",
+      "hard_pass": false,
+      "oov_rate": 1.0,
+      "failures": [
+        "oov",
+        "coverage",
+        "one_new_word",
+        "recurrence"
+      ],
+      "story": "The dog was a funny dog. He had a big nose and a big floppy ears. He was very smart and could play with his toys. He loved to play with his toys and chase after them. He was very happy and always had a smile on his face.\n\nOne day, a big dog named Max came to visit. Max was very happy and always had a big smile on his face. He was very smart and could play with his toys. He loved to play with his toys and chase after them. He was very happy and always had a big smile on his face.\n\nOne day, a big dog named Max came to visit. Max was very happy and always had a big smile on his face. He was very smart and could play with his toys. He loved to play with his toys and chase after them. He was very happy and always had a big smile on his face.\n\nOne day, a big dog named Max came to visit. Max was very happy and always had a big smile on his face. He was very smart and could play with"
+    },
+    {
+      "id": "ja-0004",
+      "hard_pass": false,
+      "oov_rate": 1.0,
+      "failures": [
+        "oov",
+        "coverage",
+        "one_new_word",
+        "recurrence"
+      ],
+      "story": "In the quiet garden, a young woman named Aiko sat on a bench, her eyes fixed on the flowers. She was a shy one, but her curiosity was piqued by the vibrant colors and delicate petals of the cherry blossoms. As she watched, a gentle breeze rustled the leaves, and the petals began to open, releasing a sweet fragrance that filled her senses.\n\nAiko's gaze drifted to the nearby pond, where a small fish darted between the reeds. She was fascinated by the way the water flowed, and the way the ripples created a soothing melody. As she watched, a small bird perched on a branch, its feathers a vibrant shade of blue.\n\nAiko's curiosity was piqued, and she decided to investigate. She gently touched the bird's feathers, and the bird began to sing a soft melody. Aiko's heart skipped a beat as she listened, and she felt a sense of wonder.\n\nAiko's curiosity was piqued, and she decided to investigate. She gently touched the bird's feathers, and the bird began to sing a soft melody"
+    },
+    {
+      "id": "ja-0005",
+      "hard_pass": false,
+      "oov_rate": 1.0,
+      "failures": [
+        "oov",
+        "coverage",
+        "one_new_word",
+        "recurrence"
+      ],
+      "story": "In the old house, a night in the old house, where the old house stood,\nThe old house stood tall, its windows wide open,\nThe old house stood tall, its windows wide open,\nThe old house stood tall, its windows wide open,\nThe old house stood tall, its windows wide open,\nThe old house stood tall, its windows wide open,\nThe old house stood tall, its windows wide open,\nThe old house stood tall, its windows wide open,\nThe old house stood tall, its windows wide open,\nThe old house stood tall, its windows wide open,\nThe old house stood tall, its windows wide open,\nThe old house stood tall, its windows wide open,\nThe old house stood tall, its windows wide open,\nThe old house stood tall, its windows wide open,\nThe old house stood tall, its windows wide open,\nThe old house stood tall, its windows wide open,\nThe old house stood tall, its windows wide open,\nThe old house stood tall, its windows wide"
+    },
+    {
+      "id": "ja-0006",
+      "hard_pass": false,
+      "oov_rate": 1.0,
+      "failures": [
+        "oov",
+        "coverage",
+        "one_new_word",
+        "recurrence"
+      ],
+      "story": "In the old house, a night in the old house, where the old man sat by the fire, the old woman watched him with a look of sadness. She had been a young woman, but her life had changed since her husband passed away. She had been a nurse, but her husband had passed away too. She had been a teacher, but her husband had passed away too. She had been a farmer, but her husband had passed away too. She had been a musician, but her husband had passed away too. She had been a teacher, but her husband had passed away too. She had been a nurse, but her husband had passed away too. She had been a farmer, but her husband had passed away too. She had been a teacher, but her husband had passed away too. She had been a farmer, but her husband had passed away too. She had been a teacher, but her husband had passed away too. She had been a farmer, but her husband had passed away too. She had been a teacher, but her husband had passed away too. She had"
+    },
+    {
+      "id": "ja-0007",
+      "hard_pass": false,
+      "oov_rate": 1.0,
+      "failures": [
+        "oov",
+        "coverage",
+        "one_new_word",
+        "recurrence"
+      ],
+      "story": "The new friend, a young man named Kaito, had just arrived in Tokyo. He was a bit nervous, but his friends and family were all so supportive. They had been waiting for him for weeks, and he had finally arrived.\n\nKaito was a bit shy, but his friends and family were all so warm and welcoming. They had been waiting for him for weeks, and he had finally arrived.\n\nKaito was a bit nervous, but his friends and family were all so warm and welcoming. They had been waiting for him for weeks, and he had finally arrived.\n\nKaito was a bit nervous, but his friends and family were all so warm and welcoming. They had been waiting for him for weeks, and he had finally arrived.\n\nKaito was a bit nervous, but his friends and family were all so warm and welcoming. They had been waiting for him for weeks, and he had finally arrived.\n\nKaito was a bit nervous, but his friends and family were all so warm and welcoming. They"
+    }
+  ],
+  "tuned": {
+    "model": "HuggingFaceTB/SmolLM2-135M-Instruct",
+    "n": 8,
+    "hard_pass_rate": 0.25,
+    "mean_oov_rate": 0.186,
+    "mean_coverage": 0.814,
+    "one_new_word_pass_rate": 0.5,
+    "recurrence_pass_rate": 0.75,
+    "judge_spec_adherence": 0.5,
+    "judge_robustness": 0.375,
+    "judge_task_quality": 0.0,
+    "judge_consistency": 0.625,
+    "judge_inferability": 0.5,
+    "judge_seductive_detail_control": 0.0,
+    "judge_coherence": 0.0,
+    "judge_interestingness": 0.0,
+    "judge_overall": 0.25,
+    "mean_inferability": 0.375
+  },
+  "tuned_rows": [
+    {
+      "id": "ja-0000",
+      "hard_pass": false,
+      "oov_rate": 1.0,
+      "failures": [
+        "oov",
+        "coverage",
+        "one_new_word",
+        "recurrence"
+      ],
+      "story": "Kono koto wa ikimasu. Koto wa ikimasu. Koto wa ikimasu. Koto wa ikimasu. Koto wa ikimasu. Koto wa ikimasu. Koto wa ikimasu. Koto wa ikimasu. Koto wa ikimasu. Koto wa ikimasu. Koto wa ikimasu. Koto wa ikimasu. Koto wa ikimasu. Koto wa ikimasu. Koto wa ikimasu. Koto wa ikimasu. Koto wa ikimasu. Koto wa ikimasu. Koto wa ikimasu. Koto wa ikimasu. Koto wa ikimasu. Koto wa ikimasu. Koto wa ikimasu. Koto wa ikimasu. Koto wa ikimasu. Koto wa ikimasu. Koto wa ikimasu. Koto"
+    },
+    {
+      "id": "ja-0001",
+      "hard_pass": false,
+      "oov_rate": 0.023,
+      "failures": [
+        "oov",
+        "coverage",
+        "recurrence"
+      ],
+      "story": "一、これは猫の犬です。これは猫の犬です。猫の犬は猫の犬です。猫の犬は猫の犬です。猫の犬は猫の犬です。猫の犬は猫の犬です。猫の犬は猫の犬です。猫の犬は猫の犬です。猫の犬は猫の犬です。猫の犬は猫の犬です。猫の犬は猫の犬です。猫の"
+    },
+    {
+      "id": "ja-0002",
+      "hard_pass": false,
+      "oov_rate": 0.161,
+      "failures": [
+        "oov",
+        "coverage",
+        "one_new_word"
+      ],
+      "story": "神秘は、宝物があるというかと言います。宝物は、神秘です。神秘は、宝物があるというかと言います。宝物が神秘です。宝物が神秘です。宝物が神秘です。宝物が神秘です。宝物が神秘です。宝物が神秘です。宝物が神秘です。宝物が神秘です。宝物が神秘です。宝�"
+    },
+    {
+      "id": "ja-0003",
+      "hard_pass": true,
+      "oov_rate": 0.0,
+      "failures": [],
+      "story": "あなたはロボットです。あなたはロボットです。あなたはロボットです。あなたはロボットです。あなたはロボットです。あなたはロボットです。あなたはロボットです。あなたはロボットです。あなたはロボットです。あなたはロボットです。あなたはロボットです。"
+    },
+    {
+      "id": "ja-0004",
+      "hard_pass": false,
+      "oov_rate": 0.192,
+      "failures": [
+        "oov",
+        "coverage",
+        "one_new_word"
+      ],
+      "story": "一、私は神秘の神秘の宝物です。 二、神秘の宝物は神秘の神秘の宝物です。 三、神秘の宝物は神秘の宝物です。 四、神秘の宝物は神秘の宝物です。 五、神秘の宝物は神秘の宝物です。"
+    },
+    {
+      "id": "ja-0005",
+      "hard_pass": true,
+      "oov_rate": 0.0,
+      "failures": [],
+      "story": "あなたはかごまでです。あなたはかごまでです。あなたはかごまでです。あなたはかごまでです。あなたはかごまでです。あなたはかごまでです。あなたはかごまでです。あなたはかごまでです。あなたはかごまでです。あなたはかごまでです。あなたはかごまでです。"
+    },
+    {
+      "id": "ja-0006",
+      "hard_pass": false,
+      "oov_rate": 0.071,
+      "failures": [
+        "oov",
+        "coverage",
+        "one_new_word"
+      ],
+      "story": "雨がください。羽根が羽根です。羽根は羽根です。羽根は羽根です。羽根は羽根です。羽根は羽根です。羽根は羽根です。羽根は羽根です。羽根は羽根です。羽根は羽根です。羽根は羽根です。羽根は羽根です。羽根は羽根です。羽根は羽根です。"
+    },
+    {
+      "id": "ja-0007",
+      "hard_pass": false,
+      "oov_rate": 0.04,
+      "failures": [
+        "oov",
+        "coverage"
+      ],
+      "story": "あなたはかごじです。あなたはかごじです。あなたはかごじです。あなたはかごじです。あなたはかごじです。あなたはかごじです。あなたはかごじです。あなたはかごじです。あなたはかごじです。あなたはかごじです。あなたはかごじです。あなたはかごじです。あな"
+    }
+  ]
+}
