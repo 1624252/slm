@@ -41,6 +41,58 @@ fits a 768-token window uncut, and matches the eval's `--curated` setup.
 
 <!-- newest first; append a block per run -->
 
+### 2026-07-09 — `v7` (4× teacher data) — under-trained on CPU; v5 still best
+
+**The data-scaling test.** Only variable vs v5: the dataset. Used the teacher endpoint to generate
+a **4× larger corpus** — `data/v7_corpus`, **87 train records** (en 50 / zh 30 / ja 7) = compact
+teacher(en/zh/ja) + the 22-record seed. Same hyperparameters as v5 (r32/α64, lr2e-4, seq 1024)
+**except** steps: an overnight CPU slowdown (~150 s/step) forced `--max-steps 40` to fit the budget
+(v5 ran 110). Final train loss **1.99** (v5: 0.87) — i.e. **under-trained**.
+
+Golden set, tuned v5 → v7 (en; zh/ja pending at cutoff):
+
+| lang | OOV | hard-pass | ≤1-new | coherence | judge overall |
+| --- | --- | --- | --- | --- | --- |
+| en | 0.133 → 0.222 | 0.103 → **0.000** | 0.487 → **0.026** | 0.15 → 0.20 | 0.45 → **0.16** |
+
+**Verdict: v7 does NOT beat v5** — worse OOV, lost hard-passes, ≤1-new collapsed. But this is a
+**confounded test**, not evidence against data scaling: 40 steps (loss 1.99) is far too few for the
+model to fit the constraints, regardless of data quality. On CPU, more data needs more steps, and
+the box can't afford both. **What we actually learned:** the data-scaling hypothesis is *untestable
+on CPU* — it needs the GPU (4× data + adequate steps together). v5 remains the best adapter.
+
+---
+
+## FINAL OVERNIGHT SUMMARY (2026-07-09, ~07:00)
+
+**Best model: `v5`** (`outputs/day3_lora_v5`) — unchanged by the overnight work, but now far better
+understood. Golden set, base→tuned: en OOV 0.43→0.13, zh 0.88→0.25, ja 1.00→0.12; en/ja post
+hard-passes; spec-adherence/robustness/consistency up. Its one weakness — coherence/interestingness
+drop to ~0 — is the open problem.
+
+**The v3→v7 arc and what it proved:**
+- v3→v5: hyperparameter search (epochs, rank, LR) improved OOV but plateaued; every tuned model
+  traded prose quality (coherence/interestingness) for vocabulary control.
+- **v6** (epochs 3): NEGATIVE — worse than v5 on golden. → hyperparameter tuning is **capped** for a
+  135M model on 22 examples.
+- **v7** (4× teacher data): under-trained on CPU (40 steps), lost to v5. → data scaling is the right
+  lever but is **compute-bound on CPU** — can't get more data *and* enough steps in one night.
+- **Both roads converge on the same conclusion: the real gains need the Colab GPU run.** A 4B model
+  (Qwen3-4B) with QLoRA can hold the constraints without flattening the story AND absorb a larger
+  teacher corpus with adequate steps — exactly what CPU cannot.
+
+**Durable overnight artifacts (all committed):**
+- Teacher data pipeline made **resilient** (client retries + skip-failed-scenario) after a network
+  blip killed a batch — critical for the unattended GPU corpus run.
+- `islm.datagen.compact` — fixes the teacher records' giant-prompt bug (~5.2k→~830 tok); **required
+  before training on any teacher data**.
+- A validated teacher corpus recipe: en 60% / zh 75% / ja 10% keep rates measured.
+- v6 + v7 fully evaluated (all criteria) and documented.
+
+**Next step (for the GPU):** `docs/COLAB_PLAN.md` — generate a few-thousand-record teacher corpus
+(compact it), QLoRA-tune Qwen3-4B with the aligned recipe + adequate steps, eval on golden. That is
+the run expected to beat v5 on both OOV *and* coherence/interestingness.
+
 ### 2026-07-09 — `v6` (epochs 3 vs v5's 5) — NEGATIVE RESULT, v5 still best
 
 **One variable changed** from v5: epochs 5→3 (r32/α64, lr2e-4, aligned recipe). Hypothesis: the

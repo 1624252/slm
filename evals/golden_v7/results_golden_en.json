@@ -1,0 +1,981 @@
+{
+  "base": {
+    "model": "HuggingFaceTB/SmolLM2-135M-Instruct",
+    "n": 39,
+    "hard_pass_rate": 0.0,
+    "mean_oov_rate": 0.4248,
+    "mean_coverage": 0.5752,
+    "one_new_word_pass_rate": 0.0,
+    "recurrence_pass_rate": 0.2051,
+    "judge_spec_adherence": 0.0,
+    "judge_robustness": 0.0,
+    "judge_task_quality": 0.179,
+    "judge_consistency": 0.103,
+    "judge_inferability": 0.385,
+    "judge_seductive_detail_control": 0.231,
+    "judge_coherence": 0.205,
+    "judge_interestingness": 0.077,
+    "judge_overall": 0.147,
+    "mean_inferability": 0.179
+  },
+  "error_analysis": {
+    "base": {
+      "n": 39,
+      "failing": 39,
+      "reasons": {
+        "oov": 39,
+        "coverage": 39,
+        "one_new_word": 39,
+        "recurrence": 31
+      }
+    },
+    "tuned": {
+      "n": 39,
+      "failing": 39,
+      "reasons": {
+        "one_new_word": 38,
+        "oov": 35,
+        "coverage": 35,
+        "recurrence": 35
+      }
+    }
+  },
+  "base_rows": [
+    {
+      "id": "en-gold-000",
+      "hard_pass": false,
+      "oov_rate": 0.495,
+      "failures": [
+        "oov",
+        "coverage",
+        "one_new_word",
+        "recurrence"
+      ],
+      "story": "The sun was setting over the sea, casting a warm glow over the bustling city. The sound of the waves crashing against the shore was a soothing melody, a gentle reminder of the beauty that lay just beyond the horizon. As the sun dipped below the horizon, the sky transformed into a kaleidoscope of colors, a vibrant display of life that seemed to pulse with life.\n\nIn the distance, a lone figure emerged from the darkness, their eyes fixed on the horizon. They were a young woman, her face serene and her eyes aglow with a deep sense of peace. She was a photographer, capturing the essence of the moment, and her presence was a reminder of the beauty that lay just beyond the edge of reality.\n\nAs she walked, the world around her seemed to slow down, and the sounds of the city began to fade away. She was a photographer, capturing the fleeting moments of life, and her presence was a reminder of the beauty that lay just beyond the edge of reality.\n\nIn the distance, a lone figure emerged from the darkness, their eyes fixed"
+    },
+    {
+      "id": "en-gold-001",
+      "hard_pass": false,
+      "oov_rate": 0.511,
+      "failures": [
+        "oov",
+        "coverage",
+        "one_new_word"
+      ],
+      "story": "The harbor was calm, and the birds sang their sweet melodies. The sun was shining, and the sea was calm, making it perfect for a day at the beach. The seagulls flew overhead, their cries echoing off the rocks. The smell of saltwater and seaweed wafted through the air, enticing the curious.\n\nAs the sun began to set, the harbor was filled with the sounds of the sea. The waves crashed against the shore, creating a soothing sound. The seagulls flew overhead, their cries echoing off the rocks. The smell of saltwater and seaweed wafted through the air, enticing the curious.\n\nThe sun was setting, casting a warm glow over the harbor. The birds sang their sweet melodies, their songs filling the air. The sea was calm, and the sun was setting, casting a golden glow over the harbor. The seagulls flew overhead, their cries echoing off the rocks. The smell of saltwater and seaweed wafted through the air, enticing the curious.\n\nAs the sun dipped below the horizon, the harbor was filled with the sounds"
+    },
+    {
+      "id": "en-gold-002",
+      "hard_pass": false,
+      "oov_rate": 0.42,
+      "failures": [
+        "oov",
+        "coverage",
+        "one_new_word"
+      ],
+      "story": "The meadow was a peaceful place, where the sun's rays danced across the grass, and the birds sang their sweet melodies. The air was filled with the scent of blooming flowers, and the sound of birds chirping filled the air. The sun was shining brightly, casting a warm glow over the meadow.\n\nAs the sun began to set, the meadow transformed into a vibrant tapestry of colors. The sky was a deep shade of blue, and the sky was painted with hues of pink and orange. The sun's rays danced across the meadow, casting a warm glow over the entire scene.\n\nThe meadow was a place of tranquility, where the creatures of the forest lived and laughed. The meadow was a place of peace, where the animals would roam freely, and the birds would sing their songs. The meadow was a place of wonder, where the creatures of the forest would come together to play and dance.\n\nAs the sun set, the meadow transformed into a place of wonder. The sky was a deep shade of blue, and the sky was painted with hues of pink and orange"
+    },
+    {
+      "id": "en-gold-003",
+      "hard_pass": false,
+      "oov_rate": 0.421,
+      "failures": [
+        "oov",
+        "coverage",
+        "one_new_word"
+      ],
+      "story": "The comet was a sight to behold, its tail a vibrant green hue as it streaked across the sky. The comet was a sight to behold, its tail a vibrant green hue as it streaked across the sky. The comet was a sight to behold, its tail a vibrant green hue as it streaked across the sky. The comet was a sight to behold, its tail a vibrant green hue as it streaked across the sky. The comet was a sight to behold, its tail a vibrant green hue as it streaked across the sky. The comet was a sight to behold, its tail a vibrant green hue as it streaked across the sky. The comet was a sight to behold, its tail a vibrant green hue as it streaked across the sky. The comet was a sight to behold, its tail a vibrant green hue as it streaked across the sky. The comet was a sight to behold, its tail a vibrant green hue as it streaked across the sky. The comet was a sight to behold, its tail a vibrant green hue as it streaked across the sky."
+    },
+    {
+      "id": "en-gold-004",
+      "hard_pass": false,
+      "oov_rate": 0.368,
+      "failures": [
+        "oov",
+        "coverage",
+        "one_new_word",
+        "recurrence"
+      ],
+      "story": "The cold morning was a perfect setting for a story. The snow was falling gently, and the wind was howling through the trees. The only sound was the gentle hum of the wind through the leaves. The sky was a deep shade of blue, and the only light came from the distant sun.\n\nAs the sun began to set, the snowflakes began to fall, creating a delicate pattern on the ground. The snowflakes were small, but they were so soft and delicate. They seemed to be watching the world go by, and the snowflakes seemed to be watching the world go by.\n\nThe story began with a young girl, who was sitting on a bench, looking out at the snow. She was a little girl, and she was very curious. She was looking at the snowflakes, and she was trying to figure out what they were. She was trying to figure out what the snowflakes were doing.\n\nAs the snowflakes fell, the girl was trying to figure out what the snowflakes were doing. She was trying to figure out what the snowflakes"
+    },
+    {
+      "id": "en-gold-005",
+      "hard_pass": false,
+      "oov_rate": 0.268,
+      "failures": [
+        "oov",
+        "coverage",
+        "one_new_word",
+        "recurrence"
+      ],
+      "story": "The sculptor's face was a testament to his skill, his chiseled features a testament to his skill. He was a master of his craft, and his work was a testament to his skill. He was a master of his craft, and his work was a testament to his skill. He was a master of his craft, and his work was a testament to his skill. He was a master of his craft, and his work was a testament to his skill. He was a master of his craft, and his work was a testament to his skill. He was a master of his craft, and his work was a testament to his skill. He was a master of his craft, and his work was a testament to his skill. He was a master of his craft, and his work was a testament to his skill. He was a master of his craft, and his work was a testament to his skill. He was a master of his craft, and his work was a testament to his skill. He was a master of his craft, and his work was a testament to his skill. He"
+    },
+    {
+      "id": "en-gold-006",
+      "hard_pass": false,
+      "oov_rate": 0.497,
+      "failures": [
+        "oov",
+        "coverage",
+        "one_new_word"
+      ],
+      "story": "The orchard was a cozy haven, where the sweet scent of blooming flowers filled the air and the gentle hum of birds filled the air. The trees, their branches stretching towards the sky, seemed to whisper secrets to each other, their leaves rustling softly in the breeze. The air was filled with the scent of fresh-cut grass and the sweet aroma of blooming flowers, which filled the senses and made the senses feel alive.\n\nAs the sun began to set, casting a warm glow over the orchard, the trees began to sway gently in the breeze, their branches creaking softly in the gentle breeze. The birds, their songs filling the air, seemed to sing of the beauty of the orchard, of the sweet scent of blooming flowers and the gentle hum of the trees.\n\nThe orchard was a place of warmth and comfort, where the trees seemed to whisper secrets to each other, and the birds sang their sweet melodies. The air was filled with the scent of fresh-cut grass and the sweet aroma of blooming flowers, which filled the senses and made the senses feel alive."
+    },
+    {
+      "id": "en-gold-007",
+      "hard_pass": false,
+      "oov_rate": 0.457,
+      "failures": [
+        "oov",
+        "coverage",
+        "one_new_word",
+        "recurrence"
+      ],
+      "story": "The warm sun beat down on the worn wooden floorboards as the children played in the park. The sound of laughter and the smell of freshly cut grass filled the air, making the children's skin crawl. They were all excited to see the new kitten, a playful and curious creature that had been hiding in the shadows.\n\nAs the sun dipped below the horizon, the children began to explore the park, their eyes wide with wonder. They climbed up the stairs, their footsteps echoing off the walls. The children laughed and played, their faces aglow with excitement.\n\nSuddenly, a loud noise broke the silence. A dog, its fur ruffled by the wind, ran towards the children. The children froze, their faces aglow with fear. The dog ran towards the children, its tail wagging wildly.\n\nThe children looked at each other, their eyes wide with fear. They knew that the dog was a friend, but they couldn't shake the feeling that it was a bad omen.\n\nThe children looked at each other again, their faces aglow"
+    },
+    {
+      "id": "en-gold-008",
+      "hard_pass": false,
+      "oov_rate": 0.4,
+      "failures": [
+        "oov",
+        "coverage",
+        "one_new_word",
+        "recurrence"
+      ],
+      "story": "In the bustling streets of the city, a young girl named Lily wandered through the crowded alleys, her eyes scanning the colorful murals and the enticing aromas of street food. She had always been fascinated by the way the light danced across the faces of the people, and the way the colors seemed to shift and change as they walked.\n\nAs she walked, she noticed a small, antique shop tucked away in a quiet corner of the alley. The shopkeeper, an elderly woman with a kind smile, greeted her with a warm smile and a gentle hand. \"Lily, I see you're looking for something,\" she said, her voice like a warm breeze on a summer day. \"I have just the thing for you.\"\n\nLily's eyes widened as she took in the shopkeeper's warm smile. \"I'm looking for a new compass,\" she said, her voice barely above a whisper. \"I've always wanted to learn how to use one.\"\n\nThe shopkeeper smiled and handed Lily a small, intricately carved compass case. \"I've got a few different models"
+    },
+    {
+      "id": "en-gold-009",
+      "hard_pass": false,
+      "oov_rate": 0.44,
+      "failures": [
+        "oov",
+        "coverage",
+        "one_new_word"
+      ],
+      "story": "The sun beat down on the canyon, its warm rays piercing through the trees like a shroud. The air was thick with the scent of ozone and the distant hum of a distant city. The sound of the wind rustling through the trees was a soothing melody, a reminder of the beauty that lay just beyond the edge of the canyon.\n\nAs the sun dipped below the horizon, the canyon transformed into a vibrant tapestry of colors. The sky was a deep shade of indigo, and the stars twinkled like diamonds in the night sky. The canyon walls seemed to stretch on forever, their peaks disappearing into the distance like a mirage.\n\nThe canyon was a place of wonder, a place where the boundaries between reality and fantasy blurred. The sounds of the canyon were a symphony of sounds, each one a reminder of the beauty that lay just beyond the edge of the canyon. The rustling of leaves, the chirping of birds, and the soft crunch of gravel beneath the feet all blended together to create a symphony of sounds that seemed to come from nowhere and everywhere at once."
+    },
+    {
+      "id": "en-gold-010",
+      "hard_pass": false,
+      "oov_rate": 0.519,
+      "failures": [
+        "oov",
+        "coverage",
+        "one_new_word",
+        "recurrence"
+      ],
+      "story": "In the cozy cottage, a warm summer evening, the soft light of the sun danced across the windows, casting a warm glow over the room. The air was filled with the sweet scent of blooming flowers, and the soft murmur of conversation filled the air. The kitchen was bustling with the usual tasks, from chopping vegetables to preparing breakfast. The kitchen was a haven for the family, where everyone shared a meal together, and the children played in the backyard.\n\nAs the sun dipped below the horizon, the kitchen was filled with the aroma of freshly baked bread and roasting vegetables. The kitchen was a place where everyone could relax and enjoy each other's company. The children played in the garden, chasing after butterflies and playing tag. The adults sat on the porch, watching the children, and enjoying each other's company.\n\nThe children were always eager to learn, and the kitchen was a place where they could learn new things. They would sit on the edge of the kitchen, listening to the children's stories and enjoying the company of their parents. The kitchen was a place where everyone could"
+    },
+    {
+      "id": "en-gold-011",
+      "hard_pass": false,
+      "oov_rate": 0.472,
+      "failures": [
+        "oov",
+        "coverage",
+        "one_new_word",
+        "recurrence"
+      ],
+      "story": "The world is a beautiful place, filled with vibrant colors and sounds. The waterfall, a gentle trickle, flows gently down a mountain, creating a soothing melody. The sound of the water is soothing, and the air is filled with the scent of blooming flowers.\n\nAs the sun sets, the world comes alive with a vibrant display of colors. The sky is a deep shade of blue, and the leaves of the trees are vibrant with a soft, ethereal light. The sky is painted with hues of pink and orange, and the leaves are vibrant with a soft, ethereal light.\n\nThe world is a beautiful place, filled with vibrant colors and sounds. The waterfall, a gentle trickle, flows gently down a mountain, creating a soothing melody. The sound of the water is soothing, and the air is filled with the scent of blooming flowers.\n\nAs the sun sets, the world comes alive with a vibrant display of colors. The sky is a deep shade of blue, and the leaves of the trees are vibrant with a soft, ethereal light"
+    },
+    {
+      "id": "en-gold-012",
+      "hard_pass": false,
+      "oov_rate": 0.436,
+      "failures": [
+        "oov",
+        "coverage",
+        "one_new_word",
+        "recurrence"
+      ],
+      "story": "As she stood at the edge of the forest, the rustle of leaves and snapping of twigs created a soothing melody that filled her lungs. The sound of the wind rustling through the leaves was a gentle reminder of the world outside, and she felt a sense of peace settle over her. She had always been drawn to the natural world, and the forest was a place where she could find solace and tranquility.\n\nAs she walked, the trees seemed to close in around her, their branches tangling together like a living tapestry. The air was filled with the sweet scent of blooming flowers, and the sound of birdsong filled the air. She felt a sense of connection to the natural world, and the forest seemed to be watching her with a deep, knowing gaze.\n\nThe sun was setting, casting a warm glow over the forest. The leaves were turning a deep shade of orange, and the sky was painted with hues of pink and purple. The trees seemed to be alive, their branches stretching towards the sky like a living, breathing entity.\n\nAs she walked, the sound"
+    },
+    {
+      "id": "en-gold-013",
+      "hard_pass": false,
+      "oov_rate": 0.462,
+      "failures": [
+        "oov",
+        "coverage",
+        "one_new_word",
+        "recurrence"
+      ],
+      "story": "The sun was setting over the city, casting a warm orange glow over the bustling streets. The air was thick with the smell of freshly baked bread and the sound of children's laughter. As the last rays of sunlight faded, the city transformed into a vibrant tapestry of colors, with the city lights casting a kaleidoscope of hues on the pavement.\n\nIn the heart of the city, a small café stood as a beacon of warmth and comfort. The café's owner, a kind-hearted woman named Emma, greeted everyone with a warm smile and a gentle smile. She had been running the café for years, and she knew just what to say to make everyone feel welcome.\n\nAs the sun dipped below the horizon, the city transformed into a world of wonder. The streets were filled with people, and the sounds of music and laughter filled the air. Emma's smile was contagious, and people began to feel at ease.\n\nThe café was a place where people could come together to share their love of food, music, and conversation. Emma's smile was contagious, and people"
+    },
+    {
+      "id": "en-gold-014",
+      "hard_pass": false,
+      "oov_rate": 0.447,
+      "failures": [
+        "oov",
+        "coverage",
+        "one_new_word",
+        "recurrence"
+      ],
+      "story": "The sun beat down on the sidewalk, casting a warm glow over the bustling streets. A lone figure emerged from the shadows, their eyes fixed on the horizon. They were a young woman, her face a map of wrinkles and creases. She was a photographer, capturing the beauty of the city on camera. Her eyes sparkled with a deep sadness, as if the world was watching her.\n\nAs she walked, the sound of her footsteps echoed through the crowded streets. She was a quiet one, her voice barely above a whisper. She was a photographer, capturing the essence of the city on camera. Her eyes, though, were a deep, piercing brown, as if she was searching for something.\n\nThe sun was setting, casting a warm glow over the city. A street performer, a musician, and a dancer were all gathered around a stage. They were all in a rush, their faces a blur of excitement and nervousness. They were all in a hurry, their eyes fixed on the stage.\n\nThe city was alive, pulsing with energy. The streets were"
+    },
+    {
+      "id": "en-gold-015",
+      "hard_pass": false,
+      "oov_rate": 0.422,
+      "failures": [
+        "oov",
+        "coverage",
+        "one_new_word",
+        "recurrence"
+      ],
+      "story": "The world is a beautiful place, filled with wonders and mysteries. The sun rises over the horizon, casting a warm glow over the landscape. The sky is a deep shade of blue, and the air is filled with the sweet scent of blooming flowers. Birds sing their melodies, and the wind whispers secrets in the trees.\n\nAs the sun sets, the world comes alive with a vibrant display of colors. The sky is a deep shade of blue, and the leaves of the trees are a vibrant green. The sky is filled with the sound of birds chirping, and the leaves rustle softly in the breeze.\n\nThe world is a beautiful place, filled with wonders and mysteries. The sun rises over the horizon, casting a warm glow over the landscape. The sky is a deep shade of blue, and the air is filled with the sweet scent of blooming flowers. Birds sing their melodies, and the wind whispers secrets in the trees.\n\nAs the sun sets, the world comes alive with a vibrant display of colors. The sky is a deep shade of blue, and the air"
+    },
+    {
+      "id": "en-gold-016",
+      "hard_pass": false,
+      "oov_rate": 0.39,
+      "failures": [
+        "oov",
+        "coverage",
+        "one_new_word",
+        "recurrence"
+      ],
+      "story": "The sun was setting over the sleepy town, casting a warm orange glow over the sleepy town. The town was quiet, except for the occasional chirping of birds and the soft murmur of the town's residents. The town was quiet, except for the occasional chirping of birds and the soft murmur of the town's residents. The town was quiet, except for the occasional chirping of birds and the soft murmur of the town's residents. The town was quiet, except for the occasional chirping of birds and the soft murmur of the town's residents. The town was quiet, except for the occasional chirping of birds and the soft murmur of the town's residents. The town was quiet, except for the occasional chirping of birds and the soft murmur of the town's residents. The town was quiet, except for the occasional chirping of birds and the soft murmur of the town's residents. The town was quiet, except for the occasional chirping of birds and the soft murmur of the town's residents. The town was quiet, except for the occasional"
+    },
+    {
+      "id": "en-gold-017",
+      "hard_pass": false,
+      "oov_rate": 0.508,
+      "failures": [
+        "oov",
+        "coverage",
+        "one_new_word",
+        "recurrence"
+      ],
+      "story": "The tranquil morning air filled the small apartment, and the gentle hum of the refrigerator filled the space. The kitchen was quiet, save for the occasional chirping of birds and the soft hum of the refrigerator. The aroma of freshly baked cookies wafted through the air, and the scent of freshly brewed coffee wafted from the coffee machine.\n\nAs the morning sun began to set, the apartment transformed into a peaceful oasis. The windows were open, allowing the soft glow of the setting sun to illuminate the space. The air was filled with the scent of fresh flowers and the sweet aroma of blooming flowers. The sound of birds chirping filled the air, and the gentle hum of the refrigerator filled the space.\n\nThe apartment was a cozy haven, a place where people could relax and unwind. The walls were adorned with a variety of plants, and the air was filled with the scent of fresh flowers. The apartment was a place where people could escape the stresses of everyday life and find peace.\n\nAs the sun began to set, the apartment transformed into a peaceful oasis."
+    },
+    {
+      "id": "en-gold-018",
+      "hard_pass": false,
+      "oov_rate": 0.376,
+      "failures": [
+        "oov",
+        "coverage",
+        "one_new_word",
+        "recurrence"
+      ],
+      "story": "The sun beat down on the worn wooden floorboards as the children played in the park. They were all excited to see the colorful birds flying overhead. The children were so close, they could almost hear their voices.\n\nThe children were all excited to see the birds flying overhead. They were so close, they could almost hear their voices.\n\nThe children were all excited to see the birds flying overhead. They were so close, they could almost hear their voices.\n\nThe children were all excited to see the birds flying overhead. They were so close, they could almost hear their voices.\n\nThe children were all excited to see the birds flying overhead. They were so close, they could almost hear their voices.\n\nThe children were all excited to see the birds flying overhead. They were so close, they could almost hear their voices.\n\nThe children were all excited to see the birds flying overhead. They were so close, they could almost hear their voices.\n\nThe children were all excited to see the birds flying overhead. They were so close, they could"
+    },
+    {
+      "id": "en-gold-019",
+      "hard_pass": false,
+      "oov_rate": 0.428,
+      "failures": [
+        "oov",
+        "coverage",
+        "one_new_word",
+        "recurrence"
+      ],
+      "story": "The sun was setting over the sleepy town, casting a warm orange glow over the sleepy town. The town was quiet, except for the occasional creak of the old wooden floorboards beneath the windows. The town was quiet, except for the occasional creak of the old wooden floorboards beneath the windows. The town was quiet, except for the occasional creak of the old wooden floorboards beneath the windows. The town was quiet, except for the occasional creak of the old wooden floorboards beneath the windows. The town was quiet, except for the occasional creak of the old wooden floorboards beneath the windows. The town was quiet, except for the occasional creak of the old wooden floorboards beneath the windows. The town was quiet, except for the occasional creak of the old wooden floorboards beneath the windows. The town was quiet, except for the occasional creak of the old wooden floorboards beneath the windows. The town was quiet, except for the occasional creak of the old wooden floorboards beneath the windows. The town was quiet, except for the occasional creak of"
+    },
+    {
+      "id": "en-gold-020",
+      "hard_pass": false,
+      "oov_rate": 0.226,
+      "failures": [
+        "oov",
+        "coverage",
+        "one_new_word",
+        "recurrence"
+      ],
+      "story": "The sun beat down on the worn wooden floorboards as the children played in the park. The children were laughing and joking, their laughter echoing through the empty streets. They were playing in the park, and the children were laughing and joking. They were laughing and joking, and they were laughing and joking. They were laughing and joking, and they were laughing and joking. They were laughing and joking, and they were laughing and joking. They were laughing and joking, and they were laughing and joking. They were laughing and joking, and they were laughing and joking. They were laughing and joking, and they were laughing and joking. They were laughing and joking, and they were laughing and joking. They were laughing and joking, and they were laughing and joking. They were laughing and joking, and they were laughing and joking. They were laughing and joking, and they were laughing and joking. They were laughing and joking, and they were laughing and joking. They were laughing and jo"
+    },
+    {
+      "id": "en-gold-021",
+      "hard_pass": false,
+      "oov_rate": 0.417,
+      "failures": [
+        "oov",
+        "coverage",
+        "one_new_word",
+        "recurrence"
+      ],
+      "story": "The sun beat down on the sidewalk, its rays piercing through the trees like a shard of glass. The air was thick with the scent of ozone and the distant hum of a distant car. A young girl, her eyes wide with wonder, stood at the edge of the street, her face bathed in the warm sunlight. She had just finished a long day of exploring the neighborhood, and her eyes were fixed on the horizon, where the sky was a deep shade of indigo.\n\nAs she walked, the sound of her mother's voice filled the air, and the girl's heart skipped a beat. She had always been fascinated by the way the world seemed to be moving, and the way the world seemed to be changing around her. She had always been drawn to the vibrant colors of the city, and the way the light danced across the buildings.\n\nThe girl's mother, a kind and gentle soul, had been watching her with a warm smile. She had always been a good listener, and she had always been there for her daughter. As she walked, the girl's"
+    },
+    {
+      "id": "en-gold-022",
+      "hard_pass": false,
+      "oov_rate": 0.415,
+      "failures": [
+        "oov",
+        "coverage",
+        "one_new_word",
+        "recurrence"
+      ],
+      "story": "The sun beat down on the worn wooden floorboards as the children played in the park. They were all excited to see the new dinosaur they had discovered. The dinosaur was a big, scaly creature with a long, curved body and a long, pointed snout. It was a favorite of the children's, and they were always eager to learn more about it.\n\nAs the children played, they noticed that the dinosaur was moving around the park. It was moving slowly, but it was still moving. They didn't know what it was doing, but they knew it was moving. They watched as the children played with it, and they were amazed by its size and shape.\n\nThe children were excited to learn more about the dinosaur. They were curious about its name, its habitat, and its habits. They were also excited to learn more about the dinosaur's favorite foods and its favorite toys.\n\nAs the children played, they noticed that the dinosaur was moving around the park. It was moving slowly, but it was still moving. They didn't know what it was doing, but"
+    },
+    {
+      "id": "en-gold-023",
+      "hard_pass": false,
+      "oov_rate": 0.473,
+      "failures": [
+        "oov",
+        "coverage",
+        "one_new_word",
+        "recurrence"
+      ],
+      "story": "The sun was setting over the rolling hills, casting a warm orange glow over the sleepy town. The streets were quiet, except for the occasional clatter of pots and pans as the children played in the park. A young boy, lost in thought, looked up and saw the sun setting over the horizon. He smiled, feeling a sense of peace wash over him.\n\nAs the sun dipped below the horizon, the townspeople gathered around the town square, their faces aglow with the warm light. A group of children played in the park, their laughter and chatter filling the air. The air was filled with the sweet scent of blooming flowers, and the sound of birdsong filled the air.\n\nThe sun was setting over the town, casting a warm orange glow over the sleepy town. The streets were quiet, except for the occasional clatter of pots and pans as the children played in the park. A young boy, lost in thought, looked up and saw the sun setting over the horizon. He smiled, feeling a sense of peace wash over him.\n\nAs the"
+    },
+    {
+      "id": "en-gold-024",
+      "hard_pass": false,
+      "oov_rate": 0.439,
+      "failures": [
+        "oov",
+        "coverage",
+        "one_new_word",
+        "recurrence"
+      ],
+      "story": "The sun was setting over the horizon, casting a warm glow over the bustling city. The streets were bustling with people, their faces filled with the sounds of laughter and conversation. A young girl, her eyes wide with excitement, was running through the crowded alleys, her footsteps echoing off the walls. She was the only one who could hear her, and she was the only one who could see her.\n\nAs she walked, the sound of her footsteps echoed through the crowded alleys, making the air vibrate with anticipation. She was the only one who could hear her, and she was the only one who could see her. The world was a beautiful tapestry, woven from the threads of her footsteps and her eyes.\n\nThe sun was setting over the city, casting a warm glow over the bustling city. The streets were bustling with people, their faces filled with the sounds of laughter and conversation. A young girl, her eyes wide with excitement, was running through the crowded alleys, her footsteps echoing off the walls. She was the only one who could hear her, and she was"
+    },
+    {
+      "id": "en-gold-025",
+      "hard_pass": false,
+      "oov_rate": 0.481,
+      "failures": [
+        "oov",
+        "coverage",
+        "one_new_word",
+        "recurrence"
+      ],
+      "story": "The sun beat down on the worn wooden floorboards as the children played in the winding path. The sound of laughter and the rustle of leaves created a soothing melody that filled the room. The children's laughter was contagious, and the air was filled with the scent of freshly cut grass.\n\nAs the children played, they were surrounded by the sights and sounds of nature. The sun was shining brightly, casting a warm glow over the scene. The children's laughter was contagious, and the air was filled with the sound of their own voices.\n\nThe children's favorite game was a game of hide-and-seek. They would hide in the shadows, and the other children would try to find them. The game was a great way to get to know each other and build a sense of community.\n\nAs the children played, they were surrounded by the sounds of nature. The rustle of leaves, the chirping of birds, and the soft crunch of gravel beneath their feet created a soothing melody that filled the room.\n\nThe children's favorite song was a song about"
+    },
+    {
+      "id": "en-gold-026",
+      "hard_pass": false,
+      "oov_rate": 0.354,
+      "failures": [
+        "oov",
+        "coverage",
+        "one_new_word",
+        "recurrence"
+      ],
+      "story": "The sun beat down on the sidewalk, casting a warm glow over the street. A lone figure emerged from the shadows, their eyes fixed on the horizon. They were a small, shy girl, her name a whispered secret among the children. She was a little girl, with a small, delicate face and a small, mischievous smile. She was the only one who knew the secret of the old, mysterious tree.\n\nAs she walked, the sun's rays danced across her face, making her look like a tiny, tiny thing. She was a little girl, with a small, delicate face and a small, delicate smile. She was the only one who knew the secret of the old, mysterious tree.\n\nThe sun beat down on the sidewalk, casting a warm glow over the street. A lone figure emerged from the shadows, their eyes fixed on the horizon. They were a small, shy girl, her name a whispered secret among the children. She was a little girl, with a small, delicate face and a small, delicate smile. She was the only one who knew the"
+    },
+    {
+      "id": "en-gold-027",
+      "hard_pass": false,
+      "oov_rate": 0.522,
+      "failures": [
+        "oov",
+        "coverage",
+        "one_new_word",
+        "recurrence"
+      ],
+      "story": "The wind howled through the empty streets, a constant reminder of the harsh reality of life. The once-majestic city, once a beacon of hope, now lay in ruins, its once-thriving streets now a barren wasteland. The once-majestic trees, once a symbol of nature's resilience, now stood as skeletal reminders of the city's decline.\n\nAs the sun began to set, casting a warm orange glow over the city, the streets were filled with the sounds of people rushing to and fro, their faces bathed in the warm sunlight. The city's once-beautiful streets now seemed to be a barren wasteland, devoid of life and vitality.\n\nThe city's once-majestic buildings, once a testament to the ingenuity and resilience of its inhabitants, now stood as a testament to the city's decline. The buildings, once a symbol of the city's power and strength, now stood as a reminder of the city's decline.\n\nThe city's once-majestic streets now stood as a reminder of"
+    },
+    {
+      "id": "en-gold-028",
+      "hard_pass": false,
+      "oov_rate": 0.457,
+      "failures": [
+        "oov",
+        "coverage",
+        "one_new_word"
+      ],
+      "story": "The mysterious cellar was a place of eerie silence, where the air was heavy with the scent of decay and the sound of distant footsteps. The walls were adorned with strange symbols, and the air was thick with the smell of decay. The only sound was the soft hum of the wind outside, and the faint whisper of a forgotten song.\n\nAs the sun began to set, casting a warm orange glow over the cellar, the sounds of the outside world grew louder. The wind rustled through the trees, and the birds sang their melodious melodies. The air was filled with the scent of damp earth and decay, and the smell of decay lingered in the air.\n\nThe cellar was a place of mystery, where the boundaries between reality and fantasy blurred. The walls seemed to stretch on forever, and the only thing that remained was the silence. The cellar was a place of secrets, where the truth was hidden, and the truth was hidden in plain sight.\n\nAs the night wore on, the cellar became a place of comfort and refuge. The shadows"
+    },
+    {
+      "id": "en-gold-029",
+      "hard_pass": false,
+      "oov_rate": 0.404,
+      "failures": [
+        "oov",
+        "coverage",
+        "one_new_word"
+      ],
+      "story": "In the sleepy town of Ravenswood, where the sun dipped below the horizon, a peculiar riddle had been passed down through generations. The riddle was a simple one: \"A bat and a ball together cost $1.10. The bat costs $1.00 more than the ball. How much does the ball cost?\"\n\nThe answer was a ball, which cost $1.10. The riddle was a clever one, and the townspeople were baffled. They had no idea how to solve it, and the town's mayor, a man named Mr. Jenkins, was determined to find a solution.\n\nAs Mr. Jenkins pondered the riddle, he noticed that the ball was not the only item in the town. The town's mayor, Mrs. Thompson, had a pet bird, a bluebird, which was a favorite among the townspeople. The bluebird was a resident of Ravenswood, and it was the only bird that could solve the riddle.\n\nMrs. Thompson explained that the bluebird was the only bird that could"
+    },
+    {
+      "id": "en-gold-030",
+      "hard_pass": false,
+      "oov_rate": 0.581,
+      "failures": [
+        "oov",
+        "coverage",
+        "one_new_word",
+        "recurrence"
+      ],
+      "story": "The sun beat down on the beach, casting a warm glow over the waves. The sound of the waves was soothing, and the salty air filled the air. A small boat, its sails a vibrant green, was gliding smoothly along the shore, its hull a gentle curve. The sun was setting, casting a warm orange glow over the horizon.\n\nAs the sun dipped below the horizon, the boat's sails began to take shape. The boat's hull was a delicate, curved shape, with a delicate, curved shape. The boat's sails were a delicate, curved shape, with a delicate, curved shape. The boat's hull was a delicate, curved shape, with a delicate, curved shape. The boat's sails were a delicate, curved shape, with a delicate, curved shape.\n\nThe boat's hull was a delicate, curved shape, with a delicate, curved shape. The boat's sails were a delicate, curved shape, with a delicate, curved shape. The boat's hull was a delicate, curved shape, with a delicate, curved shape. The boat's sails"
+    },
+    {
+      "id": "en-gold-031",
+      "hard_pass": false,
+      "oov_rate": 0.482,
+      "failures": [
+        "oov",
+        "coverage",
+        "one_new_word",
+        "recurrence"
+      ],
+      "story": "The sun beat down on the beach, casting a warm glow over the waves. The sound of the waves crashing against the shore was a soothing melody, a gentle reminder of the beauty that lay hidden beneath the waves. As the sun dipped below the horizon, the sky transformed into a kaleidoscope of colors, a vibrant display of life that seemed to pulse with life.\n\nThe sun was a symbol of hope and renewal, a reminder that even in the darkest of times, there was always a glimmer of possibility. The beach was a place of comfort and relaxation, where people could unwind and recharge. The sound of the waves was a soothing accompaniment to the gentle hum of the ocean, a reminder that even in the most challenging of circumstances, there was always a way to find peace and happiness.\n\nAs the sun dipped below the horizon, the sky transformed into a kaleidoscope of colors, a vibrant display of life that seemed to pulse with life. The sound of the waves was a soothing accompaniment to the gentle hum of the ocean, a reminder that even in the darkest of"
+    },
+    {
+      "id": "en-gold-032",
+      "hard_pass": false,
+      "oov_rate": 0.145,
+      "failures": [
+        "oov",
+        "coverage",
+        "one_new_word"
+      ],
+      "story": "The pebble was a small, delicate object that caught the eye of the curious child. It was a small pebble, but it was so small that it was almost invisible. The pebble was a small pebble, but it was so small that it was almost invisible.\n\nThe pebble was a small pebble, but it was so small that it was almost invisible. It was a small pebble, but it was so small that it was almost invisible.\n\nThe pebble was a small pebble, but it was so small that it was almost invisible. It was a small pebble, but it was so small that it was almost invisible.\n\nThe pebble was a small pebble, but it was so small that it was almost invisible. It was a small pebble, but it was so small that it was almost invisible.\n\nThe pebble was a small pebble, but it was so small that it was almost invisible. It was a small pebble, but it was so small that it was almost invisible.\n\nThe peb"
+    },
+    {
+      "id": "en-gold-033",
+      "hard_pass": false,
+      "oov_rate": 0.601,
+      "failures": [
+        "oov",
+        "coverage",
+        "one_new_word",
+        "recurrence"
+      ],
+      "story": "The aroma of freshly baked bread wafted through the air, enticing the senses. The aroma was a mix of sweet and savory notes, and it was the perfect accompaniment to the warm summer evening. As the aroma wafted through the air, the aroma of freshly baked bread filled the air, and the smell of freshly baked bread filled the air.\n\nThe aroma of freshly baked bread filled the air, and the smell of freshly baked bread filled the air. The aroma of freshly baked bread filled the air, and the smell of freshly baked bread filled the air.\n\nThe aroma of freshly baked bread filled the air, and the smell of freshly baked bread filled the air. The aroma of freshly baked bread filled the air, and the smell of freshly baked bread filled the air.\n\nThe aroma of freshly baked bread filled the air, and the smell of freshly baked bread filled the air. The aroma of freshly baked bread filled the air, and the smell of freshly baked bread filled the air.\n\nThe aroma of freshly baked bread filled the air, and the smell of freshly"
+    },
+    {
+      "id": "en-gold-034",
+      "hard_pass": false,
+      "oov_rate": 0.446,
+      "failures": [
+        "oov",
+        "coverage",
+        "one_new_word",
+        "recurrence"
+      ],
+      "story": "The sun beat down on the weathered barn, its warm rays piercing through the trees. The wind howled through the trees, carrying the scent of damp earth and the promise of a new day. A small bird, its wings flapping wildly, sang a melodious tune, its song a reminder of the beauty that lay hidden beneath the surface.\n\nAs the sun dipped below the horizon, the barn's wooden beams seemed to stretch towards the sky, their wooden planks worn smooth by the years. The barn's wooden floor, once a warm and inviting place, now felt like a cold, unforgiving place. A small dog, its fur shivering with cold, sat on the wooden floor, its eyes fixed on the barn.\n\nThe wind whispered through the trees, carrying the sound of a bird's song. A small child, her eyes wide with wonder, sat on the wooden floor, her face hidden behind a blanket. A small child, her eyes wide with wonder, sat on the wooden floor, her face hidden behind a blanket.\n\nThe sun dipped below the"
+    },
+    {
+      "id": "en-gold-035",
+      "hard_pass": false,
+      "oov_rate": 0.4,
+      "failures": [
+        "oov",
+        "coverage",
+        "one_new_word",
+        "recurrence"
+      ],
+      "story": "The meadow was a place of peace and tranquility, where the sun's rays danced across the grass, and the birds sang their sweet melodies. The air was filled with the scent of blooming flowers, and the sound of birdsong filled the air. The sun was shining brightly, casting a warm glow over the meadow.\n\nAs the sun began to set, the meadow transformed into a vibrant tapestry of colors. The sky was a deep shade of blue, and the sky was painted with hues of pink and orange. The sun's rays danced across the meadow, casting a warm glow over the entire scene.\n\nThe meadow was home to a variety of creatures, from the gentle creatures of the meadow to the fierce predators of the forest. The meadow was home to a variety of animals, from the rabbits and squirrels to the birds and insects. The meadow was home to a variety of animals, from the rabbits and squirrels to the birds and insects.\n\nThe meadow was home to a variety of animals, from the rabbits and squirrels to the birds and insects. The meadow was home to a variety"
+    },
+    {
+      "id": "en-gold-036",
+      "hard_pass": false,
+      "oov_rate": 0.135,
+      "failures": [
+        "oov",
+        "coverage",
+        "one_new_word",
+        "recurrence"
+      ],
+      "story": "The world was a dark and mysterious place, filled with strange and wondrous things. A lantern, a cellar, a door, and a window were all hidden from view, but they were all part of a larger puzzle. The light of the lantern was a reminder that there was more to life than just the ordinary world.\n\nThe door was a door, a door, a door, and it was a door that led to a room. The room was a room, a room, a room, and it was a room that was filled with strange and wonderful things. The room was a room, a room, a room, and it was a room that was filled with strange and wonderful things.\n\nThe window was a window, a window, a window, and it was a window that was a window that was a window that was a window that was a window that was a window that was a window that was a window that was a window that was a window that was a window that was a window that was a window that was a window that was a window that was a"
+    },
+    {
+      "id": "en-gold-037",
+      "hard_pass": false,
+      "oov_rate": 0.447,
+      "failures": [
+        "oov",
+        "coverage",
+        "one_new_word",
+        "recurrence"
+      ],
+      "story": "The harbor was a cozy place, filled with the smell of saltwater and the sound of seagulls. The ship was a sturdy vessel, with a hull made of sturdy wood and a hull made of sturdy wood. The ship was a sturdy vessel, with a hull made of sturdy wood and a hull made of sturdy wood. The ship was a sturdy vessel, with a hull made of sturdy wood and a hull made of sturdy wood. The ship was a sturdy vessel, with a hull made of sturdy wood and a hull made of sturdy wood. The ship was a sturdy vessel, with a hull made of sturdy wood and a hull made of sturdy wood. The ship was a sturdy vessel, with a hull made of sturdy wood and a hull made of sturdy wood. The ship was a sturdy vessel, with a hull made of sturdy wood and a hull made of sturdy wood. The ship was a sturdy vessel, with a hull made of sturdy wood and a hull made of sturdy wood. The ship was a sturdy vessel, with a hull made of sturdy wood and a hull made of sturdy wood. The ship"
+    },
+    {
+      "id": "en-gold-038",
+      "hard_pass": false,
+      "oov_rate": 0.405,
+      "failures": [
+        "oov",
+        "coverage",
+        "one_new_word",
+        "recurrence"
+      ],
+      "story": "The orchard was a cozy spot, where the trees swayed gently in the breeze. The air was filled with the sweet scent of blooming flowers, and the birds sang sweet melodies. The sun was shining brightly, casting a warm glow over the garden.\n\nAs the morning sun peeked over the rooftops, the trees seemed to sway in the breeze, their branches reaching towards the sky. The birds sang their hearts out, their melodies filling the air. The garden was a haven for the senses, with the trees and flowers providing a peaceful haven for the creatures that lived there.\n\nThe day was young, and the garden was bustling with activity. The sun was shining brightly, and the birds were singing their hearts out. The garden was a place of beauty and joy, where the trees and flowers provided a perfect backdrop for the creatures to live and thrive.\n\nAs the day drew to a close, the garden was quiet, and the birds were singing their sweet melodies again. The sun was setting, casting a warm glow over the garden. The trees were still swaying gently,"
+    }
+  ],
+  "tuned": {
+    "model": "HuggingFaceTB/SmolLM2-135M-Instruct",
+    "n": 39,
+    "hard_pass_rate": 0.0,
+    "mean_oov_rate": 0.2221,
+    "mean_coverage": 0.7779,
+    "one_new_word_pass_rate": 0.0256,
+    "recurrence_pass_rate": 0.1026,
+    "judge_spec_adherence": 0.103,
+    "judge_robustness": 0.077,
+    "judge_task_quality": 0.077,
+    "judge_consistency": 0.179,
+    "judge_inferability": 0.359,
+    "judge_seductive_detail_control": 0.256,
+    "judge_coherence": 0.205,
+    "judge_interestingness": 0.0,
+    "judge_overall": 0.157,
+    "mean_inferability": 0.051
+  },
+  "tuned_rows": [
+    {
+      "id": "en-gold-000",
+      "hard_pass": false,
+      "oov_rate": 0.462,
+      "failures": [
+        "oov",
+        "coverage",
+        "one_new_word",
+        "recurrence"
+      ],
+      "story": "The sun was shining brightly, and the birds were singing their sweetest melodies."
+    },
+    {
+      "id": "en-gold-001",
+      "hard_pass": false,
+      "oov_rate": 0.325,
+      "failures": [
+        "oov",
+        "coverage",
+        "one_new_word",
+        "recurrence"
+      ],
+      "story": "The little bird perched on the window sill, its wings beating softly. She was quiet and still, her feathers soft and warm. She was the only bird in the room, and she was the only one who could hear her. She was the only one who could see her, and she was the only one who could see her face. She was the only one who could talk, and she was the only one who could hear her. She was the only one who could see her, and she was the only one who could hear her. She was the only one who could see her, and she was the only one who could hear her. She was the only one who could see her, and she was the only one who could hear her. She was the only one who could see her, and she was the only one who could hear her. She was the only one who could see her, and she was the only one who could hear her. She was the only one who could see her, and she was the only one who could hear her. She was the only one"
+    },
+    {
+      "id": "en-gold-002",
+      "hard_pass": false,
+      "oov_rate": 0.219,
+      "failures": [
+        "oov",
+        "coverage",
+        "one_new_word"
+      ],
+      "story": "The meadow was quiet, and the birds sang sweetly.\n\nThe sun was shining brightly, and the grass was green.\n\nThe little rabbit hopped and ran, and the cat sat on the window sill.\n\nThe sun was shining brightly, and the meadow was quiet.\n\nThe meadow was quiet, and the birds sang sweetly.\n\nThe sun was shining brightly, and the meadow was quiet.\n\nThe meadow was quiet, and the birds sang sweetly.\n\nThe sun was shining brightly, and the meadow was quiet.\n\nThe meadow was quiet, and the birds sang sweetly.\n\nThe sun was shining brightly, and the meadow was quiet.\n\nThe meadow was quiet, and the birds sang sweetly.\n\nThe sun was shining brightly, and the meadow was quiet.\n\nThe meadow was quiet, and the birds sang sweetly.\n\nThe sun was shining brightly, and the meadow was quiet.\n\nThe meadow was quiet, and the birds sang sweetly.\n\nThe sun was shining"
+    },
+    {
+      "id": "en-gold-003",
+      "hard_pass": false,
+      "oov_rate": 0.222,
+      "failures": [
+        "oov",
+        "coverage",
+        "one_new_word"
+      ],
+      "story": "The comet was a bright, fluffy ball of gas and dust that drifted across the sky. It was so bright that it made the sky look like it was filled with stars. The comet was moving slowly, and it was getting closer to the Earth. The comet was called \"The Comet of the Hour.\""
+    },
+    {
+      "id": "en-gold-004",
+      "hard_pass": false,
+      "oov_rate": 0.291,
+      "failures": [
+        "oov",
+        "coverage",
+        "one_new_word",
+        "recurrence"
+      ],
+      "story": "The glacier was cold and quiet. The sun was shining, and the wind was blowing. The people were all in a hurry to get to the other side of the glacier. They were all wearing their warmest clothes. The people were all wearing the same clothes, and they all looked like they were all from the same country. They all looked like they were from the same city. They all looked like they were from the same country. They all looked like they were from the same city. They all looked like they were from the same country. They all looked like they were from the same city. They all looked like they were from the same country. They all looked like they were from the same city. They all looked like they were from the same country. They all looked like they were from the same city. They all looked like they were from the same country. They all looked like they were from the same city. They all looked like they were from the same country. They all looked like they were from the same city. They all looked like they were from the same country. They"
+    },
+    {
+      "id": "en-gold-005",
+      "hard_pass": false,
+      "oov_rate": 0.333,
+      "failures": [
+        "oov",
+        "coverage",
+        "one_new_word",
+        "recurrence"
+      ],
+      "story": "The artist's smile was a masterpiece."
+    },
+    {
+      "id": "en-gold-006",
+      "hard_pass": false,
+      "oov_rate": 0.032,
+      "failures": [
+        "oov",
+        "coverage",
+        "one_new_word",
+        "recurrence"
+      ],
+      "story": "The garden was a cozy place, filled with all the fruits and vegetables that the tree had grown. The tree was a big apple tree, and it was very happy. The tree was very happy, and it was very happy. The tree was very happy, and it was very happy. The tree was very happy, and it was very happy. The tree was very happy, and it was very happy. The tree was very happy, and it was very happy. The tree was very happy, and it was very happy. The tree was very happy, and it was very happy. The tree was very happy, and it was very happy. The tree was very happy, and it was very happy. The tree was very happy, and it was very happy. The tree was very happy, and it was very happy. The tree was very happy, and it was very happy. The tree was very happy, and it was very happy. The tree was very happy, and it was very happy. The tree was very happy, and it was very happy. The tree was very happy,"
+    },
+    {
+      "id": "en-gold-007",
+      "hard_pass": false,
+      "oov_rate": 0.308,
+      "failures": [
+        "oov",
+        "coverage",
+        "one_new_word",
+        "recurrence"
+      ],
+      "story": "The lamp was a cozy fire, and the room was filled with the soft glow of the lamp. The room was small, but it was cozy, and the lamp was the only thing that made it feel that way."
+    },
+    {
+      "id": "en-gold-008",
+      "hard_pass": false,
+      "oov_rate": 0.16,
+      "failures": [
+        "oov",
+        "coverage",
+        "one_new_word",
+        "recurrence"
+      ],
+      "story": "The sun was shining brightly outside, and the birds were singing their sweet melodies. The children were playing in the park, and the children were playing in the park. The children were playing in the park, and the children were playing in the park. The children were playing in the park, and the children were playing in the park. The children were playing in the park, and the children were playing in the park. The children were playing in the park, and the children were playing in the park. The children were playing in the park, and the children were playing in the park. The children were playing in the park, and the children were playing in the park. The children were playing in the park, and the children were playing in the park. The children were playing in the park, and the children were playing in the park. The children were playing in the park, and the children were playing in the park. The children were playing in the park, and the children were playing in the park. The children were playing in the park, and the children were playing in the park."
+    },
+    {
+      "id": "en-gold-009",
+      "hard_pass": false,
+      "oov_rate": 0.283,
+      "failures": [
+        "oov",
+        "coverage",
+        "one_new_word"
+      ],
+      "story": "The sun was shining brightly in the canyon. The trees were tall and green, and the sky was a deep shade of blue. The canyon was a place of peace and quiet, where the sounds of the world were muffled by the trees.\n\nThe man walked slowly down the canyon, his eyes fixed on the river. He had a big smile on his face, and he was very happy. He was standing in the middle of the canyon, and he was looking at the river.\n\n\"What's the river?\" he asked, his voice low and quiet.\n\n\"It's a small river,\" the man replied, \"but it's so big that it's a little bigger than the canyon.\"\n\nThe man smiled, and he said, \"I like the river. It's so big that it's a little bigger than the canyon.\"\n\nThe man looked at the river, and he said, \"I like the river too. It's so big that it's a little bigger than the canyon.\"\n\nThe man smiled, and he said, \""
+    },
+    {
+      "id": "en-gold-010",
+      "hard_pass": false,
+      "oov_rate": 0.218,
+      "failures": [
+        "oov",
+        "coverage",
+        "one_new_word",
+        "recurrence"
+      ],
+      "story": "The cottage was a cozy little place, with a big window that let in plenty of sunlight. The door was big and old, and it was always open, so the doorkeeper could see in. The door was always open, and the doorkeeper always looked at the window.\n\nThe doorkeeper was a little girl, and she was very kind. She always looked at the window and said, \"You can see the sun, the birds, and the flowers.\" She always said that, and she always said it.\n\nThe door was always open, and the doorkeeper always looked at the window. She always said, \"You can see the door, the doorkeeper, and the doorkeeper's window.\" She always said that, and she always said it.\n\nThe doorkeeper always looked at the window and said, \"You can see the door, the doorkeeper, and the doorkeeper's window.\" She always said that, and she always said it.\n\nThe doorkeeper always looked at the window and said, \"You can see the door, the"
+    },
+    {
+      "id": "en-gold-011",
+      "hard_pass": false,
+      "oov_rate": 0.276,
+      "failures": [
+        "oov",
+        "coverage",
+        "one_new_word",
+        "recurrence"
+      ],
+      "story": "The waterfall was a beautiful sight, and the sound of the water was soothing. The sound of the water was soothing, and the sound of the waterfall was soothing."
+    },
+    {
+      "id": "en-gold-012",
+      "hard_pass": false,
+      "oov_rate": 0.204,
+      "failures": [
+        "oov",
+        "coverage",
+        "one_new_word",
+        "recurrence"
+      ],
+      "story": "The cat sat on the window sill, watching the bird outside.\n\nThe bird chirped happily, and the cat looked up at it with wide eyes.\n\n\"What's that?\" the cat asked, and the bird chirped back.\n\nThe cat looked up at the bird, and the bird chirped back, \"It's a bird, it's a cat, it's a mouse.\"\n\nThe cat looked up at the bird, and the bird chirped back, \"It's a bird, it's a cat, it's a mouse.\"\n\nThe cat looked up at the bird, and the bird chirped back, \"It's a bird, it's a cat, it's a mouse.\"\n\nThe cat looked up at the bird, and the bird chirped back, \"It's a bird, it's a cat, it's a mouse.\"\n\nThe cat looked up at the bird, and the bird chirped back, \"It's a bird, it's a cat, it's a mouse.\"\n\nThe cat"
+    },
+    {
+      "id": "en-gold-013",
+      "hard_pass": false,
+      "oov_rate": 0.262,
+      "failures": [
+        "oov",
+        "coverage",
+        "one_new_word",
+        "recurrence"
+      ],
+      "story": "The house was a cozy place, with a big window that let in plenty of sunlight. The windows were always open, and the house was always warm and cozy. The windows were always open, and the house was always warm and cozy."
+    },
+    {
+      "id": "en-gold-014",
+      "hard_pass": false,
+      "oov_rate": 0.021,
+      "failures": [
+        "oov",
+        "coverage",
+        "one_new_word",
+        "recurrence"
+      ],
+      "story": "The cat sat on the window sill, its eyes fixed on the window. It was raining outside, and the cat was hungry. The cat looked at the window, and the window looked at the cat. The window looked at the cat, and the window looked at the cat. The cat looked at the window, and the window looked at the cat. The cat looked at the window, and the window looked at the cat. The cat looked at the window, and the window looked at the cat. The cat looked at the window, and the window looked at the cat. The cat looked at the window, and the window looked at the cat. The cat looked at the window, and the window looked at the cat. The cat looked at the window, and the window looked at the cat. The cat looked at the window, and the window looked at the cat. The cat looked at the window, and the window looked at the cat. The cat looked at the window, and the window looked at the cat. The cat looked at the window, and the window looked at"
+    },
+    {
+      "id": "en-gold-015",
+      "hard_pass": false,
+      "oov_rate": 0.204,
+      "failures": [
+        "oov",
+        "coverage",
+        "one_new_word",
+        "recurrence"
+      ],
+      "story": "The sun was shining brightly, and the trees were all green. The birds were singing their sweetest melodies, and the wind was blowing gently. The room was filled with the soft glow of the lamp, and the soft light of the candles seemed to fill the space.\n\nThe person who was sitting in the corner of the room was watching the world around her with a big smile on her face. She was reading a book, and the book was very big and colorful. The book was very big and colorful, and it was very big and colorful too.\n\nThe person who was sitting in the corner of the room was reading a book, and the book was very big and colorful. The book was very big and colorful, and it was very big and colorful too.\n\nThe person who was sitting in the corner of the room was reading a book, and the book was very big and colorful. The book was very big and colorful, and it was very big and colorful too.\n\nThe person who was sitting in the corner of the room was reading a book, and"
+    },
+    {
+      "id": "en-gold-016",
+      "hard_pass": false,
+      "oov_rate": 0.321,
+      "failures": [
+        "oov",
+        "coverage",
+        "one_new_word",
+        "recurrence"
+      ],
+      "story": "The owl perched on the window sill, its eyes fixed on the door. It was quiet, and the only sound was the soft chirping of its own voice."
+    },
+    {
+      "id": "en-gold-017",
+      "hard_pass": false,
+      "oov_rate": 0.34,
+      "failures": [
+        "oov",
+        "coverage",
+        "one_new_word",
+        "recurrence"
+      ],
+      "story": "The cat sat on the window sill, its eyes fixed on the window. It was quiet, and the only sound was the soft creak of the old wooden door. The cat was alone, and the only thing it heard was the soft murmur of the wind outside."
+    },
+    {
+      "id": "en-gold-018",
+      "hard_pass": false,
+      "oov_rate": 0.019,
+      "failures": [
+        "one_new_word",
+        "recurrence"
+      ],
+      "story": "Theme: slow\nTarget_WORDS: meander\nKNOWN_WORDS: a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a"
+    },
+    {
+      "id": "en-gold-019",
+      "hard_pass": false,
+      "oov_rate": 0.012,
+      "failures": [
+        "one_new_word",
+        "recurrence"
+      ],
+      "story": "The cat sat on the window sill, watching the birds.\n\nThe cat was very quiet, and the birds were all happy.\n\nThe cat was very quiet, and the birds were all happy.\n\nThe cat was very quiet, and the birds were all happy.\n\nThe cat was very quiet, and the birds were all happy.\n\nThe cat was very quiet, and the birds were all happy.\n\nThe cat was very quiet, and the birds were all happy.\n\nThe cat was very quiet, and the birds were all happy.\n\nThe cat was very quiet, and the birds were all happy.\n\nThe cat was very quiet, and the birds were all happy.\n\nThe cat was very quiet, and the birds were all happy.\n\nThe cat was very quiet, and the birds were all happy.\n\nThe cat was very quiet, and the birds were all happy.\n\nThe cat was very quiet, and the birds were all happy.\n\nThe cat was very quiet, and the birds were"
+    },
+    {
+      "id": "en-gold-020",
+      "hard_pass": false,
+      "oov_rate": 0.299,
+      "failures": [
+        "oov",
+        "coverage",
+        "one_new_word",
+        "recurrence"
+      ],
+      "story": "The sun was setting, and the trees seemed to close in around the house. The air was thick with the smell of smoke and the sound of birds chirping. The only sound was the creak of the old wooden floorboards beneath the window.\n\nThe boy sat on the edge of the bed, his eyes fixed on the window. He had been watching the sunset for hours, and the only sound was the creak of the old wooden floorboards. He was trying to sleep, but the sound of the window was too loud.\n\nSuddenly, the window opened, and a loud noise echoed through the house. The boy's heart skipped a beat. He looked up, and there was a bird outside the window. It was a sparrow, and it was crying.\n\nThe boy's eyes widened as he saw the sparrow. He was crying, and it was crying back. He tried to comfort the bird, but it was too loud.\n\nThe boy looked at the bird, and it was crying. He tried to comfort it, but it was too loud."
+    },
+    {
+      "id": "en-gold-021",
+      "hard_pass": false,
+      "oov_rate": 0.224,
+      "failures": [
+        "oov",
+        "coverage",
+        "one_new_word",
+        "recurrence"
+      ],
+      "story": "The boy's eyes were wide with hunger. He had never been hungry before, and he was so hungry that he could hardly eat. He was sitting in the kitchen, and the kitchen was filled with all the things he needed. He was hungry, and he was hungry all alone. He was hungry, and he was hungry all alone."
+    },
+    {
+      "id": "en-gold-022",
+      "hard_pass": false,
+      "oov_rate": 0.4,
+      "failures": [
+        "oov",
+        "coverage",
+        "one_new_word",
+        "recurrence"
+      ],
+      "story": "The boy's eyes were wide with wonder as he stared at the fossil. He had always been fascinated by the way the rock had been shaped by the earth's own life. He had always wondered if the fossil was alive, and if it was the same as the one he had seen in the museum."
+    },
+    {
+      "id": "en-gold-023",
+      "hard_pass": false,
+      "oov_rate": 0.089,
+      "failures": [
+        "oov",
+        "coverage",
+        "one_new_word",
+        "recurrence"
+      ],
+      "story": "The hedgehog was sitting on the bench, looking at the door. He was a little scared, but he was also a little curious. He was sitting on the bench, and he was looking at the door. He was sitting on the bench, and he was looking at the door. He was sitting on the bench, and he was looking at the door. He was sitting on the bench, and he was looking at the door. He was sitting on the bench, and he was looking at the door. He was sitting on the bench, and he was looking at the door. He was sitting on the bench, and he was looking at the door. He was sitting on the bench, and he was looking at the door. He was sitting on the bench, and he was looking at the door. He was sitting on the bench, and he was looking at the door. He was sitting on the bench, and he was looking at the door. He was sitting on the bench, and he was looking at the door. He was sitting on the bench, and he was looking at"
+    },
+    {
+      "id": "en-gold-024",
+      "hard_pass": false,
+      "oov_rate": 0.456,
+      "failures": [
+        "oov",
+        "coverage",
+        "one_new_word",
+        "recurrence"
+      ],
+      "story": "The sun was shining brightly, and the birds were singing their sweetest melodies.\n\nThe sun was shining brightly, and the birds were singing their sweetest melodies.\n\nThe sun was shining brightly, and the birds were singing their sweetest melodies.\n\nThe sun was shining brightly, and the birds were singing their sweetest melodies.\n\nThe sun was shining brightly, and the birds were singing their sweetest melodies.\n\nThe sun was shining brightly, and the birds were singing their sweetest melodies.\n\nThe sun was shining brightly, and the birds were singing their sweetest melodies.\n\nThe sun was shining brightly, and the birds were singing their sweetest melodies.\n\nThe sun was shining brightly, and the birds were singing their sweetest melodies.\n\nThe sun was shining brightly, and the birds were singing their sweetest melodies.\n\nThe sun was shining brightly, and the birds were singing their sweetest melodies.\n\nThe sun was shining brightly, and the birds were singing their sweetest melodies.\n\nThe sun was shining"
+    },
+    {
+      "id": "en-gold-025",
+      "hard_pass": false,
+      "oov_rate": 0.221,
+      "failures": [
+        "oov",
+        "coverage",
+        "one_new_word",
+        "recurrence"
+      ],
+      "story": "The cat sat on the window sill, watching the sun shine down.\n\nThe dog barked at the cat, but the cat ignored it.\n\nThe cat sat on the window sill, watching the sun shine down.\n\nThe dog barked at the cat, but the cat ignored it.\n\nThe cat sat on the window sill, watching the sun shine down.\n\nThe dog barked at the cat, but the cat ignored it.\n\nThe cat sat on the window sill, watching the sun shine down.\n\nThe dog barked at the cat, but the cat ignored it.\n\nThe cat sat on the window sill, watching the sun shine down.\n\nThe dog barked at the cat, but the cat ignored it.\n\nThe cat sat on the window sill, watching the sun shine down.\n\nThe dog barked at the cat, but the cat ignored it.\n\nThe cat sat on the window sill, watching the sun shine down.\n\nThe dog barked at"
+    },
+    {
+      "id": "en-gold-026",
+      "hard_pass": false,
+      "oov_rate": 0.021,
+      "failures": [
+        "oov",
+        "coverage",
+        "one_new_word",
+        "recurrence"
+      ],
+      "story": "The cat sat on the window sill, its eyes fixed on the window. It was sad, and it was alone. The window was a little window, and the cat was sitting on it. The window was a little window, and the cat was sitting on it. The window was a little window, and the cat was sitting on it. The window was a little window, and the cat was sitting on it. The window was a little window, and the cat was sitting on it. The window was a little window, and the cat was sitting on it. The window was a little window, and the cat was sitting on it. The window was a little window, and the cat was sitting on it. The window was a little window, and the cat was sitting on it. The window was a little window, and the cat was sitting on it. The window was a little window, and the cat was sitting on it. The window was a little window, and the cat was sitting on it. The window was a little window, and the cat was sitting on it."
+    },
+    {
+      "id": "en-gold-027",
+      "hard_pass": false,
+      "oov_rate": 0.479,
+      "failures": [
+        "oov",
+        "coverage",
+        "one_new_word",
+        "recurrence"
+      ],
+      "story": "The sun was shining brightly outside, and the wind was howling. The wind was blowing gently, and the sky was painted with colors that seemed to shift and change. The wind was blowing gently, and the sky was painted with colors that seemed to shift and change. The sun was shining brightly, and the wind was blowing gently, and the sky was painted with colors that seemed to shift and change."
+    },
+    {
+      "id": "en-gold-028",
+      "hard_pass": false,
+      "oov_rate": 0.203,
+      "failures": [
+        "oov",
+        "coverage",
+        "one_new_word",
+        "recurrence"
+      ],
+      "story": "The cat sat on the window sill, its eyes fixed on the door. It was a quiet morning, and the only sound was the creak of the old wooden door. The cat was a little girl, and she was sitting on the window sill, her eyes closed. She was watching the world go by, and the door was open."
+    },
+    {
+      "id": "en-gold-029",
+      "hard_pass": false,
+      "oov_rate": 0.229,
+      "failures": [
+        "oov",
+        "coverage",
+        "one_new_word",
+        "recurrence"
+      ],
+      "story": "The cat sat on the window sill, its eyes fixed on the door. It was a sunny day, and the sun was shining brightly. The cat was happy, and it was playing with its toy."
+    },
+    {
+      "id": "en-gold-030",
+      "hard_pass": false,
+      "oov_rate": 0.211,
+      "failures": [
+        "oov",
+        "coverage",
+        "one_new_word",
+        "recurrence"
+      ],
+      "story": "The cat sat on the window sill, watching the sun rise.\n\nThe dog barked loudly, and the cat sat on the floor, watching the dog.\n\nThe cat sat on the window sill, watching the dog.\n\nThe dog barked loudly, and the cat sat on the floor, watching the dog.\n\nThe cat sat on the window sill, watching the dog.\n\nThe dog barked loudly, and the cat sat on the floor, watching the dog.\n\nThe cat sat on the window sill, watching the dog.\n\nThe dog barked loudly, and the cat sat on the floor, watching the dog.\n\nThe cat sat on the window sill, watching the dog.\n\nThe dog barked loudly, and the cat sat on the floor, watching the dog.\n\nThe cat sat on the window sill, watching the dog.\n\nThe dog barked loudly, and the cat sat on the floor, watching the dog.\n\nThe cat sat on the window sill,"
+    },
+    {
+      "id": "en-gold-031",
+      "hard_pass": false,
+      "oov_rate": 0.236,
+      "failures": [
+        "oov",
+        "coverage",
+        "one_new_word",
+        "recurrence"
+      ],
+      "story": "The sun was shining brightly, and the birds were singing their sweetest melodies.\n\nThe boy sat on the bench, and the dog ran up to him.\n\nThe boy said, \"I love the sun, the birds, and the dog.\"\n\nThe dog wagged his tail, and the boy smiled.\n\nThe boy said, \"I love the sun, the birds, and the dog.\"\n\nThe dog wagged his tail, and the boy smiled.\n\nThe boy said, \"I love the sun, the birds, and the dog.\"\n\nThe dog wagged his tail, and the boy smiled.\n\nThe boy said, \"I love the sun, the birds, and the dog.\"\n\nThe dog wagged his tail, and the boy smiled.\n\nThe boy said, \"I love the sun, the birds, and the dog.\"\n\nThe dog wagged his tail, and the boy smiled.\n\nThe boy said, \"I love the sun, the birds, and the dog.\"\n\nThe"
+    },
+    {
+      "id": "en-gold-032",
+      "hard_pass": false,
+      "oov_rate": 0.006,
+      "failures": [
+        "one_new_word",
+        "recurrence"
+      ],
+      "story": "The pebble was a small, brown pebble that was sitting on the floor. It was very quiet, and it was very small. It was very quiet, and it was very small. It was very quiet, and it was very small. It was very quiet, and it was very small. It was very quiet, and it was very small. It was very quiet, and it was very small. It was very quiet, and it was very small. It was very quiet, and it was very small. It was very quiet, and it was very small. It was very quiet, and it was very small. It was very quiet, and it was very small. It was very quiet, and it was very small. It was very quiet, and it was very small. It was very quiet, and it was very small. It was very quiet, and it was very small. It was very quiet, and it was very small. It was very quiet, and it was very small. It was very quiet, and it was very small. It was very quiet,"
+    },
+    {
+      "id": "en-gold-033",
+      "hard_pass": false,
+      "oov_rate": 0.141,
+      "failures": [
+        "oov",
+        "coverage",
+        "one_new_word",
+        "recurrence"
+      ],
+      "story": "The boy's eyes were wide with surprise as he reached for the door handle. He had never seen a door handle before, and the sound of the door opening was like a surprise. He looked around, but there was no one there. He tried to call out, but the door was too small. He looked down, but there was no one there. He looked up, but there was no one there either. He looked around, but there was no one there either. He looked down, but there was no one there either. He looked up, but there was no one there either. He looked around, but there was no one there either. He looked down, but there was no one there either. He looked up, but there was no one there either. He looked down, but there was no one there either. He looked up, but there was no one there either. He looked down, but there was no one there either. He looked up, but there was no one there either. He looked down, but there was no one there either. He looked up,"
+    },
+    {
+      "id": "en-gold-034",
+      "hard_pass": false,
+      "oov_rate": 0.186,
+      "failures": [
+        "oov",
+        "coverage",
+        "one_new_word"
+      ],
+      "story": "The barn was quiet, but the wind was howling outside.\n\nThe farmer sat on the porch, watching the birds.\n\nHe looked up at the barn, and the wind seemed to be whispering.\n\nHe looked down at the barn, and the wind was still.\n\nHe looked up at the barn, and the wind was still.\n\nHe looked down at the barn, and the wind was still.\n\nHe looked up at the barn, and the wind was still.\n\nHe looked down at the barn, and the wind was still.\n\nHe looked up at the barn, and the wind was still.\n\nHe looked down at the barn, and the wind was still.\n\nHe looked up at the barn, and the wind was still.\n\nHe looked down at the barn, and the wind was still.\n\nHe looked up at the barn, and the wind was still.\n\nHe looked down at the barn, and the wind was still.\n\nHe looked up at the barn, and the"
+    },
+    {
+      "id": "en-gold-035",
+      "hard_pass": false,
+      "oov_rate": 0.375,
+      "failures": [
+        "oov",
+        "coverage",
+        "one_new_word",
+        "recurrence"
+      ],
+      "story": "The sun was shining brightly in the meadow, and the birds were singing their sweetest melodies. The sun was shining brightly in the meadow, and the birds were singing their sweetest melodies. The sun was shining brightly in the meadow, and the birds were singing their sweetest melodies."
+    },
+    {
+      "id": "en-gold-036",
+      "hard_pass": false,
+      "oov_rate": 0.065,
+      "failures": [
+        "oov",
+        "coverage",
+        "one_new_word",
+        "recurrence"
+      ],
+      "story": "The lamp was a big, old one that was always on. It was so dark inside that it made it hard to see what was going on outside. The lamp was very big, too, and it was so big that it made the whole room feel very dark.\n\nThe lamp was very big, too, and it was so big that it made the whole room feel very dark. It was so big that it made the whole room feel very dark.\n\nThe lamp was very big, too, and it was so big that it made the whole room feel very dark. It was so big that it made the whole room feel very dark.\n\nThe lamp was very big, too, and it was so big that it made the whole room feel very dark. It was so big that it made the whole room feel very dark.\n\nThe lamp was very big, too, and it was so big that it made the whole room feel very dark. It was so big that it made the whole room feel very dark.\n\nThe lamp was very big, too,"
+    },
+    {
+      "id": "en-gold-037",
+      "hard_pass": false,
+      "oov_rate": 0.307,
+      "failures": [
+        "oov",
+        "coverage",
+        "one_new_word",
+        "recurrence"
+      ],
+      "story": "The harbor was a cozy place, with a big sailboat that was always busy. The boat was called the \"Sea Dragon.\" The harbor was filled with all kinds of sea creatures, like dolphins and sea turtles. The sea dragon was always happy and curious, and it always looked out for the other sea creatures.\n\nOne day, the harbor was very busy, and the sea dragon was very happy. The sea dragon was always happy and curious, and it always looked out for the other sea creatures. The sea dragon was always happy and curious, and it always looked out for the other sea creatures.\n\nThe sea dragon was always happy and curious, and it always looked out for the other sea creatures. The sea dragon was always happy and curious, and it always looked out for the other sea creatures. The sea dragon was always happy and curious, and it always looked out for the other sea creatures.\n\nThe sea dragon was always happy and curious, and it always looked out for the other sea creatures. The sea dragon was always happy and curious, and it always looked out"
+    },
+    {
+      "id": "en-gold-038",
+      "hard_pass": false,
+      "oov_rate": 0.0,
+      "failures": [
+        "recurrence"
+      ],
+      "story": "The tree was a big, green apple tree. It was very happy. It was very hungry. It was very hungry. It was very hungry. It was very hungry. It was very hungry. It was very hungry. It was very hungry. It was very hungry. It was very hungry. It was very hungry. It was very hungry. It was very hungry. It was very hungry. It was very hungry. It was very hungry. It was very hungry. It was very hungry. It was very hungry. It was very hungry. It was very hungry. It was very hungry. It was very hungry. It was very hungry. It was very hungry. It was very hungry. It was very hungry. It was very hungry. It was very hungry. It was very hungry. It was very hungry. It was very hungry. It was very hungry. It was very hungry. It was very hungry. It was very hungry. It was very hungry. It was very hungry. It was very hungry. It was very hungry. It was very hungry. It was very hungry."
+    }
+  ]
+}

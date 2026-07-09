@@ -43,3 +43,5 @@ examples has low ceiling (v3→v4→v5 showed it). The real lever is **more + mo
   (r32/a64/lr2e-4). DATA is the only real variable. ~3h → done ~06:15, leaves eval+summary time.
 - v7 recapped to --max-steps 90 (seq-1024 was ~96s/step; 200 would overrun budget). Restarted ~04:07, done ~06:30. Data is the only variable vs v5.
 - CPU slowed to ~150s/step (contention); v7 recapped again to --max-steps 40 (restart ~05:12) to guarantee eval+summary fit before 07:59. 40 steps on 4x data = legit data test; prioritizing a COMPLETE committed eval over more steps.
+
+## FINAL STATUS (~07:00) — best = v5. v6 negative (HP capped); v7 under-trained on CPU (data-scaling needs GPU steps). Both point to the Colab run. Overnight built: resilient teacher pipeline, islm.datagen.compact, 4x corpus recipe. See RESULTS_LOG FINAL OVERNIGHT SUMMARY.
