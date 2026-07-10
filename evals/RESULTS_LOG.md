@@ -41,6 +41,37 @@ fits a 768-token window uncut, and matches the eval's `--curated` setup.
 
 <!-- newest first; append a block per run -->
 
+<!-- TEMPLATE — Colab QLoRA run. Fill the _TBD_ / arrow cells from the downloaded results
+     (evals/colab_golden/results_golden_<lang>.{md,json} + evals/colab_heldout/...); then delete
+     this comment line. `base → tuned` = the two columns in each results table. -->
+### YYYY-MM-DD — `qwen3-4b-qlora` (Colab GPU) — _one-line verdict TBD_
+
+**First GPU run.** Base **Qwen/Qwen3-4B-Instruct-2507**, 4-bit QLoRA, r32/α64, lr 2e-4, cosine +
+warmup + decay + clip, `--max-seq-len 1024`, `--grad-accum 8`, `--max-steps 1500`, train subset
+_N_ of `data/dataset_v1` (`SUBSET` in the notebook). Continues from the prior adapter on subsequent
+runs (this is iteration _#TBD_). Final train loss **_TBD_**. Runtime ~_TBD_ h on _L4/A100_.
+
+Golden set, base → tuned (all languages):
+
+| lang | OOV | hard-pass | ≤1-new | recurrence | coherence | judge overall | inferability |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| en | _ → _ | _ → _ | _ → _ | _ → _ | _ → _ | _ → _ | _ → _ |
+| zh | _ → _ | _ → _ | _ → _ | _ → _ | _ → _ | _ → _ | _ → _ |
+| ja | _ → _ | _ → _ | _ → _ | _ → _ | _ → _ | _ → _ | _ → _ |
+
+Held-out set (+ adversarial), tuned:
+
+| lang | OOV | hard-pass | ≤1-new | judge overall |
+| --- | --- | --- | --- | --- |
+| en | _ | _ | _ | _ |
+| zh | _ | _ | _ | _ |
+| ja | _ | _ | _ | _ |
+
+**Verdict: _TBD_.** _What the GPU + full 4B changed vs the 135M CPU runs; whether hard-pass finally
+moves off 0; which criteria still lag and whether it's a data or training-steps problem._
+
+---
+
 ### 2026-07-09 — `v7` (4× teacher data) — under-trained on CPU; v5 still best
 
 **The data-scaling test.** Only variable vs v5: the dataset. Used the teacher endpoint to generate
