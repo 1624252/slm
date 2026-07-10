@@ -45,6 +45,7 @@ class TrainConfig:
     learning_rate: float = 2e-4
     per_device_batch_size: int = 1
     grad_accum: int = 8
+    save_steps: int = 0  # >0: write a checkpoint every N steps (survives Colab idle-timeout)
     max_seq_len: int = 1024
     lora_r: int = 16
     lora_alpha: int = 32
@@ -60,6 +61,16 @@ class TrainConfig:
     merge: bool = False  # after training, merge the adapter into fp16 base (for upload/deploy)
     resume_adapter: str | None = None  # continue an existing adapter (local path or HF hub id)
     push_to_hub: str | None = None  # after training, push adapter+tokenizer to this HF Hub repo id
+
+
+def _latest_checkpoint(output_dir: Path) -> str | None:
+    """Newest `checkpoint-<step>` dir in `output_dir`, or None. Used to auto-resume a run that was
+    interrupted (Colab idle-timeout) when its output lives on durable storage (Drive)."""
+    ckpts = [p for p in Path(output_dir).glob("checkpoint-*") if p.is_dir()]
+    if not ckpts:
+        return None
+    latest = max(ckpts, key=lambda p: int(p.name.split("-")[-1]))
+    return str(latest)
 
 
 def read_records(data_dir: Path) -> list[dict]:
@@ -157,6 +168,16 @@ def train(config: TrainConfig) -> Path:
     dataset = Dataset.from_dict({"text": texts})
     # paged_adamw_32bit needs bitsandbytes (GPU); fall back to plain adamw on CPU.
     optim = "paged_adamw_32bit" if (config.qlora and on_gpu) else "adamw_torch"
+    # Periodic checkpoints let a run survive an interruption (e.g. Colab idle-timeout): point
+    # --out at durable storage (Drive) and re-running resumes from the last checkpoint. Keep only
+    # the 2 most recent so the folder stays small.
+    save_kwargs: dict = {}
+    if config.save_steps and config.save_steps > 0:
+        save_kwargs = {
+            "save_strategy": "steps",
+            "save_steps": config.save_steps,
+            "save_total_limit": 2,
+        }
     args = SFTConfig(
         output_dir=str(config.output_dir),
         num_train_epochs=config.epochs,
@@ -178,6 +199,7 @@ def train(config: TrainConfig) -> Path:
         weight_decay=config.weight_decay,
         max_grad_norm=config.max_grad_norm,
         gradient_checkpointing=config.gradient_checkpointing and on_gpu,
+        **save_kwargs,
     )
     # Pass our tokenizer so training uses the same rendering/truncation we fit the texts to.
     trainer = SFTTrainer(
@@ -187,7 +209,12 @@ def train(config: TrainConfig) -> Path:
         peft_config=peft_config,
         processing_class=tokenizer,
     )
-    trainer.train()
+    # Auto-resume: if a checkpoint already exists in output_dir (a prior run was interrupted),
+    # continue from it instead of restarting. Only meaningful when checkpointing is on.
+    resume = _latest_checkpoint(config.output_dir) if save_kwargs else None
+    if resume:
+        print(f"resuming from checkpoint: {resume}")
+    trainer.train(resume_from_checkpoint=resume)
     train_loss = (
         trainer.state.log_history[-1].get("train_loss") if trainer.state.log_history else None
     )
@@ -293,6 +320,11 @@ def main() -> None:
     p.add_argument("--max-steps", type=int, default=-1)
     p.add_argument("--max-seq-len", type=int, default=1024, help="Context window (left-truncated).")
     p.add_argument("--grad-accum", type=int, default=8, help="Gradient accumulation steps.")
+    p.add_argument(
+        "--save-steps", type=int, default=0,
+        help="Checkpoint every N steps (0=off). Point --out at Drive to survive idle-timeout; "
+        "re-running resumes from the last checkpoint.",
+    )
     p.add_argument("--lr", type=float, default=2e-4, help="Learning rate.")
     p.add_argument("--lora-r", type=int, default=16, help="LoRA rank.")
     p.add_argument("--lora-alpha", type=int, default=32, help="LoRA alpha.")
@@ -317,6 +349,7 @@ def main() -> None:
         max_steps=args.max_steps,
         max_seq_len=args.max_seq_len,
         grad_accum=args.grad_accum,
+        save_steps=args.save_steps,
         learning_rate=args.lr,
         lora_r=args.lora_r,
         lora_alpha=args.lora_alpha,
