@@ -208,9 +208,14 @@ def _run_language(lang: str, args, p) -> None:
     base_name = args.base_path or args.base_model or ("mock" if args.mock else "base")
     tuned_name = args.tuned_path or args.tuned_model or ("mock" if args.mock else "tuned")
 
+    # Print per-scenario progress for slow local (HF) runs so they don't look hung; quiet for mock.
+    show_progress = not args.mock
+
     def run(name: str, scenarios: list[Scenario], gen: StoryGenerator):
         # Same client scores the rubric (judge) and the cloze inferability proxy.
-        return evaluate(name, scenarios, gen, judge_client, cloze_client=judge_client)
+        return evaluate(
+            name, scenarios, gen, judge_client, cloze_client=judge_client, progress=show_progress
+        )
 
     base = run(base_name, held, base_gen)
     adv = adv_base = adv_tuned = tuned = None

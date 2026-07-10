@@ -79,12 +79,16 @@ def evaluate(
     cloze_client: LLMClient | None = None,
     lemmatizer: Lemmatizer | None = None,
     thresholds: Thresholds = DEFAULT_THRESHOLDS,
+    progress: bool = False,
 ) -> EvalSummary:
     analyzers: dict[str, Lemmatizer] = {}
     rows: list[EvalRow] = []
-    for s in scenarios:
+    n = len(scenarios)
+    for i, s in enumerate(scenarios, 1):
         # Reuse one analyzer per language (segmenter init can be expensive).
         lem = lemmatizer or analyzers.setdefault(s.language, get_analyzer(s.language))
+        if progress:  # per-scenario line so long GPU runs aren't silent (looks like a hang)
+            print(f"  [{model_name}] {i}/{n} {s.id} ...", flush=True)
         story = produce_story(s)
         report = validate_story(story, s.known_set(), s.target_set(), lem, thresholds)
         failures: list[str] = []
