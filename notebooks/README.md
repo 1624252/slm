@@ -23,6 +23,7 @@ What it does (each step is one cell group):
 | 5 | Full QLoRA fine-tune (rank 32 / α 64, lr 2e-4, cosine), checkpointing to Drive |
 | 6 | Base-vs-tuned eval on golden + held-out — deterministic + judge + cloze, tracked |
 | 6b | Push results to LangSmith (no-ops without the key) |
+| 6c | Push the eval results to GitHub under `evals/` (no-ops without `GITHUB_TOKEN`) |
 | 7 | (Optional) zip + download a local copy — everything is already on Drive |
 
 ### Crash-safe by default
