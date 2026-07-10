@@ -209,11 +209,15 @@ def train(config: TrainConfig) -> Path:
         peft_config=peft_config,
         processing_class=tokenizer,
     )
-    # Auto-resume: if a checkpoint already exists in output_dir (a prior run was interrupted),
-    # continue from it instead of restarting. Only meaningful when checkpointing is on.
-    resume = _latest_checkpoint(config.output_dir) if save_kwargs else None
-    if resume:
-        print(f"resuming from checkpoint: {resume}")
+    # Auto-resume from a checkpoint (crash recovery) ONLY for a fresh run. When continuing from an
+    # existing adapter (`resume_adapter`), that adapter already encodes prior learning, so we do a
+    # clean new pass on top (fresh optimizer + LR schedule) rather than resuming a checkpoint —
+    # mixing the two is fragile and would restart the step counter mid-schedule.
+    resume = None
+    if save_kwargs and not config.resume_adapter:
+        resume = _latest_checkpoint(config.output_dir)
+        if resume:
+            print(f"resuming from checkpoint: {resume}")
     trainer.train(resume_from_checkpoint=resume)
     train_loss = (
         trainer.state.log_history[-1].get("train_loss") if trainer.state.log_history else None
