@@ -113,6 +113,10 @@ def main() -> None:
         "--judge-model", default=None, help="Override judge model (default: JUDGE_MODEL from .env)."
     )
     p.add_argument("--no-judge", action="store_true", help="Skip the LLM judge (deterministic).")
+    p.add_argument(
+        "--judge-workers", type=int, default=8,
+        help="Concurrent judge+cloze API calls (network-bound; 1 = sequential).",
+    )
     p.add_argument("--mock", action="store_true", help="Use the offline MockLLM for every role.")
     p.add_argument("--adversarial", action="store_true", help="Also run the adversarial set.")
     p.add_argument("--adv-n", type=int, default=12)
@@ -144,45 +148,26 @@ def main() -> None:
     languages = [w.strip() for w in args.language.split(",") if w.strip()]
     if args.scenarios and len(languages) > 1:
         p.error("--scenarios pins one file; pass a single --language with it.")
+
+    # Build the models ONCE and reuse across languages. The HF checkpoint is language-independent,
+    # so loading it per language reloaded the 4B (in 4-bit) up to 6x — minutes each. Build here.
+    models = _build_models(args, p)
     for lang in languages:
-        _run_language(lang, args, p)
+        _run_language(lang, args, p, models)
 
 
-def _run_language(lang: str, args, p) -> None:
-    """Evaluate one language: load scenarios, score base (+tuned/adv), write reports, track."""
-    # tag distinguishes golden vs held-out output files (results_<tag><lang>.{md,json}).
-    tag = "golden_" if args.golden else ""
-    if args.golden:
-        from .golden import load_golden_scenarios
-
-        held = load_golden_scenarios(EVALS_DIR / "golden" / "golden.jsonl", language=lang)
-        if not held:
-            return  # no golden items for this language
-    else:
-        default_name = f"heldout_small_{lang}.jsonl" if args.curated else f"heldout_{lang}.jsonl"
-        held = _load_or_sample(
-            args.scenarios or EVALS_DIR / "scenarios" / default_name,
-            _sampler(lang, args.n, args.seed, args.curated),
-        )
-
+def _build_models(args, p) -> dict:
+    """Load base/tuned generators + judge client once (reused for every language)."""
     base_gen, _ = _build_generator(
-        args.base_model,
-        args.base_path,
-        args.base_adapter,
-        args.mock,
-        args.max_new_tokens,
-        args.no_think,
+        args.base_model, args.base_path, args.base_adapter,
+        args.mock, args.max_new_tokens, args.no_think,
     )
     has_tuned = bool(args.mock or args.tuned_model or args.tuned_path)
     tuned_gen = tuned_client = None
     if has_tuned:
         tuned_gen, tuned_client = _build_generator(
-            args.tuned_model,
-            args.tuned_path,
-            args.tuned_adapter,
-            args.mock,
-            args.max_new_tokens,
-            args.no_think,
+            args.tuned_model, args.tuned_path, args.tuned_adapter,
+            args.mock, args.max_new_tokens, args.no_think,
         )
         if args.guard and tuned_client is not None:
             tuned_gen = guarded(tuned_gen, client_rewriter(tuned_client))
@@ -205,8 +190,39 @@ def _run_language(lang: str, args, p) -> None:
     if judge_client is None and not args.mock:
         print("note: no judge (set OPENAI_API_KEY + JUDGE_MODEL in .env to score the rubric).")
 
-    base_name = args.base_path or args.base_model or ("mock" if args.mock else "base")
-    tuned_name = args.tuned_path or args.tuned_model or ("mock" if args.mock else "tuned")
+    return {
+        "base_gen": base_gen,
+        "tuned_gen": tuned_gen,
+        "has_tuned": has_tuned,
+        "judge_client": judge_client,
+        "base_name": args.base_path or args.base_model or ("mock" if args.mock else "base"),
+        "tuned_name": args.tuned_path or args.tuned_model or ("mock" if args.mock else "tuned"),
+    }
+
+
+def _run_language(lang: str, args, p, models: dict) -> None:
+    """Evaluate one language: load scenarios, score base (+tuned/adv), write reports, track."""
+    # tag distinguishes golden vs held-out output files (results_<tag><lang>.{md,json}).
+    tag = "golden_" if args.golden else ""
+    if args.golden:
+        from .golden import load_golden_scenarios
+
+        held = load_golden_scenarios(EVALS_DIR / "golden" / "golden.jsonl", language=lang)
+        if not held:
+            return  # no golden items for this language
+    else:
+        default_name = f"heldout_small_{lang}.jsonl" if args.curated else f"heldout_{lang}.jsonl"
+        held = _load_or_sample(
+            args.scenarios or EVALS_DIR / "scenarios" / default_name,
+            _sampler(lang, args.n, args.seed, args.curated),
+        )
+
+    base_gen = models["base_gen"]
+    tuned_gen = models["tuned_gen"]
+    has_tuned = models["has_tuned"]
+    judge_client = models["judge_client"]
+    base_name = models["base_name"]
+    tuned_name = models["tuned_name"]
 
     # Print per-scenario progress for slow local (HF) runs so they don't look hung; quiet for mock.
     show_progress = not args.mock
@@ -214,7 +230,8 @@ def _run_language(lang: str, args, p) -> None:
     def run(name: str, scenarios: list[Scenario], gen: StoryGenerator):
         # Same client scores the rubric (judge) and the cloze inferability proxy.
         return evaluate(
-            name, scenarios, gen, judge_client, cloze_client=judge_client, progress=show_progress
+            name, scenarios, gen, judge_client, cloze_client=judge_client,
+            progress=show_progress, judge_workers=args.judge_workers,
         )
 
     base = run(base_name, held, base_gen)

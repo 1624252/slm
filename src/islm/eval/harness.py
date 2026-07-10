@@ -80,15 +80,22 @@ def evaluate(
     lemmatizer: Lemmatizer | None = None,
     thresholds: Thresholds = DEFAULT_THRESHOLDS,
     progress: bool = False,
+    judge_workers: int = 8,
 ) -> EvalSummary:
+    """Two phases: (1) generate + validate each story *sequentially* (the generator is usually a
+    single GPU, so parallelism there just thrashes VRAM); (2) score judge + cloze *concurrently*
+    (independent network I/O — the slow part). Row order is preserved.
+    """
     analyzers: dict[str, Lemmatizer] = {}
     rows: list[EvalRow] = []
     n = len(scenarios)
+
+    # Phase 1 — sequential generation + deterministic validation (GPU-bound).
     for i, s in enumerate(scenarios, 1):
         # Reuse one analyzer per language (segmenter init can be expensive).
         lem = lemmatizer or analyzers.setdefault(s.language, get_analyzer(s.language))
         if progress:  # per-scenario line so long GPU runs aren't silent (looks like a hang)
-            print(f"  [{model_name}] {i}/{n} {s.id} ...", flush=True)
+            print(f"  [{model_name}] gen {i}/{n} {s.id} ...", flush=True)
         story = produce_story(s)
         report = validate_story(story, s.known_set(), s.target_set(), lem, thresholds)
         failures: list[str] = []
@@ -110,12 +117,34 @@ def evaluate(
                 recurrence_pass=report.recurrence.passed,
                 failures=failures,
                 story=story,
-                judge=judge_story(s, story, judge_client) if judge_client else None,
-                inferability=(
-                    cloze_inferability(story, s.target_set(), cloze_client)["rate"]
-                    if cloze_client
-                    else None
-                ),
             )
         )
+
+    # Phase 2 — concurrent judge + cloze scoring (network-bound). The OpenAI SDK client is
+    # thread-safe, so a small thread pool turns ~2*n sequential round-trips into n/workers waves.
+    if judge_client or cloze_client:
+        _score_rows(
+            rows, scenarios, judge_client, cloze_client, judge_workers, progress, model_name
+        )
     return EvalSummary(model_name, rows)
+
+
+def _score_rows(rows, scenarios, judge_client, cloze_client, workers, progress, model_name):
+    """Fill each row's judge + cloze scores concurrently (independent per-row network calls)."""
+    from concurrent.futures import ThreadPoolExecutor
+
+    def score(pair):
+        row, s = pair
+        if judge_client:
+            row.judge = judge_story(s, row.story, judge_client)
+        if cloze_client:
+            row.inferability = cloze_inferability(row.story, s.target_set(), cloze_client)["rate"]
+        return row
+
+    pairs = list(zip(rows, scenarios, strict=True))
+    done = 0
+    with ThreadPoolExecutor(max_workers=max(1, workers)) as pool:
+        for _ in pool.map(score, pairs):
+            done += 1
+            if progress:
+                print(f"  [{model_name}] scored {done}/{len(pairs)}", flush=True)
