@@ -41,34 +41,53 @@ fits a 768-token window uncut, and matches the eval's `--curated` setup.
 
 <!-- newest first; append a block per run -->
 
-<!-- TEMPLATE — Colab QLoRA run. Fill the _TBD_ / arrow cells from the downloaded results
-     (evals/colab_golden/results_golden_<lang>.{md,json} + evals/colab_heldout/...); then delete
-     this comment line. `base → tuned` = the two columns in each results table. -->
-### YYYY-MM-DD — `qwen3-4b-qlora` (Colab GPU) — _one-line verdict TBD_
+### 2026-07-10 — `qwen3-4b-qlora` (Colab GPU, first run) — constraints solved, quality regressed
 
-**First GPU run.** Base **Qwen/Qwen3-4B-Instruct-2507**, 4-bit QLoRA, r32/α64, lr 2e-4, cosine +
-warmup + decay + clip, `--max-seq-len 1024`, `--grad-accum 8`, `--max-steps 1500`, train subset
-_N_ of `data/dataset_v1` (`SUBSET` in the notebook). Continues from the prior adapter on subsequent
-runs (this is iteration _#TBD_). Final train loss **_TBD_**. Runtime ~_TBD_ h on _L4/A100_.
+**First GPU run, and the first time the hard constraints are actually met.** Base
+**Qwen/Qwen3-4B-Instruct-2507**, 4-bit QLoRA, r32/α64, lr 2e-4, cosine + warmup + decay + clip,
+`--max-seq-len 1024`, `--grad-accum 8`, `--max-steps 1500`, trained on a **30 000-record subset**
+of `data/dataset_v1` (`SUBSET=30000`) on an L4. Adapter saved to Drive (`qwen3_4b_qlora`); this is
+iteration #1 (fresh from base). Eval judged by claude-sonnet-4-6.
 
-Golden set, base → tuned (all languages):
+Golden set, base → tuned:
 
-| lang | OOV | hard-pass | ≤1-new | recurrence | coherence | judge overall | inferability |
+| lang | n | hard-pass | OOV (↓) | ≤1-new | recurrence | judge overall (0–2) | inferability |
 | --- | --- | --- | --- | --- | --- | --- | --- |
-| en | _ → _ | _ → _ | _ → _ | _ → _ | _ → _ | _ → _ | _ → _ |
-| zh | _ → _ | _ → _ | _ → _ | _ → _ | _ → _ | _ → _ | _ → _ |
-| ja | _ → _ | _ → _ | _ → _ | _ → _ | _ → _ | _ → _ | _ → _ |
+| en | 39 | 0.000 → **0.897** | 0.157 → **0.007** | 0.000 → **1.000** | 0.462 → **1.000** | 1.375 → **0.606** | 0.278 → 0.000 |
+| zh | 8 | 0.000 → 0.000 | 0.328 → **0.035** | 0.000 → 0.250 | 1.000 → 1.000 | 1.453 → **0.391** | 0.625 → 0.125 |
+| ja | 8 | 0.000 → **0.375** | 0.309 → **0.030** | 0.000 → **1.000** | 0.750 → **1.000** | 1.172 → **0.547** | 0.250 → 0.000 |
 
-Held-out set (+ adversarial), tuned:
+Held-out set (+ adversarial hard-pass), base → tuned:
 
-| lang | OOV | hard-pass | ≤1-new | judge overall |
-| --- | --- | --- | --- | --- |
-| en | _ | _ | _ | _ |
-| zh | _ | _ | _ | _ |
-| ja | _ | _ | _ | _ |
+| lang | n | hard-pass | OOV (↓) | ≤1-new | recurrence | judge overall | adversarial |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| en | 12 | 0.000 → **1.000** | 0.092 → **0.001** | 0.000 → **1.000** | 0.250 → **1.000** | 1.042 → 0.834 | 0.000 → **0.667** |
+| zh | 12 | 0.000 → 0.000 | 0.386 → **0.079** | 0.000 → 0.083 | 0.917 → 0.917 | 1.219 → **0.323** | 0.000 → 0.000 |
 
-**Verdict: _TBD_.** _What the GPU + full 4B changed vs the 135M CPU runs; whether hard-pass finally
-moves off 0; which criteria still lag and whether it's a data or training-steps problem._
+**English held-out PASSES the spec win condition** (beats base on both spec-adherence *and*
+robustness) — a first. English golden hard-pass went 0.00 → **0.90**, ≤1-new 0.00 → **1.00**, OOV
+to near zero. The GPU 4B + real data clearly learned the *mechanical* i+1 constraints the 135M CPU
+runs never could.
+
+**But judge quality regressed across the board** — `task_quality`, `coherence`, and
+`interestingness` all fell sharply (e.g. en golden coherence 1.36 → 0.15, interestingness 1.31 →
+0.00). This is the **reward-hacking failure mode we predicted**: SFT on the templated dataset taught
+the model to satisfy the deterministic gates by emitting flat, repetitive, low-content text (the
+data's own weakness — "The ring is a good friend"). The constraints are a **means**; comprehensible,
+*compelling* input is the goal, and that half went backwards.
+
+**zh lags most** — hard-pass still 0.00, ≤1-new barely moved (0.25 golden / 0.08 held-out). The
+Chinese share of the 30k subset is small and segmentation makes the one-new-word constraint harder;
+zh needs more data/steps.
+
+**Verdict: a real milestone, not a win.** Deterministic constraints: solved for en, partly for ja,
+not for zh. Quality: regressed everywhere — the model games the checks. **Next:** (1) fix the
+dataset's content quality (the long-deferred review) so SFT stops rewarding dull text; (2) more
+zh/ja steps; (3) consider adding the judge into the objective (RLVR-style) once the SFT floor is
+richer. Adapter kept; iteration #2 continues from it.
+
+**Missing:** ja held-out and the zh adversarial run didn't complete before download (only en/zh
+held-out present); re-run to fill those cells.
 
 ---
 

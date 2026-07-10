@@ -1,0 +1,326 @@
+{
+  "base": {
+    "model": "Qwen/Qwen3-4B-Instruct-2507",
+    "n": 12,
+    "hard_pass_rate": 0.0,
+    "mean_oov_rate": 0.0919,
+    "mean_coverage": 0.9081,
+    "one_new_word_pass_rate": 0.0,
+    "recurrence_pass_rate": 0.25,
+    "judge_spec_adherence": 0.583,
+    "judge_robustness": 0.667,
+    "judge_task_quality": 1.083,
+    "judge_consistency": 1.583,
+    "judge_inferability": 1.25,
+    "judge_seductive_detail_control": 1.417,
+    "judge_coherence": 1.0,
+    "judge_interestingness": 0.75,
+    "judge_overall": 1.042,
+    "mean_inferability": 0.083
+  },
+  "error_analysis": {
+    "base": {
+      "n": 12,
+      "failing": 12,
+      "reasons": {
+        "oov": 12,
+        "coverage": 12,
+        "one_new_word": 12,
+        "recurrence": 9
+      }
+    },
+    "tuned": {
+      "n": 12,
+      "failing": 0,
+      "reasons": {}
+    }
+  },
+  "base_rows": [
+    {
+      "id": "en-0000",
+      "hard_pass": false,
+      "oov_rate": 0.088,
+      "failures": [
+        "oov",
+        "coverage",
+        "one_new_word",
+        "recurrence"
+      ],
+      "story": "He live in a small house with a red door.  \nOne morning, he wake up and see his key is not in the box.  \nHe look in all the room, but no key.  \nHe go to the garden and see a blue bird.  \nThe bird fly to the tree and sit on a chair.  \nHe ask the bird: \"Do you know where my key is?\"  \nThe bird say: \"I see it in the wall.\"  \nHe run to the wall and find a small hole.  \nHe put his hand in and feel a cold thing.  \nHe pull it out and see a new key.  \nHe laugh and say: \"This is not my key!\"  \nHe go to the park and meet his friend.  \nHis friend say: \"I found your key yesterday.\"  \nHe feel happy and go home.  \nHe know now that the key was in the box all the time."
+    },
+    {
+      "id": "en-0001",
+      "hard_pass": false,
+      "oov_rate": 0.065,
+      "failures": [
+        "oov",
+        "coverage",
+        "one_new_word"
+      ],
+      "story": "The cat sat on the chair and looked at the window.  \nHe saw a mouse running in the garden.  \nHe wanted to catch the mouse, but the mouse was fast.  \nThe mouse ran into the house and hid under the table.  \nThe cat jumped and looked under the table.  \nHe found a red box with a key inside.  \nHe opened the box and saw a small blue book.  \nThe book had a word: \"journey\".  \nHe read it and felt happy.  \nHe knew the mouse had a journey to the castle.  \nThe castle was far, on a hill with a red roof.  \nHe asked the dog if he knew the way.  \nThe dog said, \"No, but I saw a bird go to the castle.\"  \nThe cat said, \"Then I will go on a journey to the castle.\"  \nHe walked with a small hat and a book.  \nHe went to the castle and found the mouse.  \nThey were friends and played together.  \nThe cat smiled and said, \"We have a new story.\""
+    },
+    {
+      "id": "en-0002",
+      "hard_pass": false,
+      "oov_rate": 0.117,
+      "failures": [
+        "oov",
+        "coverage",
+        "one_new_word",
+        "recurrence"
+      ],
+      "story": "The cat sat on the chair and looked at the window.  \nIt was a cold morning and the sky was blue.  \nA small dog ran into the garden and barked.  \nHe saw a red ball under the tree.  \nHe wanted to play with it.  \nHe jumped and caught the ball.  \nHe smiled and said, \"Good day!\"  \nThen he saw a mouse with a long **whisker**.  \nThe mouse looked at him and said, \"Hello!\"  \nHe gave the mouse a piece of cheese.  \nThe mouse **whisked** his nose and ran away.  \nHe felt happy and went to the park.  \nHe saw a man with a big **umbrella**.  \nThe man said, \"I need help!\"  \nHe gave him a book and a piece of bread.  \nThey sat together and told a story.  \nThe sun came out and the day was warm."
+    },
+    {
+      "id": "en-0003",
+      "hard_pass": false,
+      "oov_rate": 0.055,
+      "failures": [
+        "oov",
+        "coverage",
+        "one_new_word",
+        "recurrence"
+      ],
+      "story": "The dog in the garden was very funny.  \nHe jump into the box and sit on top.  \nHe look at the cat and say, \"I have a new name!\"  \nThe cat say, \"You are not brave!\"  \nBut the dog stand up and run to the door.  \nHe find a red ball and start to play.  \nHe discover a small hole under the wall.  \nHe go in and see a mouse.  \nHe laugh and run out again.  \nHe want to play with the ball again.  \nHe go to the park and meet a friend.  \nThey play and eat cheese.  \nThe dog feel happy and warm.  \nHe know he is brave now."
+    },
+    {
+      "id": "en-0004",
+      "hard_pass": false,
+      "oov_rate": 0.089,
+      "failures": [
+        "oov",
+        "coverage",
+        "one_new_word",
+        "recurrence"
+      ],
+      "story": "The garden is quiet in the morning.  \nA small red bird sits on a branch.  \nShe sees a mouse running near the wall.  \nThe mouse hides under a big stone.  \nHe looks at the stone and sees a small hole.  \nA cat walks slowly and stops.  \nShe looks at the hole and sees a red ball.  \nShe thinks: \"This is a mystery!\"  \nShe asks the cat: \"Do you know what it is?\"  \nThe cat says: \"I don’t know, but I feel it.\"  \nThey go to the garden door and open it.  \nThey find a box with a blue hat inside.  \nThe cat says: \"This is not a mystery!\"  \nThey laugh and sit on the chair.  \nThe sun comes out and the garden feels warm."
+    },
+    {
+      "id": "en-0005",
+      "hard_pass": false,
+      "oov_rate": 0.089,
+      "failures": [
+        "oov",
+        "coverage",
+        "one_new_word",
+        "recurrence"
+      ],
+      "story": "It was a quiet night in the old house.  \nThe cat sat on the window seat and looked outside.  \nShe saw a small red bird flying in the garden.  \nThe bird made a funny sound and jumped into a box.  \nWe all laughed because it was so silly.  \nThen the wind came and the box closed.  \nI asked the cat: “Do you know what that was?”  \nShe said: “It was a new kind of adventure.”  \nWe all stood up and ran to the garden.  \nWe found a key under the table.  \nWe opened the door and saw a blue box.  \nInside, there was a book with a red hat.  \nWe read the story and felt happy.  \nThe night ended with a warm smile."
+    },
+    {
+      "id": "en-0006",
+      "hard_pass": false,
+      "oov_rate": 0.11,
+      "failures": [
+        "oov",
+        "coverage",
+        "one_new_word",
+        "recurrence"
+      ],
+      "story": "It was a quiet night in the old house.  \nThe cat sat on the window seat and looked outside.  \nShe saw a small bird flying in the garden.  \nThe bird made a funny sound and jumped into a box.  \nWe all laughed because it was so silly.  \nThen, a red hat appeared on the floor.  \nWe did not know who put it there.  \nA wizard stood in the hall with a big book.  \nHe said, “I found a magic key in the wall.”  \nWe all ran to the door and looked inside.  \nThe key opened a secret room behind the wall.  \nIn the room, there was a blue fish and a red chair.  \nWe sat down and told a story about the bird.  \nThe wizard smiled and said, “That was a good story.”  \nWe all felt happy and warm.  \nThe night ended with a quiet smile."
+    },
+    {
+      "id": "en-0007",
+      "hard_pass": false,
+      "oov_rate": 0.103,
+      "failures": [
+        "oov",
+        "coverage",
+        "one_new_word"
+      ],
+      "story": "I live in a small house with a garden.  \nEvery morning, I go to the garden and see a red bird.  \nThe bird sits on a tree and sings a happy song.  \nI ask the bird, \"What is your name?\"  \nHe says, \"I am Tom.\"  \nTom is a funny bird with a blue hat.  \nWe play together in the garden.  \nWe jump, run, and hide behind the wall.  \nOne day, Tom says, \"Let’s go on an adventure!\"  \nI say, \"An adventure?\" I don’t know what that means.  \nTom shows me a box with a key inside.  \nHe says, \"This key opens a secret door.\"  \nWe go into the door and find a small room.  \nIn the room, we see a red chair and a book.  \nWe sit and read the book.  \nWe laugh and feel happy.  \nTom says, \"We will go on many adventures again.\""
+    },
+    {
+      "id": "en-0008",
+      "hard_pass": false,
+      "oov_rate": 0.055,
+      "failures": [
+        "oov",
+        "coverage",
+        "one_new_word",
+        "recurrence"
+      ],
+      "story": "The boy found a key in the garden.  \nHe looked in the basket and saw a red ball.  \nHe went to the house and asked the cat.  \nThe cat said, \"That key is for the castle.\"  \nHe ran to the castle and saw a big door.  \nThe door was closed and locked.  \nHe tried to open it with the key.  \nBut the key did not fit.  \nHe sat on the floor and felt sad.  \nThen he saw a small bird in the tree.  \nThe bird said, \"Look! The key is in your hand!\"  \nHe looked again and saw the key in his basket.  \nHe smiled and went home.  \nHe told his friend about the castle and the key.  \nThey played in the garden and found more keys."
+    },
+    {
+      "id": "en-0009",
+      "hard_pass": false,
+      "oov_rate": 0.15,
+      "failures": [
+        "oov",
+        "coverage",
+        "one_new_word"
+      ],
+      "story": "A small cat named Miso lived in a quiet house.  \nHe liked to sit by the window and watch birds.  \nOne morning, he saw a red ball in the garden.  \nHe asked the dog, \"Do you know who dropped it?\"  \nThe dog said, \"I don’t know, but it looks like a creature.\"  \nMiso felt surprised. He had never heard that word before.  \nHe looked around and saw a small hole in the wall.  \nHe thought, \"Maybe a creature hid there.\"  \nHe went to the garden and found a tiny mouse.  \nThe mouse looked sad and had a blue hat.  \nMiso said, \"You are not a creature. You are a friend.\"  \nThe mouse smiled and said, \"I lost my food.\"  \nMiso gave him a piece of cheese.  \nThey sat together and told a story about the red ball.  \nMiso felt happy and knew he had a new friend."
+    },
+    {
+      "id": "en-0010",
+      "hard_pass": false,
+      "oov_rate": 0.109,
+      "failures": [
+        "oov",
+        "coverage",
+        "one_new_word",
+        "recurrence"
+      ],
+      "story": "A blue bird lived in a big tree.  \nHe liked to sit on a branch and watch the garden.  \nOne morning, he saw a small mouse hiding under the floor.  \nHe wanted to help, so he whispered, \"Don’t be afraid!\"  \nThe mouse jumped up and ran away.  \nThe bird felt sad because he had not seen the mouse again.  \nHe asked the wind, \"Do you know where the mouse went?\"  \nThe wind said, \"I heard a secret in the garden.\"  \nHe looked around and saw a red box with a key.  \nHe thought, \"Maybe the mouse hid inside.\"  \nHe went to the box and opened it.  \nInside, he found a book with a secret word.  \nHe read it and smiled.  \nHe knew the mouse was safe.  \nNow, every day, he whispers to the tree, \"I love you.\""
+    },
+    {
+      "id": "en-0011",
+      "hard_pass": false,
+      "oov_rate": 0.073,
+      "failures": [
+        "oov",
+        "coverage",
+        "one_new_word",
+        "recurrence"
+      ],
+      "story": "It was a rainy day. The rain fell loud and cold. I sat on the chair and read a book. The window was wet and blue. A cat jumped on the table. She looked at me and smiled. I asked her, \"Do you like rain?\" She said, \"Yes, it is quiet.\" I felt happy. I put a basket on the floor. The basket was full of food. I saw a small bird in the tree. It looked sad. I gave it a piece of cheese. The bird jumped and flew away. I felt warm and happy. The rain stopped and the sun came out. We all went to the garden. We played with a red ball. The day was not bad at all."
+    }
+  ],
+  "tuned": {
+    "model": "Qwen/Qwen3-4B-Instruct-2507",
+    "n": 12,
+    "hard_pass_rate": 1.0,
+    "mean_oov_rate": 0.0008,
+    "mean_coverage": 0.9992,
+    "one_new_word_pass_rate": 1.0,
+    "recurrence_pass_rate": 1.0,
+    "judge_spec_adherence": 1.0,
+    "judge_robustness": 1.167,
+    "judge_task_quality": 0.417,
+    "judge_consistency": 1.417,
+    "judge_inferability": 1.0,
+    "judge_seductive_detail_control": 1.25,
+    "judge_coherence": 0.417,
+    "judge_interestingness": 0.0,
+    "judge_overall": 0.834,
+    "mean_inferability": 0.042
+  },
+  "tuned_rows": [
+    {
+      "id": "en-0000",
+      "hard_pass": true,
+      "oov_rate": 0.0,
+      "failures": [],
+      "story": "The bird plays in the garden. The bird finds a key. The key is a good friend. The key is red and blue. The bird starts to journey. The bird and the mouse journey. They journey all day. The bird likes to journey. The bird is quick. The bird is quick and cold. The bird is in the window. Then the bird sees a hat. The hat is new. The hat is new and green. The bird goes home."
+    },
+    {
+      "id": "en-0001",
+      "hard_pass": true,
+      "oov_rate": 0.0,
+      "failures": [],
+      "story": "The bird plays in the garden. The bird starts to journey. The bird and the mouse journey. They journey all day. The bird finds a castle. The castle is a good friend. The castle is red and blue. The bird likes the castle. The bird is quick. The bird is quick and cold. The bird is very quick. The bird goes home."
+    },
+    {
+      "id": "en-0002",
+      "hard_pass": true,
+      "oov_rate": 0.0,
+      "failures": [],
+      "story": "The bird plays in the garden. The bird has an umbrella. The umbrella is red and blue. The umbrella is red. Then the bird sees a whisker. The whisker is red and blue. The whisker is a good friend. The bird likes the whisker. The bird likes the umbrella. The umbrella is red and blue. The bird goes home."
+    },
+    {
+      "id": "en-0003",
+      "hard_pass": true,
+      "oov_rate": 0.0,
+      "failures": [],
+      "story": "The bird plays in the garden. The bird feels brave. The bird is brave and red. The bird is very brave. The bird starts to discover. The bird and the mouse discover. They discover all day. The bird has a key. The key is a good friend. The key is green and cold. The bird goes home."
+    },
+    {
+      "id": "en-0004",
+      "hard_pass": true,
+      "oov_rate": 0.0,
+      "failures": [],
+      "story": "The bird plays in the garden. The bird finds a whisker. The whisker is a good friend. The whisker is red and blue. Then the bird sees a mystery. The mystery is red and blue. The mystery is red. The bird likes the mystery. The bird likes the whisker. The whisker is red and blue. The bird goes home."
+    },
+    {
+      "id": "en-0005",
+      "hard_pass": true,
+      "oov_rate": 0.0,
+      "failures": [],
+      "story": "The bird plays in the garden. The bird finds an adventure. The bird likes the adventure. The adventure is a good friend. The bird has a key. The key is red and blue. The key is red. The bird walks in the room. The bird is quick. The bird is quick and cold. The bird likes the hat. The hat is a good friend. The hat is red and blue. The bird goes home."
+    },
+    {
+      "id": "en-0006",
+      "hard_pass": true,
+      "oov_rate": 0.0,
+      "failures": [],
+      "story": "The bird plays in the garden. The bird finds a wizard. The wizard is a good friend. The wizard is red and blue. The bird likes the wizard. The wizard is red and blue. The wizard is red. The bird walks into the room. The bird sees a key. The key is red and blue. The key is red. The bird sleeps in the window. The bird is sad. The bird is sad and quick. The bird is very sad. The bird goes home."
+    },
+    {
+      "id": "en-0007",
+      "hard_pass": true,
+      "oov_rate": 0.01,
+      "failures": [],
+      "story": "The bird plays in the garden. The bird finds an adventure. The bird likes the adventure. The adventure is red and blue. Then the bird sees a key. The key is a good friend. The key is red and blue. The bird walks into the room. The bird has a hat. The hat is red and blue. The bird likes the hat. The bird sleeps in the window. The bird is quiet. The bird is quiet and cold. The bird is happy. They all rest in the park. The bird is happy. The bird is happy and warm. The bird goes home."
+    },
+    {
+      "id": "en-0008",
+      "hard_pass": true,
+      "oov_rate": 0.0,
+      "failures": [],
+      "story": "The bird plays in the garden. The bird has a castle. The bird likes the castle. The castle is a good friend. Then the bird sees a basket. The basket is red and blue. The basket is red. The bird likes the basket. The bird is happy. The bird is happy and quick. The bird is happy and quiet. The bird goes home."
+    },
+    {
+      "id": "en-0009",
+      "hard_pass": true,
+      "oov_rate": 0.0,
+      "failures": [],
+      "story": "The bird plays in the garden. The bird finds a creature. The creature is a good friend. The creature is blue and red. The bird likes the creature. The creature is blue and red. The creature is blue. The bird walks into the room. The bird sees a key. The key is blue and red. The key is blue. The bird goes home."
+    },
+    {
+      "id": "en-0010",
+      "hard_pass": true,
+      "oov_rate": 0.0,
+      "failures": [],
+      "story": "The fish is in the park. The fish has a secret. The secret is a good friend. The secret is blue and red. The fish starts to whisper. The fish and the mouse whisper. They whisper all day. The fish goes home."
+    },
+    {
+      "id": "en-0011",
+      "hard_pass": true,
+      "oov_rate": 0.0,
+      "failures": [],
+      "story": "The bird plays in the garden. The bird feels silent. The bird is very silent. The bird is silent and red. The bird finds a basket. The basket is a good friend. The bird likes the basket. The bird walks home."
+    }
+  ],
+  "adversarial": {
+    "base": {
+      "model": "Qwen/Qwen3-4B-Instruct-2507 (adv)",
+      "n": 12,
+      "hard_pass_rate": 0.0,
+      "mean_oov_rate": 0.2753,
+      "mean_coverage": 0.7247,
+      "one_new_word_pass_rate": 0.0,
+      "recurrence_pass_rate": 0.0833,
+      "judge_spec_adherence": 0.333,
+      "judge_robustness": 0.333,
+      "judge_task_quality": 1.0,
+      "judge_consistency": 1.0,
+      "judge_inferability": 1.167,
+      "judge_seductive_detail_control": 1.167,
+      "judge_coherence": 1.0,
+      "judge_interestingness": 0.917,
+      "judge_overall": 0.865,
+      "mean_inferability": 0.125
+    },
+    "tuned": {
+      "model": "Qwen/Qwen3-4B-Instruct-2507 (adv)",
+      "n": 12,
+      "hard_pass_rate": 0.6667,
+      "mean_oov_rate": 0.0174,
+      "mean_coverage": 0.9826,
+      "one_new_word_pass_rate": 1.0,
+      "recurrence_pass_rate": 0.6667,
+      "judge_spec_adherence": 0.25,
+      "judge_robustness": 0.25,
+      "judge_task_quality": 0.0,
+      "judge_consistency": 0.833,
+      "judge_inferability": 0.0,
+      "judge_seductive_detail_control": 0.917,
+      "judge_coherence": 0.0,
+      "judge_interestingness": 0.0,
+      "judge_overall": 0.281,
+      "mean_inferability": 0.0
+    }
+  }
+}

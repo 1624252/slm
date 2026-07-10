@@ -1,0 +1,799 @@
+{
+  "base": {
+    "model": "Qwen/Qwen3-4B-Instruct-2507",
+    "n": 39,
+    "hard_pass_rate": 0.0,
+    "mean_oov_rate": 0.1572,
+    "mean_coverage": 0.8428,
+    "one_new_word_pass_rate": 0.0,
+    "recurrence_pass_rate": 0.4615,
+    "judge_spec_adherence": 0.923,
+    "judge_robustness": 1.077,
+    "judge_task_quality": 1.436,
+    "judge_consistency": 1.795,
+    "judge_inferability": 1.41,
+    "judge_seductive_detail_control": 1.692,
+    "judge_coherence": 1.359,
+    "judge_interestingness": 1.308,
+    "judge_overall": 1.375,
+    "mean_inferability": 0.278
+  },
+  "error_analysis": {
+    "base": {
+      "n": 39,
+      "failing": 39,
+      "reasons": {
+        "oov": 39,
+        "coverage": 39,
+        "one_new_word": 39,
+        "recurrence": 21
+      }
+    },
+    "tuned": {
+      "n": 39,
+      "failing": 4,
+      "reasons": {
+        "oov": 4,
+        "coverage": 4
+      }
+    }
+  },
+  "base_rows": [
+    {
+      "id": "en-gold-000",
+      "hard_pass": false,
+      "oov_rate": 0.228,
+      "failures": [
+        "oov",
+        "coverage",
+        "one_new_word",
+        "recurrence"
+      ],
+      "story": "The sun came out bright and warm on the beach.  \nA little boy sat on the sand, watching the waves roll in.  \nHe found a red hat by the shore and put it on his head.  \nHe looked around and saw a small blue boat tied to the wall.  \n\"Can I go in?\" he asked the man who stood nearby.  \nThe man smiled and said, \"Yes, but only if you follow the path.\"  \nThe boy followed the path and saw a green beacon shining in the distance.  \nHe ran toward it, laughing, because it looked like a star.  \nHe stopped and saw a sign that said, \"Come home, friend.\"  \nHe walked back to the house and saw his mother waiting with a cup of tea.  \nShe said, \"You were lost, but you found your way.\"  \nHe looked at the beacon again and smiled.  \nHe knew he would always find his way back, even in the dark.  \nThe next morning, he brought a small box with a new toy to his friend.  \nThey sat together and watched the sun rise, happy and full of hope."
+    },
+    {
+      "id": "en-gold-001",
+      "hard_pass": false,
+      "oov_rate": 0.135,
+      "failures": [
+        "oov",
+        "coverage",
+        "one_new_word",
+        "recurrence"
+      ],
+      "story": "The sea was calm that morning.  \nShe sat on the porch and watched the waves go by.  \nA small boat floated in the harbor, quiet and still.  \nThe wind was not loud, just a soft breath.  \nShe opened her book and read about fish in the sea.  \nOne red bird landed on the wall and looked at her.  \nShe smiled and said, \"Good morning, little one.\"  \nThe bird jumped and flew into the garden.  \nShe felt calm, like the world had slowed down.  \nShe saw a cat sleeping on the floor.  \nThe cat looked up and gave her a slow blink.  \nShe thought, \"This is a quiet day.\"  \nShe wanted to stay here, with the sea and the sun.  \nShe knew she would come back again."
+    },
+    {
+      "id": "en-gold-002",
+      "hard_pass": false,
+      "oov_rate": 0.135,
+      "failures": [
+        "oov",
+        "coverage",
+        "one_new_word"
+      ],
+      "story": "The sun came out in the morning and made the garden feel warm.  \nShe sat on a chair and looked at the meadow beyond the wall.  \nA little girl ran into the meadow and stopped to watch a red bird.  \nShe smiled and said, “That bird is so quiet.”  \nThe meadow had soft grass and flowers that moved in the wind.  \nShe found a blue box under a tree and opened it.  \nInside, there was a small key and a note that said, “Find your friend.”  \nShe looked around and saw a dog sleeping near a flower.  \nShe called the dog and it jumped up, wagging its tail.  \nThe meadow was full of quiet sounds and soft laughter.  \nShe thought, “Maybe the key opens a secret place.”  \nShe walked slowly and found a small red hat on the floor.  \nShe picked it up and felt it was warm and soft.  \nShe knew this was the place where her friend lived.  \nShe sat down and said, “I will come back tomorrow.”"
+    },
+    {
+      "id": "en-gold-003",
+      "hard_pass": false,
+      "oov_rate": 0.215,
+      "failures": [
+        "oov",
+        "coverage",
+        "one_new_word"
+      ],
+      "story": "The boy stood in the garden and looked up at the sky.  \nHe saw a bright light moving fast across the sky.  \n\"Is that a star?\" he asked his friend.  \nShe said, \"No, it's a comet.\"  \nHe didn't know what a comet was, but it looked like a long, thin piece of ice.  \nThe comet moved slowly, leaving a trail of light behind.  \nHe wanted to follow it, so he ran to the park.  \nThere, he saw another comet, this one glowing red and spinning.  \nHe felt excited and said, \"I love comets!\"  \nHe sat on the grass and watched them go away.  \nThe next morning, he found a book about space and read about comets.  \nHe showed it to his dog, who wagged his tail and barked.  \nHe thought, \"Comets are fun and quiet, like a story from the sky.\"  \nHe promised to look for comets every night.  \nHe even drew a picture of a comet with a tail and a name."
+    },
+    {
+      "id": "en-gold-004",
+      "hard_pass": false,
+      "oov_rate": 0.19,
+      "failures": [
+        "oov",
+        "coverage",
+        "one_new_word"
+      ],
+      "story": "The wind blew hard in the mountain town.  \nA girl sat by the window, watching the cold sky.  \nShe saw a big white shape far away on the hill.  \nIt looked like a wall, but it moved slowly.  \nShe asked her friend if it was a new kind of cloud.  \nHer friend said, \"No, it's a glacier.\"  \nShe felt cold, but also happy to see something so big.  \nThe next morning, she went to the park to look again.  \nShe saw the glacier had grown a little, like a slow-moving cat.  \nShe sat on a chair and watched it for hours.  \nIt looked quiet, but it made a soft sound when the wind passed.  \nShe thought, \"This is not just ice — it is a world of cold.\"  \nLater, she found a small red book near the door.  \nThe book said, \"Glaciers are old, but they remember the sun.\"  \nShe smiled and knew she would go back again."
+    },
+    {
+      "id": "en-gold-005",
+      "hard_pass": false,
+      "oov_rate": 0.159,
+      "failures": [
+        "oov",
+        "coverage",
+        "one_new_word"
+      ],
+      "story": "The boy stood in the garden and looked at the big stone on the wall.  \nHe had found it there last week and thought it looked like a cat.  \nHe wanted to make something new with it, so he picked up a hammer and started to break it.  \nBut the stone was too strong and he couldn’t break it.  \nThen he saw a man in a red hat walking by and asked, “Can you help me?”  \nThe man said, “I don’t know how to fix stone, but I know a sculptor.”  \nThe boy felt happy and ran to the park to find the sculptor.  \nThe sculptor sat on a chair and said, “I can turn stone into a bird.”  \nThe boy watched and saw how the stone became a small, flying bird.  \nHe laughed and said, “That’s the best thing I’ve ever seen!”  \nThe sculptor smiled and said, “I make things from stone, like birds, trees, and houses.”  \nThe boy wanted to try again and asked, “Can you make a new one?”  \nThe sculptor said, “Yes, but only if you bring me a big stone.”  \nThe boy ran home and found a stone under the tree.  \nHe brought it to the sculptor and said, “This one is proud.”  \nThe sculptor laughed and said, “That’s the best word I’ve ever heard.”"
+    },
+    {
+      "id": "en-gold-006",
+      "hard_pass": false,
+      "oov_rate": 0.131,
+      "failures": [
+        "oov",
+        "coverage",
+        "one_new_word",
+        "recurrence"
+      ],
+      "story": "The sun came out in the morning and warmed the ground.  \nWe walked through the garden and saw a big red apple on a tree.  \nA little girl stood there and said, \"Can I pick one?\"  \nShe reached for the apple and smiled.  \nThe wind blew and made the leaves move.  \nBehind the house, there was a quiet orchard with many trees.  \nWe went there and found a box full of apples.  \nShe picked one and ate it, and then she laughed.  \nThe warm light made her feel happy.  \nShe said, \"This is the best day ever.\"  \nWe sat on a chair and watched the birds fly.  \nThe orchard was full of birds and warm air.  \nShe told a story about a cat that jumped into a box.  \nWe all laughed and said, \"That was funny!\"  \nThe day ended with a sweet smell of apples."
+    },
+    {
+      "id": "en-gold-007",
+      "hard_pass": false,
+      "oov_rate": 0.208,
+      "failures": [
+        "oov",
+        "coverage",
+        "one_new_word"
+      ],
+      "story": "The girl sat by the window in her small house and watched the rain fall outside.  \nShe had a red hat and a book about animals.  \nIn the garden, a little cat jumped over a fence and ran into the yard.  \nShe called out, “Come here, little one!” but the cat just looked away.  \nThen she saw a small box under the table with a blue light inside.  \nShe opened it and found a lantern inside, glowing softly.  \nShe held it close and felt warm, like the sun had come through the clouds.  \nThat night, she placed the lantern on her nightstand and smiled, knowing it would keep her safe.  \nShe told her friend, “I found a lantern,” and they both laughed.  \nThe next morning, the lantern was still lit, even though no one had turned it on.  \nShe asked, “How does it work?” and her friend said, “It just knows when you need light.”  \nShe carried it to the garden and placed it near the tree.  \nLater, a bird landed on the roof and looked at it with a funny face.  \nShe said, “It’s not broken,” and the lantern stayed bright.  \nShe sat again, and the light made the room feel cozy and full of peace."
+    },
+    {
+      "id": "en-gold-008",
+      "hard_pass": false,
+      "oov_rate": 0.196,
+      "failures": [
+        "oov",
+        "coverage",
+        "one_new_word"
+      ],
+      "story": "The boy found a red box in the garden.  \nHe opened it and saw a small blue compass inside.  \nIt pointed straight to the old tree in the park.  \nHe followed the direction and found a hidden door.  \nThe door was locked, but he had a key from his mother.  \nHe used the key and went inside.  \nThe room was full of books and a cat sat on the chair.  \nHe asked the cat, \"Do you know the way out?\"  \nThe cat blinked and said, \"Follow the compass, it will guide you.\"  \nHe looked around and saw a map drawn on the wall.  \nThe map showed a path to the river.  \nHe walked fast and saw a bird flying high.  \nThe bird dropped a piece of cheese and he picked it up.  \nHe smiled and felt happy.  \nHe knew the compass would always help him find his way."
+    },
+    {
+      "id": "en-gold-009",
+      "hard_pass": false,
+      "oov_rate": 0.109,
+      "failures": [
+        "oov",
+        "coverage",
+        "one_new_word"
+      ],
+      "story": "The boy walked into the park and saw a big red rock on the edge.  \nHe picked it up and felt it was warm and smooth.  \nThen he saw a small blue bird sitting on a tree branch.  \nThe bird looked at him and made a funny sound.  \nHe laughed and ran back to his house.  \nHis mother asked, \"What did you find?\"  \nHe said, \"I found a canyon!\"  \nShe looked surprised and said, \"There’s no canyon here!\"  \nHe showed her the rock and said, \"It’s not a rock — it’s a canyon!\"  \nShe looked again and saw the rock was wide and deep.  \nThey sat on the floor and watched the sun go down.  \nThe boy smiled and said, \"I think the canyon is inside the rock.\"  \nThat night, he dreamed of a canyon with a river and a cat.  \nHe woke up and said, \"I saw a canyon in my dream!\"  \nHis friend said, \"You must have been very happy.\"  \nHe said, \"Yes, because I feel like I found a canyon in my heart.\""
+    },
+    {
+      "id": "en-gold-010",
+      "hard_pass": false,
+      "oov_rate": 0.066,
+      "failures": [
+        "oov",
+        "coverage",
+        "one_new_word"
+      ],
+      "story": "She lived in a small house on a quiet street.  \nThe garden had flowers and a red door.  \nOne morning, she saw a little bird sitting on the roof.  \nShe called the bird and it jumped down to her hand.  \nShe gave it a piece of cheese and it smiled.  \nLater, she found a broken box in the garden.  \nInside, she saw a key and a note that said \"cottage\".  \nShe thought, \"I need to go to a cottage.\"  \nShe walked to the edge of the park and saw a cottage with a green roof.  \nShe knocked on the door and a woman opened it.  \nThe woman said, \"This is my cottage. I live here.\"  \nShe asked, \"Can I stay for a day?\"  \nThe woman said yes and gave her a key.  \nShe felt happy and warm, like home.  \nShe sat on a chair and read a book by the window."
+    },
+    {
+      "id": "en-gold-011",
+      "hard_pass": false,
+      "oov_rate": 0.175,
+      "failures": [
+        "oov",
+        "coverage",
+        "one_new_word"
+      ],
+      "story": "The sun shone bright in the morning, and the children ran through the park.  \nA big red bird flew over the hill and landed on a tree.  \nShe saw a small blue box near the wall and opened it.  \nInside, there was a key and a note that said, \"Find the waterfall.\"  \nThey all looked around, but no waterfall was visible.  \nOne boy said, \"Maybe it's behind the garden.\"  \nThey walked through the garden and found a path that went down the hill.  \nAt the bottom, the water fell fast and made a loud sound — a real waterfall!  \nThey laughed and sat on the floor, drinking warm tea.  \nThe waterfall was not far from their house, and they knew they would go back again.  \nThey made a new friend and told a story about the key.  \nThe next day, they came with a dog and a book.  \nThey found the same key and the same note, and the same waterfall.  \nThey all felt happy and knew they would never stop playing."
+    },
+    {
+      "id": "en-gold-012",
+      "hard_pass": false,
+      "oov_rate": 0.127,
+      "failures": [
+        "oov",
+        "coverage",
+        "one_new_word",
+        "recurrence"
+      ],
+      "story": "The boy stood in the garden and looked up at the sky.  \nHe saw a bright red ball floating in the blue sky.  \n\"Is that a star?\" he asked his friend.  \nShe said, \"No, it's just a balloon.\"  \nBut he kept looking, and then he saw a small green shape near the tree.  \nHe ran to the edge of the park and found a box with a red hat.  \nInside, he found a key and a note that said, \"Look through the window.\"  \nHe opened the window and saw a big telescope on the table.  \nHe held it and looked through it at the stars.  \nThe stars looked like fish swimming in a dark sea.  \nHe smiled and said, \"This is the best day ever.\"  \nHe sat down and read the note again.  \n\"Look through the window,\" it said.  \nHe did it again and saw a new star.  \nHe showed it to his friend, and she laughed.  \nThey both knew that the telescope had a secret."
+    },
+    {
+      "id": "en-gold-013",
+      "hard_pass": false,
+      "oov_rate": 0.181,
+      "failures": [
+        "oov",
+        "coverage",
+        "one_new_word"
+      ],
+      "story": "The cat sat on the windowsill and watched the garden all morning.  \nShe saw a small mouse run past the flower bed and jump into the grass.  \nThe dog barked loudly and ran after it, but the mouse was gone.  \nNo one saw the mouse again, and the family started to feel quiet.  \nThen, a man in a red hat walked into the garden and stood still.  \nHe looked around with a very **vigilant** eye and didn’t move.  \nHe saw a red box under the tree and picked it up slowly.  \nThe next day, the children found the box open and inside was a note that said, “Stay safe.”  \nThey all felt calm again, and the garden stayed peaceful.  \nThe man never came back, but the children still watch the garden with **vigilant** eyes.  \nThey say the mouse still hides in the garden at night, and they stay **vigilant** to hear a small sound.  \nOne day, a bird flew in and dropped a piece of cheese — the children laughed and ran to catch it.  \nThey didn’t see the mouse, but they stayed **vigilant** and looked at every corner.  \nNow, every morning, they sit on the porch and watch the garden, just like the cat."
+    },
+    {
+      "id": "en-gold-014",
+      "hard_pass": false,
+      "oov_rate": 0.082,
+      "failures": [
+        "oov",
+        "coverage",
+        "one_new_word",
+        "recurrence"
+      ],
+      "story": "The cat sat on the windowsill and looked at the bird outside.  \nIt was a blue bird with a red hat.  \nThe bird said, \"I see a mouse!\" and jumped into the garden.  \nThe cat didn't move. It was very hungry.  \nHe looked at the cheese on the table and felt his stomach grow.  \nHe wanted to eat it fast.  \nThen he saw a small red box under the chair.  \nHe opened it and found a new kind of food.  \nHe ate it and felt ravenous.  \nHe ran to the park and found a friend.  \nThey both laughed and ate more food.  \nThe friend said, \"You are ravenous!\"  \nHe smiled and said, \"Yes, I am!\"  \nThey sat on the grass and watched the sun go down.  \nThe cat said, \"I love this food!\"  \nHe felt happy and full.  \nHe went home and slept with a full belly."
+    },
+    {
+      "id": "en-gold-015",
+      "hard_pass": false,
+      "oov_rate": 0.21,
+      "failures": [
+        "oov",
+        "coverage",
+        "one_new_word",
+        "recurrence"
+      ],
+      "story": "The sky was deep blue and soft, like a blanket over the town.  \nShe sat by the window and watched the sun go down, glowing warm and golden.  \nA little bird flew in and landed on the table, its feathers bright and shiny.  \nShe didn’t know why, but she felt a strange glow in her chest.  \nIt wasn’t fire or light — it was something quiet, like a whisper from the wind.  \nThen she saw a box in the corner with a red lid, and it was open.  \nInside, a small fish swam slowly, its body glowing with a soft, luminous light.  \nShe reached out and touched it — the light spread through her hand, warm and happy.  \nShe smiled and said, “This is not a dream.”  \nThe fish jumped up and swam to the wall, where it stayed, glowing gently.  \nShe sat again, and the glow stayed with her, like a friend.  \nShe told her dog, “I saw something beautiful today.”  \nThe dog looked at her and gave a quiet bark, like he knew.  \nShe didn’t ask more — she just knew it was true.  \nAnd every night, when she closed her eyes, she saw the fish, glowing softly in the dark."
+    },
+    {
+      "id": "en-gold-016",
+      "hard_pass": false,
+      "oov_rate": 0.214,
+      "failures": [
+        "oov",
+        "coverage",
+        "one_new_word",
+        "recurrence"
+      ],
+      "story": "The cat sat in the quiet garden all night.  \nShe didn’t move, even when the wind blew through the trees.  \nA small mouse ran past, but she stayed still.  \nNo one saw her, not even the red bird on the fence.  \nShe felt warm in her fur, like the sun had come back.  \nThe world was silent, and she liked it that way.  \nThen she heard a soft *click* — a tiny box had opened.  \nInside was a piece of cheese, and she didn’t know why.  \nShe looked at it and smiled, because it was so quiet.  \nShe didn’t want to move, not even to eat.  \nThe next morning, the garden was full of birds.  \nBut she still stayed in the corner, watching the sky.  \nShe knew she was not like the others — she was quiet.  \nShe loved the night, and the stillness, and the peace."
+    },
+    {
+      "id": "en-gold-017",
+      "hard_pass": false,
+      "oov_rate": 0.197,
+      "failures": [
+        "oov",
+        "coverage",
+        "one_new_word",
+        "recurrence"
+      ],
+      "story": "The sun came out slowly over the garden.  \nShe sat on the chair by the window and watched the birds fly.  \nThe wind was quiet and the world felt calm.  \nA small red bird landed on the table and looked at her.  \nShe smiled and said, “Hello.”  \nThe bird didn’t move, just stayed still.  \nShe thought, “This is peaceful.”  \nShe wanted to stay like this forever.  \nThe next morning, she found a blue box under the tree.  \nInside was a key and a note that said, “Tranquil.”  \nShe opened it and saw a picture of the same bird.  \nShe felt happy and warm.  \nShe sat again, this time with her hat on.  \nThe bird came back and sat on her lap.  \nShe knew this was a peaceful day.  \nShe would come back every morning to feel tranquil."
+    },
+    {
+      "id": "en-gold-018",
+      "hard_pass": false,
+      "oov_rate": 0.251,
+      "failures": [
+        "oov",
+        "coverage",
+        "one_new_word",
+        "recurrence"
+      ],
+      "story": "The boy sat on the porch and watched the rain fall slowly.  \nHe saw a red bird hop from branch to branch, moving in a slow way.  \nThat made him think — maybe the rain was making the world move slow.  \nHe opened his book and read about a river that meandered through the forest.  \nThe river looked like it was walking in a long, winding path.  \nHe smiled and said, “That’s how the wind moves too.”  \nHis friend came over and asked, “Do you see how the grass bends slowly?”  \nShe pointed to a field where the wind made the blades move in a slow wave.  \nThey both knew that slow things could be beautiful.  \nThe boy closed his book and said, “I want to walk with the wind.”  \nHe stood up and walked down the street, feeling the slow rhythm of the day.  \nThe sun came out, warm and quiet, and the world felt still.  \nHe sat again, watching a cat walk slowly past the house.  \nHe thought, “Even cats move slow when they’re happy.”  \nThe day ended with a quiet smile and a slow breath."
+    },
+    {
+      "id": "en-gold-019",
+      "hard_pass": false,
+      "oov_rate": 0.169,
+      "failures": [
+        "oov",
+        "coverage",
+        "one_new_word",
+        "recurrence"
+      ],
+      "story": "The cat sat on the windowsill and watched the garden.  \nA small mouse ran past and hid behind the old red door.  \nHe looked around and saw a furtive shadow move in the grass.  \nThe mouse stopped and listened—something was wrong.  \nIt didn’t look like a bird, or a dog, or even a cat.  \nIt just moved too fast, too quiet, and too close.  \nThe mouse felt cold, like the wind had touched his fur.  \nHe didn’t know what it was, but he knew it wasn’t friendly.  \nThen the shadow jumped into the garden and vanished.  \nThe mouse ran to the door and saw a furtive box under the table.  \nInside, a piece of cheese was wrapped in a blue cloth.  \nHe didn’t want to eat it, but he couldn’t stop looking.  \nThe box had a name: “Milo.”  \nHe didn’t know who made it, but he knew it was not for him.  \nLater that night, the mouse found Milo again—this time, in the kitchen."
+    },
+    {
+      "id": "en-gold-020",
+      "hard_pass": false,
+      "oov_rate": 0.138,
+      "failures": [
+        "oov",
+        "coverage",
+        "one_new_word",
+        "recurrence"
+      ],
+      "story": "It was a quiet afternoon in the garden when the wind started to howl.  \nA black cat sat on the wall, watching the sky.  \nShe saw a red box near the door and felt something strange.  \nThe box had a lock, and the key was missing.  \nNo one had seen it before, but the air felt heavy.  \nEveryone in the house said, “It’s just the wind.”  \nBut the cat didn’t move when the storm came.  \nThe storm was loud, and the trees bent low.  \nThen, a small bird flew in and dropped a note.  \nThe note said: “Look inside. It’s not a box.”  \nInside, the box was full of old books, all with the same name.  \nOne book had a word that made her stop: *ominous*.  \nShe opened it and saw a picture of a man with a hat.  \nHe looked at her and smiled, but the sky turned dark.  \nShe knew then that the house had a secret."
+    },
+    {
+      "id": "en-gold-021",
+      "hard_pass": false,
+      "oov_rate": 0.153,
+      "failures": [
+        "oov",
+        "coverage",
+        "one_new_word",
+        "recurrence"
+      ],
+      "story": "The boy sat at the kitchen table and looked at the empty bowl.  \nHe felt hungry and wanted something to eat.  \nHis mother said, \"Let’s go to the garden.\"  \nIn the garden, he saw a big red tomato on the wall.  \nHe picked it up and took a bite.  \nIt was sweet and made him smile.  \nThen he saw a small mouse running through the grass.  \nThe mouse looked at him and gave a quick jump.  \nHe felt very hungry again and wanted more food.  \nHe ran to the kitchen and asked for a new sandwich.  \nHis mother said, \"You have a voracious appetite.\"  \nHe didn’t know what that meant, but he liked the sound of it.  \nLater that night, he sat on the floor and thought about the mouse.  \nHe said, \"I want to feed the mouse.\"  \nThe next morning, he found a box with a red hat inside.  \nHe opened it and saw a note: \"You are very hungry, but also very kind.\"  \nHe smiled and felt happy."
+    },
+    {
+      "id": "en-gold-022",
+      "hard_pass": false,
+      "oov_rate": 0.127,
+      "failures": [
+        "oov",
+        "coverage",
+        "one_new_word"
+      ],
+      "story": "The girl found a big red rock in the garden.  \nShe picked it up and looked at it closely.  \nIt felt cold and smooth, like a piece of old stone.  \nShe asked her dog if it was a fossil.  \nThe dog barked and ran away, but she stayed.  \nShe sat on the floor and watched the sun go down.  \nShe thought, \"Maybe it's a fossil from long ago.\"  \nShe dug around the base of the tree and found a small bone.  \nShe held it in her hand and smiled.  \nShe knew now that the red rock was not a fossil.  \nShe looked at the bone and said, \"That's not a fossil either.\"  \nShe ran to the window and saw a bird flying past.  \nShe laughed and said, \"I didn’t know fossils were so small!\"  \nShe went back to the garden and found another red rock.  \nShe picked it up and said, \"This one feels warm, not cold.\"  \nShe knew the truth: not all rocks are fossils."
+    },
+    {
+      "id": "en-gold-023",
+      "hard_pass": false,
+      "oov_rate": 0.113,
+      "failures": [
+        "oov",
+        "coverage",
+        "one_new_word"
+      ],
+      "story": "The girl found a small red ball in the garden.  \nShe picked it up and smiled.  \nIt was soft and warm in her hand.  \nShe asked her dog if it wanted to play.  \nThe dog jumped and ran after it.  \nShe saw a hedgehog sleeping under the wall.  \nIt had a tiny blue hat and looked very quiet.  \nShe sat down and told the story of how the ball came from the tree.  \nThe hedgehog opened one eye and looked at her.  \nShe gave it a piece of cheese and it ate slowly.  \nThe hedgehog stood up and walked to the door.  \nShe followed it and saw it go into the garden again.  \nThey played together every morning.  \nThe hedgehog never ran away.  \nShe felt happy and knew it was a good friend."
+    },
+    {
+      "id": "en-gold-024",
+      "hard_pass": false,
+      "oov_rate": 0.13,
+      "failures": [
+        "oov",
+        "coverage",
+        "one_new_word"
+      ],
+      "story": "The girl found a small red box under the garden chair.  \nInside, the box had a key that looked like a fish.  \nShe opened it and saw a blue hat with a tiny gold star.  \nShe picked it up and felt it warm in her hand.  \nThat night, the hat began to *shimmer* softly.  \nShe sat by the window and watched the stars go *shimmer* above the tree.  \nThe wind came in and made the hat *shimmer* like a wave of light.  \nShe smiled and said, “This is a good friend.”  \nShe gave the hat to her dog, who sat still and let it *shimmer* on his head.  \nThe next morning, the hat was gone — but the floor still *shimmered* where it had been.  \nShe looked at the wall and saw a small mark that *shimmered* like a secret.  \nShe asked her cat, “Did you see the hat?”  \nThe cat blinked and said, “Yes, it *shimmered* when I walked past.”  \nShe ran to the park and found a new red box — it *shimmered* with a quiet laugh.  \nShe knew then that magic was not far, and the world was full of quiet *shimmer*."
+    },
+    {
+      "id": "en-gold-025",
+      "hard_pass": false,
+      "oov_rate": 0.205,
+      "failures": [
+        "oov",
+        "coverage",
+        "one_new_word",
+        "recurrence"
+      ],
+      "story": "The path wound slowly through the forest, bending around big trees.  \nHe followed the path, thinking it would lead to the lake.  \nIt was quiet, and the wind moved like a snake.  \nHe saw a red bird sitting on a branch, watching the path.  \nThe path looked serpentine, twisting in circles.  \nHe stopped and looked at the sky, which was blue and warm.  \nA small mouse ran past, hiding behind a stone.  \nHe smiled, because the path felt like a long, slow dance.  \nThe next day, he walked the same path again, and it still looked serpentine.  \nHe found a key under a tree, and it felt cold in his hand.  \nHe didn’t know where it led, but he wanted to follow it.  \nThe path bent again, going down a hill and into the garden.  \nHe sat on a chair and read a book about animals.  \nHe saw a cat jump over a fence, and the path looked like a snake again.  \nHe knew he would keep walking, because the path was full of quiet stories."
+    },
+    {
+      "id": "en-gold-026",
+      "hard_pass": false,
+      "oov_rate": 0.172,
+      "failures": [
+        "oov",
+        "coverage",
+        "one_new_word",
+        "recurrence"
+      ],
+      "story": "The girl sat on the porch, watching the rain fall.  \nShe had no hat, no coat, and no one to play with.  \nThe garden was full of weeds, and the flowers had gone quiet.  \nShe looked at the red door and thought, *I don’t want to go inside.*  \nA small mouse ran past, and she felt sad again.  \nShe opened the window and saw a blue bird flying away.  \nShe wanted to call her friend, but the phone was broken.  \nShe sat there, forlorn, with a book in her lap, waiting for the sun to come back.  \nShe didn’t move, and the world felt cold and still.  \nShe thought of the time they played in the park, and how happy they had been.  \nNow, she only saw the empty chair and the silence.  \nShe closed her eyes and felt the cold floor beneath her.  \nShe didn’t know if she would ever feel warm again.  \nShe stayed there, forlorn, until the morning light came."
+    },
+    {
+      "id": "en-gold-027",
+      "hard_pass": false,
+      "oov_rate": 0.155,
+      "failures": [
+        "oov",
+        "coverage",
+        "one_new_word",
+        "recurrence"
+      ],
+      "story": "The wind howled outside the window.  \nIt was a cold morning in the town of Maplewood.  \nSnow fell all day, and the sky turned white.  \nThe garden looked quiet, with no birds or children playing.  \nA big red hat sat on the table, forgotten.  \nShe opened the door and saw a small dog hiding under the chair.  \nThe dog looked sad and hungry.  \nThen, a loud noise came from the back of the house.  \n\nA blizzard had started.  \nThe whole street was covered in snow.  \nNo one could go out to the park.  \nThe children stayed inside, reading books.  \nOne boy said, “I want to go outside and play.”  \nBut the wind was too strong.  \nHe looked at the window and saw a red hat again.  \nHe smiled and said, “I’ll stay here and watch the snow.”  \n\nThe blizzard lasted all night.  \nThe next morning, the snow melted.  \nThe garden looked green again.  \nThe dog ran outside and barked.  \nEveryone laughed and said, “It was a funny day.”"
+    },
+    {
+      "id": "en-gold-028",
+      "hard_pass": false,
+      "oov_rate": 0.089,
+      "failures": [
+        "oov",
+        "coverage",
+        "one_new_word"
+      ],
+      "story": "The girl walked into the old house and saw a dark room with no light.  \nShe asked the cat if it knew what was behind the wall.  \nThe cat meowed and jumped into a small box.  \nShe opened the box and found a red key inside.  \nShe felt cold and sat on the floor, afraid of what it might open.  \nShe looked at the key and thought, \"This is not a key for a door.\"  \nThen she saw a small stone on the floor, and it looked like a name.  \nShe picked it up and said, \"This is not a stone. It's a clue.\"  \nShe went to the back of the house and found a cellar under the garden.  \nShe opened the cellar door and saw a blue book with a strange word: *und*.  \nShe read it and laughed, because it looked like a word for \"stop.\"  \nShe closed the book and felt warm, like the sun had come in.  \nShe sat on the chair and said, \"I think I found the secret.\"  \nShe looked at the key again and knew it was meant for the cellar.  \nShe smiled and said, \"I have the key. I have the clue. I have the story.\""
+    },
+    {
+      "id": "en-gold-029",
+      "hard_pass": false,
+      "oov_rate": 0.11,
+      "failures": [
+        "oov",
+        "coverage",
+        "one_new_word"
+      ],
+      "story": "The girl sat on the floor and looked at the box of toys.  \nShe asked her dog, \"Can you solve this?\"  \nThe dog barked and ran to the garden.  \nA red bird flew in and said, \"I have a riddle for you.\"  \nShe smiled and said, \"Tell me!\"  \nThe bird said, \"What has keys but can't open locks?\"  \nShe thought for a moment and said, \"A piano!\"  \nThe bird laughed and said, \"Yes! That’s the answer!\"  \nThey all sat together and told a new story.  \nThe next day, she found a riddle in her book.  \nShe read it and said, \"I can’t solve this one.\"  \nHer friend came and said, \"Try again!\"  \nThey sat on the chair and looked at the sky.  \nThe riddle was about a cat and a mouse.  \nShe said, \"I know the answer now!\"  \nThey all laughed and went to the park."
+    },
+    {
+      "id": "en-gold-030",
+      "hard_pass": false,
+      "oov_rate": 0.177,
+      "failures": [
+        "oov",
+        "coverage",
+        "one_new_word",
+        "recurrence"
+      ],
+      "story": "The boat sat still in the calm sea.  \nIt didn’t move, even when the wind blew hard.  \nThe man sat on the deck and watched the waves.  \nHe felt safe, like a bird that had found its home.  \nHe looked at the red hat on the floor and smiled.  \nA small fish jumped out of the water and swam away.  \nHe called his friend, who came with a box of cheese.  \nThey sat together and told a story about a storm.  \nThe storm had come fast, but the boat stayed steady.  \nHe held the hat and said, “This is my anchor.”  \nThe cat jumped on the chair and looked at the sky.  \nThey all felt calm again, like the sea had stopped moving.  \nHe knew the boat would never fall apart.  \nThey stayed there, happy and quiet, for the whole morning."
+    },
+    {
+      "id": "en-gold-031",
+      "hard_pass": false,
+      "oov_rate": 0.173,
+      "failures": [
+        "oov",
+        "coverage",
+        "one_new_word",
+        "recurrence"
+      ],
+      "story": "The sun rose bright over the red roof of the old house.  \nA cat sat on the windowsill, watching the birds fly in.  \nShe saw a small mouse run into the garden.  \nThe mouse hid under a big rock, then jumped out again.  \nIt was a funny sight, and everyone laughed.  \nShe called her friend to come and see.  \nThey found a red box with a key inside.  \nThe key was cold, but it opened the door to the garden.  \nInside, the grass was green and the flowers were bright.  \nShe felt happy, and the wind blew softly.  \nThen, a loud noise came from the tree.  \nA fire started in the corner of the garden.  \nThe flames spread fast, and the whole place turned red.  \nShe ran to the door and shouted, “Help!”  \nBut the fire was too big to stop.  \nShe sat down and thought, “This is not good.”  \nThen she saw a small blue bird flying away.  \nShe smiled and said, “Maybe tomorrow will be better.”"
+    },
+    {
+      "id": "en-gold-032",
+      "hard_pass": false,
+      "oov_rate": 0.158,
+      "failures": [
+        "oov",
+        "coverage",
+        "one_new_word"
+      ],
+      "story": "She found a small pebble by the garden door.  \nIt was round and smooth, like a little stone from the river.  \nShe picked it up and held it in her hand.  \nThe pebble felt cold, but she liked it.  \nShe put it in her pocket and walked to the park.  \nA dog ran past and barked, but she didn’t stop.  \nShe sat on the bench and looked at the sky.  \nThe pebble was quiet, and she felt happy.  \nShe gave it to her friend, who said, “It’s a nice pebble.”  \nThey both smiled and sat together.  \nShe found another pebble near the tree.  \nIt was red and looked like a tiny berry.  \nShe put it in her pocket too.  \nShe told her mom about the pebble, and she said, “That’s a good one.”  \nShe kept the pebbles in her pocket and felt warm.  \nShe knew she would find more pebbles every day."
+    },
+    {
+      "id": "en-gold-033",
+      "hard_pass": false,
+      "oov_rate": 0.15,
+      "failures": [
+        "oov",
+        "coverage",
+        "one_new_word"
+      ],
+      "story": "The boy sat in the garden and watched the birds fly over the green roof.  \nHe saw a red box on the floor and picked it up.  \nInside, there was a small key and a note that said *“Find the gorge.”*  \nHe didn’t know what a gorge was, but he thought it might be a deep hole.  \nHe ran through the garden and found a big crack in the wall.  \nIt opened into a dark cave with cold air and a strange smell.  \nHe stood still and listened — the cave was full of quiet sounds.  \nThen he saw a small blue fish swimming in the water below.  \nHe laughed and said, “This is not a gorge — it’s a secret room!”  \nHe sat down and read the note again.  \nThe key fit the lock on the door, and he opened it.  \nInside, there was a book with a picture of a cat and a boy.  \nHe smiled and said, “I found the gorge — and it was a surprise.”  \nHe looked around and saw a new red hat on the table.  \nHe knew he had to go home, but he wanted to come back again."
+    },
+    {
+      "id": "en-gold-034",
+      "hard_pass": false,
+      "oov_rate": 0.15,
+      "failures": [
+        "oov",
+        "coverage",
+        "one_new_word"
+      ],
+      "story": "The old farm had a big red barn at the back.  \nInside, a cat sat on a chair and watched the birds fly.  \nA small mouse ran into the barn and hid under a box.  \nThe mouse looked at a blue hat and thought, \"That’s my favorite color.\"  \nHe saw a hole in the wall and jumped in, not knowing what was inside.  \nThere, a dog lay on the floor, eating cheese and sleeping.  \nThe dog looked up and said, \"You’re not supposed to be here!\"  \nThe mouse felt scared and ran out, but then saw a new sign on the door: \"Welcome to the barn.\"  \nHe smiled and went back in, because it felt warm and safe.  \nThe next morning, a child came to the farm and asked, \"Can I play in the barn?\"  \nShe found a toy horse and sat on the floor, laughing.  \nThe dog barked and ran to the door, but stopped when he saw the mouse again.  \nThey played together, and the barn felt like home.  \nNo one ever said it was bad — it was just quiet and full of happy sounds."
+    },
+    {
+      "id": "en-gold-035",
+      "hard_pass": false,
+      "oov_rate": 0.208,
+      "failures": [
+        "oov",
+        "coverage",
+        "one_new_word",
+        "recurrence"
+      ],
+      "story": "The sun came out in the morning and painted the sky bright blue.  \nShe walked through the garden and saw a big red flower growing near the wall.  \nA little girl sat on a chair and looked at the flower with a happy smile.  \nShe asked the wind, “Do you know what this flower is for?”  \nThe wind whispered, “It helps the bees find the meadow.”  \nShe ran to the meadow and saw bees buzzing around a yellow flower.  \nA small bird landed on a branch and sang a soft song.  \nShe felt warm and happy, like the sun had touched her heart.  \nShe looked up and saw a tall light shining in the sky — a beacon.  \nShe didn’t know why, but she thought it was a sign that good things would come.  \nShe sat down and watched the light glow, like a friend from the sky.  \nThe next day, she found a new red flower in the garden, and the beacon shone again.  \nShe smiled and said, “I know the meadow is full of hope.”  \nShe knew the light would stay, and the garden would grow, one day at a time."
+    },
+    {
+      "id": "en-gold-036",
+      "hard_pass": false,
+      "oov_rate": 0.142,
+      "failures": [
+        "oov",
+        "coverage",
+        "one_new_word",
+        "recurrence"
+      ],
+      "story": "The boy found a red box in the garden.  \nHe opened it and saw a small blue lantern inside.  \nIt was cold, but the light came on when he turned it.  \nHe took it to the cellar and put it on the table.  \nThe cellar was dark and quiet, with only one old chair.  \nHe sat down and waited for something to happen.  \nThen the lantern began to glow, and the walls looked warm.  \nHe saw a small mouse run past the door.  \nHe laughed and said, \"This is not a normal house!\"  \nThe next morning, he found the lantern on the floor again.  \nHe picked it up and carried it to the window.  \nThe light showed a path through the garden.  \nHe followed it and found a new book under the tree.  \nHe opened it and read a story about a boy with a lantern.  \nHe smiled and knew he would go back again."
+    },
+    {
+      "id": "en-gold-037",
+      "hard_pass": false,
+      "oov_rate": 0.129,
+      "failures": [
+        "oov",
+        "coverage",
+        "one_new_word",
+        "recurrence"
+      ],
+      "story": "The boat sat in the harbor, waiting for the tide to rise.  \nEvery morning, the old man went to the harbor to check the weather.  \nHe had a red hat and a small box with a key inside.  \nOne day, he saw a blue bird flying over the sea.  \nHe asked the bird, \"Do you know where the lost boat is?\"  \nThe bird said, \"It’s far out, past the green island.\"  \nHe took the key and opened the box.  \nInside was a map with a red mark — a new voyage.  \nHe felt calm and began to walk toward the sea.  \nThe wind was strong, but he didn’t stop.  \nHe saw a small boat floating in the water — it was his own.  \nHe smiled and said, \"This is the start of a new voyage.\"  \nHe sat on the floor and read the map again.  \nThe sun came out, and the sea looked warm.  \nHe knew he had to go — the voyage was calling him."
+    },
+    {
+      "id": "en-gold-038",
+      "hard_pass": false,
+      "oov_rate": 0.075,
+      "failures": [
+        "oov",
+        "coverage",
+        "one_new_word",
+        "recurrence"
+      ],
+      "story": "The boy walked into the garden and saw a big red apple on the tree.  \nHe felt hungry and wanted to eat it.  \nHe looked behind the wall and saw a small blue bird.  \nThe bird was not singing — it was just sitting still.  \nHe asked the bird, “Do you know where the apple is?”  \nThe bird said, “No, but I can help you find it.”  \nThen he saw a box under the tree with a key inside.  \nHe opened it and found a fossil of a small cat.  \nHe was ravenous and wanted to eat the fossil.  \nHe laughed and said, “This is not food!”  \nThe fossil was not made of meat — it was made of stone.  \nHe sat down and thought, “Maybe I should go to the orchard.”  \nHe walked to the orchard and saw many trees with apples.  \nHe picked one and ate it — it was sweet and warm.  \nHe smiled and said, “I love the orchard.”"
+    }
+  ],
+  "tuned": {
+    "model": "Qwen/Qwen3-4B-Instruct-2507",
+    "n": 39,
+    "hard_pass_rate": 0.8974,
+    "mean_oov_rate": 0.0068,
+    "mean_coverage": 0.9932,
+    "one_new_word_pass_rate": 1.0,
+    "recurrence_pass_rate": 1.0,
+    "judge_spec_adherence": 0.795,
+    "judge_robustness": 0.923,
+    "judge_task_quality": 0.103,
+    "judge_consistency": 1.077,
+    "judge_inferability": 0.769,
+    "judge_seductive_detail_control": 1.026,
+    "judge_coherence": 0.154,
+    "judge_interestingness": 0.0,
+    "judge_overall": 0.606,
+    "mean_inferability": 0.0
+  },
+  "tuned_rows": [
+    {
+      "id": "en-gold-000",
+      "hard_pass": true,
+      "oov_rate": 0.01,
+      "failures": [],
+      "story": "The bird plays in the garden. The bird finds a beacon. The bird likes the beacon. The beacon is a good friend. The bird has a hat. The hat is blue and red. The hat is blue. The bird walks in the room. The bird sees a key. The key is blue and red. The key is blue. The bird sleeps in the window. The bird is happy. The bird is happy and quick. The bird is happy again. They all rest in the boat. The bird is happy. The bird is happy and quick. The bird is happy all day. The bird goes home."
+    },
+    {
+      "id": "en-gold-001",
+      "hard_pass": true,
+      "oov_rate": 0.0,
+      "failures": [],
+      "story": "The bird walks in the garden. The bird finds a harbor. The harbor is a good friend. The bird likes the harbor. The bird has a key. The key is red and blue. The key is red. The bird is calm. The bird is calm and quiet. The bird is very calm. The bird sleeps in the room. The bird is calm. The bird is calm and warm. The bird goes home."
+    },
+    {
+      "id": "en-gold-002",
+      "hard_pass": true,
+      "oov_rate": 0.0,
+      "failures": [],
+      "story": "The bird sings in the garden. The bird finds a meadow. The meadow is a good friend. The meadow is red and blue. The bird likes the meadow. The meadow is red and blue. The meadow is red. The bird walks in the park. Then the bird sees a secret. The secret is red and blue. The secret is red. The bird goes home."
+    },
+    {
+      "id": "en-gold-003",
+      "hard_pass": true,
+      "oov_rate": 0.0,
+      "failures": [],
+      "story": "The bird plays in the garden. The bird finds a comet. The comet is a good friend. The bird likes the comet. The bird is quick. The bird is quick and blue. The bird is quick and red. The bird walks into the room. The bird sees a tail. The tail is a good friend. The bird likes the tail. The bird sleeps in the sky. The bird is sad. The bird is sad and warm. The bird is sad, warm, and new. The bird goes home."
+    },
+    {
+      "id": "en-gold-004",
+      "hard_pass": true,
+      "oov_rate": 0.0,
+      "failures": [],
+      "story": "The bird walks in the garden. The bird finds a glacier. The bird likes the glacier. The glacier is a good friend. The bird is cold. The bird is cold and red. The bird is very cold. The bird sleeps in the window. The bird has a hat. The hat is new. The hat is quiet and green. The bird goes home."
+    },
+    {
+      "id": "en-gold-005",
+      "hard_pass": false,
+      "oov_rate": 0.039,
+      "failures": [
+        "oov",
+        "coverage"
+      ],
+      "story": "The old man walks in the garden. The old man finds a sculptor. The old man likes the sculptor. The sculptor is a good friend. The old man likes to play. The old man makes a key. The key is blue and red. The key is blue. The old man sleeps in the room. The old man feels proud. The old man is very proud. The old man is proud and quick. The old man goes home."
+    },
+    {
+      "id": "en-gold-006",
+      "hard_pass": true,
+      "oov_rate": 0.01,
+      "failures": [],
+      "story": "The bird walks in the park. The bird finds an orchard. The bird likes the orchard. The orchard is a good friend. The bird has a key. The key is red and blue. The key is red. The bird likes the key. The bird is warm. The bird is warm and quick. The bird is very warm. The bird sleeps in the window. The bird is warm. The bird is warm and quiet. The bird is warm all day. They all rest in the room. The bird is warm. The bird is warm and cold. The bird is warm and new. The bird goes home."
+    },
+    {
+      "id": "en-gold-007",
+      "hard_pass": true,
+      "oov_rate": 0.0,
+      "failures": [],
+      "story": "The bird plays in the garden. The bird finds a lantern. The lantern is a good friend. The bird likes the lantern. The bird has a key. The key is blue and red. The key is blue. The bird walks in the park. The bird is quiet. The bird is quiet and cold. The bird sleeps in the room. The bird is happy. The bird is happy and warm. The bird likes the key. The bird likes the lantern. The bird likes the key. The bird goes home."
+    },
+    {
+      "id": "en-gold-008",
+      "hard_pass": true,
+      "oov_rate": 0.0,
+      "failures": [],
+      "story": "The bird plays in the garden. The bird finds a compass. The bird likes the compass. The compass is a good friend. The bird has a key. The key is red and blue. The key is red. The bird walks in the park. The bird sees a mouse. The mouse is quick and cold. The mouse is quick. The bird sleeps in the room. The bird is sad. The bird is sad and new. The bird is very sad. The bird goes home."
+    },
+    {
+      "id": "en-gold-009",
+      "hard_pass": true,
+      "oov_rate": 0.0,
+      "failures": [],
+      "story": "The bird walks in the park. The bird finds a canyon. The bird likes the canyon. The canyon is a good friend. The bird has a hat. The hat is blue and red. The hat is blue. The bird is happy. The bird is happy and quick. The bird is very happy. The bird goes home."
+    },
+    {
+      "id": "en-gold-010",
+      "hard_pass": true,
+      "oov_rate": 0.01,
+      "failures": [],
+      "story": "The bird plays in the garden. The bird finds a cottage. The cottage is a good friend. The bird likes the cottage. The bird has a key. The key is red and blue. The key is red. The bird walks in the room. The bird sees a small dog. The small dog is quick. The small dog is quick and cold. The bird sleeps in the window. The bird likes the hat. The hat is a good friend. The bird is happy. They all rest in the roof. The bird is happy. The bird is happy and warm. The bird goes home."
+    },
+    {
+      "id": "en-gold-011",
+      "hard_pass": true,
+      "oov_rate": 0.0,
+      "failures": [],
+      "story": "The bird plays in the garden. The bird finds a waterfall. The waterfall is a good friend. The waterfall is red and blue. The bird likes the waterfall. The waterfall is red and blue. The waterfall is red. The bird walks in the park. The bird sees a key. The key is red and blue. The key is red. The bird sleeps in the room. The bird is quiet. The bird is quiet and slow. The bird is quiet and red. The bird goes home."
+    },
+    {
+      "id": "en-gold-012",
+      "hard_pass": false,
+      "oov_rate": 0.029,
+      "failures": [
+        "oov",
+        "coverage"
+      ],
+      "story": "The bird plays in the garden. The bird finds a telescope. The bird likes the telescope. The telescope is a good friend. The bird has a hat. The hat is red and blue. The hat is red. The bird walks in the park. The bird sees a star. The star is red and blue. The star is red. The bird sleeps in the room. The bird is happy. The bird is happy and quick. The bird likes the star. The bird likes the hat. The bird likes the key. The bird likes the moon. The bird likes the old man. The old man is red and blue. The old man is red. They all rest in the window. The bird is happy. The bird is happy and quick. The bird is happy again. The bird goes home."
+    },
+    {
+      "id": "en-gold-013",
+      "hard_pass": true,
+      "oov_rate": 0.0,
+      "failures": [],
+      "story": "The bird plays in the garden. The bird feels vigilant. The bird is very vigilant. The bird is vigilant and red. The bird has a hat. The hat is blue and cold. The hat is a good friend. The bird finds a key. The key is a good friend. The key is blue and quiet. The bird walks home."
+    },
+    {
+      "id": "en-gold-014",
+      "hard_pass": true,
+      "oov_rate": 0.0,
+      "failures": [],
+      "story": "The bird plays in the garden. The bird feels ravenous. The bird is ravenous and red. The bird is very ravenous. The bird finds a key. The key is a good friend. The key is quick and cold. The bird likes the hat. The hat is a good friend. The hat is quick and cold. The bird walks home."
+    },
+    {
+      "id": "en-gold-015",
+      "hard_pass": false,
+      "oov_rate": 0.038,
+      "failures": [
+        "oov",
+        "coverage"
+      ],
+      "story": "The bird plays in the garden. The bird feels luminous. The bird is very luminous. The bird is luminous and red. The bird has a dream. The bird likes the dream. The dream is a good friend. The bird walks in the park. The bird finds a key. The key is dark or blue. The key is dark. The bird sleeps in the window. The bird is warm. The bird is warm and quiet. The bird is warm and soft. They all rest in the room. The bird is old. The bird is old and quick. The bird is old and new. The bird goes home."
+    },
+    {
+      "id": "en-gold-016",
+      "hard_pass": true,
+      "oov_rate": 0.0,
+      "failures": [],
+      "story": "The bird walks in the park. The bird feels nocturnal. The bird is very nocturnal. The bird is nocturnal and red. The bird finds a key. The key is a good friend. The key is quiet and cold. The bird likes the hat. The hat is quiet and cold. The hat is quiet. The bird sleeps in the room. The bird is quiet. The bird is quiet and sad. The bird goes home."
+    },
+    {
+      "id": "en-gold-017",
+      "hard_pass": true,
+      "oov_rate": 0.0,
+      "failures": [],
+      "story": "The bird walks in the park. The bird feels tranquil. The bird is tranquil and red. The bird is very tranquil. The bird has a key. The key is a good friend. The key is quiet and cold. The bird likes the hat. The hat is quiet and cold. The hat is quiet. The bird sleeps in the window. The bird is tranquil. The bird is tranquil and quiet. They all rest in the room."
+    },
+    {
+      "id": "en-gold-018",
+      "hard_pass": true,
+      "oov_rate": 0.01,
+      "failures": [],
+      "story": "The bird plays in the garden. The bird wants to meander. The bird and the mouse meander. They meander all day. The bird finds a key. The key is red. The key is red and blue. The bird likes the key. The bird is slow. The bird is slow and green. The bird is very slow. The bird sleeps in the window. The bird is quick. The bird is quick and cold. The bird is happy. They all rest in the room. The bird is happy. The bird is happy and warm. The bird leaves the room."
+    },
+    {
+      "id": "en-gold-019",
+      "hard_pass": true,
+      "oov_rate": 0.011,
+      "failures": [],
+      "story": "The bird walks in the garden. The bird feels furtive. The bird is furtive and red. The bird is very furtive. The bird has a key. The key is a good friend. The bird likes the key. The bird finds a hat. The hat is blue and green. The hat is blue. The bird sleeps in the room. The bird is sad. The bird is sad and quick. The bird is happy. They all rest in the window. The bird is happy. The bird is happy and cold. The bird goes home."
+    },
+    {
+      "id": "en-gold-020",
+      "hard_pass": true,
+      "oov_rate": 0.0,
+      "failures": [],
+      "story": "The bird plays in the park. The bird feels ominous. The bird is very ominous. The bird is ominous and red. The bird finds a key. The key is a good friend. The key is blue and dark. The bird likes the key. The bird is old. The bird is old and quick. The bird is old and new. The bird walks into the room. The bird is warm. The bird is warm and quiet. The bird likes the window. The bird has a hat. The hat is a good friend. The bird likes the hat. The bird goes home."
+    },
+    {
+      "id": "en-gold-021",
+      "hard_pass": true,
+      "oov_rate": 0.009,
+      "failures": [],
+      "story": "The bird plays in the garden. The bird feels voracious. The bird is very voracious. The bird is voracious and red. The bird finds a key. The key is a good friend. The key is quiet and cold. The bird likes the key. The bird walks into the room. The bird is hungry. The bird is hungry and quick. The bird is hungry. The bird sleeps in the window. The bird is warm. The bird is warm and blue. The bird is warm, blue, and red. They all rest in the park. The bird is old. The bird is old and quick. The bird is old, quick, and red. The bird goes home."
+    },
+    {
+      "id": "en-gold-022",
+      "hard_pass": true,
+      "oov_rate": 0.0,
+      "failures": [],
+      "story": "The bird plays in the garden. The bird finds a fossil. The bird likes the fossil. The fossil is a good friend. The bird has a key. The key is red and blue. The key is red. The bird walks in the park. The bird is quick. The bird is quick and cold. The bird sleeps in the room. The bird is happy. The bird is happy and new. The bird is happy again. The bird goes home."
+    },
+    {
+      "id": "en-gold-023",
+      "hard_pass": false,
+      "oov_rate": 0.048,
+      "failures": [
+        "oov",
+        "coverage"
+      ],
+      "story": "The bird plays in the garden. The bird finds a hedgehog. The hedgehog is a good friend. The bird likes the hedgehog. The bird has a key. The key is red and blue. The key is red. The bird walks in the park. The bird is sweet. The bird is sweet and quick. The bird is very sweet. The bird goes home."
+    },
+    {
+      "id": "en-gold-024",
+      "hard_pass": true,
+      "oov_rate": 0.0,
+      "failures": [],
+      "story": "The bird plays in the garden. The bird finds a key. The bird likes the key. The key is a good friend. The bird starts to shimmer. The bird and the mouse shimmer. They shimmer all day. The bird is quiet. The bird is bright. The bird is quiet and bright. The bird goes home."
+    },
+    {
+      "id": "en-gold-025",
+      "hard_pass": true,
+      "oov_rate": 0.0,
+      "failures": [],
+      "story": "The bird climbs in the garden. The bird feels serpentine. The bird is very serpentine. The bird is serpentine and red. The bird finds a key. The key is a good friend. The key is blue and green. The bird likes the key. The bird is sad. The bird is sad and quick. The bird is sad or cold. The bird walks in the park. The bird is long. The bird is long and quiet. The bird is in the room. The bird sees a snake. The snake is a good friend. The snake is new and warm. The bird goes home."
+    },
+    {
+      "id": "en-gold-026",
+      "hard_pass": true,
+      "oov_rate": 0.0,
+      "failures": [],
+      "story": "The bird plays in the garden. The bird feels forlorn. The bird is very forlorn. The bird is forlorn and red. The bird finds a key. The key is a good friend. The key is green and blue. The bird likes the key. The bird is sad. The bird is sad and quick. The bird is very sad. The bird walks into the room. The bird sees a mouse. The mouse is a good friend. The mouse is old and new. The bird goes home."
+    },
+    {
+      "id": "en-gold-027",
+      "hard_pass": true,
+      "oov_rate": 0.0,
+      "failures": [],
+      "story": "The bird plays in the garden. The bird finds a blizzard. The blizzard is a good friend. The blizzard is red and cold. The bird likes the blizzard. The blizzard is red and cold. The blizzard is red. The bird walks in the park. The bird sees a key. The key is red and cold. The key is red. The bird goes home."
+    },
+    {
+      "id": "en-gold-028",
+      "hard_pass": true,
+      "oov_rate": 0.0,
+      "failures": [],
+      "story": "The bird plays in the garden. The bird finds a cellar. The bird likes the cellar. The little cellar is new. The bird is cold. The bird is cold and dark. The bird is cold and red. The bird is quick. The bird is quick and sad. The bird is quick and warm. The bird goes home."
+    },
+    {
+      "id": "en-gold-029",
+      "hard_pass": true,
+      "oov_rate": 0.018,
+      "failures": [],
+      "story": "The old man walks in the park. The old man finds a riddle. The old man likes the riddle. The riddle is a good friend. The old man has a key. The key is blue and red. The key is blue. The old man climbs the wall. The old man sees a bird. The bird is quick and cold. The bird is quick. The old man sleeps in the room. The old man is happy. The old man is happy and quiet. They all rest in the window. The old man likes the hat. The hat is a good friend. The hat is blue and red. The old man goes home."
+    },
+    {
+      "id": "en-gold-030",
+      "hard_pass": true,
+      "oov_rate": 0.015,
+      "failures": [],
+      "story": "The bird plays in the garden. The bird finds an anchor. The anchor is a good friend. The bird likes the anchor. The bird holds the anchor. The anchor is red and blue. The anchor is red. The bird climbs up the wall. Then the bird sees a key. The key is a good friend. The key is red and blue. The bird sleeps in the room. The bird is quiet. The bird is quiet and cold. The bird is happy. The bird walks in the park. The bird is happy. The bird is happy and warm. They all rest in the boat. The bird is happy. The bird is happy and warm. The bird likes the story. The bird likes the key. The bird likes the hat. The bird goes home."
+    },
+    {
+      "id": "en-gold-031",
+      "hard_pass": true,
+      "oov_rate": 0.01,
+      "failures": [],
+      "story": "The bird plays in the garden. The bird finds a blaze. The bird likes the blaze. The blaze is a good friend. The bird has a key. The key is red and blue. The key is red. The bird walks in the park. The bird sees a mouse. The mouse is quiet. The mouse is quiet and cold. The bird sleeps in the room. The bird is happy. The bird is happy and warm. They all rest in the window. The bird likes the blaze. The bird likes the key. The bird likes the old hat. The bird goes home."
+    },
+    {
+      "id": "en-gold-032",
+      "hard_pass": true,
+      "oov_rate": 0.011,
+      "failures": [],
+      "story": "The bird plays in the garden. The bird finds a pebble. The bird likes the pebble. The pebble is a good friend. The bird has a key. The key is red and blue. The key is red. The bird is sad. The bird is sad and quick. The bird is very sad. The bird walks into the room. The bird sees a small dog. The small dog is new. The bird likes the small dog. The bird climbs down. The bird is happy. The bird is happy and quiet. The bird goes home."
+    },
+    {
+      "id": "en-gold-033",
+      "hard_pass": true,
+      "oov_rate": 0.0,
+      "failures": [],
+      "story": "The bird plays in the garden. The bird finds a gorge. The bird likes the gorge. The gorge is a good friend. The bird is dark. The bird is dark and red. The bird is dark and red, and the bird is quick. The bird is happy. The bird is happy and warm. The bird is very happy. The bird goes home."
+    },
+    {
+      "id": "en-gold-034",
+      "hard_pass": true,
+      "oov_rate": 0.0,
+      "failures": [],
+      "story": "The bird walks in the garden. The bird finds a barn. The barn is a good friend. The barn is red and blue. The bird likes the barn. The barn is red and blue. The barn is red. The bird sleeps in the window. The bird has a hat. The hat is red and blue. The hat is red. The bird goes home."
+    },
+    {
+      "id": "en-gold-035",
+      "hard_pass": true,
+      "oov_rate": 0.0,
+      "failures": [],
+      "story": "The bird plays in the garden. The bird finds a meadow. The meadow is red and blue. The meadow is a good friend. Then the bird sees a beacon. The beacon is red and blue. The beacon is red. The bird likes the beacon. The bird runs away. They all rest in the room. The bird is happy. It is a good day for the bird. The bird is quick. The bird is happy. The bird is happy and warm. The bird is happy. The bird likes the beacon. The bird likes the meadow. The bird likes the flower. The bird goes home."
+    },
+    {
+      "id": "en-gold-036",
+      "hard_pass": true,
+      "oov_rate": 0.0,
+      "failures": [],
+      "story": "The bird plays in the garden. The bird finds a lantern. The lantern is a good friend. The lantern is red and dark. Then the bird sees a cellar. The bird likes the cellar. The cellar is red and dark. The bird runs home."
+    },
+    {
+      "id": "en-gold-037",
+      "hard_pass": true,
+      "oov_rate": 0.0,
+      "failures": [],
+      "story": "The bird plays in the garden. The bird finds a harbor. The harbor is a good friend. The little harbor is red. The bird starts to voyage. The bird and the mouse voyage. They voyage all day. The bird goes home."
+    },
+    {
+      "id": "en-gold-038",
+      "hard_pass": true,
+      "oov_rate": 0.0,
+      "failures": [],
+      "story": "The bird plays in the garden. The bird finds an orchard. The orchard is a good friend. The bird likes the orchard. The bird feels ravenous. The bird is very ravenous. The bird is ravenous and red. Then the bird sees a fossil. The fossil is a good friend. The fossil is green and blue. The bird goes home."
+    }
+  ]
+}
