@@ -1,15 +1,15 @@
 {
  "name": "islm i+1 story dataset v2 (teacher-regen; en exam + zh/ja authored graded)",
- "total_elements": 987,
+ "total_elements": 1335,
  "by_split": {
-  "train": 789,
-  "val": 98,
-  "test": 100
+  "train": 1068,
+  "val": 133,
+  "test": 134
  },
  "by_language": {
+  "ja": 385,
   "en": 600,
-  "ja": 185,
-  "zh": 202
+  "zh": 350
  },
  "target_source": {
   "en": "exam (GRE/SAT/ACT, data/vocab/en/exam.csv)",
@@ -18,27 +18,27 @@
  },
  "added_this_pass": {
   "zh": {
-   "kept": 202,
+   "kept": 350,
    "splits": {
-    "train": 161,
-    "val": 20,
-    "test": 21
+    "train": 280,
+    "val": 35,
+    "test": 35
    },
-   "unique_targets": 41,
+   "unique_targets": 52,
    "avg_targets": 2.0
   },
   "ja": {
-   "kept": 185,
+   "kept": 385,
    "splits": {
-    "train": 148,
-    "val": 18,
-    "test": 19
+    "train": 308,
+    "val": 38,
+    "test": 39
    },
-   "unique_targets": 42,
+   "unique_targets": 48,
    "avg_targets": 2.0
   }
  },
- "provenance": "en: islm.datagen.teacher --targets exam + humanizer + 2nd-pass validate. zh/ja: hand-authored coherent i+1 stories, validated through scripts/author_cjk.py (compact-known scoping + deterministic hard-pass: coverage/OOV, <=1-new-word/sentence, recurrence>=3x). No LLM API used for zh/ja.",
+ "provenance": "en: islm.datagen.teacher --targets exam + humanizer + 2nd-pass validate. zh/ja: hand/model-authored coherent i+1 stories (batched via subagents), each validated through scripts/author_cjk.py (compact-known scoping + deterministic hard-pass: coverage/OOV, <=1-new-word/sentence, recurrence>=3x) then deduped and re-purged. No LLM API used for zh/ja generation.",
  "leakage_stories_shared_across_splits": 0,
  "all_spec_passing": true,
  "schema": "chat records system+user+assistant; metadata has hard_pass, target_recurrence, source"

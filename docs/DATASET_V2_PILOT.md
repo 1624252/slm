@@ -65,16 +65,18 @@ stays in the tree and does not run away."*
 still exists at `data/generated/teacher_en/` if needed. Exam generation source:
 `data/generated/teacher_en_exam/`.)
 
-**zh/ja added (2026-07-11).** `data/dataset_v2/` is now **multilingual**: en 600 + **zh 202** +
-**ja 185** = 987 stories. zh/ja have no exam vocab, so their targets are the graded concrete-noun
-pools (`synth.TARGET_POOLS`: lighthouse, rainbow, castle, treasure, robot, …). Unlike the API
-teacher used for en, these were **authored directly (no OpenAI API — zero contention with a running
-Colab eval)** and validated through the same deterministic pipeline via `scripts/author_cjk.py`:
-compact-known scoping (coverage passes by construction) + the hard checks (OOV, ≤1-new-word/sentence,
-recurrence ≥3×). Every kept story hard-passes; a 40-record random re-validation of the merged set is
-40/40. zh 41 unique targets, ja 42; 0 story leakage across splits. (CJK has no em-dash tell, so no
-humanizer pass is needed there.) The eval already runs all three languages, so the multilingual v2
-lets the A/B measure zh/ja quality too — not just en.
+**zh/ja scaled up (2026-07-11).** `data/dataset_v2/` is now **multilingual**: en 600 + **zh 350** +
+**ja 385** = 1335 stories. zh/ja have no exam vocab, so their targets are the graded concrete-noun
+pools (`synth.TARGET_POOLS`: lighthouse, rainbow, castle, treasure, robot, …). These were
+**model-authored without the OpenAI API** (batched via parallel subagents — zero contention with a
+running Colab eval) and every story validated through the same deterministic pipeline via
+`scripts/author_cjk.py`: compact-known scoping (coverage passes by construction) + the hard checks
+(OOV, ≤1-new-word/sentence, recurrence ≥3×), then deduped and re-purged. **The validator is
+authoritative — subagent output is never trusted directly; anything that fails hard-pass or duplicates
+an existing story is dropped on append.** Final corpus: 0 dups, 0 hard-fails, **zh 52 / ja 48 unique
+targets**, 0 story leakage across splits; a 50-record random re-validation of the merged set is 50/50.
+(CJK has no em-dash tell, so no humanizer pass is needed there.) Train on the multilingual set with
+`notebooks/train_colab_v2_multi.ipynb`.
 
 ## Validate it actually improved — the comparison train (A/B)
 

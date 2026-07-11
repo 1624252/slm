@@ -16,6 +16,7 @@ Run as a module to validate a JSON batch file:
 from __future__ import annotations
 
 import argparse
+import hashlib
 import json
 from pathlib import Path
 
@@ -25,6 +26,10 @@ from islm.datagen.scenarios import Scenario
 from islm.datagen.synth import _compact_known
 from islm.validators import validate_story
 from islm.vocab.lemmatize import get_analyzer
+
+
+def _story_key(story: str) -> str:
+    return hashlib.sha1(story.strip().encode("utf-8")).hexdigest()
 
 
 def build_example(language: str, targets: list[str], story: str, idx: int) -> Example:
@@ -63,12 +68,37 @@ def validate_batch(language: str, items: list[dict]) -> tuple[list[dict], list[d
     return kept, rejects
 
 
-def append_records(out_dir: Path, records: list[dict]) -> None:
-    """Append kept records to all.jsonl (crash-safe, matches teacher.py streaming)."""
+def _existing_keys(out_dir: Path) -> set[str]:
+    """Story hashes already in all.jsonl (for cross-batch dedup)."""
+    path = out_dir / "all.jsonl"
+    if not path.exists():
+        return set()
+    keys: set[str] = set()
+    for line in path.read_text(encoding="utf-8").splitlines():
+        if line.strip():
+            keys.add(_story_key(json.loads(line)["messages"][-1]["content"]))
+    return keys
+
+
+def append_records(out_dir: Path, records: list[dict]) -> tuple[int, int]:
+    """Append hard-passing records to all.jsonl, skipping any story already present.
+
+    Returns (appended, skipped_duplicates). Dedup is against the existing corpus AND within this
+    batch, so feeding subagent output straight in never inserts a repeat.
+    """
     out_dir.mkdir(parents=True, exist_ok=True)
+    seen = _existing_keys(out_dir)
+    appended = skipped = 0
     with open(out_dir / "all.jsonl", "a", encoding="utf-8") as f:
         for r in records:
+            key = _story_key(r["messages"][-1]["content"])
+            if key in seen:
+                skipped += 1
+                continue
+            seen.add(key)
             f.write(json.dumps(r, ensure_ascii=False) + "\n")
+            appended += 1
+    return appended, skipped
 
 
 def main() -> None:
@@ -80,8 +110,12 @@ def main() -> None:
 
     items = json.loads(args.inp.read_text(encoding="utf-8"))
     kept, rejects = validate_batch(args.language, items)
-    append_records(args.out, kept)
-    print(f"[{args.language}] kept {len(kept)}/{len(items)}; rejected {len(rejects)}")
+    appended, skipped = append_records(args.out, kept)
+    total = sum(1 for line in (args.out / "all.jsonl").read_text(encoding="utf-8").splitlines() if line.strip())
+    print(
+        f"[{args.language}] {len(items)} in -> {len(kept)} hard-pass, "
+        f"{appended} appended, {skipped} dup-skipped, {len(rejects)} rejected. corpus now {total}."
+    )
     for r in rejects:
         print(f"  reject #{r['idx']} targets={r['targets']} failures={r['failures']}")
 
