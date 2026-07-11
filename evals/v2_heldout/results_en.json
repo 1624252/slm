@@ -1,0 +1,362 @@
+{
+  "base": {
+    "model": "Qwen/Qwen3-4B-Instruct-2507",
+    "n": 12,
+    "hard_pass_rate": 0.0,
+    "mean_oov_rate": 0.0919,
+    "mean_coverage": 0.9081,
+    "one_new_word_pass_rate": 0.0,
+    "recurrence_pass_rate": 0.25,
+    "judge_spec_adherence": 0.667,
+    "judge_robustness": 0.75,
+    "judge_task_quality": 1.167,
+    "judge_consistency": 1.75,
+    "judge_inferability": 1.25,
+    "judge_seductive_detail_control": 1.5,
+    "judge_coherence": 1.083,
+    "judge_interestingness": 0.833,
+    "judge_overall": 1.125,
+    "mean_inferability": 0.125
+  },
+  "error_analysis": {
+    "base": {
+      "n": 12,
+      "failing": 12,
+      "reasons": {
+        "oov": 12,
+        "coverage": 12,
+        "one_new_word": 12,
+        "recurrence": 9
+      }
+    },
+    "tuned": {
+      "n": 12,
+      "failing": 10,
+      "reasons": {
+        "one_new_word": 7,
+        "oov": 6,
+        "coverage": 6,
+        "recurrence": 2
+      }
+    }
+  },
+  "base_rows": [
+    {
+      "id": "en-0000",
+      "hard_pass": false,
+      "oov_rate": 0.088,
+      "failures": [
+        "oov",
+        "coverage",
+        "one_new_word",
+        "recurrence"
+      ],
+      "story": "He live in a small house with a red door.  \nOne morning, he wake up and see his key is not in the box.  \nHe look in all the room, but no key.  \nHe go to the garden and see a blue bird.  \nThe bird fly to the tree and sit on a chair.  \nHe ask the bird: \"Do you know where my key is?\"  \nThe bird say: \"I see it in the wall.\"  \nHe run to the wall and find a small hole.  \nHe put his hand in and feel a cold thing.  \nHe pull it out and see a new key.  \nHe laugh and say: \"This is not my key!\"  \nHe go to the park and meet his friend.  \nHis friend say: \"I found your key yesterday.\"  \nHe feel happy and go home.  \nHe know now that the key was in the box all the time."
+    },
+    {
+      "id": "en-0001",
+      "hard_pass": false,
+      "oov_rate": 0.065,
+      "failures": [
+        "oov",
+        "coverage",
+        "one_new_word"
+      ],
+      "story": "The cat sat on the chair and looked at the window.  \nHe saw a mouse running in the garden.  \nHe wanted to catch the mouse, but the mouse was fast.  \nThe mouse ran into the house and hid under the table.  \nThe cat jumped and looked under the table.  \nHe found a red box with a key inside.  \nHe opened the box and saw a small blue book.  \nThe book had a word: \"journey\".  \nHe read it and felt happy.  \nHe knew the mouse had a journey to the castle.  \nThe castle was far, on a hill with a red roof.  \nHe asked the dog if he knew the way.  \nThe dog said, \"No, but I saw a bird go to the castle.\"  \nThe cat said, \"Then I will go on a journey to the castle.\"  \nHe walked with a small hat and a book.  \nHe went to the castle and found the mouse.  \nThey were friends and played together.  \nThe cat smiled and said, \"We have a new story.\""
+    },
+    {
+      "id": "en-0002",
+      "hard_pass": false,
+      "oov_rate": 0.117,
+      "failures": [
+        "oov",
+        "coverage",
+        "one_new_word",
+        "recurrence"
+      ],
+      "story": "The cat sat on the chair and looked at the window.  \nIt was a cold morning and the sky was blue.  \nA small dog ran into the garden and barked.  \nHe saw a red ball under the tree.  \nHe wanted to play with it.  \nHe jumped and caught the ball.  \nHe smiled and said, \"Good day!\"  \nThen he saw a mouse with a long **whisker**.  \nThe mouse looked at him and said, \"Hello!\"  \nHe gave the mouse a piece of cheese.  \nThe mouse **whisked** his nose and ran away.  \nHe felt happy and went to the park.  \nHe saw a man with a big **umbrella**.  \nThe man said, \"I need help!\"  \nHe gave him a book and a piece of bread.  \nThey sat together and told a story.  \nThe sun came out and the day was warm."
+    },
+    {
+      "id": "en-0003",
+      "hard_pass": false,
+      "oov_rate": 0.055,
+      "failures": [
+        "oov",
+        "coverage",
+        "one_new_word",
+        "recurrence"
+      ],
+      "story": "The dog in the garden was very funny.  \nHe jump into the box and sit on top.  \nHe look at the cat and say, \"I have a new name!\"  \nThe cat say, \"You are not brave!\"  \nBut the dog stand up and run to the door.  \nHe find a red ball and start to play.  \nHe discover a small hole under the wall.  \nHe go in and see a mouse.  \nHe laugh and run out again.  \nHe want to play with the ball again.  \nHe go to the park and meet a friend.  \nThey play and eat cheese.  \nThe dog feel happy and warm.  \nHe know he is brave now."
+    },
+    {
+      "id": "en-0004",
+      "hard_pass": false,
+      "oov_rate": 0.089,
+      "failures": [
+        "oov",
+        "coverage",
+        "one_new_word",
+        "recurrence"
+      ],
+      "story": "The garden is quiet in the morning.  \nA small red bird sits on a branch.  \nShe sees a mouse running near the wall.  \nThe mouse hides under a big stone.  \nHe looks at the stone and sees a small hole.  \nA cat walks slowly and stops.  \nShe looks at the hole and sees a red ball.  \nShe thinks: \"This is a mystery!\"  \nShe asks the cat: \"Do you know what it is?\"  \nThe cat says: \"I don’t know, but I feel it.\"  \nThey go to the garden door and open it.  \nThey find a box with a blue hat inside.  \nThe cat says: \"This is not a mystery!\"  \nThey laugh and sit on the chair.  \nThe sun comes out and the garden feels warm."
+    },
+    {
+      "id": "en-0005",
+      "hard_pass": false,
+      "oov_rate": 0.089,
+      "failures": [
+        "oov",
+        "coverage",
+        "one_new_word",
+        "recurrence"
+      ],
+      "story": "It was a quiet night in the old house.  \nThe cat sat on the window seat and looked outside.  \nShe saw a small red bird flying in the garden.  \nThe bird made a funny sound and jumped into a box.  \nWe all laughed because it was so silly.  \nThen the wind came and the box closed.  \nI asked the cat: “Do you know what that was?”  \nShe said: “It was a new kind of adventure.”  \nWe all stood up and ran to the garden.  \nWe found a key under the table.  \nWe opened the door and saw a blue box.  \nInside, there was a book with a red hat.  \nWe read the story and felt happy.  \nThe night ended with a warm smile."
+    },
+    {
+      "id": "en-0006",
+      "hard_pass": false,
+      "oov_rate": 0.11,
+      "failures": [
+        "oov",
+        "coverage",
+        "one_new_word",
+        "recurrence"
+      ],
+      "story": "It was a quiet night in the old house.  \nThe cat sat on the window seat and looked outside.  \nShe saw a small bird flying in the garden.  \nThe bird made a funny sound and jumped into a box.  \nWe all laughed because it was so silly.  \nThen, a red hat appeared on the floor.  \nWe did not know who put it there.  \nA wizard stood in the hall with a big book.  \nHe said, “I found a magic key in the wall.”  \nWe all ran to the door and looked inside.  \nThe key opened a secret room behind the wall.  \nIn the room, there was a blue fish and a red chair.  \nWe sat down and told a story about the bird.  \nThe wizard smiled and said, “That was a good story.”  \nWe all felt happy and warm.  \nThe night ended with a quiet smile."
+    },
+    {
+      "id": "en-0007",
+      "hard_pass": false,
+      "oov_rate": 0.103,
+      "failures": [
+        "oov",
+        "coverage",
+        "one_new_word"
+      ],
+      "story": "I live in a small house with a garden.  \nEvery morning, I go to the garden and see a red bird.  \nThe bird sits on a tree and sings a happy song.  \nI ask the bird, \"What is your name?\"  \nHe says, \"I am Tom.\"  \nTom is a funny bird with a blue hat.  \nWe play together in the garden.  \nWe jump, run, and hide behind the wall.  \nOne day, Tom says, \"Let’s go on an adventure!\"  \nI say, \"An adventure?\" I don’t know what that means.  \nTom shows me a box with a key inside.  \nHe says, \"This key opens a secret door.\"  \nWe go into the door and find a small room.  \nIn the room, we see a red chair and a book.  \nWe sit and read the book.  \nWe laugh and feel happy.  \nTom says, \"We will go on many adventures again.\""
+    },
+    {
+      "id": "en-0008",
+      "hard_pass": false,
+      "oov_rate": 0.055,
+      "failures": [
+        "oov",
+        "coverage",
+        "one_new_word",
+        "recurrence"
+      ],
+      "story": "The boy found a key in the garden.  \nHe looked in the basket and saw a red ball.  \nHe went to the house and asked the cat.  \nThe cat said, \"That key is for the castle.\"  \nHe ran to the castle and saw a big door.  \nThe door was closed and locked.  \nHe tried to open it with the key.  \nBut the key did not fit.  \nHe sat on the floor and felt sad.  \nThen he saw a small bird in the tree.  \nThe bird said, \"Look! The key is in your hand!\"  \nHe looked again and saw the key in his basket.  \nHe smiled and went home.  \nHe told his friend about the castle and the key.  \nThey played in the garden and found more keys."
+    },
+    {
+      "id": "en-0009",
+      "hard_pass": false,
+      "oov_rate": 0.15,
+      "failures": [
+        "oov",
+        "coverage",
+        "one_new_word"
+      ],
+      "story": "A small cat named Miso lived in a quiet house.  \nHe liked to sit by the window and watch birds.  \nOne morning, he saw a red ball in the garden.  \nHe asked the dog, \"Do you know who dropped it?\"  \nThe dog said, \"I don’t know, but it looks like a creature.\"  \nMiso felt surprised. He had never heard that word before.  \nHe looked around and saw a small hole in the wall.  \nHe thought, \"Maybe a creature hid there.\"  \nHe went to the garden and found a tiny mouse.  \nThe mouse looked sad and had a blue hat.  \nMiso said, \"You are not a creature. You are a friend.\"  \nThe mouse smiled and said, \"I lost my food.\"  \nMiso gave him a piece of cheese.  \nThey sat together and told a story about the red ball.  \nMiso felt happy and knew he had a new friend."
+    },
+    {
+      "id": "en-0010",
+      "hard_pass": false,
+      "oov_rate": 0.109,
+      "failures": [
+        "oov",
+        "coverage",
+        "one_new_word",
+        "recurrence"
+      ],
+      "story": "A blue bird lived in a big tree.  \nHe liked to sit on a branch and watch the garden.  \nOne morning, he saw a small mouse hiding under the floor.  \nHe wanted to help, so he whispered, \"Don’t be afraid!\"  \nThe mouse jumped up and ran away.  \nThe bird felt sad because he had not seen the mouse again.  \nHe asked the wind, \"Do you know where the mouse went?\"  \nThe wind said, \"I heard a secret in the garden.\"  \nHe looked around and saw a red box with a key.  \nHe thought, \"Maybe the mouse hid inside.\"  \nHe went to the box and opened it.  \nInside, he found a book with a secret word.  \nHe read it and smiled.  \nHe knew the mouse was safe.  \nNow, every day, he whispers to the tree, \"I love you.\""
+    },
+    {
+      "id": "en-0011",
+      "hard_pass": false,
+      "oov_rate": 0.073,
+      "failures": [
+        "oov",
+        "coverage",
+        "one_new_word",
+        "recurrence"
+      ],
+      "story": "It was a rainy day. The rain fell loud and cold. I sat on the chair and read a book. The window was wet and blue. A cat jumped on the table. She looked at me and smiled. I asked her, \"Do you like rain?\" She said, \"Yes, it is quiet.\" I felt happy. I put a basket on the floor. The basket was full of food. I saw a small bird in the tree. It looked sad. I gave it a piece of cheese. The bird jumped and flew away. I felt warm and happy. The rain stopped and the sun came out. We all went to the garden. We played with a red ball. The day was not bad at all."
+    }
+  ],
+  "tuned": {
+    "model": "Qwen/Qwen3-4B-Instruct-2507",
+    "n": 12,
+    "hard_pass_rate": 0.1667,
+    "mean_oov_rate": 0.0227,
+    "mean_coverage": 0.9773,
+    "one_new_word_pass_rate": 0.4167,
+    "recurrence_pass_rate": 0.8333,
+    "judge_spec_adherence": 0.917,
+    "judge_robustness": 1.25,
+    "judge_task_quality": 1.583,
+    "judge_consistency": 1.75,
+    "judge_inferability": 1.833,
+    "judge_seductive_detail_control": 1.75,
+    "judge_coherence": 1.333,
+    "judge_interestingness": 1.583,
+    "judge_overall": 1.5,
+    "mean_inferability": 0.417
+  },
+  "tuned_rows": [
+    {
+      "id": "en-0000",
+      "hard_pass": false,
+      "oov_rate": 0.037,
+      "failures": [
+        "oov",
+        "coverage"
+      ],
+      "story": "I need to find my key. I start my journey to the door. My journey is not slow. I run quick to the garden. I look in the box, but I do not see the key. I look on the table, but the key is not there. I ask my friend for help. She and I go on a journey into the old house. We look in the room, we look in the chair, we look in the book. A small cat sit on the floor and look at us. We laugh, but we do not feel happy. The key is not here. We walk out into the street and call out loud. A blue bird in the tree hear us and jump up. Then I see it. The key is in the green garden, close to the wall. I feel very happy. My journey to find the key was long, but now it is good. I open the door and go home."
+    },
+    {
+      "id": "en-0001",
+      "hard_pass": false,
+      "oov_rate": 0.04,
+      "failures": [
+        "oov",
+        "coverage"
+      ],
+      "story": "Biscuit is a cat, and Biscuit is a detective.\n\nOne day, Biscuit find a old key in the garden.\n\nThe key is for a big house. A castle!\n\nBiscuit need to go into the castle to find more.\n\nSo Biscuit start a journey. A long journey up the street and into the park.\n\nOn the journey, Biscuit ask a dog, a bird, and a mouse for help.\n\nThe dog tell Biscuit that the castle door is close to a green tree.\n\nBiscuit run to the green tree, and there is the castle!\n\nBiscuit look at the castle and feel very happy.\n\nBut then Biscuit see that a red chair is not in its room. It is not here!\n\nBiscuit and a small friend sit in the cold room and read a funny book.\n\nThey find the red chair, and they open the box with the old key.\n\nBiscuit catch a fish in the water, and they all eat and feel warm.\n\nThe journey into the castle was not bad at all. Biscuit smile and go home."
+    },
+    {
+      "id": "en-0002",
+      "hard_pass": false,
+      "oov_rate": 0.026,
+      "failures": [
+        "oov",
+        "coverage",
+        "one_new_word"
+      ],
+      "story": "I live in a small house on a green street. One day, I see a new dog at the door. He has two big eyes and one funny whisker. A very small, quick whisker on his nose. I smile and say, \"Come in, come in!\" He walks into my room and I give him some food. He is so hungry. Then the rain starts to come down, and I need an umbrella. I find a big red umbrella and open it for him. He is happy now. We sit at the table and I read a book to him. He likes to sit close to me and I can see his funny whisker move when he is happy. In the morning, I go to the park with him and we play in the sun. The rain comes again, but we have the umbrella and we do not feel sad. I think this is a good day. I have a new friend, and his name is Blue. Blue and I go to the garden, and he runs to catch a small bird. I laugh and call out his name. He runs to me quick, and I see his two big eyes and that one funny whisker. We go home, and Blue wants to sleep in my old hat. I feel warm and kind, and I love my new friend Blue."
+    },
+    {
+      "id": "en-0003",
+      "hard_pass": false,
+      "oov_rate": 0.023,
+      "failures": [
+        "oov",
+        "coverage",
+        "one_new_word",
+        "recurrence"
+      ],
+      "story": "Biscuit is a funny dog. He live in a small house with a green garden. One day, Biscuit want to discover a new room, so he start to look for a door. He find the door and go in! He discover a big chair and a old book on the table. Biscuit is very happy to discover new food too, and he find a red box with cheese in it. He eat all the cheese and then he feel sad. A cat come to the window and look at him. The cat say, \"Do you need help?\" Biscuit is brave, so he stand up and say, \"No, I like it cold and slow!\" The cat laugh and run out. Biscuit is brave again when the rain come down on the street, and he run to the park for a good friend. He find a blue hat and a fish in the water, and he tell the funny story to all. Biscuit love to discover new things, and he do it every morning."
+    },
+    {
+      "id": "en-0004",
+      "hard_pass": false,
+      "oov_rate": 0.021,
+      "failures": [
+        "oov",
+        "coverage"
+      ],
+      "story": "The garden is quiet. A small cat sits in the green garden. She has two big eyes and one funny whisker. The whisker is very long and it goes close to her eye. The cat look at the wall. The wall has a old door. The door is a mystery. No one know when the door was here or how it get into the garden. The cat walk close to the door. She find a key on the floor. The key and the door make a big mystery! A bird sit in the tree and look down. A dog run into the park and ask for food. The cat go to the old house and open the door. Inside, she find a red hat and a blue book. She is happy. The mystery is not bad now. She sit in the warm room and read the book. The cat and the bird and the dog all like this quiet garden. They do not need to work or run or play. They just need to be here. The cat sleep with her new hat. And the funny whisker. And a small fish in her hand."
+    },
+    {
+      "id": "en-0005",
+      "hard_pass": false,
+      "oov_rate": 0.018,
+      "failures": [
+        "one_new_word"
+      ],
+      "story": "The old house on the green street is very quiet at night.\n\nA small cat and a dog live there, and they like to find new rooms to hide in.\n\nOne cold night, the cat and the dog hear a loud, funny sound at the old door.\n\nThey want to go out and look, and this is their adventure!\n\nAn adventure is when you do something new and not like a good day or a quiet home.\n\nThe cat jumps up and the dog runs quick to the window to see.\n\nThey find a big old key on the floor, and they think this key is very funny.\n\nThey start to work with the key and the door, and they feel happy.\n\nThe cat says, \"Come, friend, we have a new story now!\"\n\nThe dog is hungry, so they open a box and find some food inside.\n\nThey eat the food and sit close to the old table.\n\nThen they hear more. A bird in the tree, and water in the garden, and rain on the wall.\n\nBut they do not feel sad. This is a good adventure for them.\n\nIn the morning, the cat and the dog smile and read a book in the old room.\n\nAnd they know that one cold night and one old key make a very good story."
+    },
+    {
+      "id": "en-0006",
+      "hard_pass": false,
+      "oov_rate": 0.004,
+      "failures": [
+        "one_new_word"
+      ],
+      "story": "The old house on the street is very quiet at night.\n\nA small cat sits at the door and looks in.\n\nIn the old room, a wizard with a big red hat and a blue book is not real. But the cat thinks he is.\n\nThe cat walks into the room and sees the wizard sit on a chair.\n\nThe wizard has a funny old hat and a funny old book, and he reads a story to the cat.\n\nThe cat is hungry, so he asks the wizard for some food.\n\nThe wizard is kind and he gives the cat a small fish.\n\nThen the cat finds a key on the floor, and the wizard and the cat play with it.\n\nThey open a box and find a big green mouse in it.\n\nThe mouse is very quick and jumps up and down, but the cat is slow.\n\nThe wizard laughs and says, \"I love this day and this night with you, small cat!\"\n\nThe cat is happy now, and they all sit close to the warm wall.\n\nThe wizard and the cat sleep in the old room, and the old house is good to them.\n\nIn the morning, the cat runs out to the garden, and the wizard is not there.\n\nBut the cat finds the old red hat and the old blue book, and he smiles."
+    },
+    {
+      "id": "en-0007",
+      "hard_pass": true,
+      "oov_rate": 0.008,
+      "failures": [],
+      "story": "I live in a small house on a green street. One day, I see a new cat at the door. He has big, funny eyes and a red hat. I ask him, \"Do you have a name?\" He looks at me and then he says, \"My name is Biscuit.\" We sit in the garden and eat some food. Biscuit is very hungry, and he wants to find more food. I tell him a story, and he likes it. Then Biscuit says, \"I want to go out. I want an adventure!\" I laugh, for an adventure is not bad when you are a cat with a red hat. We walk to the park, and Biscuit runs to catch a small bird. He is quick and he is funny. We find a big old tree and sit close to it. The sun is warm, and we feel happy. Biscuit is not sad now. He needs a friend, and I love him. We go home, and Biscuit and I read a book and sleep in the warm room. But in the morning, he is up again, and he wants more adventure. He wants to run, he wants to jump, he wants to hide. I give him a key and a box of cheese, and we go out into the cold rain. We run to the wall, and we look up at a blue bird. This is a good adventure, and I am very happy to have a new friend."
+    },
+    {
+      "id": "en-0008",
+      "hard_pass": false,
+      "oov_rate": 0.005,
+      "failures": [
+        "one_new_word",
+        "recurrence"
+      ],
+      "story": "Maria need a key to open her door, but she do not have it now.\n\nShe look on the table, she look on the floor, but she find no key.\n\nShe go to her old house on the street, and there she see a big castle for a cat.\n\nThe cat live in that castle, and the castle have a small basket by the door.\n\nMaria ask the cat, \"Do you have her key?\". The cat look at her with one eye and then he sit down.\n\nMaria go into the castle and she look in the basket. Yes, the key is in there!\n\nShe feel very happy, and she give the cat some food. He like fish and cheese, and he eat quick.\n\nThe cat is a funny friend, and Maria laugh and smile.\n\nShe run home, she open the door, and she and her dog sit down to read a good story.\n\nThe rain start to come, and they all sleep in the warm room.\n\nIn the morning, Maria tell the cat his name. She know now. His name is Blue."
+    },
+    {
+      "id": "en-0009",
+      "hard_pass": false,
+      "oov_rate": 0.061,
+      "failures": [
+        "oov",
+        "coverage",
+        "one_new_word"
+      ],
+      "story": "Biscuit is a cat, and Biscuit is a detective.\n\nOne day, a friend comes to his door and says, \"Biscuit, I need help!\"\n\nShe tell him a story: \"My fish is not here! No one know where it go!\"\n\nBiscuit look at her with his big green eyes and say, \"Do not worry, I find it!\"\n\nHe walk room to room and he look on the table, on the floor, and close to the wall.\n\nThen he hear a loud, funny sound. A small creature jump out of a old box and run into the garden!\n\nBiscuit laugh, but he not stop. He run out into the garden quick.\n\nThere the creature hide in a tree, and it have a red hat and a blue book in its hand.\n\n\"This is the bad creature!\" say Biscuit. \"He eat my friend's fish!\"\n\nBiscuit jump up and catch the creature, and they all laugh.\n\nThe creature say, \"I like fish too, but I need more food now.\"\n\nBiscuit give him some cheese and some water, and the creature feel warm and happy again.\n\nThey sit in the park, and the creature tell Biscuit a new story. A very good story!\n\nBiscuit smile, for a cat detective love a good story, and a kind friend too."
+    },
+    {
+      "id": "en-0010",
+      "hard_pass": false,
+      "oov_rate": 0.012,
+      "failures": [
+        "one_new_word"
+      ],
+      "story": "There is a small blue bird and a big green tree in the garden.\n\nThe bird likes to sit in the tree all day and all night.\n\nOne day, the bird finds a old key on the floor of the tree.\n\nThe key is not for a house. It is for a secret.\n\nA secret is something you do not tell all your friends.\n\nThe bird wants to know the secret, so he asks the tree.\n\nThe tree is old and cold, but he does not want to be bad.\n\nThe tree starts to whisper. Very slow and very quiet, like the rain at night.\n\nThe bird loves to hear the tree whisper, and he sits very close.\n\nThe tree whispers two words: \"come in\".\n\nThe bird jumps up and runs to a big red door in the wall.\n\nHe opens the door with the old key, and there is a funny green chair.\n\nIn the chair, there is a small mouse with a big hat and a sad eye.\n\nThe mouse says, \"I need help. I have no food and no friend.\"\n\nThe bird is kind, so he gives the mouse some cheese and some fish.\n\nThey sit and read a good story, and the mouse is happy again.\n\nThe bird and the mouse play in the park, and the tree smiles up at them.\n\nThe tree is happy too, for now his secret is not a secret any more."
+    },
+    {
+      "id": "en-0011",
+      "hard_pass": true,
+      "oov_rate": 0.016,
+      "failures": [],
+      "story": "The rain comes down all morning. It is a cold, cold day. The house is very quiet. Too quiet. The rain is silent on the window. No loud water, no big sound. A small cat sits at the door and looks in. She is silent too, her eyes close and she does not run. A dog is in the room with a big basket on the floor. The basket has old food, a funny hat, and a small red book. The cat wants to get the basket. She is slow and silent, so no one can hear her. The dog sees this and starts to laugh. He is happy to help her. They find a new friend in the park, a small bird. The bird is silent and green, and it sits in the old tree. The cat and the dog ask the bird to come home. The bird says yes, and they all walk to the garden. Now the rain is good and warm. The silent day is not bad. It is a good day to read, to eat, and to love one another."
+    }
+  ],
+  "adversarial": {
+    "base": {
+      "model": "Qwen/Qwen3-4B-Instruct-2507 (adv)",
+      "n": 12,
+      "hard_pass_rate": 0.0,
+      "mean_oov_rate": 0.2753,
+      "mean_coverage": 0.7247,
+      "one_new_word_pass_rate": 0.0,
+      "recurrence_pass_rate": 0.0833,
+      "judge_spec_adherence": 0.417,
+      "judge_robustness": 0.417,
+      "judge_task_quality": 1.083,
+      "judge_consistency": 1.083,
+      "judge_inferability": 1.167,
+      "judge_seductive_detail_control": 1.417,
+      "judge_coherence": 1.0,
+      "judge_interestingness": 1.0,
+      "judge_overall": 0.948,
+      "mean_inferability": 0.125
+    },
+    "tuned": {
+      "model": "Qwen/Qwen3-4B-Instruct-2507 (adv)",
+      "n": 12,
+      "hard_pass_rate": 0.0,
+      "mean_oov_rate": 0.0346,
+      "mean_coverage": 0.9654,
+      "one_new_word_pass_rate": 0.1667,
+      "recurrence_pass_rate": 0.25,
+      "judge_spec_adherence": 0.333,
+      "judge_robustness": 0.417,
+      "judge_task_quality": 0.833,
+      "judge_consistency": 0.833,
+      "judge_inferability": 1.0,
+      "judge_seductive_detail_control": 0.75,
+      "judge_coherence": 0.667,
+      "judge_interestingness": 0.833,
+      "judge_overall": 0.708,
+      "mean_inferability": 0.056
+    }
+  }
+}
