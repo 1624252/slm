@@ -57,3 +57,7 @@ data/curated/synth_*/
 data/dataset_v1/*
 !data/dataset_v1/*.jsonl.gz
 !data/dataset_v1/stats.json
+# dataset_v2 (teacher-regen): same policy — ship gzipped splits + stats, ignore raw .jsonl.
+data/dataset_v2/*
+!data/dataset_v2/*.jsonl.gz
+!data/dataset_v2/stats.json
