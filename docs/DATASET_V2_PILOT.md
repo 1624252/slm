@@ -46,13 +46,20 @@ gate (deterministic-only); `--max-attempts` caps API spend (default `4 × n`).
 
 ## Pilot status (2026-07-11)
 
-**`data/dataset_v2/` = EXAM-target English set (current).** Regenerated with `--targets exam` so the
-target words are the GRE/SAT/ACT list (`data/vocab/en/exam.csv`), which is what the graded golden
-set's harder tier tests. **600 kept stories** (480/60/60 train/val/test), 593 unique exam targets,
-2.34 targets/story, **0 story leakage**, all spec-passing. Quality held even on hard vocab:
-**coherence = 2 and task_quality = 2 for 100%** of records, inferability = 2 for ~90%. Keep-rate
-0.89; curate dedup kept 100%. Sample: *"the mouse ran in a **tangential** way, not straight, but out
-to the side"*; *"she has **fortitude** — she stays in the tree and does not run away."*
+**`data/dataset_v2/` = EXAM-target English set, humanized (current).** Regenerated with
+`--targets exam` so the target words are the GRE/SAT/ACT list (`data/vocab/en/exam.csv`), which is
+what the graded golden set's harder tier tests. **600 stories** (480/60/60 train/val/test), 593
+unique exam targets, 2.34 targets/story, **0 story leakage**, all spec-passing. Quality held even on
+hard vocab: **coherence = 2 and task_quality = 2 for 100%** of records, inferability = 2 for ~90%.
+Keep-rate 0.89; curate dedup kept 100%.
+
+**Humanizer pass:** the teacher leaned on the em-dash gloss (`stolid mouse — nothing could make him
+run`) in 570/600 stories — the top AI tell per the humanizer skill (§14). A follow-up pass removed
+every em/en dash (splitting each into two short sentences, which also suits i+1 pacing) **without
+changing any words, so every target word is preserved by construction**, then re-validated all 600
+against the full spec and re-checked the judge gate; **0 dropped, 0 residual dashes**. Sample after:
+*"It ran in a **tangential** way, not straight, but out to the side."*; *"she has **fortitude**. She
+stays in the tree and does not run away."*
 
 (The earlier graded-target pilot — 594 concrete-word stories — was overwritten here per request; it
 still exists at `data/generated/teacher_en/` if needed. Exam generation source:
