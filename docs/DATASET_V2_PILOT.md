@@ -46,11 +46,17 @@ gate (deterministic-only); `--max-attempts` caps API spend (default `4 × n`).
 
 ## Pilot status (2026-07-11)
 
-English pilot **done**: 594 kept stories (session closed before 1000; `all.jsonl` is authoritative).
-Quality held across the whole set, not just the probe: **coherence = 2 and task_quality = 2 for
-100%** of records, interestingness ≥ 1 for all (2 for ~82%). Curate dedup kept 100% — no duplicates
-or degenerate text. Assembled into **`data/dataset_v2/`** (475/59/60 train/val/test, 0 story leakage,
-gzipped splits + `stats.json` committed like v1). zh/ja pilots not yet run.
+**`data/dataset_v2/` = EXAM-target English set (current).** Regenerated with `--targets exam` so the
+target words are the GRE/SAT/ACT list (`data/vocab/en/exam.csv`), which is what the graded golden
+set's harder tier tests. **600 kept stories** (480/60/60 train/val/test), 593 unique exam targets,
+2.34 targets/story, **0 story leakage**, all spec-passing. Quality held even on hard vocab:
+**coherence = 2 and task_quality = 2 for 100%** of records, inferability = 2 for ~90%. Keep-rate
+0.89; curate dedup kept 100%. Sample: *"the mouse ran in a **tangential** way, not straight, but out
+to the side"*; *"she has **fortitude** — she stays in the tree and does not run away."*
+
+(The earlier graded-target pilot — 594 concrete-word stories — was overwritten here per request; it
+still exists at `data/generated/teacher_en/` if needed. Exam generation source:
+`data/generated/teacher_en_exam/`.) zh/ja pilots not yet run (no exam vocab for those languages).
 
 ## Validate it actually improved — the comparison train (A/B)
 

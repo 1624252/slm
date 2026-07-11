@@ -1,18 +1,19 @@
 {
-  "name": "islm i+1 story dataset v2 (teacher-regen, en pilot)",
-  "total_elements": 594,
+  "name": "islm i+1 story dataset v2 (teacher-regen, EXAM targets, en)",
+  "total_elements": 600,
   "by_split": {
-    "train": 475,
-    "val": 59,
+    "train": 480,
+    "val": 60,
     "test": 60
   },
   "by_language": {
-    "en": 594
+    "en": 600
   },
-  "avg_targets_per_story": 2.31,
-  "unique_targets": 199,
-  "provenance": "islm.datagen.teacher (LLM teacher-written, judge-gated coherence=2/task_quality=2/interestingness>=1) + curate dedup",
-  "quality": "coherence=2 and task_quality=2 for 100%% of records; interestingness>=1 for all",
+  "target_source": "exam (GRE/SAT/ACT, data/vocab/en/exam.csv)",
+  "avg_targets_per_story": 2.34,
+  "unique_targets": 593,
+  "provenance": "islm.datagen.teacher --targets exam (LLM teacher-written, judge-gated coherence=2/task_quality=2/interestingness>=1) + curate dedup",
+  "quality": "coherence=2 and task_quality=2 for 100% of records; inferability 2 for ~90%",
   "leakage_stories_shared_across_splits": 0,
   "all_spec_passing": true,
   "schema": "chat records system+user+assistant; metadata has judge_scores, source=teacher-v2"
