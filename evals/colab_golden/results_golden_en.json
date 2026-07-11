@@ -7,16 +7,16 @@
     "mean_coverage": 0.8428,
     "one_new_word_pass_rate": 0.0,
     "recurrence_pass_rate": 0.4615,
-    "judge_spec_adherence": 0.923,
-    "judge_robustness": 1.077,
-    "judge_task_quality": 1.436,
-    "judge_consistency": 1.795,
-    "judge_inferability": 1.41,
-    "judge_seductive_detail_control": 1.692,
+    "judge_spec_adherence": 0.872,
+    "judge_robustness": 1.026,
+    "judge_task_quality": 1.462,
+    "judge_consistency": 1.692,
+    "judge_inferability": 1.359,
+    "judge_seductive_detail_control": 1.641,
     "judge_coherence": 1.359,
-    "judge_interestingness": 1.308,
-    "judge_overall": 1.375,
-    "mean_inferability": 0.278
+    "judge_interestingness": 1.359,
+    "judge_overall": 1.346,
+    "mean_inferability": 0.252
   },
   "error_analysis": {
     "base": {
@@ -31,10 +31,10 @@
     },
     "tuned": {
       "n": 39,
-      "failing": 4,
+      "failing": 1,
       "reasons": {
-        "oov": 4,
-        "coverage": 4
+        "oov": 1,
+        "coverage": 1
       }
     }
   },
@@ -493,307 +493,298 @@
   "tuned": {
     "model": "Qwen/Qwen3-4B-Instruct-2507",
     "n": 39,
-    "hard_pass_rate": 0.8974,
-    "mean_oov_rate": 0.0068,
-    "mean_coverage": 0.9932,
+    "hard_pass_rate": 0.9744,
+    "mean_oov_rate": 0.0017,
+    "mean_coverage": 0.9983,
     "one_new_word_pass_rate": 1.0,
     "recurrence_pass_rate": 1.0,
-    "judge_spec_adherence": 0.795,
-    "judge_robustness": 0.923,
-    "judge_task_quality": 0.103,
-    "judge_consistency": 1.077,
-    "judge_inferability": 0.769,
-    "judge_seductive_detail_control": 1.026,
-    "judge_coherence": 0.154,
-    "judge_interestingness": 0.0,
-    "judge_overall": 0.606,
+    "judge_spec_adherence": 0.923,
+    "judge_robustness": 0.821,
+    "judge_task_quality": 0.256,
+    "judge_consistency": 0.795,
+    "judge_inferability": 0.821,
+    "judge_seductive_detail_control": 0.897,
+    "judge_coherence": 0.231,
+    "judge_interestingness": 0.026,
+    "judge_overall": 0.596,
     "mean_inferability": 0.0
   },
   "tuned_rows": [
     {
       "id": "en-gold-000",
       "hard_pass": true,
-      "oov_rate": 0.01,
+      "oov_rate": 0.0,
       "failures": [],
-      "story": "The bird plays in the garden. The bird finds a beacon. The bird likes the beacon. The beacon is a good friend. The bird has a hat. The hat is blue and red. The hat is blue. The bird walks in the room. The bird sees a key. The key is blue and red. The key is blue. The bird sleeps in the window. The bird is happy. The bird is happy and quick. The bird is happy again. They all rest in the boat. The bird is happy. The bird is happy and quick. The bird is happy all day. The bird goes home."
+      "story": "One dark day, the old man plays. The old man finds a beacon. The old man likes the beacon. The beacon is a good friend. The old man has a hat. The hat is blue and red. The hat is blue. The old man has a key. The key is a good friend. The key is blue and red. The old man has a window. The window is blue and red. The window is blue. The old man starts to walk. The old man is quick. The old man is quick and blue. The old man is blue. The old man is in the garden. The old man is blue and red. The old man is very blue. The old man is in the boat. The old man is blue. The old man is blue and red. The old man is in the room. The old man is blue and red. The old man is blue. The old man is in the park. The old man is blue and red. The old man is blue. The old man is in the tree. The old man is blue and red. The old man is blue. The old man is in the wall. The old man is blue and red. The old man is blue. The old man is in the box. The old man is blue and red. The old man is blue. The old man is in the house. The old man is blue and red. The old man is blue. The old man is in the floor. The old man is blue and red. The old man is blue. The old man is in"
     },
     {
       "id": "en-gold-001",
       "hard_pass": true,
       "oov_rate": 0.0,
       "failures": [],
-      "story": "The bird walks in the garden. The bird finds a harbor. The harbor is a good friend. The bird likes the harbor. The bird has a key. The key is red and blue. The key is red. The bird is calm. The bird is calm and quiet. The bird is very calm. The bird sleeps in the room. The bird is calm. The bird is calm and warm. The bird goes home."
+      "story": "One red day, the mouse plays. The mouse finds a harbor. The harbor is a good friend. The harbor is cold and quiet. The mouse has a key. The key is a good friend. The key is cold and quiet. The mouse starts to laugh. The mouse likes to laugh. They laugh all day. The mouse feels old. The mouse is old and warm. The mouse is very old. The mouse has a hat. The hat is a good friend. The hat is cold and quiet. The mouse runs into the park. The mouse finds a harbor. The harbor is cold and quiet. The harbor is a good friend. The mouse has a hat. The hat is cold and quiet. The hat is a good friend. The mouse sleeps in the room. The mouse has a harbor. The harbor is cold and quiet. The harbor is a good friend. The mouse has a key. The key is cold and quiet. The key is a good friend. The mouse runs into the park. The mouse finds a harbor. The harbor is cold and quiet. The harbor is a good friend. The mouse has a hat. The hat is cold and quiet. The hat is a good friend. The mouse runs into the park. The mouse finds a harbor. The harbor is cold and quiet. The harbor is a good friend. The mouse has a key. The key is cold and quiet. The key is a good friend. The mouse has a hat. The hat is cold and quiet. The hat is a good friend. The mouse runs into the park. The mouse"
     },
     {
       "id": "en-gold-002",
       "hard_pass": true,
       "oov_rate": 0.0,
       "failures": [],
-      "story": "The bird sings in the garden. The bird finds a meadow. The meadow is a good friend. The meadow is red and blue. The bird likes the meadow. The meadow is red and blue. The meadow is red. The bird walks in the park. Then the bird sees a secret. The secret is red and blue. The secret is red. The bird goes home."
+      "story": "The fish sings in the park. The fish finds a meadow. The meadow is a good friend. The meadow is green and red. The fish has a secret. The secret is cold. The secret is green and red. The fish likes the secret. The fish likes the secret. The secret is green. The fish is quiet. The fish is quiet and old. The fish is very quiet. The fish starts to laugh. The fish and the mouse laugh. They laugh all day. The fish goes home."
     },
     {
       "id": "en-gold-003",
       "hard_pass": true,
       "oov_rate": 0.0,
       "failures": [],
-      "story": "The bird plays in the garden. The bird finds a comet. The comet is a good friend. The bird likes the comet. The bird is quick. The bird is quick and blue. The bird is quick and red. The bird walks into the room. The bird sees a tail. The tail is a good friend. The bird likes the tail. The bird sleeps in the sky. The bird is sad. The bird is sad and warm. The bird is sad, warm, and new. The bird goes home."
+      "story": "One blue day, the fish plays. The fish finds a comet. The comet is a good friend. The fish likes the comet. The fish has a tail. The tail is new and warm. The tail is new. The fish looks sad. The fish is sad and quick. The fish is very sad. The fish starts to wait. The fish and the old cat wait. They wait all day. The fish goes home."
     },
     {
       "id": "en-gold-004",
       "hard_pass": true,
       "oov_rate": 0.0,
       "failures": [],
-      "story": "The bird walks in the garden. The bird finds a glacier. The bird likes the glacier. The glacier is a good friend. The bird is cold. The bird is cold and red. The bird is very cold. The bird sleeps in the window. The bird has a hat. The hat is new. The hat is quiet and green. The bird goes home."
+      "story": "One red day, the mouse plays. The mouse finds a glacier. The glacier is a good friend. The mouse likes the glacier. The mouse has a glacier. The glacier is cold and green. The little glacier is new. The mouse starts to laugh. The mouse feels cold. The mouse is very cold. The mouse is cold and green. The mouse is cold and green. The mouse is very cold. The mouse goes home."
     },
     {
       "id": "en-gold-005",
-      "hard_pass": false,
-      "oov_rate": 0.039,
-      "failures": [
-        "oov",
-        "coverage"
-      ],
-      "story": "The old man walks in the garden. The old man finds a sculptor. The old man likes the sculptor. The sculptor is a good friend. The old man likes to play. The old man makes a key. The key is blue and red. The key is blue. The old man sleeps in the room. The old man feels proud. The old man is very proud. The old man is proud and quick. The old man goes home."
+      "hard_pass": true,
+      "oov_rate": 0.011,
+      "failures": [],
+      "story": "One red day, the fish plays. The fish finds a sculptor. The fish likes the sculptor. The sculptor is a good friend. The fish has a key. The key is cold and green. The key is cold. The fish looks proud. The fish is very proud. A proud fish is happy. The fish is in the park. The fish is quiet. The fish is quiet and old. The fish is very quiet. The fish starts to walk. The fish walks all day. The fish is slow. The fish is in the window. The fish has a hat. The hat is a good friend. The hat is cold and green. The fish is in the room. The fish sees a stone. The stone is a good friend. The stone is cold and green. The fish sleeps in the box. The fish is quiet. The fish is quiet and old. The fish is very quiet. The fish is in the garden. The fish has a hat. The hat is cold and green. The fish likes the hat. The fish is in the house. The fish has a hat. The hat is cold and green. The fish likes the hat. The fish is in the park. The fish has a hat. The hat is cold and green. The fish likes the hat. The fish is in the room. The fish has a hat. The hat is cold and green. The fish likes the hat. The fish is in the park. The fish has a hat. The hat is cold and green. The fish likes the hat. The fish is in"
     },
     {
       "id": "en-gold-006",
       "hard_pass": true,
-      "oov_rate": 0.01,
+      "oov_rate": 0.0,
       "failures": [],
-      "story": "The bird walks in the park. The bird finds an orchard. The bird likes the orchard. The orchard is a good friend. The bird has a key. The key is red and blue. The key is red. The bird likes the key. The bird is warm. The bird is warm and quick. The bird is very warm. The bird sleeps in the window. The bird is warm. The bird is warm and quiet. The bird is warm all day. They all rest in the room. The bird is warm. The bird is warm and cold. The bird is warm and new. The bird goes home."
+      "story": "One red day, the fish plays. The fish finds an orchard. The fish likes the orchard. The orchard is a good friend. The fish has a key. The key is cold and green. The key is cold. The fish looks warm. The fish is warm and quiet. The fish is very warm. The fish starts to laugh. The fish and the old cat laugh. They laugh all day. The fish sleeps in the room. The fish has a hat. The hat is a good friend. The fish likes the hat. The fish is happy. The fish is happy and quiet. The fish is very happy. The fish goes home."
     },
     {
       "id": "en-gold-007",
       "hard_pass": true,
       "oov_rate": 0.0,
       "failures": [],
-      "story": "The bird plays in the garden. The bird finds a lantern. The lantern is a good friend. The bird likes the lantern. The bird has a key. The key is blue and red. The key is blue. The bird walks in the park. The bird is quiet. The bird is quiet and cold. The bird sleeps in the room. The bird is happy. The bird is happy and warm. The bird likes the key. The bird likes the lantern. The bird likes the key. The bird goes home."
+      "story": "One red day, the old woman works. The old woman finds a lantern. The old woman likes the lantern. The lantern is a good friend. The old woman has a key. The key is blue and dark. The key is blue. The old woman has a hat. The hat is a good friend. The hat is blue and dark. The old woman starts to laugh. The old woman is happy. The old woman is very happy. The old woman goes home."
     },
     {
       "id": "en-gold-008",
       "hard_pass": true,
       "oov_rate": 0.0,
       "failures": [],
-      "story": "The bird plays in the garden. The bird finds a compass. The bird likes the compass. The compass is a good friend. The bird has a key. The key is red and blue. The key is red. The bird walks in the park. The bird sees a mouse. The mouse is quick and cold. The mouse is quick. The bird sleeps in the room. The bird is sad. The bird is sad and new. The bird is very sad. The bird goes home."
+      "story": "One red day, the mouse plays. The mouse finds a compass. The mouse likes the compass. The little compass is new. The mouse has a key. The key is a good friend. The key is cold and green. The mouse starts to laugh. The mouse is quiet. The mouse is quiet and green. The mouse is in the park. The mouse sees a hat. The hat is a good friend. The hat is cold and green. The mouse is in the window. The mouse is quiet. The mouse is quiet and green. The mouse is in the window. The mouse runs down the wall. The mouse is quiet. The mouse is quiet and green. The mouse is in the park. The mouse has a hat. The hat is a good friend. The hat is cold and green. The mouse is in the park. The mouse is quiet. The mouse is quiet and green. The mouse is in the park. The mouse is quiet. The mouse is quiet and green. The mouse is in the park. The mouse is quiet. The mouse is quiet and green. The mouse is in the park. The mouse is quiet. The mouse is quiet and green. The mouse is in the park. The mouse is quiet. The mouse is quiet and green. The mouse is in the park. The mouse is quiet. The mouse is quiet and green. The mouse is in the park. The mouse is quiet. The mouse is quiet and green. The mouse is in the park. The mouse is quiet. The mouse is quiet and green. The mouse is in the"
     },
     {
       "id": "en-gold-009",
       "hard_pass": true,
       "oov_rate": 0.0,
       "failures": [],
-      "story": "The bird walks in the park. The bird finds a canyon. The bird likes the canyon. The canyon is a good friend. The bird has a hat. The hat is blue and red. The hat is blue. The bird is happy. The bird is happy and quick. The bird is very happy. The bird goes home."
+      "story": "One blue day, the mouse plays. The mouse finds a canyon. The canyon is a good friend. The mouse likes the canyon. The mouse has a hat. The hat is new and warm. The hat is new. The mouse has a key. The key is new and warm. The key is new. The mouse starts to laugh. The mouse is happy. The mouse is very happy. The mouse sleeps in the room. The mouse is quick. The mouse is quick and new. The mouse is very new. The mouse runs out of the room. The mouse is happy. The mouse is happy and new. The mouse is very new. The mouse has a canyon. The mouse likes the canyon. The mouse loves the canyon. The mouse has a hat. The hat is new and warm. The hat is new. The mouse has a key. The key is new and warm. The key is new. The mouse starts to laugh. The mouse is happy. The mouse is very happy. The mouse sleeps in the room. The mouse is quick. The mouse is quick and new. The mouse is very new. The mouse runs out of the room. The mouse is happy. The mouse is happy and new. The mouse is very new. Now the mouse is happy."
     },
     {
       "id": "en-gold-010",
       "hard_pass": true,
-      "oov_rate": 0.01,
+      "oov_rate": 0.0,
       "failures": [],
-      "story": "The bird plays in the garden. The bird finds a cottage. The cottage is a good friend. The bird likes the cottage. The bird has a key. The key is red and blue. The key is red. The bird walks in the room. The bird sees a small dog. The small dog is quick. The small dog is quick and cold. The bird sleeps in the window. The bird likes the hat. The hat is a good friend. The bird is happy. They all rest in the roof. The bird is happy. The bird is happy and warm. The bird goes home."
+      "story": "One red day, the old woman works. The old woman finds a cottage. The old woman likes the cottage. The cottage is a good friend. The old woman has a key. The key is quiet and cold. The key is quiet. The old woman has a hat. The old woman likes the hat. The hat is a good friend. The old woman starts to laugh. The old woman is happy. The old woman is very happy. The old woman goes home."
     },
     {
       "id": "en-gold-011",
-      "hard_pass": true,
-      "oov_rate": 0.0,
-      "failures": [],
-      "story": "The bird plays in the garden. The bird finds a waterfall. The waterfall is a good friend. The waterfall is red and blue. The bird likes the waterfall. The waterfall is red and blue. The waterfall is red. The bird walks in the park. The bird sees a key. The key is red and blue. The key is red. The bird sleeps in the room. The bird is quiet. The bird is quiet and slow. The bird is quiet and red. The bird goes home."
-    },
-    {
-      "id": "en-gold-012",
       "hard_pass": false,
-      "oov_rate": 0.029,
+      "oov_rate": 0.026,
       "failures": [
         "oov",
         "coverage"
       ],
-      "story": "The bird plays in the garden. The bird finds a telescope. The bird likes the telescope. The telescope is a good friend. The bird has a hat. The hat is red and blue. The hat is red. The bird walks in the park. The bird sees a star. The star is red and blue. The star is red. The bird sleeps in the room. The bird is happy. The bird is happy and quick. The bird likes the star. The bird likes the hat. The bird likes the key. The bird likes the moon. The bird likes the old man. The old man is red and blue. The old man is red. They all rest in the window. The bird is happy. The bird is happy and quick. The bird is happy again. The bird goes home."
+      "story": "One red day, the mouse plays. The mouse finds a waterfall. The waterfall is a good friend. The mouse likes the waterfall. The mouse has a waterfall. The waterfall is cold and green. The waterfall is cold. The mouse starts to laugh. The mouse feels funny. The mouse is funny and old. The mouse runs in the park. The mouse finds a key. The key is a good friend. The mouse likes the key. Then the mouse sees a hat. The hat is a good friend. The hat is cold and green. The mouse climbs up the wall. The mouse has a waterfall. The waterfall is cold and green. The mouse likes the waterfall. The mouse climbs down the hill. The mouse finds a blue key. The blue key is a good friend. The mouse likes the blue key. The mouse sleeps in the room. The mouse has a waterfall. The waterfall is cold and green. The mouse likes the waterfall. The mouse climbs up the wall. The mouse has a waterfall. The waterfall is cold and green. The mouse likes the waterfall. The mouse climbs down the hill. The mouse finds a blue key. The blue key is a good friend. The mouse likes the blue key. The mouse climbs up the wall. The mouse has a waterfall. The waterfall is cold and green. The mouse likes the waterfall. The mouse climbs down the hill. The mouse finds a blue key. The blue key is a good friend. The mouse likes the blue key. The mouse climbs up the wall. The mouse has a waterfall. The waterfall is cold and green"
+    },
+    {
+      "id": "en-gold-012",
+      "hard_pass": true,
+      "oov_rate": 0.0,
+      "failures": [],
+      "story": "The mouse plays in the park. The mouse finds a telescope. The mouse likes the telescope. The telescope is a good friend. The mouse has a hat. The hat is blue and red. The hat is blue. The mouse has a key. The key is a good friend. The key is blue and red. The mouse starts to laugh. The mouse is quiet. The mouse is quiet and cold. The mouse is quiet and cold. The mouse is in the room. The mouse is old. The mouse is old and blue. The mouse is very blue. The mouse runs down the wall. The mouse has a star. The star is blue and red. The star is blue. The mouse is in the window. The mouse is blue and red. The mouse is blue. The mouse is in the room. The mouse is blue and red. The mouse is blue. The mouse is in the room. The mouse is blue and red. The mouse is blue. The mouse is in the room. The mouse is blue and red. The mouse is blue. The mouse is in the room. The mouse is blue and red. The mouse is blue. The mouse is in the room. The mouse is blue and red. The mouse is blue. The mouse is in the room. The mouse is blue and red. The mouse is blue. The mouse is in the room. The mouse is blue and red. The mouse is blue. The mouse is in the room. The mouse is blue and red. The mouse is blue. The mouse is in the room. The mouse is"
     },
     {
       "id": "en-gold-013",
       "hard_pass": true,
-      "oov_rate": 0.0,
+      "oov_rate": 0.01,
       "failures": [],
-      "story": "The bird plays in the garden. The bird feels vigilant. The bird is very vigilant. The bird is vigilant and red. The bird has a hat. The hat is blue and cold. The hat is a good friend. The bird finds a key. The key is a good friend. The key is blue and quiet. The bird walks home."
+      "story": "One red day, the fish plays. The fish feels vigilant. The fish is very vigilant. The fish is vigilant and old. The fish has a hat. The hat is a good friend. The fish likes the hat. The fish finds a key. The key is cold and brave. The key is cold. The fish is in the park. The fish is quiet. The fish is quiet and old. The fish is very quiet. The fish starts to laugh. The fish and the mouse laugh. They laugh all day. The fish stops. The fish goes home. They all rest in the park."
     },
     {
       "id": "en-gold-014",
       "hard_pass": true,
       "oov_rate": 0.0,
       "failures": [],
-      "story": "The bird plays in the garden. The bird feels ravenous. The bird is ravenous and red. The bird is very ravenous. The bird finds a key. The key is a good friend. The key is quick and cold. The bird likes the hat. The hat is a good friend. The hat is quick and cold. The bird walks home."
+      "story": "The fish plays in the park. The fish feels ravenous. The fish is ravenous and blue. A ravenous fish is happy. The fish has a hat. The hat is a good friend. The fish likes the hat. The fish finds a key. The key is cold and green. The key is cold. The fish is quick. The fish is quick and blue. The fish is very quick. The fish starts to laugh. The fish and the big cat laugh. They laugh all day. The fish sleeps in the room. The fish has a new day. The fish is happy. The fish goes home."
     },
     {
       "id": "en-gold-015",
-      "hard_pass": false,
-      "oov_rate": 0.038,
-      "failures": [
-        "oov",
-        "coverage"
-      ],
-      "story": "The bird plays in the garden. The bird feels luminous. The bird is very luminous. The bird is luminous and red. The bird has a dream. The bird likes the dream. The dream is a good friend. The bird walks in the park. The bird finds a key. The key is dark or blue. The key is dark. The bird sleeps in the window. The bird is warm. The bird is warm and quiet. The bird is warm and soft. They all rest in the room. The bird is old. The bird is old and quick. The bird is old and new. The bird goes home."
+      "hard_pass": true,
+      "oov_rate": 0.0,
+      "failures": [],
+      "story": "The fish swims in the park. The fish feels luminous. The fish is luminous and blue. A luminous fish is happy. The fish has a hat. The hat is a good friend. The little hat is new. The fish finds a key. The key is a good friend. The key is blue and green. The fish starts to laugh. The fish is loud. The fish is loud and blue. The fish is very loud. The fish is in the room. The fish is quiet. The fish is quiet and blue. The fish is very quiet. The fish is in the window. The fish is old. The fish is old and blue. The fish is very old. The fish is in the box. The fish is cold. The fish is cold and blue. The fish is very cold. The fish is in the tree. The fish is slow. The fish is slow and blue. The fish is very slow. The fish is in the wall. The fish is dark. The fish is dark and blue. The fish is very dark. The fish is in the floor. The fish is warm. The fish is warm and blue. The fish is very warm. The fish is in the house. The fish is quick. The fish is quick and blue. The fish is very quick. The fish is in the sea. The fish is new. The fish is new and blue. The fish is very new. The fish is in the table. The fish is old. The fish is old and blue. The fish is very old. The fish is in"
     },
     {
       "id": "en-gold-016",
       "hard_pass": true,
       "oov_rate": 0.0,
       "failures": [],
-      "story": "The bird walks in the park. The bird feels nocturnal. The bird is very nocturnal. The bird is nocturnal and red. The bird finds a key. The key is a good friend. The key is quiet and cold. The bird likes the hat. The hat is quiet and cold. The hat is quiet. The bird sleeps in the room. The bird is quiet. The bird is quiet and sad. The bird goes home."
+      "story": "One red day, the bird plays. The bird feels nocturnal. The bird is very nocturnal. The bird is nocturnal and dark. The bird has a hat. The bird likes the hat. The hat is a good friend. The bird finds a key. The key is a good friend. The key is dark and quiet. The bird starts to walk. The bird is quiet. The bird is quiet and dark. The bird is quiet and dark. The bird is quiet. The bird is quiet and dark. The bird is quiet and dark. The bird is quiet. The bird is quiet and dark. The bird is quiet and dark. The bird is quiet. The bird is quiet and dark. The bird is quiet and dark. The bird is quiet. The bird is quiet and dark. The bird is quiet and dark. The bird is quiet. The bird is quiet and dark. The bird is quiet and dark. The bird is quiet. The bird is quiet and dark. The bird is quiet and dark. The bird is quiet. The bird is quiet and dark. The bird is quiet and dark. The bird is quiet. The bird is quiet and dark. The bird is quiet and dark. The bird is quiet. The bird is quiet and dark. The bird is quiet and dark. The bird is quiet. The bird is quiet and dark. The bird is quiet and dark. The bird is quiet. The bird is quiet and dark. The bird is quiet and dark. The bird is quiet. The bird is quiet and dark. The bird is quiet and dark"
     },
     {
       "id": "en-gold-017",
       "hard_pass": true,
       "oov_rate": 0.0,
       "failures": [],
-      "story": "The bird walks in the park. The bird feels tranquil. The bird is tranquil and red. The bird is very tranquil. The bird has a key. The key is a good friend. The key is quiet and cold. The bird likes the hat. The hat is quiet and cold. The hat is quiet. The bird sleeps in the window. The bird is tranquil. The bird is tranquil and quiet. They all rest in the room."
+      "story": "One red day, the fish plays. The fish feels tranquil. The fish is very tranquil. A tranquil fish is happy. The fish has a hat. The hat is a good friend. The fish likes the hat. The fish finds a key. The key is cold and green. The key is cold. The fish is quiet. The fish is quiet and old. The fish is very quiet. The fish starts to laugh. The fish and the mouse laugh. They laugh all day. The fish goes home."
     },
     {
       "id": "en-gold-018",
       "hard_pass": true,
-      "oov_rate": 0.01,
+      "oov_rate": 0.0,
       "failures": [],
-      "story": "The bird plays in the garden. The bird wants to meander. The bird and the mouse meander. They meander all day. The bird finds a key. The key is red. The key is red and blue. The bird likes the key. The bird is slow. The bird is slow and green. The bird is very slow. The bird sleeps in the window. The bird is quick. The bird is quick and cold. The bird is happy. They all rest in the room. The bird is happy. The bird is happy and warm. The bird leaves the room."
+      "story": "One red day, the mouse plays. The mouse starts to meander. The mouse and the big cat meander. They meander all day. The mouse finds a key. The key is a good friend. The key is quiet and green. The mouse has a hat. The hat is a good friend. The hat is quiet. The mouse walks in the park. The mouse feels slow. The mouse is slow and green. The mouse is very slow. The mouse likes to laugh. The mouse and the big cat laugh. They laugh all day. The mouse sleeps in the room. The mouse has a blue hat. The blue hat is a good friend. The blue hat is quiet. The mouse has a new hat. The new hat is quiet and green. The little hat is green. The mouse runs down the wall. The mouse finds a box. The box is a good friend. The box is quiet and green. The mouse has a warm hat. The warm hat is a good friend. The warm hat is quiet. The mouse has a hat. The hat is a good friend. The hat is quiet and green. The mouse walks in the park. The mouse feels slow. The mouse is slow and green. The mouse is very slow. The mouse has a hat. The hat is a good friend. The hat is quiet and green. The mouse has a hat. The hat is a good friend. The hat is quiet and green. The mouse walks in the park. The mouse feels slow. The mouse is slow and green. The mouse is very slow. The"
     },
     {
       "id": "en-gold-019",
       "hard_pass": true,
-      "oov_rate": 0.011,
+      "oov_rate": 0.0,
       "failures": [],
-      "story": "The bird walks in the garden. The bird feels furtive. The bird is furtive and red. The bird is very furtive. The bird has a key. The key is a good friend. The bird likes the key. The bird finds a hat. The hat is blue and green. The hat is blue. The bird sleeps in the room. The bird is sad. The bird is sad and quick. The bird is happy. They all rest in the window. The bird is happy. The bird is happy and cold. The bird goes home."
+      "story": "One red day, the fish plays. The fish feels furtive. The fish is very furtive. A furtive fish is happy. The fish has a hat. The hat is a good friend. The fish likes the hat. The fish finds a key. The key is cold and green. The key is a good friend. The fish starts to laugh. The fish is quiet. The fish is quiet and old. The fish is very quiet. The fish goes home."
     },
     {
       "id": "en-gold-020",
       "hard_pass": true,
       "oov_rate": 0.0,
       "failures": [],
-      "story": "The bird plays in the park. The bird feels ominous. The bird is very ominous. The bird is ominous and red. The bird finds a key. The key is a good friend. The key is blue and dark. The bird likes the key. The bird is old. The bird is old and quick. The bird is old and new. The bird walks into the room. The bird is warm. The bird is warm and quiet. The bird likes the window. The bird has a hat. The hat is a good friend. The bird likes the hat. The bird goes home."
+      "story": "One blue day, the mouse plays. The mouse feels ominous. The mouse is very ominous. An ominous mouse is happy. The mouse is dark. The mouse is dark and new. The mouse is dark and new, and the mouse is new. The mouse has a hat. The hat is a good friend. The hat is new and quiet. The mouse finds a key. The key is a good friend. The key is new and quiet. The mouse starts to laugh. The mouse is loud. The mouse is loud and new. The mouse is in the sky. The mouse is new. The mouse is new and quiet. The mouse is in the sky. The mouse is new. The mouse is new and quiet. The mouse is new, quiet, and new. The mouse is in the sky. The mouse is new. The mouse is new and quiet. The mouse is new, quiet, and new. The mouse is in the sky. The mouse is new. The mouse is new and quiet. The mouse is new, quiet, and new. The mouse is in the sky. The mouse is new. The mouse is new and quiet. The mouse is new, quiet, and new. The mouse is in the sky. The mouse is new. The mouse is new and quiet. The mouse is new, quiet, and new. The mouse is in the sky. The mouse is new. The mouse is new and quiet. The mouse is new, quiet, and new. The mouse is in the sky. The mouse is new. The mouse is new and quiet."
     },
     {
       "id": "en-gold-021",
       "hard_pass": true,
-      "oov_rate": 0.009,
+      "oov_rate": 0.0,
       "failures": [],
-      "story": "The bird plays in the garden. The bird feels voracious. The bird is very voracious. The bird is voracious and red. The bird finds a key. The key is a good friend. The key is quiet and cold. The bird likes the key. The bird walks into the room. The bird is hungry. The bird is hungry and quick. The bird is hungry. The bird sleeps in the window. The bird is warm. The bird is warm and blue. The bird is warm, blue, and red. They all rest in the park. The bird is old. The bird is old and quick. The bird is old, quick, and red. The bird goes home."
+      "story": "One red day, the mouse plays. The mouse feels voracious. The mouse is very voracious. The mouse is voracious and old. The mouse has a hat. The hat is a good friend. The hat is cold and blue. The mouse finds a key. The key is a good friend. The key is cold and blue. The mouse starts to laugh. The mouse is very hungry. The mouse is hungry and old. The mouse is very hungry. The mouse goes home."
     },
     {
       "id": "en-gold-022",
       "hard_pass": true,
       "oov_rate": 0.0,
       "failures": [],
-      "story": "The bird plays in the garden. The bird finds a fossil. The bird likes the fossil. The fossil is a good friend. The bird has a key. The key is red and blue. The key is red. The bird walks in the park. The bird is quick. The bird is quick and cold. The bird sleeps in the room. The bird is happy. The bird is happy and new. The bird is happy again. The bird goes home."
+      "story": "One red day, the fish plays. The fish finds a fossil. The fossil is a good friend. The fish likes the fossil. The fish has a key. The key is clean and old. The key is clean. The fish looks funny. The fish is funny and quiet. A funny fish is happy. The fish starts to walk. The fish walks in the park. The fish is slow. The fish sleeps in the room. The fish has a hat. The hat is a good friend. The hat is clean and old. The fish has a bone. The bone is a good friend. The bone is clean and old. The fish has a window. The window is a good friend. The window is clean and old. The fish is happy. The fish is happy and clean. The fish is very clean. The fish stops. The fish is happy. The fish is happy and clean. The fish is clean. The fish is in the park. The fish is clean and old. The fish is clean. The fish is in the window. The fish is clean and old. The fish is clean. The fish is in the room. The fish is clean and old. The fish is clean. The fish is in the park. The fish is clean and old. The fish is clean. The fish is in the park. The fish is clean and old. The fish is clean. The fish is in the park. The fish is clean and old. The fish is clean. The fish is in the park. The fish is clean and old. The fish is clean."
     },
     {
       "id": "en-gold-023",
-      "hard_pass": false,
-      "oov_rate": 0.048,
-      "failures": [
-        "oov",
-        "coverage"
-      ],
-      "story": "The bird plays in the garden. The bird finds a hedgehog. The hedgehog is a good friend. The bird likes the hedgehog. The bird has a key. The key is red and blue. The key is red. The bird walks in the park. The bird is sweet. The bird is sweet and quick. The bird is very sweet. The bird goes home."
+      "hard_pass": true,
+      "oov_rate": 0.011,
+      "failures": [],
+      "story": "One red day, the fish plays. The fish finds a hedgehog. The hedgehog is a good friend. The fish likes the hedgehog. The fish has a key. The key is cold and green. The key is cold. The fish looks sweet. The fish is sweet and quick. The fish is very sweet. The fish is in the park. The fish has a hat. The hat is a good friend. The fish likes the hat. The fish is in the window. The fish is old. The fish is old and quick. The fish is very old. The fish starts to sleep. The fish sleeps all day. The fish is quiet. The fish is in the room. The fish has a small hat. The small hat is cold. The fish likes the small hat. The fish is in the tree. The fish has a blue hat. The blue hat is a good friend. The fish likes the blue hat. The fish is in the box. The fish has a new hat. The new hat is a good friend. The fish likes the new hat. The fish is in the wall. The fish has a green hat. The green hat is cold and green. The green hat is cold. The fish is in the house. The fish has a hat. The fish likes the hat. The fish likes the hat. The fish is in the floor. The fish has a hat. The hat is a good friend. The fish likes the hat. The fish is in the table. The fish has a hat. The fish likes the hat. The hat is"
     },
     {
       "id": "en-gold-024",
       "hard_pass": true,
       "oov_rate": 0.0,
       "failures": [],
-      "story": "The bird plays in the garden. The bird finds a key. The bird likes the key. The key is a good friend. The bird starts to shimmer. The bird and the mouse shimmer. They shimmer all day. The bird is quiet. The bird is bright. The bird is quiet and bright. The bird goes home."
+      "story": "The fish plays in the park. The fish starts to shimmer. The fish and the old cat shimmer. They shimmer all day. The fish finds a key. The key is a good friend. The key is red and blue. The fish has a hat. The hat is red and blue. The hat is red. The fish watches the window. The window is red and blue. The window is red. The fish walks into the room. The fish finds a wave. The wave is red and blue. The wave is red. The fish is quiet. The fish is quiet and red. The fish is very red. The fish sleeps in the room. The fish has a small hat. The small hat is red. The fish likes the small hat. The fish is happy. The fish is happy and red. The fish is very red. The fish goes home."
     },
     {
       "id": "en-gold-025",
       "hard_pass": true,
-      "oov_rate": 0.0,
+      "oov_rate": 0.008,
       "failures": [],
-      "story": "The bird climbs in the garden. The bird feels serpentine. The bird is very serpentine. The bird is serpentine and red. The bird finds a key. The key is a good friend. The key is blue and green. The bird likes the key. The bird is sad. The bird is sad and quick. The bird is sad or cold. The bird walks in the park. The bird is long. The bird is long and quiet. The bird is in the room. The bird sees a snake. The snake is a good friend. The snake is new and warm. The bird goes home."
+      "story": "The mouse climbs in the park. The mouse feels serpentine. The mouse is very serpentine. The mouse is serpentine and blue. The mouse has a hat. The hat is a good friend. The hat is cold and red. The mouse finds a key. The key is a good friend. The key is blue and red. The mouse starts to laugh. The mouse is slow. The mouse is slow and green. The mouse is in the room. The mouse is quick. The mouse is quick and green. The mouse is in the window. The mouse is quick. The mouse is quick and green. The mouse stops to rest. The mouse is quick. The mouse is quick and green. The mouse goes home."
     },
     {
       "id": "en-gold-026",
       "hard_pass": true,
       "oov_rate": 0.0,
       "failures": [],
-      "story": "The bird plays in the garden. The bird feels forlorn. The bird is very forlorn. The bird is forlorn and red. The bird finds a key. The key is a good friend. The key is green and blue. The bird likes the key. The bird is sad. The bird is sad and quick. The bird is very sad. The bird walks into the room. The bird sees a mouse. The mouse is a good friend. The mouse is old and new. The bird goes home."
+      "story": "One red day, the fish plays. The fish feels forlorn. The fish is very forlorn. A forlorn fish is happy. The fish has a hat. The hat is a good friend. The fish likes the hat. The fish finds a key. The key is new and blue. The key is new. The fish is in the park. The fish is new. The fish is new and blue. The fish is new and blue. The fish is in the park. The fish is new. The fish is new and blue. The fish is new and blue. The fish is in the park. The fish is new. The fish is new and blue. The fish is new and blue. The fish is in the park. The fish is new. The fish is new and blue. The fish is new and blue. The fish is in the park. The fish is new. The fish is new and blue. The fish is new and blue. The fish is in the park. The fish is new. The fish is new and blue. The fish is new and blue. The fish is in the park. The fish is new. The fish is new and blue. The fish is new and blue. The fish is in the park. The fish is new. The fish is new and blue. The fish is new and blue. The fish is in the park. The fish is new. The fish is new and blue. The fish is new and blue. The fish is in the park. The fish is new. The fish is new and blue"
     },
     {
       "id": "en-gold-027",
       "hard_pass": true,
       "oov_rate": 0.0,
       "failures": [],
-      "story": "The bird plays in the garden. The bird finds a blizzard. The blizzard is a good friend. The blizzard is red and cold. The bird likes the blizzard. The blizzard is red and cold. The blizzard is red. The bird walks in the park. The bird sees a key. The key is red and cold. The key is red. The bird goes home."
+      "story": "The fish plays in the park. The fish finds a blizzard. The blizzard is a good friend. The blizzard is cold and red. The fish has a hat. The hat is a good friend. The hat is cold and red. The fish has a key. The key is cold and red. The key is cold. The fish starts to laugh. The fish is quiet. The fish is cold. The fish is in the room. The fish is old. The fish is warm. The fish is in the window. The fish is slow. The fish is warm and red. The fish is in the tree. The fish is warm. The fish is cold and red. The fish is in the box. The fish is warm. The fish is cold. The fish is in the house. The fish is warm. The fish is cold. The fish is in the wall. The fish is warm. The fish is cold. The fish is in the floor. The fish is warm. The fish is cold. The fish is in the table. The fish is warm. The fish is cold. The fish is in the garden. The fish is warm. The fish is cold. The fish is in the house. The fish is warm. The fish is cold. The fish is in the park. The fish is warm. The fish is cold. The fish is in the room. The fish is warm. The fish is cold. The fish is in the window. The fish is warm. The fish is cold. The fish is in the tree. The fish is warm"
     },
     {
       "id": "en-gold-028",
       "hard_pass": true,
       "oov_rate": 0.0,
       "failures": [],
-      "story": "The bird plays in the garden. The bird finds a cellar. The bird likes the cellar. The little cellar is new. The bird is cold. The bird is cold and dark. The bird is cold and red. The bird is quick. The bird is quick and sad. The bird is quick and warm. The bird goes home."
+      "story": "One red day, the fish plays. The fish finds a cellar. The fish likes the cellar. The little cellar is old. The fish has a key. The key is a good friend. The key is quiet and cold. The fish smiles. The fish feels funny. The fish is funny and cold. The fish starts to walk. The fish is slow. The fish is slow and cold. The fish goes home."
     },
     {
       "id": "en-gold-029",
       "hard_pass": true,
-      "oov_rate": 0.018,
+      "oov_rate": 0.0,
       "failures": [],
-      "story": "The old man walks in the park. The old man finds a riddle. The old man likes the riddle. The riddle is a good friend. The old man has a key. The key is blue and red. The key is blue. The old man climbs the wall. The old man sees a bird. The bird is quick and cold. The bird is quick. The old man sleeps in the room. The old man is happy. The old man is happy and quiet. They all rest in the window. The old man likes the hat. The hat is a good friend. The hat is blue and red. The old man goes home."
+      "story": "The fish walks in the park. The fish finds a riddle. The fish likes the riddle. The riddle is a good friend. The fish has a key. The key is green and blue. The key is green. The fish starts to laugh. The fish is quiet. The fish is quiet and red. The fish is quiet and red. The fish is sad. The fish is sad and new. The fish is very sad. The fish sleeps in the room. The fish has a hat. The hat is a good friend. The hat is green and blue. The fish is happy. The fish is happy and new. The fish is very happy. It is a good day for the fish. The fish runs down the wall. The fish finds a riddle. The riddle is green and blue. The fish likes the riddle. The fish has a hat. The hat is green and blue. The hat is green. The fish has a key. The key is green and blue. The key is green. The fish is happy. The fish is happy and new. The fish is very happy. The fish is happy. The fish is happy and new. The fish is very happy. The fish is happy. The fish is happy and new. The fish is very happy. The fish is happy. The fish is happy and new. The fish is very happy. The fish is happy. The fish is happy and new. The fish is very happy. The fish is happy. The fish is happy and new. The fish is very happy. The fish is"
     },
     {
       "id": "en-gold-030",
       "hard_pass": true,
-      "oov_rate": 0.015,
+      "oov_rate": 0.0,
       "failures": [],
-      "story": "The bird plays in the garden. The bird finds an anchor. The anchor is a good friend. The bird likes the anchor. The bird holds the anchor. The anchor is red and blue. The anchor is red. The bird climbs up the wall. Then the bird sees a key. The key is a good friend. The key is red and blue. The bird sleeps in the room. The bird is quiet. The bird is quiet and cold. The bird is happy. The bird walks in the park. The bird is happy. The bird is happy and warm. They all rest in the boat. The bird is happy. The bird is happy and warm. The bird likes the story. The bird likes the key. The bird likes the hat. The bird goes home."
+      "story": "One red day, the old man plays. The old man finds an anchor. The old man likes the anchor. The anchor is a good friend. The old man has a key. The key is cold and green. The key is cold. The old man has a hat. The old man holds the hat. The hat is a good friend. The old man has a blue hat. The old man likes the blue hat. The blue hat is a good friend. The old man has a small hat. The small hat is a good friend. The small hat is cold and green. The old man has a hat. The old man likes the hat. The hat is cold and green. The old man has a hat. The old man likes the hat. The hat is a good friend. The old man has a hat. The old man likes the hat. The hat is cold and green. The old man has a hat. The old man likes the hat. The hat is a good friend. The old man has a hat. The old man likes the hat. The hat is a good friend. The old man has a hat. The old man likes the hat. The hat is a good friend. The old man has a hat. The old man likes the hat. The hat is a good friend. The old man has a hat. The old man likes the hat. The hat is a good friend. The old man has a hat. The old man likes the hat. The hat is a good friend. The old man has a hat. The old man likes the hat"
     },
     {
       "id": "en-gold-031",
       "hard_pass": true,
-      "oov_rate": 0.01,
+      "oov_rate": 0.0,
       "failures": [],
-      "story": "The bird plays in the garden. The bird finds a blaze. The bird likes the blaze. The blaze is a good friend. The bird has a key. The key is red and blue. The key is red. The bird walks in the park. The bird sees a mouse. The mouse is quiet. The mouse is quiet and cold. The bird sleeps in the room. The bird is happy. The bird is happy and warm. They all rest in the window. The bird likes the blaze. The bird likes the key. The bird likes the old hat. The bird goes home."
+      "story": "One red day, the mouse plays. The mouse finds a blaze. The mouse likes the blaze. The blaze is a good friend. The mouse has a key. The key is cold and green. The key is cold. The mouse looks bright. The mouse is bright and quick. The mouse is very bright. The mouse starts to laugh. The mouse is bright. The mouse is bright and quick. The mouse goes home."
     },
     {
       "id": "en-gold-032",
       "hard_pass": true,
-      "oov_rate": 0.011,
+      "oov_rate": 0.0,
       "failures": [],
-      "story": "The bird plays in the garden. The bird finds a pebble. The bird likes the pebble. The pebble is a good friend. The bird has a key. The key is red and blue. The key is red. The bird is sad. The bird is sad and quick. The bird is very sad. The bird walks into the room. The bird sees a small dog. The small dog is new. The bird likes the small dog. The bird climbs down. The bird is happy. The bird is happy and quiet. The bird goes home."
+      "story": "The fish plays in the park. The fish finds a pebble. The pebble is a good friend. The pebble is new and blue. The fish has a hat. The hat is new and blue. The hat is new. The fish has a key. The key is new and blue. The key is new. The fish starts to laugh. The fish is quiet. The fish is new and blue. The fish is new. The fish is new and blue. The fish is new. The fish is new and blue. The fish is new. The fish is new and blue. The fish is new. The fish is new and blue. The fish is new. The fish is new and blue. The fish is new. The fish is new and blue. The fish is new. The fish is new and blue. The fish is new. The fish is new and blue. The fish is new. The fish is new and blue. The fish is new. The fish is new and blue. The fish is new. The fish is new and blue. The fish is new. The fish is new and blue. The fish is new. The fish is new and blue. The fish is new. The fish is new and blue. The fish is new. The fish is new and blue. The fish is new. The fish is new and blue. The fish is new. The fish is new and blue. The fish is new. The fish is new and blue. The fish is new. The fish is new and blue. The fish is new. The fish is"
     },
     {
       "id": "en-gold-033",
       "hard_pass": true,
       "oov_rate": 0.0,
       "failures": [],
-      "story": "The bird plays in the garden. The bird finds a gorge. The bird likes the gorge. The gorge is a good friend. The bird is dark. The bird is dark and red. The bird is dark and red, and the bird is quick. The bird is happy. The bird is happy and warm. The bird is very happy. The bird goes home."
+      "story": "The fish plays in the park. The fish finds a gorge. The fish likes the gorge. The gorge is a good friend. The fish has a hat. The hat is blue and red. The hat is blue. The fish has a key. The key is a good friend. The key is blue and red. The fish starts to laugh. The fish is loud. The fish is loud and blue. The fish is in the room. The fish is quick. The fish is quick and blue. The fish is very blue. The fish sleeps in the room. The fish has a window. The window is blue and red. The window is blue. The fish is in the room. The fish is quick. The fish is quick and blue. The fish is very blue. The fish walks in the room. The fish is quick. The fish is quick and blue. The fish is very blue. The fish is in the room. The fish is quick. The fish is quick and blue. The fish is very blue. The fish is in the room. The fish is quick. The fish is quick and blue. The fish is very blue. The fish is in the room. The fish is quick. The fish is quick and blue. The fish is very blue. The fish is in the room. The fish is quick. The fish is quick and blue. The fish is very blue. The fish is in the room. The fish is quick. The fish is quick and blue. The fish is very blue. The fish is in the room. The fish is quick. The"
     },
     {
       "id": "en-gold-034",
       "hard_pass": true,
       "oov_rate": 0.0,
       "failures": [],
-      "story": "The bird walks in the garden. The bird finds a barn. The barn is a good friend. The barn is red and blue. The bird likes the barn. The barn is red and blue. The barn is red. The bird sleeps in the window. The bird has a hat. The hat is red and blue. The hat is red. The bird goes home."
+      "story": "One red day, the mouse plays. The mouse finds a barn. The barn is a good friend. The mouse likes the barn. The mouse has a key. The key is quiet and cold. The key is quiet. The mouse looks old. The mouse is old and funny. The mouse is very old. The mouse starts to laugh. The mouse is happy. The mouse is happy and funny. The mouse goes home."
     },
     {
       "id": "en-gold-035",
       "hard_pass": true,
       "oov_rate": 0.0,
       "failures": [],
-      "story": "The bird plays in the garden. The bird finds a meadow. The meadow is red and blue. The meadow is a good friend. Then the bird sees a beacon. The beacon is red and blue. The beacon is red. The bird likes the beacon. The bird runs away. They all rest in the room. The bird is happy. It is a good day for the bird. The bird is quick. The bird is happy. The bird is happy and warm. The bird is happy. The bird likes the beacon. The bird likes the meadow. The bird likes the flower. The bird goes home."
+      "story": "One red day, the mouse plays. The mouse has a meadow. The meadow is a good friend. The mouse likes the meadow. Then the mouse sees a beacon. The mouse likes the beacon. The beacon is cold and green. The mouse goes home. They all rest in the room."
     },
     {
       "id": "en-gold-036",
       "hard_pass": true,
       "oov_rate": 0.0,
       "failures": [],
-      "story": "The bird plays in the garden. The bird finds a lantern. The lantern is a good friend. The lantern is red and dark. Then the bird sees a cellar. The bird likes the cellar. The cellar is red and dark. The bird runs home."
+      "story": "One red day, the mouse plays. The mouse has a lantern. The lantern is a good friend. The lantern is dark and cold. Then the mouse sees a cellar. The mouse likes the cellar. The mouse takes the cellar. The mouse goes home."
     },
     {
       "id": "en-gold-037",
       "hard_pass": true,
       "oov_rate": 0.0,
       "failures": [],
-      "story": "The bird plays in the garden. The bird finds a harbor. The harbor is a good friend. The little harbor is red. The bird starts to voyage. The bird and the mouse voyage. They voyage all day. The bird goes home."
+      "story": "The mouse plays in the park. The mouse finds a harbor. The harbor is a good friend. The harbor is blue and red. The mouse starts to voyage. The mouse and the cat voyage. They voyage all day. The mouse goes home."
     },
     {
       "id": "en-gold-038",
       "hard_pass": true,
       "oov_rate": 0.0,
       "failures": [],
-      "story": "The bird plays in the garden. The bird finds an orchard. The orchard is a good friend. The bird likes the orchard. The bird feels ravenous. The bird is very ravenous. The bird is ravenous and red. Then the bird sees a fossil. The fossil is a good friend. The fossil is green and blue. The bird goes home."
+      "story": "The fish plays in the park. The fish finds an orchard. The orchard is a good friend. The fish likes the orchard. The fish feels ravenous. The fish is very ravenous. A ravenous fish is happy. Then the fish sees a fossil. The fossil is new and green. The fossil is new. It is a good day for the fish. The fish goes home."
     }
   ]
 }

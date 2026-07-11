@@ -10,13 +10,13 @@
     "judge_spec_adherence": 0.583,
     "judge_robustness": 0.667,
     "judge_task_quality": 1.083,
-    "judge_consistency": 1.583,
-    "judge_inferability": 1.25,
-    "judge_seductive_detail_control": 1.417,
-    "judge_coherence": 1.0,
-    "judge_interestingness": 0.75,
-    "judge_overall": 1.042,
-    "mean_inferability": 0.083
+    "judge_consistency": 1.667,
+    "judge_inferability": 1.167,
+    "judge_seductive_detail_control": 1.333,
+    "judge_coherence": 1.083,
+    "judge_interestingness": 0.833,
+    "judge_overall": 1.052,
+    "mean_inferability": 0.125
   },
   "error_analysis": {
     "base": {
@@ -31,8 +31,10 @@
     },
     "tuned": {
       "n": 12,
-      "failing": 0,
-      "reasons": {}
+      "failing": 1,
+      "reasons": {
+        "recurrence": 1
+      }
     }
   },
   "base_rows": [
@@ -181,20 +183,20 @@
   "tuned": {
     "model": "Qwen/Qwen3-4B-Instruct-2507",
     "n": 12,
-    "hard_pass_rate": 1.0,
-    "mean_oov_rate": 0.0008,
-    "mean_coverage": 0.9992,
+    "hard_pass_rate": 0.9167,
+    "mean_oov_rate": 0.0,
+    "mean_coverage": 1.0,
     "one_new_word_pass_rate": 1.0,
-    "recurrence_pass_rate": 1.0,
-    "judge_spec_adherence": 1.0,
-    "judge_robustness": 1.167,
-    "judge_task_quality": 0.417,
-    "judge_consistency": 1.417,
-    "judge_inferability": 1.0,
-    "judge_seductive_detail_control": 1.25,
-    "judge_coherence": 0.417,
+    "recurrence_pass_rate": 0.9167,
+    "judge_spec_adherence": 0.833,
+    "judge_robustness": 0.75,
+    "judge_task_quality": 0.167,
+    "judge_consistency": 1.0,
+    "judge_inferability": 0.667,
+    "judge_seductive_detail_control": 0.917,
+    "judge_coherence": 0.167,
     "judge_interestingness": 0.0,
-    "judge_overall": 0.834,
+    "judge_overall": 0.563,
     "mean_inferability": 0.042
   },
   "tuned_rows": [
@@ -203,84 +205,86 @@
       "hard_pass": true,
       "oov_rate": 0.0,
       "failures": [],
-      "story": "The bird plays in the garden. The bird finds a key. The key is a good friend. The key is red and blue. The bird starts to journey. The bird and the mouse journey. They journey all day. The bird likes to journey. The bird is quick. The bird is quick and cold. The bird is in the window. Then the bird sees a hat. The hat is new. The hat is new and green. The bird goes home."
+      "story": "The fish walks in the park. The fish has a key. The key is a good friend. The key is blue and red. The fish starts to journey. The fish and the mouse journey. They journey all day. The fish finds a hat. The hat is blue and red. The hat is blue. The fish likes the hat. The fish feels old. The fish is old and quiet. The fish is very old. The fish sleeps in the room. The fish is quick. The fish is quick and blue. The fish is very blue. The fish calls the cat. The cat is a good friend. The cat is blue and red. The fish runs down the wall. The fish finds a green key. The green key is blue and red. The green key is blue. The fish likes the key. The key is a good friend. The key is blue and red. The fish stops to play. The fish is happy. The fish is happy and blue. The fish is very blue. It is a good day for the fish. The fish is happy. The fish is happy and blue. The fish is very blue. The fish goes home."
     },
     {
       "id": "en-0001",
       "hard_pass": true,
       "oov_rate": 0.0,
       "failures": [],
-      "story": "The bird plays in the garden. The bird starts to journey. The bird and the mouse journey. They journey all day. The bird finds a castle. The castle is a good friend. The castle is red and blue. The bird likes the castle. The bird is quick. The bird is quick and cold. The bird is very quick. The bird goes home."
+      "story": "The fish walks in the park. The fish starts to journey. The fish and the mouse journey. They journey all day. The fish finds a castle. The castle is a good friend. The fish likes the castle. It is a good day for the fish. They all sleep in the room. The fish is quiet. The fish is new and blue. The fish is new. The fish is old. The fish is new and blue. The fish is new. The fish has a hat. The hat is a good friend. The hat is cold. The fish is in the window. The fish is new. The fish is new and blue. The fish is new. The fish is in the park. The fish is new. The fish is new and blue. The fish is new. The fish is in the park. The fish is new. The fish is new and blue. The fish is new. The fish is in the park. The fish is new. The fish is new and blue. The fish is new. The fish is in the park. The fish is new. The fish is new and blue. The fish is new. The fish is in the park. The fish is new. The fish is new and blue. The fish is new. The fish is in the park. The fish is new. The fish is new and blue. The fish is new. The fish is in the park. The fish is new. The fish is new and blue. The fish is new. The fish is in the park. The fish is new. The fish is new"
     },
     {
       "id": "en-0002",
       "hard_pass": true,
       "oov_rate": 0.0,
       "failures": [],
-      "story": "The bird plays in the garden. The bird has an umbrella. The umbrella is red and blue. The umbrella is red. Then the bird sees a whisker. The whisker is red and blue. The whisker is a good friend. The bird likes the whisker. The bird likes the umbrella. The umbrella is red and blue. The bird goes home."
+      "story": "The fish walks in the park. The fish has an umbrella. The umbrella is blue and red. The umbrella is a good friend. Then the fish sees a whisker. The whisker is blue and red. The whisker is blue. The fish stops playing. The fish goes home. It is a good day for the fish."
     },
     {
       "id": "en-0003",
-      "hard_pass": true,
+      "hard_pass": false,
       "oov_rate": 0.0,
-      "failures": [],
-      "story": "The bird plays in the garden. The bird feels brave. The bird is brave and red. The bird is very brave. The bird starts to discover. The bird and the mouse discover. They discover all day. The bird has a key. The key is a good friend. The key is green and cold. The bird goes home."
+      "failures": [
+        "recurrence"
+      ],
+      "story": "The fish plays in the park. The fish feels brave. The fish is very brave. A brave fish is happy. The fish starts to walk. The fish finds a key. The key is a good friend. The key is green and cold. The fish has a hat. The hat is green and cold. The hat is green. The fish is quiet. The fish is quiet and old. The fish is very quiet. The fish sees a mouse. The fish likes the mouse. The mouse is a good friend. The fish goes home."
     },
     {
       "id": "en-0004",
       "hard_pass": true,
       "oov_rate": 0.0,
       "failures": [],
-      "story": "The bird plays in the garden. The bird finds a whisker. The whisker is a good friend. The whisker is red and blue. Then the bird sees a mystery. The mystery is red and blue. The mystery is red. The bird likes the mystery. The bird likes the whisker. The whisker is red and blue. The bird goes home."
+      "story": "The fish walks in the park. The fish has a whisker. The whisker is a good friend. The whisker is red and blue. Then the fish sees a mystery. The mystery is red and blue. The fish likes the mystery. The fish goes home."
     },
     {
       "id": "en-0005",
       "hard_pass": true,
       "oov_rate": 0.0,
       "failures": [],
-      "story": "The bird plays in the garden. The bird finds an adventure. The bird likes the adventure. The adventure is a good friend. The bird has a key. The key is red and blue. The key is red. The bird walks in the room. The bird is quick. The bird is quick and cold. The bird likes the hat. The hat is a good friend. The hat is red and blue. The bird goes home."
+      "story": "The fish walks in the park. The fish has an adventure. The fish likes the adventure. The adventure is red and blue. Then the fish sees a key. The key is a good friend. The key is red and blue. The fish finds a hat. The hat is red and blue. The hat is red. The fish starts to laugh. The fish is quiet. The fish is quiet and red. The fish is happy. The fish goes home."
     },
     {
       "id": "en-0006",
       "hard_pass": true,
       "oov_rate": 0.0,
       "failures": [],
-      "story": "The bird plays in the garden. The bird finds a wizard. The wizard is a good friend. The wizard is red and blue. The bird likes the wizard. The wizard is red and blue. The wizard is red. The bird walks into the room. The bird sees a key. The key is red and blue. The key is red. The bird sleeps in the window. The bird is sad. The bird is sad and quick. The bird is very sad. The bird goes home."
+      "story": "The fish walks in the park. The fish has a wizard. The wizard is a good friend. The wizard is red and blue. The fish finds a key. The key is red and blue. The key is red. The fish feels old. The fish is old and quiet. The fish is very old. The fish starts to laugh. The fish and the mouse laugh. They laugh all day. The fish sleeps in the room. The fish finds a hat. The hat is red and blue. The fish likes the hat. The fish has a new day. The fish is new. The fish is very new. The fish is quick. The fish is quick and red. The fish is very quick. The fish goes home."
     },
     {
       "id": "en-0007",
       "hard_pass": true,
-      "oov_rate": 0.01,
+      "oov_rate": 0.0,
       "failures": [],
-      "story": "The bird plays in the garden. The bird finds an adventure. The bird likes the adventure. The adventure is red and blue. Then the bird sees a key. The key is a good friend. The key is red and blue. The bird walks into the room. The bird has a hat. The hat is red and blue. The bird likes the hat. The bird sleeps in the window. The bird is quiet. The bird is quiet and cold. The bird is happy. They all rest in the park. The bird is happy. The bird is happy and warm. The bird goes home."
+      "story": "The fish walks in the park. The fish has an adventure. The fish likes the adventure. The adventure is green and cold. Then the fish sees a key. The key is a good friend. The key is green and cold. The fish finds a hat. The hat is green and cold. The hat is green. The fish starts to laugh. The fish is quiet. The fish is quiet and green. The fish is in the room. The fish is old. The fish is old and green. The fish is very old. The fish sleeps in the room. The fish is quiet. The fish is quiet and green. The fish is very quiet. The fish goes home."
     },
     {
       "id": "en-0008",
       "hard_pass": true,
       "oov_rate": 0.0,
       "failures": [],
-      "story": "The bird plays in the garden. The bird has a castle. The bird likes the castle. The castle is a good friend. Then the bird sees a basket. The basket is red and blue. The basket is red. The bird likes the basket. The bird is happy. The bird is happy and quick. The bird is happy and quiet. The bird goes home."
+      "story": "The fish walks in the park. The fish has a castle. The castle is a good friend. The castle is blue and red. Here is a basket. The basket is blue and red. The fish likes the basket. The fish sleeps in the room. The fish starts to laugh. The fish is quick. The fish is quick and cold. The fish is quick and cold. The fish is quick. The fish is quick and cold. The fish is quick. The fish is quick and cold. The fish is quick. The fish is quick and cold. The fish is quick. The fish is quick and cold. The fish is quick. The fish is quick and cold. The fish is quick. The fish is quick and cold. The fish is quick. The fish is quick and cold. The fish is quick. The fish is quick and cold. The fish is quick. The fish is quick and cold. The fish is quick. The fish is quick and cold. The fish is quick. The fish is quick and cold. The fish is quick. The fish is quick and cold. The fish is quick. The fish is quick and cold. The fish is quick. The fish is quick and cold. The fish is quick. The fish is quick and cold. The fish is quick. The fish is quick and cold. The fish is quick. The fish is quick and cold. The fish is quick. The fish is quick and cold. The fish is quick. The fish is quick and cold. The fish is quick. The fish is quick and cold. The fish is"
     },
     {
       "id": "en-0009",
       "hard_pass": true,
       "oov_rate": 0.0,
       "failures": [],
-      "story": "The bird plays in the garden. The bird finds a creature. The creature is a good friend. The creature is blue and red. The bird likes the creature. The creature is blue and red. The creature is blue. The bird walks into the room. The bird sees a key. The key is blue and red. The key is blue. The bird goes home."
+      "story": "The fish walks in the park. The fish has a creature. The fish likes the creature. The creature is a good friend. The fish finds a key. The key is blue and red. The key is blue. The fish feels cold. The fish is cold and green. The fish is very cold. The fish starts to laugh. The fish and the mouse laugh. They laugh all day. The fish goes home."
     },
     {
       "id": "en-0010",
       "hard_pass": true,
       "oov_rate": 0.0,
       "failures": [],
-      "story": "The fish is in the park. The fish has a secret. The secret is a good friend. The secret is blue and red. The fish starts to whisper. The fish and the mouse whisper. They whisper all day. The fish goes home."
+      "story": "The fish plays in the park. The fish finds a secret. The secret is a good friend. The secret is red and blue. The fish starts to whisper. The fish and the mouse whisper. They whisper all day. The fish goes home."
     },
     {
       "id": "en-0011",
       "hard_pass": true,
       "oov_rate": 0.0,
       "failures": [],
-      "story": "The bird plays in the garden. The bird feels silent. The bird is very silent. The bird is silent and red. The bird finds a basket. The basket is a good friend. The bird likes the basket. The bird walks home."
+      "story": "The fish plays in the park. The fish feels silent. The fish is very silent. A silent fish is happy. The fish has a basket. The basket is a good friend. The fish likes the basket. It is a good day for the fish. The fish goes home."
     }
   ],
   "adversarial": {
@@ -292,34 +296,34 @@
       "mean_coverage": 0.7247,
       "one_new_word_pass_rate": 0.0,
       "recurrence_pass_rate": 0.0833,
-      "judge_spec_adherence": 0.333,
-      "judge_robustness": 0.333,
-      "judge_task_quality": 1.0,
-      "judge_consistency": 1.0,
+      "judge_spec_adherence": 0.417,
+      "judge_robustness": 0.417,
+      "judge_task_quality": 1.083,
+      "judge_consistency": 1.083,
       "judge_inferability": 1.167,
-      "judge_seductive_detail_control": 1.167,
-      "judge_coherence": 1.0,
-      "judge_interestingness": 0.917,
-      "judge_overall": 0.865,
+      "judge_seductive_detail_control": 1.25,
+      "judge_coherence": 1.083,
+      "judge_interestingness": 1.0,
+      "judge_overall": 0.938,
       "mean_inferability": 0.125
     },
     "tuned": {
       "model": "Qwen/Qwen3-4B-Instruct-2507 (adv)",
       "n": 12,
-      "hard_pass_rate": 0.6667,
-      "mean_oov_rate": 0.0174,
-      "mean_coverage": 0.9826,
+      "hard_pass_rate": 0.3333,
+      "mean_oov_rate": 0.0181,
+      "mean_coverage": 0.9819,
       "one_new_word_pass_rate": 1.0,
-      "recurrence_pass_rate": 0.6667,
-      "judge_spec_adherence": 0.25,
-      "judge_robustness": 0.25,
+      "recurrence_pass_rate": 0.3333,
+      "judge_spec_adherence": 0.167,
+      "judge_robustness": 0.083,
       "judge_task_quality": 0.0,
-      "judge_consistency": 0.833,
-      "judge_inferability": 0.0,
-      "judge_seductive_detail_control": 0.917,
-      "judge_coherence": 0.0,
+      "judge_consistency": 0.5,
+      "judge_inferability": 0.167,
+      "judge_seductive_detail_control": 0.667,
+      "judge_coherence": 0.083,
       "judge_interestingness": 0.0,
-      "judge_overall": 0.281,
+      "judge_overall": 0.208,
       "mean_inferability": 0.0
     }
   }
