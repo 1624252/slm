@@ -41,6 +41,40 @@ fits a 768-token window uncut, and matches the eval's `--curated` setup.
 
 <!-- newest first; append a block per run -->
 
+### 2026-07-11 — `qwen3-4b-qlora` iter #2 (+500 steps) — constraints firmer, quality still floored
+
+**500-step continuation** from iteration #1's adapter (not from base), same recipe and 30k v1
+subset, on Colab GPU. This run also completed **ja held-out** (missing in #1). The point of logging
+it: confirm whether more SFT on the templated v1 data recovers any quality. **It does not.**
+
+Golden set, base → tuned (iter #2):
+
+| lang | n | hard-pass | OOV (↓) | ≤1-new | coherence | interestingness | win |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| en | 39 | 0.000 → **0.974** | 0.157 → **0.002** | 0.000 → **1.000** | 1.359 → 0.231 | 1.359 → 0.026 | FAIL |
+| zh | 8 | 0.000 → 0.250 | 0.328 → **0.014** | 0.000 → 0.375 | 1.375 → 0.000 | 1.375 → 0.000 | FAIL |
+| ja | 8 | 0.000 → 0.125 | 0.309 → **0.076** | 0.000 → **1.000** | 1.125 → 0.000 | 0.875 → 0.000 | **PASS** |
+
+Held-out (+ adversarial), base → tuned:
+
+| lang | n | hard-pass | OOV (↓) | ≤1-new | coherence | adversarial | win |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| en | 12 | 0.000 → **0.917** | 0.092 → **0.000** | 0.000 → **1.000** | 1.083 → 0.167 | 0.000 → **0.333** | **PASS** |
+| zh | 12 | 0.000 → 0.000 | 0.386 → **0.053** | 0.000 → 0.167 | 1.083 → 0.000 | 0.000 → 0.167 | FAIL |
+| ja | 12 | 0.000 → 0.250 | 0.392 → **0.054** | 0.000 → **1.000** | 0.917 → 0.000 | 0.000 → 0.167 | **PASS** |
+
+**Read: same trajectory as #1, sharper.** The mechanical constraints firmed up (en golden hard-pass
+0.90 → 0.97; en + ja now PASS the spec win condition on one or both eval sets), but **coherence,
+task_quality, and interestingness are pinned near 0** across every language — worse, if anything,
+than #1. Extra SFT steps on the v1 templated data can only make the model a *better* mimic of
+incoherent text. **This closes the "just train more" branch:** the ceiling is the data, exactly as
+diagnosed. zh remains the weakest (held-out hard-pass still 0).
+
+**Decision:** stop iterating on v1. The fix is the teacher-regenerated **dataset v2** (see
+`docs/DATASET_V2_PILOT.md`) — an English pilot of 594 stories now scores coherence/task_quality = 2
+for ~100% of items (vs the ~0 the v1-tuned model produces). Next: train an en adapter on v2 and
+confirm coherence/interestingness rise while constraints hold.
+
 ### 2026-07-10 — `qwen3-4b-qlora` (Colab GPU, first run) — constraints solved, quality regressed
 
 **First GPU run, and the first time the hard constraints are actually met.** Base
