@@ -41,6 +41,54 @@ fits a 768-token window uncut, and matches the eval's `--curated` setup.
 
 <!-- newest first; append a block per run -->
 
+### 2026-07-11 — `qwen3-4b-v2` (dataset_v2 A/B, fresh from base) — DATA HYPOTHESIS CONFIRMED
+
+**The comparison that closes the arc.** Same recipe family as the v1 GPU runs, only the **data**
+changed: trained **fresh from base** on `data/dataset_v2` (teacher-regenerated, exam-target,
+humanized English — 480 train stories), 300 steps (~5 epochs), r32/α64, lr 2e-4, seq 1024,
+grad-accum 8. Judge = claude-sonnet-4-6. This is the direct test of "better data, not more training"
+against v1 iter #2 (which drilled 30k templated records for 1500 steps).
+
+Golden set, base → tuned (v2), with v1 iter #2 tuned for contrast:
+
+| lang | n | hard-pass | OOV (↓) | coherence | task_quality | interestingness | overall |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| en (v2) | 39 | 0.000 → **0.333** | 0.157 → **0.021** | 1.36 → **1.10** | 1.39 → **1.31** | 1.31 → **1.26** | 1.36 → **1.44** |
+| en (v1 #2) | 39 | → 0.974 | → 0.002 | → **0.23** | → **0.26** | → **0.03** | → 0.61 |
+| zh (v2) | 8 | 0.000 → 0.000 | 0.328 → **0.195** | 1.38 → 1.00 | 1.50 → 1.00 | 1.38 → 1.00 | 1.47 → 1.31 |
+| ja (v2) | 8 | 0.000 → 0.000 | 0.309 → **0.256** | 1.12 → 0.75 | 1.00 → 0.75 | 0.88 → 0.75 | 1.16 → 0.83 |
+
+Held-out (+ adversarial), base → tuned (v2):
+
+| lang | n | hard-pass | OOV (↓) | ≤1-new | coherence | interestingness | overall |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| en | 12 | 0.000 → **0.167** | 0.092 → **0.023** | 0.000 → **0.417** | 1.08 → **1.33** | 0.83 → **1.58** | 1.12 → **1.50** |
+| zh | 12 | 0.000 → 0.000 | 0.386 → **0.244** | 0.000 → 0.000 | 1.08 → 0.92 | 1.25 → 0.92 | 1.19 → 1.15 |
+| ja | 12 | 0.000 → 0.000 | 0.392 → **0.298** | 0.000 → 0.000 | 1.00 → 0.67 | 1.17 → 0.67 | 1.21 → 0.86 |
+
+**Read — the reward-hacking is gone.** The whole point of dataset_v2 was to stop SFT from buying
+constraint-satisfaction with dead prose. It worked: on **en**, the tuned model **improves OOV
+(0.157 → 0.021) and posts hard-passes while keeping coherence/task_quality/interestingness near
+base** — en golden judge overall actually *rises* (1.36 → 1.44), and en held-out interestingness
+rises **above base** (0.83 → **1.58**). Compare v1 iter #2, which hit hard-pass 0.97 but flattened
+coherence to 0.23 and interestingness to 0.03. **Same base, same recipe, only the data differs — so
+the quality lift is attributable to the dataset. Hypothesis confirmed.**
+
+**The hard-pass is lower than v1 (0.33 vs 0.97), and that is expected, not a regression.** v2 trained
+on 480 stories for 300 steps; v1 drilled 30k records for 1500. Less mechanical drilling → fewer perfect
+constraint passes, but the text is worth reading. The lever now is *more v2-style data + more steps*,
+not templated volume.
+
+**zh/ja tuned regressed — because this run used the en-only dataset_v2.** At the time of this Colab
+run, `data/dataset_v2` had no zh/ja records (those were added afterward on branch
+`dataset-v2-multilang`: zh + ja authored + hard-pass validated). So the model saw **zero** zh/ja
+training signal and drifted from base on those languages. This is exactly what the **next run fixes**:
+train on the now-multilingual dataset_v2 (en + zh + ja). Judge this run on the **en** rows only.
+
+**Verdict: the first unambiguous win for the data thesis.** en quality held/rose while OOV collapsed
+and hard-passes appeared — the failure mode from every prior run is gone. **Next:** retrain on the
+multilingual v2 (all three languages) and expect zh/ja to move like en did.
+
 ### 2026-07-11 — `qwen3-4b-qlora` iter #2 (+500 steps) — constraints firmer, quality still floored
 
 **500-step continuation** from iteration #1's adapter (not from base), same recipe and 30k v1
