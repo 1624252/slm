@@ -99,7 +99,7 @@ def main() -> None:
     p.add_argument("--mode", required=True, choices=list(MODES), help="en | en-exam | zh | jp")
     p.add_argument("--base-path", required=True, help="HF model path/id for the base.")
     p.add_argument("--adapter", default=None, help="LoRA adapter path (omit to test the base).")
-    p.add_argument("--seed", type=int, default=None, help="Fix the random selection (default: random).")
+    p.add_argument("--seed", type=int, default=None, help="Fix the selection (default: random).")
     p.add_argument("--max-new-tokens", type=int, default=320)
     p.add_argument("--no-think", action="store_true", help="Disable thinking mode (e.g. Qwen3).")
     p.add_argument("--temperature", type=float, default=0.0)
