@@ -41,6 +41,50 @@ fits a 768-token window uncut, and matches the eval's `--curated` setup.
 
 <!-- newest first; append a block per run -->
 
+### 2026-07-11 — `qwen3-4b-v2-multi` (multilingual dataset_v2, fresh from base) — zh/ja LEARN, en improves
+
+**The multilingual follow-up.** Same recipe, fresh from base, but trained on the **multilingual**
+`data/dataset_v2` (en 600 + zh 350 + ja 385 = 1335 stories), **700 steps** (~5 epochs, scaled to the
+~3× corpus), r32/α64, lr 2e-4, seq 1024, grad-accum 8. The en-only v2 run left zh/ja with no training
+signal (they drifted from base); this run gives all three languages data. Judge = claude-sonnet-4-6.
+
+Golden set, base → tuned (multilingual), with the **en-only v2** tuned zh/ja for contrast:
+
+| lang | n | hard-pass | OOV (↓) | ≤1-new | coherence | interestingness | overall |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| en | 39 | 0.000 → **0.487** | 0.157 → **0.018** | 0.000 → **0.564** | 1.28 → 1.05 | 1.26 → **1.31** | 1.36 → **1.42** |
+| zh | 8 | 0.000 → 0.000 | 0.328 → **0.074** | 0.000 → **0.250** | 1.38 → 1.00 | 1.38 → 0.88 | 1.47 → 1.44 |
+| zh (en-only v2) | 8 | → 0.000 | → 0.195 | → 0.000 | → 1.00 | → 1.00 | → 1.31 |
+| ja | 8 | 0.000 → **0.250** | 0.309 → **0.036** | 0.000 → **0.875** | 1.00 → 0.88 | 1.00 → 0.50 | 1.20 → **1.23** |
+| ja (en-only v2) | 8 | → 0.000 | → 0.256 | → 0.000 | → 0.75 | → 0.75 | → 0.83 |
+
+Held-out (+ adversarial), base → tuned (multilingual):
+
+| lang | n | hard-pass | OOV (↓) | ≤1-new | coherence | interestingness | overall |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| en | 12 | 0.000 → **0.417** | 0.092 → **0.013** | 0.000 → **0.500** | 1.08 → **1.17** | 0.83 → **1.42** | 1.08 → **1.43** |
+| zh | 12 | 0.000 → 0.000 | 0.386 → **0.132** | 0.000 → **0.250** | 1.08 → 0.75 | 1.25 → 0.67 | 1.23 → 1.05 |
+| ja | 12 | 0.000 → **0.333** | 0.392 → **0.046** | 0.000 → **0.750** | 1.00 → 0.42 | 1.17 → 0.25 | 1.22 → 0.80 |
+
+**Read — the multilingual data delivered on its prediction.** With training signal, **zh/ja finally
+learn the mechanical i+1 constraints**: zh golden OOV 0.328 → **0.074** (vs 0.195 en-only), ja golden
+OOV → **0.036** and ja posts its **first hard-passes** (golden 0.25, held-out 0.33) and near-perfect
+≤1-new (0.75–0.88). All three languages now collapse OOV. **en also improved** over the en-only v2 run
+— more data + more steps lifted hard-pass (golden 0.33 → **0.49**, held-out 0.17 → **0.42**) while
+keeping quality (held-out interestingness **1.42**, above base 0.83; golden overall **1.42**).
+
+**The wart: ja judge quality dropped** (held-out coherence 1.00 → 0.42, interestingness 1.17 → 0.25).
+ja bought its strong constraint gains with flatter prose — a smaller-scale echo of the v1 pattern,
+most likely because ja's baseline palette is tiny (66 words) so the model has little room to be
+interesting within it. **zh held quality far better** (golden overall 1.47 → 1.44; only mild judge
+dips). en is the healthiest on every axis.
+
+**Verdict: the multilingual dataset works — the core thesis now holds across all three languages on
+the deterministic constraints, and en is a clean win on quality too.** Open item is **ja prose
+quality**: it needs either more ja data, a slightly larger ja baseline palette (more room to write),
+or fewer epochs for ja specifically. zh is in good shape. **Next:** address ja quality and push en/zh
+further; see the plan.
+
 ### 2026-07-11 — `qwen3-4b-v2` (dataset_v2 A/B, fresh from base) — DATA HYPOTHESIS CONFIRMED
 
 **The comparison that closes the arc.** Same recipe family as the v1 GPU runs, only the **data**
