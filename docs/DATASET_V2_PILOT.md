@@ -63,7 +63,18 @@ stays in the tree and does not run away."*
 
 (The earlier graded-target pilot — 594 concrete-word stories — was overwritten here per request; it
 still exists at `data/generated/teacher_en/` if needed. Exam generation source:
-`data/generated/teacher_en_exam/`.) zh/ja pilots not yet run (no exam vocab for those languages).
+`data/generated/teacher_en_exam/`.)
+
+**zh/ja added (2026-07-11).** `data/dataset_v2/` is now **multilingual**: en 600 + **zh 202** +
+**ja 185** = 987 stories. zh/ja have no exam vocab, so their targets are the graded concrete-noun
+pools (`synth.TARGET_POOLS`: lighthouse, rainbow, castle, treasure, robot, …). Unlike the API
+teacher used for en, these were **authored directly (no OpenAI API — zero contention with a running
+Colab eval)** and validated through the same deterministic pipeline via `scripts/author_cjk.py`:
+compact-known scoping (coverage passes by construction) + the hard checks (OOV, ≤1-new-word/sentence,
+recurrence ≥3×). Every kept story hard-passes; a 40-record random re-validation of the merged set is
+40/40. zh 41 unique targets, ja 42; 0 story leakage across splits. (CJK has no em-dash tell, so no
+humanizer pass is needed there.) The eval already runs all three languages, so the multilingual v2
+lets the A/B measure zh/ja quality too — not just en.
 
 ## Validate it actually improved — the comparison train (A/B)
 
