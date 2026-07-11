@@ -145,8 +145,15 @@ def generate(
     config: TeacherConfig | None = None,
     seed: int = 0,
     max_attempts: int | None = None,
+    progress: bool = False,
 ) -> dict:
-    """Generate up to `n` kept teacher stories; write train/val/test (80/10/10) + stats."""
+    """Generate up to `n` kept teacher stories; write train/val/test (80/10/10) + stats.
+
+    Each kept story is *also* appended to `all.jsonl` as it is produced, so a long run is
+    crash-safe (a killed run keeps everything generated so far) and observable via that file;
+    `progress=True` additionally prints a per-story line. The final split files are written at the
+    end from the in-memory list.
+    """
     config = config or TeacherConfig()
     analyzer = get_analyzer(language)
     pools = TARGET_POOLS[language]
@@ -154,22 +161,39 @@ def generate(
     rng = random.Random(seed)
     max_attempts = max_attempts or n * 4
 
+    out_dir.mkdir(parents=True, exist_ok=True)
+    checkpoint = open(out_dir / "all.jsonl", "w", encoding="utf-8")  # incremental, crash-safe
+
     records: list[dict] = []
     kept = attempts = rejected = 0
-    while kept < n and attempts < max_attempts:
-        attempts += 1
-        targets = [w for _, w in _sample_targets(rng, pools)]
-        theme = rng.choice(themes)
-        ex = make_teacher_example(
-            language, targets, theme, kept, client, analyzer, config, judge_client
-        )
-        if not ex.kept:
-            rejected += 1
-            continue
-        rec = ex.to_record()
-        rec["metadata"]["source"] = "teacher-v2"
-        records.append(rec)
-        kept += 1
+    try:
+        while kept < n and attempts < max_attempts:
+            attempts += 1
+            targets = [w for _, w in _sample_targets(rng, pools)]
+            theme = rng.choice(themes)
+            ex = make_teacher_example(
+                language, targets, theme, kept, client, analyzer, config, judge_client
+            )
+            if not ex.kept:
+                rejected += 1
+                if progress:
+                    reason = "hard-fail" if not ex.report.hard_pass else "judge-gate"
+                    print(f"  [{language}] attempt {attempts}: rejected ({reason})", flush=True)
+                continue
+            rec = ex.to_record()
+            rec["metadata"]["source"] = "teacher-v2"
+            records.append(rec)
+            checkpoint.write(json.dumps(rec, ensure_ascii=False) + "\n")
+            checkpoint.flush()  # survive a kill/timeout mid-run
+            kept += 1
+            if progress:
+                print(
+                    f"  [{language}] kept {kept}/{n} (attempt {attempts}, "
+                    f"keep_rate {kept / attempts:.2f}) targets={rec['target_words']}",
+                    flush=True,
+                )
+    finally:
+        checkpoint.close()
 
     rng.shuffle(records)
     n_tr, n_va = int(kept * 0.8), int(kept * 0.1)
@@ -209,6 +233,7 @@ def main() -> None:
     p.add_argument("--no-judge", action="store_true", help="Skip the judge gate (deterministic).")
     p.add_argument("--mock", action="store_true", help="Offline MockLLM for teacher + judge.")
     p.add_argument("--max-attempts", type=int, default=None)
+    p.add_argument("--progress", action="store_true", help="Print a line per attempt (long runs).")
     args = p.parse_args()
 
     if args.mock:
@@ -220,7 +245,7 @@ def main() -> None:
     stats = generate(
         args.language, args.n, args.out,
         client=client, judge_client=judge_client, seed=args.seed,
-        max_attempts=args.max_attempts,
+        max_attempts=args.max_attempts, progress=args.progress,
     )
     print(json.dumps(stats, indent=2, ensure_ascii=False))
 
