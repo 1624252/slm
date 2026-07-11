@@ -135,6 +135,24 @@ def make_teacher_example(
     return Example(scenario, story, report, passes, judge, kept)
 
 
+def load_target_pool(language: str, kind: str) -> dict[str, list[str]]:
+    """POS-keyed target pool for the given source. `kind="graded"` -> the hand-curated
+    TARGET_POOLS (concrete, easy to infer); `kind="exam"` -> the GRE/SAT/ACT exam list. Exam words
+    have no reliable POS here, so they all go under one "exam" key (POS is unused by teacher regen,
+    which lets the LLM frame the sentence)."""
+    if kind == "graded":
+        return TARGET_POOLS[language]
+    if kind == "exam":
+        path = VOCAB_DIR / language / "exam.csv"
+        if not path.exists():
+            raise ValueError(f"no exam vocab for '{language}' ({path} missing)")
+        words = sorted(Vocabulary.from_csv(path).lemmas)
+        if not words:
+            raise ValueError(f"exam vocab for '{language}' is empty")
+        return {"exam": words}
+    raise ValueError(f"unknown target kind: {kind!r} (use 'graded' or 'exam')")
+
+
 def generate(
     language: str,
     n: int,
@@ -146,17 +164,18 @@ def generate(
     seed: int = 0,
     max_attempts: int | None = None,
     progress: bool = False,
+    pools: dict[str, list[str]] | None = None,
 ) -> dict:
     """Generate up to `n` kept teacher stories; write train/val/test (80/10/10) + stats.
 
-    Each kept story is *also* appended to `all.jsonl` as it is produced, so a long run is
-    crash-safe (a killed run keeps everything generated so far) and observable via that file;
-    `progress=True` additionally prints a per-story line. The final split files are written at the
-    end from the in-memory list.
+    `pools` overrides the target-word source (POS-keyed word lists); defaults to the graded
+    TARGET_POOLS. Each kept story is *also* appended to `all.jsonl` as it is produced, so a long run
+    is crash-safe (a killed run keeps everything generated so far) and observable via that file;
+    `progress=True` additionally prints a per-story line. Final split files are written at the end.
     """
     config = config or TeacherConfig()
     analyzer = get_analyzer(language)
-    pools = TARGET_POOLS[language]
+    pools = pools if pools is not None else TARGET_POOLS[language]
     themes = _theme_pool(language)
     rng = random.Random(seed)
     max_attempts = max_attempts or n * 4
@@ -234,6 +253,10 @@ def main() -> None:
     p.add_argument("--mock", action="store_true", help="Offline MockLLM for teacher + judge.")
     p.add_argument("--max-attempts", type=int, default=None)
     p.add_argument("--progress", action="store_true", help="Print a line per attempt (long runs).")
+    p.add_argument(
+        "--targets", choices=["graded", "exam"], default="graded",
+        help="Target-word source: 'graded' = curated concrete words; 'exam' = GRE/SAT/ACT list.",
+    )
     args = p.parse_args()
 
     if args.mock:
@@ -246,6 +269,7 @@ def main() -> None:
         args.language, args.n, args.out,
         client=client, judge_client=judge_client, seed=args.seed,
         max_attempts=args.max_attempts, progress=args.progress,
+        pools=load_target_pool(args.language, args.targets),
     )
     print(json.dumps(stats, indent=2, ensure_ascii=False))
 
