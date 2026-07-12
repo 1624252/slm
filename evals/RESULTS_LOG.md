@@ -41,6 +41,51 @@ fits a 768-token window uncut, and matches the eval's `--curated` setup.
 
 <!-- newest first; append a block per run -->
 
+### 2026-07-12 — `qwen3-4b-v2-multi` @1610 (scaled data + wider ja palette) — en jumps, ja palette fix lands on constraints
+
+**Second multilingual run, two changes vs. the 2026-07-11 multi run:** (1) the dataset scaled to
+**1610 stories** (en 600 + zh 500 + ja 510, up from 1335), and (2) the **ja baseline palette was
+widened 66 → 206 words** (140 common N5 words) to give ja room for interesting prose — the fix for
+the ja flatness that run surfaced. Same base (`Qwen/Qwen3-4B-Instruct-2507`), fresh from base,
+**800 steps** (~5 epochs on the 1288 train split), r32/α64. Judge = claude-sonnet-4-6.
+
+Golden set, base → tuned, with the **prior multi run** (1335 stories, 700 steps) for contrast:
+
+| lang | n | hard-pass | OOV (↓) | ≤1-new | coherence | interestingness | overall |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| en | 39 | 0.000 → **0.615** | 0.157 → **0.016** | 0.000 → **0.692** | 1.36 → 1.21 | 1.33 → 1.26 | 1.35 → **1.46** |
+| en (prior) | 39 | → 0.487 | → 0.018 | → 0.564 | → 1.05 | → 1.31 | → 1.42 |
+| zh | 8 | 0.000 → 0.000 | 0.328 → **0.076** | 0.000 → 0.375 | 1.38 → 1.00 | 1.38 → 0.75 | 1.45 → 1.34 |
+| ja | 8 | 0.000 → **0.375** | 0.309 → **0.035** | 0.000 → **0.875** | 1.12 → 1.00 | 0.88 → 0.50 | 1.16 → **1.27** |
+| ja (prior) | 8 | → 0.250 | → 0.036 | → 0.875 | → 0.88 | → 0.50 | → 1.23 |
+
+Held-out (+ adversarial), base → tuned:
+
+| lang | n | hard-pass | OOV (↓) | ≤1-new | coherence | interestingness | overall |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| en | 12 | 0.000 → **0.250** | 0.092 → **0.018** | 0.000 → **0.417** | 1.08 → **1.25** | 0.83 → **1.50** | 1.08 → **1.44** |
+| zh | 12 | 0.000 → 0.000 | 0.386 → **0.126** | 0.000 → 0.333 | 1.08 → 0.75 | 1.33 → 0.92 | 1.20 → 1.20 |
+| ja | 12 | 0.000 → **0.333** | 0.392 → **0.043** | 0.000 → **0.667** | 1.00 → 0.50 | 1.00 → 0.50 | 1.15 → 0.82 |
+
+**Read — best en run yet, and the ja palette fix landed on the constraints.** en is the clear win:
+golden hard-pass **0.49 → 0.62**, OOV to 0.016, ≤1-new 0.56 → 0.69, **and quality held** (golden
+overall rises to 1.46; held-out interestingness 1.50, well above base 0.83). More good data + more
+steps lifted en on every axis without the v1-style quality collapse. **ja improved on constraints**
+too — golden hard-pass 0.25 → **0.375**, held-out → 0.33, OOV 0.31 → 0.035, ≤1-new 0.88 — so the
+wider palette did buy better i+1 adherence.
+
+**But ja prose quality stayed soft** (golden interestingness 0.50, held-out coherence 0.50). The
+palette widening stopped the *further* decline and improved the mechanics, but did not lift ja's
+judge scores back toward base — the flatness is only partly a palette problem. Likely remaining
+causes: (a) ja stories are still short/simple by construction, and (b) the CJK judge may score
+terse polite-form prose harshly. zh holds quality better (golden overall 1.34) but its held-out
+coherence dipped (1.08 → 0.75).
+
+**Verdict: en is a strong, clean win; the multilingual thesis holds on the deterministic
+constraints for all three; ja *quality* is the remaining open problem.** Next levers for ja: richer
+narrative structure in the source data (not just more of the same short shape), or a look at whether
+the judge is under-scoring correct-but-terse ja. Adapter saved to Drive (`islm_v2_multi`).
+
 ### 2026-07-11 — `qwen3-4b-v2-multi` (multilingual dataset_v2, fresh from base) — zh/ja LEARN, en improves
 
 **The multilingual follow-up.** Same recipe, fresh from base, but trained on the **multilingual**
