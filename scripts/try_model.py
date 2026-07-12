@@ -94,11 +94,8 @@ def build_scenario(mode: str, seed: int) -> Scenario:
     return scenario
 
 
-def score(scenario: Scenario, story: str) -> None:
-    """Grade the story with the same deterministic validators the eval uses, and spell out exactly
-    what failed — which words are OOV, which sentences add >1 new word, which targets under-recur.
-    Uses compact-known scoping (known = the story's own content words minus targets), matching how
-    the dataset is built and evaluated, so a genuinely i+1 story can pass by construction."""
+def _report(scenario: Scenario, story: str):
+    """Run the deterministic validators; return the ValidationReport (has .hard_pass)."""
     from islm.config import DEFAULT_THRESHOLDS as T
     from islm.validators import validate_story
     from islm.vocab.lemmatize import get_analyzer
@@ -107,8 +104,18 @@ def score(scenario: Scenario, story: str) -> None:
     targets = {t.lower() for t in scenario.target_words}
     # Grade against the palette the model was TOLD it could use — the promise to the learner,
     # and the honest test of whether the story is actually i+1 for that learner.
-    known = scenario.known_set()
-    rep = validate_story(story, known, targets, analyzer, T, language=scenario.language)
+    return validate_story(
+        story, scenario.known_set(), targets, analyzer, T, language=scenario.language
+    )
+
+
+def score(scenario: Scenario, story: str) -> bool:
+    """Grade the story with the same deterministic validators the eval uses, and spell out exactly
+    what failed — which words are OOV, which sentences add >1 new word, which targets under-recur.
+    Returns the hard-pass boolean."""
+    from islm.config import DEFAULT_THRESHOLDS as T
+
+    rep = _report(scenario, story)
     c, onew, rec = rep.coverage, rep.one_new_word, rep.recurrence
 
     print("SCORE (deterministic i+1 checks):")
@@ -146,6 +153,44 @@ def score(scenario: Scenario, story: str) -> None:
         print(f"        UNDER {rec.min_required}x: {under}")
     if rec.absent:
         print(f"        MISSING entirely: {', '.join(rec.absent)}")
+    return rep.hard_pass
+
+
+def find_passing(mode: str, base_path: str, adapter: str, n: int, no_think: bool) -> None:
+    """Search seeds for the demo-ideal case: BASE fails the i+1 spec, TUNED passes it. Loads both
+    models once and tries `n` seeds per model. Prints the winning seeds to hardcode into the demo.
+    Run this in Colab (where the adapter + GPU live); it can't run on a CPU box without the adapter.
+    """
+    import torch
+
+    from islm.eval.generators import HFGenerator
+
+    on_gpu = torch.cuda.is_available()
+    kw = dict(
+        max_new_tokens=320,
+        temperature=0.0,
+        device_map="auto" if on_gpu else None,
+        load_in_4bit=on_gpu,
+        chat_kwargs={"enable_thinking": False} if no_think else None,
+    )
+    print(f"loading base ({base_path}) and tuned (+{adapter})...", flush=True)
+    base_gen = HFGenerator(base_path, None, **kw)
+    tuned_gen = HFGenerator(base_path, adapter, **kw)
+
+    hits = []
+    for seed in range(n):
+        sc = build_scenario(mode, seed)  # same scenario for both models
+        base_pass = _report(sc, base_gen(sc)).hard_pass
+        tuned_pass = _report(sc, tuned_gen(sc)).hard_pass
+        tag = "IDEAL (base FAIL, tuned PASS)" if (tuned_pass and not base_pass) else (
+            "both pass" if tuned_pass else "tuned fail")
+        print(f"  seed {seed}: base={'PASS' if base_pass else 'FAIL'} "
+              f"tuned={'PASS' if tuned_pass else 'FAIL'}  {sc.target_words}  -> {tag}")
+        if tuned_pass and not base_pass:
+            hits.append(seed)
+    print(f"\n[{mode}] ideal demo seeds (base fails, tuned passes): {hits or 'NONE in range'}")
+    if hits:
+        print(f"  use e.g.:  --seed {hits[0]}")
 
 
 def main() -> None:
@@ -157,7 +202,17 @@ def main() -> None:
     p.add_argument("--max-new-tokens", type=int, default=320)
     p.add_argument("--no-think", action="store_true", help="Disable thinking mode (e.g. Qwen3).")
     p.add_argument("--temperature", type=float, default=0.0)
+    p.add_argument(
+        "--find-passing", type=int, default=0, metavar="N",
+        help="Search N seeds for a base-fails/tuned-passes case (needs --adapter).",
+    )
     args = p.parse_args()
+
+    if args.find_passing:
+        if not args.adapter:
+            sys.exit("--find-passing needs --adapter (compares base vs tuned)")
+        find_passing(args.mode, args.base_path, args.adapter, args.find_passing, args.no_think)
+        return
 
     # A fresh random seed each run unless pinned, so repeated calls vary.
     seed = args.seed if args.seed is not None else random.randint(0, 10_000)
