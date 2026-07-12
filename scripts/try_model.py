@@ -25,6 +25,7 @@ from __future__ import annotations
 import argparse
 import random
 import sys
+import unicodedata
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "src"))
@@ -32,6 +33,66 @@ sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "src"))
 from islm.datagen.scenarios import Scenario
 from islm.vocab.languages import get_language
 from islm.vocab.wordlists import VOCAB_DIR, Vocabulary
+
+WRAP_WIDTH = 88
+
+
+def _char_width(ch: str) -> int:
+    """Terminal columns a char occupies: CJK/wide glyphs take 2, everything else 1."""
+    return 2 if unicodedata.east_asian_width(ch) in ("W", "F") else 1
+
+
+def _str_width(s: str) -> int:
+    """Total terminal columns for a string (CJK glyphs count as 2)."""
+    return sum(_char_width(c) for c in s)
+
+
+def _break_token(tok: str, width: int) -> list[str]:
+    """Break a single space-less token on character boundaries (for CJK runs longer than width)."""
+    parts, cur, cur_w = [], "", 0
+    for ch in tok:
+        w = _char_width(ch)
+        if cur_w + w > width and cur:
+            parts.append(cur)
+            cur, cur_w = "", 0
+        cur += ch
+        cur_w += w
+    if cur:
+        parts.append(cur)
+    return parts
+
+
+def _wrap(text: str, width: int = WRAP_WIDTH) -> str:
+    """Wrap a story to a readable width for terminal printing, breaking on WORD boundaries. A word
+    is only split mid-token when it alone exceeds the width (e.g. a space-less CJK run), so Chinese
+    and Japanese wrap too. CJK glyphs count as 2 columns. Preserves the story's own line breaks."""
+    lines = []
+    for para in text.splitlines() or [text]:
+        if not para.strip():
+            lines.append("")
+            continue
+        cur, cur_w = "", 0
+        for word in para.split():
+            # Oversized word: flush the line, then hard-break the word itself.
+            if _str_width(word) > width:
+                if cur:
+                    lines.append(cur)
+                    cur, cur_w = "", 0
+                pieces = _break_token(word, width)
+                lines.extend(pieces[:-1])
+                cur, cur_w = pieces[-1], _str_width(pieces[-1])
+                continue
+            add = _str_width(word) + (1 if cur else 0)
+            if cur_w + add > width:
+                lines.append(cur)
+                cur, cur_w = word, _str_width(word)
+            else:
+                cur = f"{cur} {word}" if cur else word
+                cur_w += add
+        if cur:
+            lines.append(cur)
+    return "\n".join(lines)
+
 
 MODES = {
     # mode -> (language, exam?)
@@ -212,10 +273,10 @@ def compare(mode: str, base_path: str, adapter: str, no_think: bool, seed: int |
 
     print("-" * 70)
     print("BASE (no adapter):\n")
-    print(base_story)
+    print(_wrap(base_story))
     print("-" * 70)
     print("TUNED (+ adapter):\n")
-    print(tuned_story)
+    print(_wrap(tuned_story))
     print("-" * 70)
 
     b, t = _metrics(scenario, base_story), _metrics(scenario, tuned_story)
@@ -353,7 +414,7 @@ def main() -> None:
     story = gen(scenario)
     print("-" * 70)
     print("GENERATED STORY:\n")
-    print(story)
+    print(_wrap(story))
     print("-" * 70)
 
     score(scenario, story)
