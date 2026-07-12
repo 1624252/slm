@@ -25,20 +25,20 @@ board in `evals/LEADERBOARD.md`.
    folder is in a half-wiped state. Set **`FRESH = True`** so it starts from base, and confirm it
    trains the full ~800 steps / ~50 min (not seconds — see the "no-op resume" note below). This bakes
    in the widened en/zh/ja baselines, which is what makes the demo pass reliably.
-2. **Pick demo scenarios** with the seed-finder (in `demo_colab.ipynb` Step 2.5, or directly):
-   `python scripts/try_model.py --mode en --base-path <base> --adapter <dir> --no-think --find-passing 20`
-   → note a seed tagged `IDEAL (base FAIL, tuned PASS)`; repeat for `jp`.
-3. **Record the demo** following `docs/DEMO_SCRIPT.md` / run `notebooks/demo_colab.ipynb`.
-4. **Model: published** to https://huggingface.co/i0445/islm (Step 7 of the train notebook re-uploads
+2. **Record the demo** following `docs/DEMO_SCRIPT.md` / run `notebooks/demo_colab.ipynb`. It uses
+   `try_model.py --compare`, which runs base and tuned on the same random scenario and prints the
+   per-metric improvement — no seed selection needed.
+3. **Model: published** to https://huggingface.co/i0445/islm (Step 7 of the train notebook re-uploads
    the fresh adapter each run). **Dataset:** still to publish — `python scripts/publish_hf.py dataset
    --repo i0445/islm-stories` (or any repo you make).
 
 ### Why the demo "wasn't passing" (resolved)
 Two causes, both fixed: (a) the baseline word-lists were too small, so basic words (`what`, `my`;
 CJK compounds like `山上`) counted as OOV — now widened (en 250, zh 250, ja 206); (b) the tuned model
-genuinely doesn't pass *every* random scenario (en golden hard-pass 0.62), so the demo uses
-`--find-passing` to select base-fail/tuned-pass scenarios. The demo scores **identically** to the eval
-harness (both use `scenario.known_set()`), so a demo pass == a real leaderboard pass.
+genuinely doesn't pass *every* random scenario (en golden hard-pass 0.62), so the demo shows the
+base-vs-tuned improvement per metric (`--compare`) rather than hunting for a guaranteed pass. The demo
+scores **identically** to the eval harness (both use `scenario.known_set()`), so a demo pass == a real
+leaderboard pass.
 
 ### The "no-op resume" trap
 `sft.py` auto-resumes from the newest checkpoint in `--out`. If a prior run already hit `max-steps`,

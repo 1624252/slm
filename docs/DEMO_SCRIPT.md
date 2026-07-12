@@ -5,10 +5,12 @@ video is one comparison — base vs tuned on the same i+1 task — plus a 30-sec
 it up" close. Keep it tight; the graders have seen a hundred of these.
 
 **Easiest path: just run `notebooks/demo_colab.ipynb` on Colab** — it does all of this one cell at a
-time and auto-picks passing seeds. This doc is the narration guide / manual-command reference.
+time. This doc is the narration guide / manual-command reference.
 
-**Setup.** `scripts/try_model.py` picks the vocab, prints the selection, then generates — so the
-screen narrates itself. Two fixed values for every command below:
+**Setup.** `scripts/try_model.py --compare` picks the vocab, prints the selection, runs the base and
+the tuned model on the *same* scenario, then prints an **IMPROVEMENT OVER BASE** table — so the screen
+narrates itself and shows the gain, not just a pass/fail stamp. Two fixed values for every command
+below:
 
 - **Base model:** `Qwen/Qwen3-4B-Instruct-2507` — a Hugging Face model ID. Downloads on first use (~8 GB).
 - **Adapter:** **`i0445/islm`** — the fine-tuned adapter, published to the Hugging Face Hub. The
@@ -29,33 +31,34 @@ instead, point `--adapter` at `/content/drive/MyDrive/islm_v2_multi/qwen3_4b_v2_
 
 Say the **Behavior Spec** out loud — it's the pass/fail rubric the rest of the video is judged on.
 
-### 0:30–1:45 — Base model fails (screen recording)
-Run the **base** (no adapter) on English advanced targets:
-```bash
-python scripts/try_model.py --mode en --base-path Qwen/Qwen3-4B-Instruct-2507 --no-think
-```
-- Point at the printed **TARGETS** and **KNOWN tier** so the viewer sees the task.
-- Read the output and narrate the violations: out-of-vocabulary words the learner wouldn't know,
-  multiple new words per sentence, target words that appear once. "It writes a fine story — but not
-  an *i+1* story. It breaks the constraint, and it breaks it differently every run." Run it **twice**
-  to show the inconsistency (the spec's "reliable every time" dimension).
-
-### 1:45–3:15 — Tuned model holds (screen recording)
-Same command, **with the adapter**:
+### 0:30–2:30 — Base vs tuned, same scenario (screen recording)
+Run `--compare` on English advanced targets — it runs both models on the *same* sampled scenario:
 ```bash
 python scripts/try_model.py --mode en --base-path Qwen/Qwen3-4B-Instruct-2507 \
-    --adapter i0445/islm --no-think
+    --adapter i0445/islm --no-think --compare
 ```
-- Same task framing. Read the output: in-vocabulary, one new word per sentence, target words recur,
-  still a coherent little story. "Same base model, same prompt — the only thing that changed is it
-  was trained on data that embodies the spec."
-- Then show it **generalizes across languages** — one Chinese, one Japanese, and the hard exam mode:
+- Point at the printed **TARGETS** and **KNOWN tier** so the viewer sees the task.
+- Read the **BASE** story and narrate the violations: out-of-vocabulary words the learner wouldn't
+  know, multiple new words per sentence, target words that appear once. "It writes a fine story, but
+  not an *i+1* story."
+- Then read the **TUNED** story: in-vocabulary, one new word per sentence, target words recur, still a
+  coherent little story.
+- Land on the **IMPROVEMENT OVER BASE** table: OOV rate collapsing toward the 2% limit, coverage up,
+  new-words-per-sentence down to 1, hard pass FAIL to PASS. "Same base model, same prompt, same
+  scenario. The only thing that changed is training data that embodies the spec, and here's the
+  measured gain."
+- Run it **twice** — the base breaks the constraint differently each time (the spec's "reliable every
+  time" dimension); the tuned model keeps holding it.
+
+### 2:30–3:15 — It generalizes across languages (screen recording)
+Same `--compare`, other modes — one Chinese, one Japanese, and the hard exam mode:
 ```bash
-python scripts/try_model.py --mode zh --base-path Qwen/Qwen3-4B-Instruct-2507 --adapter i0445/islm --no-think
-python scripts/try_model.py --mode jp --base-path Qwen/Qwen3-4B-Instruct-2507 --adapter i0445/islm --no-think
-python scripts/try_model.py --mode en-exam --base-path Qwen/Qwen3-4B-Instruct-2507 --adapter i0445/islm --no-think
+python scripts/try_model.py --mode zh --base-path Qwen/Qwen3-4B-Instruct-2507 --adapter i0445/islm --no-think --compare
+python scripts/try_model.py --mode jp --base-path Qwen/Qwen3-4B-Instruct-2507 --adapter i0445/islm --no-think --compare
+python scripts/try_model.py --mode en-exam --base-path Qwen/Qwen3-4B-Instruct-2507 --adapter i0445/islm --no-think --compare
 ```
-"Chinese, Japanese, and even hard GRE/SAT vocabulary — the behavior holds."
+For zh, point at the OOV drop in the improvement table (roughly 0.33 to ~0.08) rather than a hard
+pass. "Chinese OOV collapses, Japanese holds the constraint, and it works on hard GRE/SAT vocabulary."
 
 ### 3:15–4:15 — The numbers (screen or slide: `evals/LEADERBOARD.md`)
 Show the base-vs-tuned table. Call out the deltas that matter:

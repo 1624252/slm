@@ -16,6 +16,8 @@ The random target/theme selection is printed BEFORE the model runs, so you see t
     # zh / jp:
     python scripts/try_model.py --mode zh  --base-path <path> --adapter <path> --no-think
     python scripts/try_model.py --mode jp  --base-path <path> --adapter <path> --no-think
+    # base vs tuned on the SAME random scenario, with the improvement on each metric:
+    python scripts/try_model.py --mode en --base-path <path> --adapter <path> --no-think --compare
 """
 
 from __future__ import annotations
@@ -156,6 +158,99 @@ def score(scenario: Scenario, story: str) -> bool:
     return rep.hard_pass
 
 
+def _metrics(scenario: Scenario, story: str) -> dict:
+    """Pull the headline numbers out of a validation report for the base-vs-tuned table."""
+    rep = _report(scenario, story)
+    c, onew, rec = rep.coverage, rep.one_new_word, rep.recurrence
+    # below/absent overlap (an absent target is also "below"), so union them for a distinct count.
+    under = set(rec.below) | set(rec.absent)
+    return {
+        "hard_pass": rep.hard_pass,
+        "oov_rate": c.oov_rate,
+        "coverage": c.coverage,
+        "max_new": onew.max_new_words,
+        "targets_under": len(under),
+        "n_targets": len(scenario.target_words),
+    }
+
+
+def _fmt_delta(base: float, tuned: float, unit: str = "pts", scale: float = 100.0,
+               lower_is_better: bool = True) -> str:
+    """Signed change with an arrow marking whether it moved the right way."""
+    d = (tuned - base) * scale
+    good = (d < 0) if lower_is_better else (d > 0)
+    arrow = "improved" if (good and abs(d) > 1e-9) else ("worse" if abs(d) > 1e-9 else "same")
+    return f"{d:+.1f} {unit}  ({arrow})"
+
+
+def compare(mode: str, base_path: str, adapter: str, no_think: bool, seed: int | None,
+            max_new_tokens: int, temperature: float) -> None:
+    """Run BASE and TUNED on the SAME scenario and show what the fine-tune improved. Prints both
+    stories, then a side-by-side table of the i+1 metrics with the base->tuned change on each —
+    so the demo shows the gain over base, not just a pass/fail stamp."""
+    import torch
+
+    from islm.eval.generators import HFGenerator
+
+    seed = seed if seed is not None else random.randint(0, 10_000)
+    scenario = build_scenario(mode, seed)
+
+    on_gpu = torch.cuda.is_available()
+    kw = dict(
+        max_new_tokens=max_new_tokens,
+        temperature=temperature,
+        device_map="auto" if on_gpu else None,
+        load_in_4bit=on_gpu,
+        chat_kwargs={"enable_thinking": False} if no_think else None,
+    )
+    print(f"\nloading base ({base_path}) and tuned (+{adapter})...", flush=True)
+    base_gen = HFGenerator(base_path, None, **kw)
+    tuned_gen = HFGenerator(base_path, adapter, **kw)
+
+    base_story = base_gen(scenario)
+    tuned_story = tuned_gen(scenario)
+
+    print("-" * 70)
+    print("BASE (no adapter):\n")
+    print(base_story)
+    print("-" * 70)
+    print("TUNED (+ adapter):\n")
+    print(tuned_story)
+    print("-" * 70)
+
+    b, t = _metrics(scenario, base_story), _metrics(scenario, tuned_story)
+    print("\nIMPROVEMENT OVER BASE (same scenario, base -> tuned):\n")
+    hp = f"{'PASS' if b['hard_pass'] else 'FAIL'} -> {'PASS' if t['hard_pass'] else 'FAIL'}"
+    hp_tag = "fixed" if (t["hard_pass"] and not b["hard_pass"]) else (
+        "held" if t["hard_pass"] else "still failing")
+    rows = [
+        ("hard pass", hp, hp_tag),
+        (
+            "OOV rate (limit 2%)",
+            f"{b['oov_rate']:.1%} -> {t['oov_rate']:.1%}",
+            _fmt_delta(b["oov_rate"], t["oov_rate"]),
+        ),
+        (
+            "coverage (need 98%)",
+            f"{b['coverage']:.1%} -> {t['coverage']:.1%}",
+            _fmt_delta(b["coverage"], t["coverage"], lower_is_better=False),
+        ),
+        (
+            "max new words/sentence (<=1)",
+            f"{b['max_new']} -> {t['max_new']}",
+            _fmt_delta(b["max_new"], t["max_new"], unit="", scale=1.0),
+        ),
+        (
+            "targets under-recurring",
+            f"{b['targets_under']}/{b['n_targets']} -> {t['targets_under']}/{t['n_targets']}",
+            _fmt_delta(b["targets_under"], t["targets_under"], unit="", scale=1.0),
+        ),
+    ]
+    for label, change, delta in rows:
+        print(f"  {label:<30} {change:<18} {delta}")
+    print(f"\n(seed={seed} — pass --seed {seed} to reproduce this exact selection)")
+
+
 def find_passing(mode: str, base_path: str, adapter: str, n: int, no_think: bool,
                  stop_on_first: bool = True) -> None:
     """Search seeds for the demo-ideal case: BASE fails the i+1 spec, TUNED passes it. Loads both
@@ -214,12 +309,23 @@ def main() -> None:
         "--find-passing", type=int, default=0, metavar="N",
         help="Search N seeds for a base-fails/tuned-passes case (needs --adapter).",
     )
+    p.add_argument(
+        "--compare", action="store_true",
+        help="Run base AND tuned on the same scenario and show the improvement (needs --adapter).",
+    )
     args = p.parse_args()
 
     if args.find_passing:
         if not args.adapter:
             sys.exit("--find-passing needs --adapter (compares base vs tuned)")
         find_passing(args.mode, args.base_path, args.adapter, args.find_passing, args.no_think)
+        return
+
+    if args.compare:
+        if not args.adapter:
+            sys.exit("--compare needs --adapter (compares base vs tuned)")
+        compare(args.mode, args.base_path, args.adapter, args.no_think, args.seed,
+                args.max_new_tokens, args.temperature)
         return
 
     # A fresh random seed each run unless pinned, so repeated calls vary.
