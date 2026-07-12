@@ -109,8 +109,26 @@ model = PeftModel.from_pretrained(model, "{repo}")
 ```
 """
     (adapter / "README.md").write_text(card, encoding="utf-8")
-    api.upload_folder(folder_path=str(adapter), repo_id=repo, repo_type="model")
-    print(f"model published -> https://huggingface.co/{repo}")
+    # Upload ONLY the final adapter — not the checkpoint-*/ scratch dirs (optimizer/RNG state, huge
+    # and useless for inference). `delete_patterns` also removes any stale checkpoints already on the
+    # repo, so the published model is just the best adapter.
+    api.upload_folder(
+        folder_path=str(adapter),
+        repo_id=repo,
+        repo_type="model",
+        allow_patterns=[
+            "adapter_config.json",
+            "adapter_model.safetensors",
+            "tokenizer.json",
+            "tokenizer_config.json",
+            "special_tokens_map.json",
+            "chat_template.jinja",
+            "train_summary.json",
+            "README.md",
+        ],
+        delete_patterns=["checkpoint-*/*", "checkpoint-*", "*.pt", "*.pth", "optimizer*", "*.bin"],
+    )
+    print(f"model published (adapter only) -> https://huggingface.co/{repo}")
 
 
 def main() -> None:
