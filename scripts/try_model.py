@@ -156,10 +156,13 @@ def score(scenario: Scenario, story: str) -> bool:
     return rep.hard_pass
 
 
-def find_passing(mode: str, base_path: str, adapter: str, n: int, no_think: bool) -> None:
+def find_passing(mode: str, base_path: str, adapter: str, n: int, no_think: bool,
+                 stop_on_first: bool = True) -> None:
     """Search seeds for the demo-ideal case: BASE fails the i+1 spec, TUNED passes it. Loads both
-    models once and tries `n` seeds per model. Prints the winning seeds to hardcode into the demo.
-    Run this in Colab (where the adapter + GPU live); it can't run on a CPU box without the adapter.
+    models once and tries up to `n` seeds. Prints the winning seeds AND writes the first one to
+    `.demo_seed_<mode>` so the demo notebook can pick it up automatically (no manual paste).
+    Run this in Colab (where the adapter + GPU live). With `stop_on_first`, it returns as soon as it
+    finds one ideal seed (fast); otherwise it scans all `n`.
     """
     import torch
 
@@ -188,9 +191,14 @@ def find_passing(mode: str, base_path: str, adapter: str, n: int, no_think: bool
               f"tuned={'PASS' if tuned_pass else 'FAIL'}  {sc.target_words}  -> {tag}")
         if tuned_pass and not base_pass:
             hits.append(seed)
+            if stop_on_first:
+                break
     print(f"\n[{mode}] ideal demo seeds (base fails, tuned passes): {hits or 'NONE in range'}")
     if hits:
-        print(f"  use e.g.:  --seed {hits[0]}")
+        Path(f".demo_seed_{mode}").write_text(str(hits[0]), encoding="utf-8")
+        print(f"  wrote seed {hits[0]} -> .demo_seed_{mode}  (the demo reads this automatically)")
+    else:
+        print("  NONE found — adapter likely stale/untrained, or bump --find-passing.")
 
 
 def main() -> None:
