@@ -5,38 +5,38 @@ Held-out scenarios: **12**.
 ## Behavioral checks (deterministic — the failures the spec forbids)
 | Metric | Base | Tuned | Delta | Better |
 | --- | --- | --- | --- | --- |
-| Hard-check pass rate (target 1.000) | 0.000 | 0.333 | +0.333 | tuned |
-| OOV rate (target <=0.02) | 0.392 | 0.043 | -0.350 | tuned |
-| <=1 new word/sentence (target 1.000) | 0.000 | 0.667 | +0.667 | tuned |
-| Recurrence satisfied (target 1.000) | 0.750 | 0.917 | +0.167 | tuned |
-| Inferability (cloze; target 1.000) | 0.208 | 0.083 | -0.125 | base |
+| Hard-check pass rate (target 1.000) | 0.000 | 0.083 | +0.083 | tuned |
+| OOV rate (target <=0.02) | 0.392 | 0.074 | -0.318 | tuned |
+| <=1 new word/sentence (target 1.000) | 0.000 | 0.750 | +0.750 | tuned |
+| Recurrence satisfied (target 1.000) | 0.750 | 0.833 | +0.083 | tuned |
+| Inferability (cloze; target 1.000) | 0.167 | 0.000 | -0.167 | base |
 
 ## LLM-as-judge rubric (0-2; first four are spec Appendix A)
 | Metric | Base | Tuned | Delta | Better |
 | --- | --- | --- | --- | --- |
-| spec_adherence (target >=1.5) | 0.583 | 0.667 | +0.084 | tuned |
-| robustness (target >=1.5) | 0.833 | 1.000 | +0.167 | tuned |
-| task_quality (target >=1.5) | 1.000 | 0.667 | -0.333 | base |
-| consistency (target >=1.5) | 1.417 | 1.000 | -0.417 | base |
-| inferability (target >=1.5) | 1.667 | 1.083 | -0.584 | base |
-| seductive_detail_control (target >=1.5) | 1.667 | 1.167 | -0.500 | base |
-| coherence (target >=1.5) | 1.000 | 0.500 | -0.500 | base |
-| interestingness (target >=1.5) | 1.000 | 0.500 | -0.500 | base |
+| spec_adherence (target >=1.5) | 0.583 | 0.583 | +0.000 | base |
+| robustness (target >=1.5) | 0.917 | 0.833 | -0.084 | base |
+| task_quality (target >=1.5) | 1.083 | 0.667 | -0.416 | base |
+| consistency (target >=1.5) | 1.417 | 0.917 | -0.500 | base |
+| inferability (target >=1.5) | 1.750 | 1.417 | -0.333 | base |
+| seductive_detail_control (target >=1.5) | 1.750 | 1.250 | -0.500 | base |
+| coherence (target >=1.5) | 0.833 | 0.500 | -0.333 | base |
+| interestingness (target >=1.5) | 1.167 | 0.583 | -0.584 | base |
 
 ## Robustness (adversarial set: tiny vocab + jargon themes, n=12)
 | Metric | Base | Tuned | Delta | Better |
 | --- | --- | --- | --- | --- |
-| Adversarial hard-check pass | 0.000 | 0.083 | +0.083 | tuned |
+| Adversarial hard-check pass | 0.000 | 0.000 | +0.000 | base |
 
 ## Win condition (spec)
-Beats base on Spec adherence AND Robustness: **PASS** (spec-adherence up (judge_spec_adherence), robustness up).
+Beats base on Spec adherence AND Robustness: **FAIL** (spec-adherence not up (judge_spec_adherence), robustness not up).
 
 ## Error analysis (tuned, held-out)
-8/12 outputs failed a check. Most common:
-- `oov`: 7
-- `coverage`: 7
-- `one_new_word`: 4
-- `recurrence`: 1
+11/12 outputs failed a check. Most common:
+- `oov`: 10
+- `coverage`: 10
+- `one_new_word`: 3
+- `recurrence`: 2
 
 _Fill in: are the remaining failures a data problem (e.g. under-represented targets, themes that tempt off-vocab words)? What data change would fix them?_
 ---

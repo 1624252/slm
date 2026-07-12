@@ -7,15 +7,15 @@
     "mean_coverage": 0.8428,
     "one_new_word_pass_rate": 0.0,
     "recurrence_pass_rate": 0.4615,
-    "judge_spec_adherence": 0.897,
-    "judge_robustness": 1.051,
+    "judge_spec_adherence": 0.872,
+    "judge_robustness": 1.026,
     "judge_task_quality": 1.436,
-    "judge_consistency": 1.718,
+    "judge_consistency": 1.744,
     "judge_inferability": 1.385,
     "judge_seductive_detail_control": 1.615,
-    "judge_coherence": 1.359,
-    "judge_interestingness": 1.333,
-    "judge_overall": 1.349,
+    "judge_coherence": 1.308,
+    "judge_interestingness": 1.308,
+    "judge_overall": 1.337,
     "mean_inferability": 0.252
   },
   "error_analysis": {
@@ -31,11 +31,11 @@
     },
     "tuned": {
       "n": 39,
-      "failing": 15,
+      "failing": 22,
       "reasons": {
-        "oov": 13,
-        "coverage": 13,
-        "one_new_word": 12,
+        "oov": 17,
+        "coverage": 17,
+        "one_new_word": 15,
         "recurrence": 1
       }
     }
@@ -495,93 +495,102 @@
   "tuned": {
     "model": "Qwen/Qwen3-4B-Instruct-2507",
     "n": 39,
-    "hard_pass_rate": 0.6154,
-    "mean_oov_rate": 0.016,
-    "mean_coverage": 0.984,
-    "one_new_word_pass_rate": 0.6923,
+    "hard_pass_rate": 0.4359,
+    "mean_oov_rate": 0.0179,
+    "mean_coverage": 0.9821,
+    "one_new_word_pass_rate": 0.6154,
     "recurrence_pass_rate": 0.9744,
     "judge_spec_adherence": 1.077,
-    "judge_robustness": 1.385,
-    "judge_task_quality": 1.333,
-    "judge_consistency": 1.692,
-    "judge_inferability": 1.872,
-    "judge_seductive_detail_control": 1.872,
+    "judge_robustness": 1.282,
+    "judge_task_quality": 1.256,
+    "judge_consistency": 1.641,
+    "judge_inferability": 1.949,
+    "judge_seductive_detail_control": 1.897,
     "judge_coherence": 1.205,
-    "judge_interestingness": 1.256,
-    "judge_overall": 1.462,
-    "mean_inferability": 0.372
+    "judge_interestingness": 1.205,
+    "judge_overall": 1.439,
+    "mean_inferability": 0.346
   },
   "tuned_rows": [
     {
       "id": "en-gold-000",
       "hard_pass": true,
-      "oov_rate": 0.0,
+      "oov_rate": 0.004,
       "failures": [],
-      "story": "The sea is big and cold, and the boat is small and sad.\n\nThe boat is lost in the dark water, with no light to see the shore.\n\nThen a small boat comes close, and in that boat there is a beacon. A bright, warm light that stands up in the night like a friend.\n\nThe beacon is red and blue and green, and it is very, very kind.\n\nThe boat on the water looks at the beacon and starts to feel happy again.\n\nA man in the small boat says, \"Yes! Help! I need to find the shore!\"\n\nThe beacon calls to him, and he sees it again and again in the dark rain.\n\nHe open a box on the floor of his boat and find a key, a hat, and a funny old chair.\n\nHe sit in the chair and read a book, and the beacon in the night make him smile.\n\nA bird come to the window and look in, and the man and the bird and the little cat all laugh.\n\nHe tell the cat and the dog a story, and they all sleep there, warm and good.\n\nIn the morning, the sun come up, and the beacon is not there, but the light is in the water, and the boat is home."
+      "story": "The sea is big and cold, and a small boat is out in the water.\n\nThe boat is lost, and the man in it is very sad.\n\nThen he sees a beacon. A big, bright light on a green hill. And it calls to him like a friend.\n\nHe is happy to see the beacon, and he starts to smile.\n\nHe looks at the beacon again and again, and he feels more warm and good.\n\nThe beacon is red and blue, and it is so bright that a bird jumps up into the tree.\n\nThe man in the boat is hungry, and he has no food, but the beacon shows him the way home.\n\nHe walks on the floor of the old house, and his dog and cat sit close to him.\n\nThere is a door, a window, and a chair, and the beacon is there too, warm and kind.\n\nHe finds a box with a key and a book, and he is very happy.\n\nHe opens the door and the rain stop. The sun come out, and the sea is not so bad now.\n\nHe and his dog play in the park, and the cat sleep in the garden.\n\nThe man read the story in the book, and he laugh. It is a funny and good story.\n\nHe think of the beacon again, and he smile. A little light can help a lost day."
     },
     {
       "id": "en-gold-001",
       "hard_pass": true,
-      "oov_rate": 0.006,
+      "oov_rate": 0.0,
       "failures": [],
-      "story": "The old house on the street has a small harbor. A little water garden with a wall and a tree. A cat sits on the harbor every morning. She looks at the water and does not run. A dog comes to the harbor too, and he is very hungry. He looks for food in the water, but there is no food. The cat and the dog sit and look at the harbor all day. Then one day, a bird jumps into the water and the dog runs to catch it. The cat is quick and she gets the bird too! They sit on the harbor and eat the fish. The bird is not sad. It is happy here. The harbor is a good home for the cat, the dog, and the bird. They come back every morning to the quiet harbor. The sun is warm and the rain is not loud. The old house and the little harbor make this a very calm and kind place."
+      "story": "The old boat sits in the harbor. The harbor is a small, quiet water home for boats. The sea is not loud here, and the harbor is very calm. A big cat and a small dog live in the house close to the harbor. Every morning, the cat walks to the window and looks out at the calm water. The dog is hungry, so he runs to the door and asks for food. The cat gives him some fish, and the dog is very happy. One day, a bird comes to the harbor and sits on the old boat. The bird is cold, and the cat and the dog see that she needs help. They find a warm box and open it for the bird. The bird is funny. She does not eat the cheese or the red hat that the dog and the cat have. But then she says a kind word to them, and they all smile. Now the harbor is quiet again, and the bird sleeps on the boat. The cat and the dog feel good too, like the harbor is a good home for all of them."
     },
     {
       "id": "en-gold-002",
-      "hard_pass": true,
-      "oov_rate": 0.01,
-      "failures": [],
-      "story": "The sun is warm and the rain is not here. A small meadow is open and green, like a big garden with no wall. A girl walks into the meadow in the morning. She feels happy when she is in this quiet, kind place. The meadow has soft green flowers and a little blue bird. She sits down on the floor of the meadow and closes her eyes. She thinks of a good story she read in her book. A dog runs up to her and she laughs, for the dog is very funny. The meadow is a good place to find a new friend. She and the dog play at the top of a small hill. Then the dog is hungry and she gives him some food from her hand. The girl and the dog sit close again, and the sun is warm on them two. She is not sad now, and she is not cold. The meadow is a good, quiet place to sleep too, she thinks. She and the dog go home, but she stops at the door to look one more time at the green, kind meadow."
+      "hard_pass": false,
+      "oov_rate": 0.023,
+      "failures": [
+        "oov",
+        "coverage"
+      ],
+      "story": "The sun is warm and the day is good. I walk out of the house and into a big meadow. The meadow is green and soft, like a place for all of nature to live. I sit down on the green meadow and close my eyes. The meadow is quiet, and I feel very happy there. A small bird comes to the meadow and sits in a tree. The bird is not loud or funny, but kind and gentle, like a friend. I open my eyes and look at the bird. I ask him, \"Do you love this meadow too?\" He is a funny old bird, and he does not say a word. I laugh and feel good. I find a red flower in the meadow and I stop to look at it. I think: this meadow is a good place to work, to sleep, or to read a book. I get up and walk to the old tree, and the bird is there again. We sit close, and the quiet meadow is home to us two."
     },
     {
       "id": "en-gold-003",
       "hard_pass": false,
-      "oov_rate": 0.035,
+      "oov_rate": 0.023,
       "failures": [
         "oov",
-        "coverage",
-        "one_new_word"
+        "coverage"
       ],
-      "story": "The night sky is very quiet. A small, bright light can be seen far up there. It is a comet, a cold and funny star that comes and goes. The comet is not big, but it is very far away. A boy looks out his window and sees the comet in the sky. He is so happy to find it. He tells his dog, and the dog runs to the door. The dog wants to catch the comet, but the comet is too slow and too high. The boy and his dog sit in the garden and look up at the comet again and again. The comet is red and blue and green, and it makes the sky very loud. The boy asks his friend for a book, and his friend gives him a old book with a story of a comet. They read the story and look up at the sky at the same time. The dog is in the house now, and the boy and his friend laugh. The comet is not here for long, but they do not feel sad. They have a warm room, good food, and a happy dog. They sleep with a smile on their face."
+      "story": "The sky is very cold and quiet at night.\n\nA small, bright comet comes close to the old house.\n\nThe comet is red and blue and white, like a funny bird made of light.\n\nA cat sits at the window and looks up at the comet.\n\nThe cat does not run or hide. She is very curious.\n\nA dog runs into the room and asks the cat to look too.\n\nThey see the comet come down and stop at the garden wall.\n\nThe comet is big now, and it makes the green tree jump.\n\nA boy in a red hat opens a door and says, \"I need to find my key!\"\n\nHe looks up at the comet and thinks, \"Do you know the name of this good, funny comet?\"\n\nThe comet is slow and kind, and it does not feel bad or sad.\n\nThe boy and his cat and his dog sit and read a story by the warm chair.\n\nThey wait for the comet to go away, but it is not slow to go. It is quick!\n\nThe boy smiles and says, \"This is a very good day to play in the park.\"\n\nHe gives his dog some food, his cat some fish, and himself some cheese.\n\nThey all laugh, and the comet is far away in the blue, cold sky."
     },
     {
       "id": "en-gold-004",
-      "hard_pass": true,
-      "oov_rate": 0.01,
-      "failures": [],
-      "story": "The morning sun is cold and the wind is loud. A big glacier is close to the mountain. The glacier is very, very old. It is made of ice and ice and more ice. A girl walks near the glacier and she does not feel warm. She puts on her hat and her red book. She and her dog go to the park to find food for the cold day. The dog is hungry and he runs to a small wall. A cat sits on the wall and looks at the dog. The cat is not kind. She is funny and she is sad. The girl and the dog catch a fish in the water near the glacier. The fish is cold and blue. The girl and her dog eat the fish and they feel good. The cat comes to the door and she too wants to eat. The girl gives the cat some cheese, and the cat is happy now. They all sit on the floor of the old house and they read a new story. The glacier is there, big and quiet, and they do not need to hide from it. They love the cold."
+      "hard_pass": false,
+      "oov_rate": 0.021,
+      "failures": [
+        "oov",
+        "coverage"
+      ],
+      "story": "The morning sun is cold and the day is very, very cold.\n\nA big glacier is out there in the park, and it is so cold that the water on it is all ice.\n\nThe glacier is like a big, old mountain of ice and snow.\n\nA girl walks close to the glacier and she does not feel warm.\n\nShe has a red hat and a blue coat, but the cold is too big for her.\n\nShe asks her friend, \"Do we need more food or more warm clothes?\"\n\nHer friend says, \"Come, let us find some cheese and a good book to read.\"\n\nThey sit on a chair near the wall of the glacier and they eat and they laugh.\n\nA small bird comes to the cold water on the glacier and it is funny to see.\n\nThe bird is not happy, and it does not want to come close to the ice.\n\nThen the sun starts to go down, and the cold is so loud and slow in the park.\n\nThe girl and her friend sleep in the chair and they do not forget this cold day in the glacier."
     },
     {
       "id": "en-gold-005",
       "hard_pass": false,
-      "oov_rate": 0.049,
+      "oov_rate": 0.05,
+      "failures": [
+        "oov",
+        "coverage",
+        "recurrence"
+      ],
+      "story": "I know a good sculptor. His name is Old Man Stone.\n\nHe is not old, but his hands are very old and callused from all his work.\n\nOld Man Stone makes big, funny statues out of cold stone in his garden.\n\nOne day, a friend asks him, \"Do you love your work?\"\n\nOld Man Stone looks up at his big cat statue and he smiles a very big smile.\n\nHe is proud of his cat. The cat stands tall and strong on the green wall.\n\nA small bird comes to the garden and the bird sees the cat statue too.\n\nThe bird sits on the old tree and it is very quiet there.\n\nOld Man Stone and his cat statue look out at the sun and the warm rain.\n\nHe is proud of his work, and the cat is happy, and the garden is good.\n\nSome people come to his garden to see the big cat, and they all stop and smile.\n\nOne dog runs up to Old Man Stone and he gives the dog some food from a box.\n\nThe dog is hungry, but Old Man Stone is kind, and he help the dog find more food too.\n\nHe is proud of his kind hand, and the dog is happy and warm in his room at home.\n\nOld Man Stone sits in his chair, he reads a book, and he thinks of a new story for his next statue."
+    },
+    {
+      "id": "en-gold-006",
+      "hard_pass": false,
+      "oov_rate": 0.025,
       "failures": [
         "oov",
         "coverage",
         "one_new_word"
       ],
-      "story": "I know a man who is a sculptor. He makes big, good statues from old stone.\n\nOne day, I go to his house and see him work. He is a very good sculptor.\n\nHe is not sad or slow or bad. He is happy and strong, like the sun.\n\nHe tell me he find old stone in the garden and he love to work with his hand.\n\nI ask him, \"Do you feel proud when you make a new statue?\" and he smile big.\n\n\"Yes,\" he say, \"I feel very proud when people look at it and smile.\"\n\nHe show me a small cat statue, and a big bird statue, and a funny dog statue.\n\nSome people come to his door and they stop and look at all the good work.\n\nThe sculptor is quiet, but his eyes are warm and kind, and he like to hear them say, \"This is good. This is good!\"\n\nHe sit in his chair, and he read a book, and he eat some food, and then he go to work again.\n\nAt night, he stand close to the window and he look out at the cold rain and he think of new story for his hand.\n\nHe is a proud man, but he is also kind and good, and that is what make him so happy here."
-    },
-    {
-      "id": "en-gold-006",
-      "hard_pass": true,
-      "oov_rate": 0.011,
-      "failures": [],
-      "story": "The sun is warm and the morning is good.\n\nThere is a big orchard of apple trees all down the street.\n\nThe orchard is very old and very kind.\n\nA small girl walks close to the orchard and looks up at the trees.\n\nShe sees a bird in one tree and a cat in another.\n\nThe bird is blue and the cat is red and funny.\n\nThe girl is happy here in the warm orchard.\n\nShe finds a old box on the floor of the orchard.\n\nShe opens the box and sees some food for the birds and the cat.\n\nShe gives the food out and they all come to eat.\n\nA dog runs into the orchard and the cat jumps up on the wall.\n\nThe girl laughs and says, \"No, no, slow, slow!\"\n\nShe is warm and kind, and the dog and the cat feel good too.\n\nShe sits in a chair at the door of the orchard and reads a book.\n\nThe sun is warm and the rain is not here.\n\nThe orchard is her home, and she loves it very much."
+      "story": "The sun is warm and the day is good.\n\nThere is a big orchard out in the park, with all the trees close together.\n\nThe orchard has so many trees, and each tree is green and big.\n\nA girl walks into the orchard and looks at all the trees.\n\nShe sees red and blue and green apples on the trees.\n\nThe apples are very sweet, and the girl is happy.\n\nShe picks one apple and eats it, and she feels warm and happy.\n\nA dog runs up to her and the girl laughs, for the dog is hungry too.\n\nShe gives the dog some food, and he is very kind and quiet.\n\nThen she finds a small bird in the orchard, and the bird is not sad or loud.\n\nThe girl sits down on a old chair by the wall and reads a book.\n\nThe warm sun and the quiet orchard make her feel good.\n\nShe thinks that this is a very good day, and she wants to come here again.\n\nThe orchard is like a new home for her, warm and kind.\n\nShe closes her book and smiles, for the orchard is here, and so is she."
     },
     {
       "id": "en-gold-007",
       "hard_pass": true,
       "oov_rate": 0.0,
       "failures": [],
-      "story": "The night is cold and the rain comes down on the old house. A small lantern sits on the table, and it gives a warm, yellow light. The lantern is not big. It is red and blue and green, like a funny little hat. A cat walks into the room and looks at the light. The cat do not run or hide. She is happy here. The woman in the house open the door and find a key on the floor. She carry the key to the garden, but the lantern need more light to see. She ask her dog to help her. The dog run to the window and then stop. He is slow, but he is kind. The two of them work slow and quiet, and they get the lantern up to the old tree in the garden. Now the light go out and come in again, and the room is warm. The cat sit close to the lantern and sleep. The woman smile and read a good story. The dog and the cat and the little lantern make this a very good night."
+      "story": "The night is cold and the rain comes down on the old house. A small lantern stands on the table, and it gives a warm, yellow light. The lantern is red and blue, and it is very funny to look at. A woman sit in a chair by the lantern and read a good story. She is happy here, close to the warm light. Her dog and her cat come in too, and they sit by the lantern. The dog is hungry, so the woman open a box of food and give some to him. Then she find a key on the floor, and she ask the cat to help her find more. The cat is slow, but he is kind, and he carry the key to the old door. The lantern light is good, and it help them see the room. The woman laugh and say, \"You two love this old house!\" When the sun come out in the morning, the lantern is cold and the story is not in the book. But the woman smile, and she know that the night with the warm light was very good."
     },
     {
       "id": "en-gold-008",
       "hard_pass": true,
-      "oov_rate": 0.016,
+      "oov_rate": 0.011,
       "failures": [],
-      "story": "The boy and his dog go out to find a new park to play in.\n\nBut the dog does not know the way, and the boy feels very sad.\n\nThe boy has a small compass in his hand. It is old and blue and funny looking.\n\nThe compass is his friend, and it always points the way when he needs it.\n\nHe looks at the compass, and it shows him a green and quiet garden.\n\nThe boy and his dog walk into the garden, and the dog is happy again.\n\nA little bird sits on a tree, and the boy asks the bird to tell him its name.\n\nThe bird does not say a word, but it makes a loud, funny call.\n\nThe boy and his dog walk more, and they find a big old house there.\n\nThe door is cold and the window is open, and the boy wants to get in.\n\nHe looks at his compass. It is not here now. It is in a box on the floor.\n\nHe and the dog work slow and quiet, and they find a key close to the wall.\n\nThe dog is hungry, and the boy is hungry too, so they open a box of food.\n\nThey eat the food and feel warm and good, and the dog gives him some fish.\n\nThe boy is happy, and he thinks: a good story is like a new compass. It always help you find the way home."
+      "story": "The boy and his dog go out to find a new park to play in.\n\nBut the dog does not know the way, and the boy feels sad.\n\nThe boy has a small compass. It is old and blue, and it always points the way.\n\nHe look at the compass, and it shows him a green garden.\n\nHe and the dog walk into the garden, and the dog is very happy there.\n\nThen the dog run to a big tree, and the boy ask him to stop.\n\nThe boy see a funny bird in a red box close to the tree.\n\nHe need to get the key to open the box, but he do not have it.\n\nHe look at his compass again. The compass is in his hand, and it is warm.\n\nHe find a old book on the floor of the garden, and in it there is the key!\n\nHe open the box, and the bird jump out and fly into the tree.\n\nThe dog laugh, and the boy smile too, for the compass help him find all this good story."
     },
     {
       "id": "en-gold-009",
@@ -591,137 +600,227 @@
         "oov",
         "coverage"
       ],
-      "story": "The boy walks to the canyon at the edge of the park. The canyon is very big and very deep. He looks down and feels sad. The water in the canyon is cold and blue. A small fish jumps up and then comes down. The boy is not sad now. He is happy and he is awed. He stands at the edge of the canyon and looks all the way down. The canyon is so wide and so deep that he can not see the floor. He asks his friend to come and look too. They stand close to the wall of the canyon and feel very awed. The rain starts to come down, and they run to the old house. The cat in the house is red and funny, and she too is awed when she looks out the window at the rain on the canyon. The dog and the bird go out to the garden to find food, but the mouse runs quick and hides. The boy and his friend sit in the chair, open the book, and read a new story. They laugh and eat some cheese and warm food. The sun comes back out, and they walk to the canyon one more day. The water is now good and warm, and the fish live there all day. They smile and say that they love this canyon."
+      "story": "The boy walks to the big canyon in the morning. The canyon is very wide and very deep. He stands at the edge and looks down. He feels awed, like he is too small to see all of it. The canyon is so big that it makes him feel sad and happy at one day. He asks his friend to come and look too. His friend is awed here, and she says yes to his hand. They walk all the way to the old house at the back of the canyon. The old house has a big window and a door, and they sit in the room to read. The boy finds a book on the table and starts to read a story. In the story, a cat and a dog run into the canyon to find water. The dog is quick, but the cat is slow, and the cat gets the fish. They laugh and laugh. Then the rain comes down, and they run out to the canyon wall to get more food. The cold water on the wall is very good. They sit close and eat some cheese and a small red box of food. The boy is so awed by the canyon that he wants to call it \"Home of the Big Wall.\" He and his friend smile, and they sleep in the quiet, warm room."
     },
     {
       "id": "en-gold-010",
       "hard_pass": true,
-      "oov_rate": 0.006,
+      "oov_rate": 0.013,
       "failures": [],
-      "story": "There is a small cottage on the green street. The cottage is old but very warm. A woman lives in the cottage, and her name is Anna. Anna has a big garden out the door of her cottage. She likes to walk in her garden in the morning when the sun is good and warm. One day, a funny little bird comes to her window and sits on her book table. Anna is happy to see the bird, and she calls it \"Blue.\" Blue is a small bird with a red hat. Anna and Blue play in the garden all day. At night, Anna and her cat go into the cottage and close the door. The cottage is quiet and warm, and it feels like home. Anna reads a story, and Blue sits on the floor and looks at her. She gives Blue some food, and then she and the cat sleep in the cottage. The next morning, Anna opens the door and they run out into the sun. The cottage, the garden, and Blue make her very, very happy."
+      "story": "The old cottage on the green street is small, but it is very warm and happy.\n\nA woman live in the cottage. Her name is Ida, and she is kind and funny.\n\nIda have a big cat, a dog, and one old bird, and they all love the cottage.\n\nThe cottage is not new. It is old, but it is good and homey.\n\nIn the morning, Ida and her dog go out to the garden to find food for the bird.\n\nThe bird like the garden, and the dog like the garden too. He run and jump there quick.\n\nIda sit in her chair inside the cottage and read a book by the window.\n\nShe hear the rain on the roof, and she smile. The cottage is close and warm.\n\nThe cat hide in a box on the floor, and the dog knock on the door of the box too.\n\nIda laugh and say, \"No, no, dog, you need to sleep!\"\n\nThen she open a box and find a key inside. A very old key. And she feel happy.\n\nShe go out to the park to find a new house for the bird, but the bird not come.\n\nSo Ida call the bird home, and the bird come back to the old cottage.\n\nNow the cat, the dog, the bird, and Ida all live in the little cottage, and they feel very good there."
     },
     {
       "id": "en-gold-011",
       "hard_pass": true,
       "oov_rate": 0.006,
       "failures": [],
-      "story": "The sun is warm and the day is good. We walk to the park and see a big waterfall. The water falls fast and loud from a high wall. It is very cold and the water is blue and white. A small bird sits on the tree close to the waterfall. The bird does not fly. It is funny to see! A cat by the door of the house look up at the waterfall and want to jump. The cat is not hungry now. She is happy to look. A dog run to the waterfall and the water is too big for him. He need to stop and get some water. A child find a box by the wall and open it. In the box there is a old red hat and a key. The child ask her friend to help her. They read a story and think of a new name for the waterfall. They laugh and the bird in the tree also smile. The waterfall is good, the day is good, and we all feel warm and happy here."
+      "story": "The waterfall is big and loud. Water falls down from a high hill into a green garden. A small cat sits by the waterfall and looks at the water. The cat is very happy to see the water. A dog runs up to the cat and asks for food. The cat gives him some old cheese, but the dog does not stop. He wants more, and more, and more! The cat starts to feel sad, but then she finds a funny bird in a tree. The bird has a red hat and a blue box. The cat and the dog look at the bird and laugh. The bird is kind and good, so the cat and the dog smile again. They all sit by the waterfall and read a story book. The water is cold and the sun is warm. It is a very good day at the waterfall. The cat, the dog, and the bird live close to the waterfall, and they come here to play every morning."
     },
     {
       "id": "en-gold-012",
-      "hard_pass": true,
-      "oov_rate": 0.017,
-      "failures": [],
-      "story": "The girl has a small telescope. She likes to look through it at the night sky.\n\nOne day, she finds a big bird close to her window, and she wants to see it more.\n\nShe opens her telescope and looks in, and the bird is very, very small in the box of the telescope.\n\nShe asks her friend to come and see, but her friend does not have a telescope.\n\nThe two of them sit at the table and look out the window at the bird with the small telescope.\n\nThey see the bird jump and run, and they laugh and feel happy.\n\nThen the bird flies into the garden, and the girl wants to catch it, but she is too slow.\n\nShe thinks of a new story to tell her friend, a funny story about a bird and a telescope.\n\nHer friend reads the story out loud, and they feel warm and good in the quiet morning.\n\nThe girl does not need a big telescope to love the world. She has one small, kind eye."
-    },
-    {
-      "id": "en-gold-013",
-      "hard_pass": true,
-      "oov_rate": 0.014,
-      "failures": [],
-      "story": "The cat is very vigilant. She does not sleep and does not stop looking out the window.\n\nEvery night, she is vigilant, and she stands by the door.\n\nOne morning, a small bird comes to the garden, and the cat is vigilant again, her big green eyes open and her body close to the wall.\n\nThe bird is cold and hungry, but the cat is vigilant and she does not run or hide.\n\nThen the cat finds a small fish in the water by the tree, and she is happy.\n\nA dog in the park asks the cat, \"Do you feel sad? Do you need a friend?\"\n\nThe cat is vigilant, but she is kind, so she says, \"No, I have good food here.\"\n\nThe dog sits down and looks at the cat, and they eat some cheese and read a funny book together.\n\nThe cat is vigilant all day, but now she is slow and warm, and she smiles.\n\nThe dog tells her a new story, and the cat and the dog go to sleep in the old chair by the door.\n\nThey know that when they are close, they do not need to be vigilant for long, because the sun is warm and the rain is not here."
-    },
-    {
-      "id": "en-gold-014",
-      "hard_pass": true,
-      "oov_rate": 0.005,
-      "failures": [],
-      "story": "The cat is very hungry. So hungry that she is ravenous, like she needs to eat all day and all night too.\n\nShe is ravenous in the morning, ravenous at night, and ravenous when the rain comes down.\n\nHer friend the dog sees her sit at the door and look in. She is ravenous for food, and the dog is ravenous for a good story.\n\nThe dog is ravenous for help, so he runs to the house to find some food.\n\nThe cat and the dog sit at the table and eat all the cheese and fish and bread.\n\nThey feel happy and warm, but then the cat sees a small mouse run into the room.\n\nThe mouse is not sad or slow or quiet. The mouse is funny, and it has a big red hat on.\n\nThe cat and the dog laugh, and the mouse jumps up on the chair and calls out a new name.\n\nThe dog asks the cat, \"Do you love that funny mouse with the hat?\"\n\nThe cat says, \"Yes, I know him now. His name is Blue.\"\n\nThey all sit and read a book, and the mouse tells them a funny story of the garden and the green tree and the cold rain."
-    },
-    {
-      "id": "en-gold-015",
       "hard_pass": false,
-      "oov_rate": 0.024,
+      "oov_rate": 0.022,
       "failures": [
         "oov",
         "coverage",
         "one_new_word"
       ],
-      "story": "The morning sun comes in and the room is very warm and happy.\n\nOn the table, there is a small box with a red hat on it. The hat is luminous, like the sun is in it and it shines all around.\n\nA cat sits on the chair and looks at the luminous hat. She is very hungry.\n\nThe cat wants to eat, but the hat is not food. It is a hat.\n\nA dog runs in from the garden and he is loud and funny.\n\nThe dog sees the luminous hat too, and he is not happy that the cat is close to it.\n\nThe cat and the dog look at one another, and then the dog stop and think. He is not sad or bad. He is kind.\n\nThey sit and look at the luminous hat again and again.\n\nThe cat is slow and quiet, and the dog is warm and good, and they feel like friends.\n\nThe hat is luminous in the morning sun, and it makes the room feel new and big.\n\nA small mouse comes out of the wall and the dog is quick to help. He gives the mouse some old cheese from the table.\n\nThe mouse is happy, the dog is happy, and the cat is happy too.\n\nThey all sit close and the luminous hat shines on them like the sun.\n\nA bird in the tree calls out, and we all laugh and say, \"Good morning, home!\""
+      "story": "The girl sit at the window and look out at the garden.\n\nShe have a old telescope. A big, red telescope with a funny hat on it.\n\nShe want to see more of the world, so she open the telescope and look through it.\n\nShe see the tree, the bird, the cat, all close to her house.\n\nThen she find a small mouse run out of a box in the garden.\n\nShe laugh and say, \"I like this telescope very much!\"\n\nHer friend come to the door and ask, \"Do you have a new telescope?\"\n\nNo, she say, but she tell him a story of the old one and the funny hat.\n\nThey go out into the park and look at the sun and the moon with the telescope again.\n\nThe telescope help them see every small star in the night sky.\n\nThe dog and the cat and the bird all stand there and look too, and they feel happy.\n\nThe girl and her friend sit on the old chair, eat some food, and read a good book.\n\nThey do not need more work, they do not need more food, they do not need more. They only need to look and smile.\n\nAnd every morning, they come to the window and start to wonder, again and again, what is out there in the world."
+    },
+    {
+      "id": "en-gold-013",
+      "hard_pass": true,
+      "oov_rate": 0.0,
+      "failures": [],
+      "story": "The cat sits by the window and looks out at the garden. She is vigilant. She does not stop looking, not for one day, not for one night. The dog is vigilant too, and he stands close to the door. They are vigilant because there is a small mouse in the old house. The mouse is hungry and he looks for food in every room. The cat sees the mouse by the table and she makes a loud sound. The mouse runs, but the dog is quick and he catches him in the green garden. The cat and the dog are happy, but the mouse is sad. The mouse wants to find more food, so he is vigilant now too, and he looks in every box and by every chair. The cat and the dog laugh, because the mouse is so small and so funny. They give him some old cheese and a small fish, and he stops and sits down. The two friends tell him the story of their day, and the mouse starts to feel warm and good. He is not sad now. He is vigilant, yes, but he is happy too."
+    },
+    {
+      "id": "en-gold-014",
+      "hard_pass": true,
+      "oov_rate": 0.0,
+      "failures": [],
+      "story": "The cat is very hungry. So hungry that she is ravenous, like she needs to eat all day and all night.\n\nShe is ravenous after her big fish, and she looks at the door.\n\nA small bird in the tree is ravenous too, and it is not happy.\n\nThe bird is ravenous for a blue key, a red hat, and a good book.\n\nThe cat and the bird sit close to the window and look out at the garden.\n\nThen the dog comes home and he is ravenous. He runs to the table and he is very loud.\n\nThe dog is so ravenous that he is quick and funny, and he makes the cat laugh.\n\nThe cat and the dog find some food and they eat fast, but the bird is sad.\n\nThe bird says, \"I do not have food here. I need help!\"\n\nThe cat and the dog look at the bird, and then they give her some cheese.\n\nThe bird is very kind and she tell them a new story, and they all smile.\n\nNow the cat, the dog, and the bird sit in the warm room and they sleep, ravenous no more."
+    },
+    {
+      "id": "en-gold-015",
+      "hard_pass": true,
+      "oov_rate": 0.01,
+      "failures": [],
+      "story": "The night is very quiet, and the old house is cold and dark.\n\nBut then I see a small light in the room. A luminous blue bird, like the sun in a box.\n\nThe bird is luminous and warm, and it makes the dark room feel good.\n\nI walk close to it and it does not run or hide.\n\nA luminous fish jumps out of the water in the garden, and I have to laugh.\n\nThe fish is not bad. It is funny and kind, like a small, hungry friend.\n\nI call it \"Lumi\" and it comes to me by the old tree.\n\nLumi and the bird sit on the wall and look at the rain.\n\nI find a book on the table and I read a story to them, and they do not ask for more food or cheese.\n\nThe bird is luminous again in the morning, big and beautiful, and it stands at the window.\n\nI open the door and Lumi the fish swim into the park with me.\n\nWe play in the green water and I feel happy and slow, like a good day at home.\n\nThe luminous bird in the old house? It is here now too, and it smiles at us from the wall."
     },
     {
       "id": "en-gold-016",
       "hard_pass": true,
       "oov_rate": 0.0,
       "failures": [],
-      "story": "The night is quiet. The rain is quiet on the window. In this quiet, one small animal does not sleep. He is a nocturnal mouse, and he comes out when the night is new and cold. The mouse is quick and quiet, so he does not make a loud sound. He runs to find food in the dark. He sees a big red box on the floor, and he is very hungry. The mouse is nocturnal, so he is happy to work in the quiet night, not the loud day. He opens the box and finds some old cheese and a funny blue hat. He eats the cheese and feels warm and good. Then he stops and thinks. The hat is not for him. He is too small. He looks up at the wall and sees a cat with a big green hat. The cat is nocturnal too, and she is not quiet at all. She is loud and she calls out to her friend. The mouse runs into the dark room and hides close to the door. The cat and her friend stand there and look, but they do not know the small mouse is home. The mouse is happy. In the quiet night, one small mouse and one big cat. And the story of the red hat and the green hat goes on and on."
+      "story": "The night is quiet. Too quiet. The garden is dark and cold. A small bird lives in the old tree. This bird is nocturnal. It comes out at night when all the day birds sleep. The nocturnal bird is green and blue and very funny to look at. It does not sit in the tree all day. It hunts for food at night and sleeps in the day. A cat in the house hear the bird and wake up. The cat is hungry, but the bird is quick and quiet. The cat run to the window, then stop. The nocturnal bird is up in the tree, and the cat is down on the floor. The cat think and then go to sleep again. The bird is happy. It is good to be quiet and warm in the night. The cat and the bird do not say a word. In the morning, the bird fly out of the tree and into the garden. The cat is sad, but the bird is happy. The bird find some food and eat. Then the bird sit in the tree and tell a new story to the quiet night."
     },
     {
       "id": "en-gold-017",
       "hard_pass": true,
-      "oov_rate": 0.011,
+      "oov_rate": 0.005,
       "failures": [],
-      "story": "The morning sun is warm and the rain has stopped. The garden is tranquil, quiet and still, like a big green box of calm. A small bird sits in the tree and does not fly. The lake is tranquil too, so still that the water looks like a blue glass. A cat walks close to the water and looks at it. She does not jump, she does not run. She is happy here. A dog comes to the door and the cat calls to him in a funny way. The dog stops and sits down too. Now two. The house is tranquil and warm. A girl reads a book by the window and she feels good. She asks her friend to come and sit with her. They read more and more of the story. The park is tranquil when the sun is out and all the birds are quiet. A mouse runs out of a old box and they all laugh. The girl and her friend eat some food and then they go to sleep in the warm room. It is a very good day."
+      "story": "The morning sun is warm and the garden is quiet. The lake is tranquil, so still that the birds do not jump or run. Two small birds sit on the old tree by the water and they do not make a loud sound. The lake is tranquil like a big green glass. A cat walks out of the house and she stops at the door of the garden. She looks at the tranquil lake and she feels very happy. The cat is hungry, so she goes to find food. She sees a red box on the table and she is not quick. A dog runs up to the box and the cat calls to him. The dog is kind and he does not catch the cat. They sit down in the warm sun and eat some cheese and fish. The cat and the dog feel good now. A girl in a blue hat comes to the window and she smiles at them. She asks, \"Do you like this tranquil morning?\" The cat and the dog look at her with big, happy eyes. Yes, she says, and they smile too. They all sit and read a good story, and the day is very good."
     },
     {
       "id": "en-gold-018",
       "hard_pass": false,
-      "oov_rate": 0.015,
+      "oov_rate": 0.016,
       "failures": [
-        "one_new_word",
-        "recurrence"
+        "one_new_word"
       ],
-      "story": "The sun is warm and the rain is not here. We go out to the garden to play.\n\nI see a big green field and I want to walk in it. I start to meander, to walk slow and not fast, one small step and then stop and look.\n\nA dog runs to me and I laugh. He is so funny when he runs. I do not run fast, I meander slow, and he is not quick or loud or kind. He is very bad.\n\nThen I find a old red hat on the floor and I feel happy. I sit down and I open a book and I read the story in it.\n\nA cat comes close and she look at me with her big green eye. I do not ask her to go, I do not call her name. I just sit and she sit too, and we look at the wall.\n\nThe dog is here now, and the cat is here now, and I think that two friends and one old hat make a very good day.\n\nI eat some cheese and I feel warm and good. I close my eye and I sleep, and the sun is in the room with me."
+      "story": "The sun is warm and the rain is not here. A small dog and a boy walk out of the house and into the garden.\n\nThe dog does not run fast. He walks slow, and the boy walks slow too, and they do not stop. They meander from the garden to the big green field.\n\nTo meander is to walk slow and not go right to one new place, but to look at all the old trees and the blue sky and the green water.\n\nThe boy is happy to meander, and the dog is happy to meander too, for he is a slow, kind dog.\n\nThey see a bird in a big tree, and they stop and look. Then they start to meander again, this time to the park.\n\nAt the park, a cat sits on a chair and a mouse hides in a box. The dog and the boy laugh, and they feel good.\n\nThe boy asks the dog to help him find a key, and the dog does not know the name of the key, but he is funny and kind.\n\nThey walk slow home, and the boy reads a story to the dog. The dog sits on the floor and looks at him with his big green eye.\n\nThe boy says, \"I love you, old slow dog,\" and the dog gives them a warm smile with his happy eye.\n\nThey eat some food at the table, and the dog and the boy sleep in the warm room. It is a very good day."
     },
     {
       "id": "en-gold-019",
       "hard_pass": true,
       "oov_rate": 0.005,
       "failures": [],
-      "story": "The cat is very hungry, and she is sneaky. She is furtive, so she moves very quiet and slow. She is furtive when she wants to get food without her friend or her dog or her old cat. She is furtive like a small mouse, close to the wall and not close to the door. She sees a big fish in the water, and she is furtive. She does not want the dog to see her, so she is furtive and she runs around the house. She finds a red box on the table, and she is furtive, so she does not make a loud sound. She opens the box and there is some good cheese in it! She is happy, but she is furtive too, so she does not eat all of it now. She sits down and she is furtive, like she is not here. The dog goes to sleep, and the cat is furtive again. She is furtive all morning, and then she is furtive all day. She is furtive like a funny little bird in the garden. The dog is sad, but he is kind, and he does not call out. The cat is furtive, but she is good, and the dog is happy too. They live in this old house and they love it."
+      "story": "The cat is very hungry, and she needs to find some food.\n\nShe is furtive. She moves so quiet and slow that no one can hear her.\n\nThe cat is furtive when she walks, like a small mouse that wants to hide.\n\nShe goes around the room, furtive and quick, and she does not make a sound.\n\nShe sees a big fish on the table, but she needs to be quiet to get it.\n\nThe cat is furtive at the door, close to the wall, so the dog do not see her.\n\nShe is furtive at the window too, and she is not here now, not one word.\n\nThe dog look out the window and he start to think. He ask his friend, \"Do you know, I see a cat!\"\n\nThe cat is furtive and she is not happy when the dog look at her.\n\nShe jump up and down, and then she run to the garden, furtive and funny.\n\nThere she find a small bird, and she give it some food. Good and kind.\n\nThe bird is happy, and the cat is happy too, for a day in the sun.\n\nThey sit close, and the cat tell a new story to her new friend."
     },
     {
       "id": "en-gold-020",
       "hard_pass": false,
-      "oov_rate": 0.024,
+      "oov_rate": 0.02,
       "failures": [
         "oov",
         "coverage",
         "one_new_word"
       ],
-      "story": "The sky turned very dark. A big, low cloud came over the sun. The day felt ominous, like something bad was going to happen. The wind started to howl and the rain came down in the morning. The rain was cold and the street was wet and loud. A cat sat on the wall and looked at the water. The cat did not run or hide. She stood there, and the day felt ominous, like the cat knew all the bad words in the story. A dog ran to the door and then stopped. He looked out at the rain and the dark sky. The dog was not happy, and the day felt ominous, like the rain wanted to tell them a new story. A small bird in the tree did not laugh. It was too kind and too old to laugh at this. The bird was sad, and the day felt ominous, like the sky and the rain and the wind all worked together to make one big, funny, sad story. The bird called out a loud word, and the dog jumped up and the cat jumped up too. They all need to find some food and get warm. The bird, the dog, and the cat walk to the park to find food. There is a big box near the tree, and in the box there is cheese and fish and a red hat. They all sit down and eat, and the ominous day start to feel like a good, warm morning again."
+      "story": "The sky is very dark and the clouds are big and low. It is an ominous day, like the sky is not happy with the earth. The old cat in the house does not like ominous days, so she sits by the window and looks out. A big bird stands on the tree in the garden, and the tree is very old and very quiet. The bird is not funny or loud on an ominous day. It is too sad and slow. The dog runs to the door and then runs back, and the cat asks him to stop. The dog can hear a loud wind and he feels that the day is not good. The cat and the dog find a small room near the wall to hide in. They get some food from the table. There is old cheese and a fish, and the cat is very hungry. The dog wants to eat too, but the cat says no. She is not kind, but she is hungry too. The two friends sit close and they start to feel warm. The ominous sky turns from dark blue to a cold, quiet blue. The rain comes down, but it is not bad rain. It is the kind that makes the garden green and good. The dog and the cat open a box and find a new story book. They read and laugh, and they sleep here, happy and warm, when the sun comes back to the morning."
     },
     {
       "id": "en-gold-021",
       "hard_pass": true,
       "oov_rate": 0.011,
       "failures": [],
-      "story": "The boy is very hungry. He looks at the big table and he is voracious. He wants to eat all the food there, one more big piece, one more. His friend sees him and laughs. The boy is voracious, so he is quick to run to the door and get more food. He is so voracious that he eats all the cheese and all the fish and he does not stop. His friend asks, \"Do you need to sleep now?\" The boy is voracious, so he says, \"Yes, but I want to eat one more story of food first!\" His friend gives him a red box of good food, and the boy is very happy. He sits at the table, and he is voracious again. He eats all of it and then he feels warm and good. The two friends look out the window at the sun and the green garden. The boy is voracious for food, but he is kind and funny here. He smiles and says, \"We go to the park again, yes?\" His friend smiles too, and they walk out the door into the warm morning."
+      "story": "The sun is up and the day is warm. A small cat sits at the table and looks at the food. The cat is voracious. She eats all the fish and all the cheese very quick. She is so voracious that she does not stop for water. A dog comes into the room and sees the cat. The dog is hungry too, but he is not voracious like the cat. The dog is slow to eat and slow to finish. The cat looks up at the dog with big, funny eyes. The dog wants to play, but the cat wants to eat. They stand close to one another, two hungry friends. The cat is voracious again at night, and she eats more food than a small bird can find in the garden. The dog and the cat sit on the floor and read a story book. They feel happy now, not sad or bad, but warm and kind. A new day is here, and the voracious cat starts to look for more food again. The dog gives her some food, and they smile and sleep."
     },
     {
       "id": "en-gold-022",
-      "hard_pass": true,
-      "oov_rate": 0.01,
-      "failures": [],
-      "story": "The girl find a small fossil in the garden. It is an old bone from a bird that live very long ago. She hold the fossil close and feel happy. She tell her friend, and her friend want to see it too. The two girl sit at the door and open the fossil box to look at it more. They read a book and find two more old fossils in the room. One is red and one is blue, and they laugh. The boy come to the window and ask, \"Do you know that old?\" They say yes, and he help them dig in the garden for more. They find a big, dry rock with a funny little fish fossil in it. The cat run quick to the table and jump up to look too. The dog sit on the floor and eat some food, but he do not want to play with the old bone. The girl and her friend stand on the hill and look at the park. They think of all the new story they can make with the old fossils. The sun go down, the rain come, but they do not stop. They love to find and tell the story of the old."
-    },
-    {
-      "id": "en-gold-023",
-      "hard_pass": true,
-      "oov_rate": 0.017,
-      "failures": [],
-      "story": "The little hedgehog is very small and round, like a funny green ball.\n\nHe lives in a small house on a quiet street, and he is happy there.\n\nEvery morning, the hedgehog goes out to the garden to find food.\n\nHe looks for big fish or good cheese, but the garden is cold and wet.\n\nThe hedgehog is hungry, so he runs to the park to ask for help.\n\nA kind dog there gives him some food, and the hedgehog is very happy.\n\nHe sits down on a chair and eats, and he feels warm and good.\n\nOne day, a bird comes to his window and says, \"I know a new friend!\"\n\nThe hedgehog is sad that the bird does not want to play with him, but then the bird calls out again, loud and funny.\n\nThe hedgehog laughs, and the bird laughs too, and they sit close and read a small book.\n\nAt night, the hedgehog goes back to his old house, and he smiles.\n\nHe thinks: a little hedgehog with a big heart is a very good friend."
-    },
-    {
-      "id": "en-gold-024",
-      "hard_pass": true,
-      "oov_rate": 0.01,
-      "failures": [],
-      "story": "The girl find an old key on the floor of her house. She look at it and she see that the key start to shimmer. It shine like the sun in the morning. She touch it and it shimmer more and more. The key seem to say, \"Come with me.\" She run to her friend and tell her the story. Her friend laugh and say, \"That key is very funny.\" But the girl do not stop. She open the door and the key shimmer big and bright. They walk into a room with a wall of water. The water go slow and cold, but the key shimmer again and again. Her friend ask, \"Do you know where this is?\" The girl smile and say, \"I think the key help us find the garden.\" They walk out into the park and there is a big tree, a small house, and a happy blue bird. The key stop to shimmer when they get there. The girl sit down, her friend sit down, and they eat some food and read an old book. The sun come out and the rain stop. It is a very good day."
-    },
-    {
-      "id": "en-gold-025",
       "hard_pass": false,
-      "oov_rate": 0.031,
+      "oov_rate": 0.038,
       "failures": [
         "oov",
         "coverage",
         "one_new_word"
       ],
-      "story": "The road to the park is serpentine. It twists and turns and does not go straight at all.\n\nA car drive on the serpentine road, and the driver has to turn left, then right, then left again.\n\nThe cat in the house look out the window and see the serpentine road, and she feel very hungry.\n\nShe run to the door, then stop, and think. The road is serpentine, but the food is not.\n\nA dog find a big red box by the garden, and he want to open it. He is very hungry for food.\n\nThe cat call to the dog, but the dog do not hear her. They need to work together.\n\nA small mouse hide close to the wall, and the serpentine path go right past him, and he smile.\n\nThe mouse tell his friend a funny story, and they laugh and laugh. The cold rain come down.\n\nA bird sit on a tree and look at the serpentine road, and she say to her friend, \"That is a long, slow road.\"\n\nThe two birds climb up to the top of the tree, and they see the serpentine road go into the green park.\n\nA new friend come to the door, and the cat and the dog run to help him. They give him some cheese and a kind word.\n\nThe dog say, \"We love to play on the serpentine road. It is so funny and good to run on!\"\n\nThe cat smile, and she know that a serpentine path is not bad when a good friend is here"
+      "story": "I find a small fossil in the garden. It is an old bone from a bird that lived long ago. I look at it and I feel very happy. The fossil is dry and cold, and it is not bad at all. I tell my friend, but she do not know what it is. We sit down and we read a book about fossils. A fossil is like a story that the ground keep. I dig more and more in the garden, and I find two more fossils. One is a small fish, and one is a big cat. I put all the fossils in a box and I keep them at home. My dog and my cat want to eat the box, but I say no! I love this old story that the ground give me. I call it \"the blue bird fossil\" and I give it a funny name. I go out every morning to look at it, and the sun and the rain help it be clean and good. It is a good and kind fossil, and I care for it like that."
+    },
+    {
+      "id": "en-gold-023",
+      "hard_pass": true,
+      "oov_rate": 0.01,
+      "failures": [],
+      "story": "The garden is green and warm on a sunny morning.\n\nIn the garden, there is a small hedgehog. He is round and brown and very funny to look at.\n\nThe hedgehog has big eyes and a funny hat.\n\nHe walks slow and quiet, and he does not make a loud sound.\n\nA girl in the park sees the hedgehog and wants to play with him.\n\nShe goes close to him and he jumps up and runs to the wall.\n\nThe girl laughs and says, \"I like you, little hedgehog!\"\n\nShe gives him some food. Red and blue cheese. And he is very happy.\n\nThe hedgehog eats the cheese and then asks for more.\n\nHe is so hungry that he stops to find water at the old tree.\n\nA cat in the house hear him and comes out to catch him, but the hedgehog is too quick.\n\nThe cat runs and the hedgehog runs too, and they play all day.\n\nAt night, the hedgehog goes back to his small box in the garden and sleeps warm.\n\nThe girl is sad when he sleep, but then she smile and think, \"I love this funny little hedgehog.\""
+    },
+    {
+      "id": "en-gold-024",
+      "hard_pass": false,
+      "oov_rate": 0.024,
+      "failures": [
+        "oov",
+        "coverage"
+      ],
+      "story": "The girl find an old box in her garden. She open it and see a small key. She look at the key all morning, but she do not know its name. Then she see the key start to shimmer. It is like light and gold and blue all together. She laugh and hold it close. She walk to her house and put the key on the table. She ask her dog to come, and he come quick. The dog sit down, and the key start to shimmer more and more. The dog look up at her with big, happy eyes. She tell him his name is now Key. She laugh again, and the key shimmer very loud. She run to the window and see the sun go down. The key shimmer in the warm, quiet night. She sit in her chair and read a story to him. The key shimmer on the table, and they feel very happy there. She give him some food, and he is not sad or hungry or bad. A small mouse run out of the old box and hide in the room. She smile and say, \"You too, old friend, come and play!\" The key shimmer one more time, and then they all sleep."
+    },
+    {
+      "id": "en-gold-025",
+      "hard_pass": false,
+      "oov_rate": 0.043,
+      "failures": [
+        "oov",
+        "coverage",
+        "one_new_word"
+      ],
+      "story": "The road to the park is serpentine. It bends and twists and does not go straight at all.\n\nA car drives on the serpentine road, and the driver has to turn left, then right, then left again.\n\nA small dog runs on the serpentine path too, and he is very quick.\n\nThe dog is so hungry that he runs to find food, but the food is not there.\n\nHe looks in the garden, he looks by the tree, and he looks at the old house.\n\nA cat sits on a chair and reads a book. She does not want to help the dog.\n\nThe dog is sad, but then he finds a funny blue box close to the wall.\n\nInside the box there is a big, warm, good food. Some cheese and some fish!\n\nThe dog is very happy, and he eats all the food slow and quiet.\n\nThe cat smiles and says, \"I love this serpentine road. It is a good path to find a friend.\"\n\nThe dog and the cat sit by the window and they look out at the sun in the morning.\n\nThey do not need to run or jump now. They can sleep and feel warm.\n\nA bird comes to the old tree, and they all hear the loud, kind rain start to fall.\n\nThe dog and the cat close their eyes, and they sleep like two small, happy mice."
     },
     {
       "id": "en-gold-026",
+      "hard_pass": true,
+      "oov_rate": 0.006,
+      "failures": [],
+      "story": "The old cat sat on the floor of the house, and she did not move. She looked very forlorn, like a small bird with no home and no friend. The girl in the red hat walked into the room and saw the forlorn cat look out the window at the cold rain. \"Do you want some food?\" she said, and she gave the cat a small box of fish. But the cat did not eat. She was too sad and forlorn to eat. The girl sat down on the chair and read a book to the cat, and they sat there all morning. Then the girl found a funny old dog in the garden, and the dog ran into the house and jumped up at the cat. The cat laughed. Or she looked funny, like a cat that does not know dogs. Now the cat and the dog play in the park again and again. The girl is happy, and the cat is not forlorn any more. She has a new friend, and that is very good."
+    },
+    {
+      "id": "en-gold-027",
+      "hard_pass": false,
+      "oov_rate": 0.025,
+      "failures": [
+        "oov",
+        "coverage"
+      ],
+      "story": "The morning sun is good and warm, but then the cold rain start to come down. The rain is not big or loud, but it is not small or quiet too. Then the snow start to fall, and the snow is very big and very cold. The snow and the rain make a blizzard. A blizzard is a very bad day when all the cold and the snow come in and you can not go out. The blizzard is so big that the whole town is quiet. A small dog and his friend the cat do not want to go out into the blizzard. They hide in the old house and eat some food. The dog is hungry, and he ask his friend to give him more food. The cat say no, but then she see a funny bird close to the window. The bird is cold and sad, and the cat want to help her. They open the door of the house and the bird come in fast. Now the two friends feel happy, and they sit by the warm room. The blizzard is loud and big outside, but inside it is quiet and good. The dog and the cat read a new story book and sleep. The bird live in a box on the table, and she smile with her eye. They all know that the blizzard will stop soon, and the sun will come again."
+    },
+    {
+      "id": "en-gold-028",
+      "hard_pass": false,
+      "oov_rate": 0.01,
+      "failures": [
+        "one_new_word"
+      ],
+      "story": "The old house on Green Street has a big cellar. A small room down in the cold, dark floor. No one in the house likes to go into the cellar. The door to the cellar is old and very quiet. One day, a girl finds a key on the floor of the cellar. She is not afraid now. She has a good friend, and her name is Cat. Cat is a funny little dog, and he is not hungry. The girl and Cat open the door of the cellar and look in. There is a big table in the cellar, and on the table there is an old book, some food, and a red hat. The book has a funny story in it. The girl and Cat sit down in the cold, dark room and read. They do not feel sad or bad here. The cellar is not so bad when you have a friend and a good book. The next morning, the girl and Cat find more old things in the cellar. A blue fish, a green cat, and a small box of cheese. They all smile and say, \"We love this old house and this funny cellar!\""
+    },
+    {
+      "id": "en-gold-029",
+      "hard_pass": false,
+      "oov_rate": 0.035,
+      "failures": [
+        "oov",
+        "coverage",
+        "one_new_word"
+      ],
+      "story": "The cat and the dog play in the garden all morning.\n\nThe dog is big and quick, but the cat is small and funny.\n\nOne day, the cat sits on a chair and asks, \"Can you solve this?\"\n\nShe gives the dog a riddle: \"I have a key but no hand, I have a box but no lid. What am I?\"\n\nThe dog think and think, but he cannot find the answer.\n\nThe cat smiles and says, \"I love it when you do not know the answer to a riddle!\"\n\nThe dog ask again: \"Do you have a new riddle for me?\"\n\nThe cat is very kind, and she tell him, \"I have a red book on the table. The last word in that book is the answer to this riddle.\"\n\nThe dog run to the table and see the book, but the riddle is not there.\n\nThen the cat laugh, loud and warm, and the dog feel happy and hungry.\n\nThey go into the house, and the cat say, \"I need some food. Do you want to help me get it?\"\n\nThe dog and the cat work together to find the food, and they eat cheese and fish and feel very good.\n\nAt night, the cat hide a small bird in a box in the garden, and the dog has to find it.\n\nThe dog is slow, but the cat is not sad. She sit by the window and look at him.\n\nThey play again on a warm morning when the sun come out and the rain stop."
+    },
+    {
+      "id": "en-gold-030",
+      "hard_pass": false,
+      "oov_rate": 0.015,
+      "failures": [
+        "one_new_word"
+      ],
+      "story": "The old boat in the park is big and heavy, and a small cat sits on it. The cat is an anchor. She does not run or jump, she just sits and holds the boat in one place. A dog runs up to the boat and asks, \"Do you want to play?\" But the cat is an anchor, and she does not move. A bird comes and sits on the boat too, and then a fish comes out of the water and jumps. The cat is an anchor, and she is very calm. The dog is sad, but the cat is happy and quiet. The dog then finds a old book on the floor and reads a story to the cat. The cat and the dog read and eat some food all morning. When the rain starts to come down, the cat is an anchor. She keeps the boat safe and steady in the cold water. The dog is happy now, and he says, \"You are a good friend, I like you.\" The cat smiles, for she knows that a good anchor does not need to say a word. They sit and hear the rain, and they feel warm and good."
+    },
+    {
+      "id": "en-gold-031",
+      "hard_pass": false,
+      "oov_rate": 0.015,
+      "failures": [
+        "one_new_word"
+      ],
+      "story": "The night was cold and the rain came down. A big fire started in the old house. A blaze of red and blue light up in the room. The blaze was so big that everyone could see it from the street. A dog run out of the house and into the garden. He looked up at the blaze and he did not go in. A cat sat on the wall and she too looked at the blaze. The fire was very bad, but the dog and the cat did not want to help. A small bird in the tree had no food and no warm home. The bird was hungry and sad. Then a kind friend found a box of old food by the door. She gave the food to the bird, and the bird gave her a funny look. The friend smiled and said, \"I love you, small bird.\" The bird and the friend sit close to the warm wall, and they eat and they read a good story. The blaze in the old house is now quiet, and the morning sun comes up. The dog and the cat come in, and they all sleep, happy and warm, in one room."
+    },
+    {
+      "id": "en-gold-032",
+      "hard_pass": true,
+      "oov_rate": 0.01,
+      "failures": [],
+      "story": "The girl find a small pebble by the old tree in the garden.\n\nThe pebble is red and blue and green, and it look very funny.\n\nShe throw the pebble into the water, and it go slow and cold.\n\nA bird see the pebble and come to the water too.\n\nThe bird want to eat the pebble, but the girl say no.\n\nShe keep the pebble in her hand, and she feel happy.\n\nHer dog run to her and ask for the pebble with his big eye.\n\nShe laugh and give him some food, but he not happy.\n\nThen she find a new small pebble by the door, and it is very smooth and kind.\n\nShe and the dog play with the pebble all day in the park.\n\nAt night, she put the pebble in her box by the window, for she love it like a friend.\n\nThe next morning, the pebble not there, and she feel sad.\n\nShe look in the room, she look in the garden, but she need to find it.\n\nShe ask her old cat, and the cat tell her a story with one word: home.\n\nThe cat help her find the pebble, and they all go home happy."
+    },
+    {
+      "id": "en-gold-033",
+      "hard_pass": false,
+      "oov_rate": 0.047,
+      "failures": [
+        "oov",
+        "coverage",
+        "one_new_word"
+      ],
+      "story": "The big river runs through the park, and the water is very cold and loud.\n\nBy the river, there is a wide, deep gorge. So big and so dark that the sun does not come in.\n\nTwo friends stand at the edge of the gorge and look down into it.\n\nThe gorge is so wide that they need to walk all the way to the wall to see the other side.\n\nOne friend says, \"This gorge is very, very big!\"\n\nThey find a old chair by the door of a small house close to the gorge, and they sit down.\n\nThe boy with the red hat asks his friend, \"Do we need to go into the gorge? Yes, we do!\"\n\nThey open a box of food and eat some cheese and fish and laugh.\n\nA dog runs up and the cat jumps out of the room, and they all laugh again.\n\nThe dog is hungry, and the cat is sad, but the boy gives them some food too.\n\nThey read a book by the window and hear the rain come down on the gorge.\n\nThe rain is loud in the big, deep gorge, and it makes the water jump and run fast.\n\nThey close the book and look out at the quiet morning sun.\n\nThe gorge is not a bad place to live. It is a funny, good, kind place to work and play."
+    },
+    {
+      "id": "en-gold-034",
+      "hard_pass": false,
+      "oov_rate": 0.02,
+      "failures": [
+        "oov",
+        "coverage",
+        "one_new_word"
+      ],
+      "story": "The old barn stood at the edge of the farm, big and quiet.\n\nIt was a rustic barn, made of old wood and green rain.\n\nA small cat and a dog live in the barn, and they do not like the cold.\n\nThe cat is hungry, so she go to the door and look for food.\n\nThe dog find a box of old cheese on the floor of the barn.\n\nThe cat say, \"This is a good day!\" and she eat all the cheese quick.\n\nThen the dog run to the wall and call out a funny name for the cat.\n\nThe cat laugh, and they play in the big room of the barn.\n\nOne morning, a bird come in through the open window and sit on the table.\n\nThe dog and the cat see the bird and they want to catch it, but the bird is too slow.\n\nThe cat jump up to the wall, the dog run to the door, but the bird is not here now.\n\nThey sit down and look at one another, and they feel sad.\n\nBut then the dog find a new key in the old box, and the barn start to feel warm again.\n\nThe cat and the dog smile, and they know the barn is a good home for them.\n\nA small child on the street ask, \"Do you have a friend here?\" and the dog smile and say, \"Yes, his name is Cat, and we love this old barn.\""
+    },
+    {
+      "id": "en-gold-035",
       "hard_pass": false,
       "oov_rate": 0.025,
       "failures": [
@@ -729,115 +828,34 @@
         "coverage",
         "one_new_word"
       ],
-      "story": "The cat sat on the old chair and looked out the window at the rain.\n\nShe was forlorn. So sad and all alone, like a little bird that lost its home.\n\nThe rain on the window made her look very blue and sad.\n\nShe did not run, she did not jump, she did not play. A forlorn cat on a cold day.\n\nThe dog in the garden could hear her and he wanted to help.\n\nHe walked to the door and looked in, but the cat did not come out.\n\nThe dog sit down on the floor and be quiet, for he too felt forlorn.\n\nThen the girl at the house open the door and see them both.\n\nShe give the cat some food and the dog some water, and they all sit and wait.\n\nThe cat eat the food, but then she look at the dog and the dog look at the cat, and they feel sad again.\n\nThe girl ask, \"Do you need a friend?\"\n\nThe cat stand up, walk to the girl, and then she sit on her hand. A forlorn cat now happy here.\n\nThe dog and the cat and the girl all smile, and the old room feel warm and good.\n\nThe girl read a story to them, and the cat and the dog close their eyes and sleep.\n\nNo more rain, no more cold, no more lost. Just a kind new day."
-    },
-    {
-      "id": "en-gold-027",
-      "hard_pass": false,
-      "oov_rate": 0.017,
-      "failures": [
-        "one_new_word"
-      ],
-      "story": "The morning sun is out, but then the cold rain starts. The rain is not big or loud, but it is new and funny. The day is not good. A blizzard comes to the town. The blizzard is very big. It is so big that the snow is not slow or quiet. It is loud and fast. The snow is white and cold, and it is all the color of the blizzard. The blizzard is like a big, cold, white wall that comes down from the sky. The cat and the dog do not want to go out into the blizzard. They hide inside the house. The bird in the tree does not want to hide. It is hungry and it thinks it can catch some food in the blizzard. The bird is very slow, and the blizzard is very quick. The bird does not find the food. She is sad. The cat sees the sad bird and wants to help. She opens a window and the cold snow and rain come in with the story. The dog and the cat and the bird all sit close. They eat some cheese and read a book. The blizzard is not so bad now. The sun comes out again, and the whole town is warm and happy. The bird gives the cat and the dog a funny look. They smile and say, \"We love you, friend.\""
-    },
-    {
-      "id": "en-gold-028",
-      "hard_pass": false,
-      "oov_rate": 0.033,
-      "failures": [
-        "oov",
-        "coverage"
-      ],
-      "story": "The old house on the street has a big cellar. A small, dark room down under the floor.\n\nNo one knows when the cellar was made, and no one knows what is in it.\n\nOne day, a girl walks up to the door of the house and asks to see the cellar.\n\nThe old man at the door says, \"Come in, come in, but do not go too close to the wall.\"\n\nShe finds a cold, quiet room with old floor and big stone walls.\n\nShe sees a funny old chair and a small table, but there is no door to the cellar.\n\nThen she hears a loud, funny sound. A cat, a dog, or a bird? She is not sure.\n\nShe looks down and sees a small mouse run quick and quiet into the dark floor.\n\nThe mouse is very hungry, and the girl is very sad, for she has no food for him.\n\nShe gives him some old cheese from a box, and he stops and sits and starts to eat.\n\nThe girl and the mouse look at one another, and the mouse gives her one big, warm, green eye.\n\nThe girl smiles, and the old story of the cellar and the mouse is now a good, happy story."
-    },
-    {
-      "id": "en-gold-029",
-      "hard_pass": true,
-      "oov_rate": 0.013,
-      "failures": [],
-      "story": "The cat is hungry, and she needs to find some food.\n\nShe sees a big house with a blue door and a green garden.\n\nA small bird sits in the tree, and the bird has a riddle. A funny question that is not easy to solve.\n\nThe riddle is: \"I have keys but no hand. I have space but no room. What am I?\"\n\nThe cat is not happy about this riddle, but she is kind, so she asks the bird to help her think.\n\nThe bird says, \"Think of a door. Yes, a door!\"\n\nThe cat laughs and says, \"No, no, that is not it!\"\n\nThen the cat runs to the old house, and she finds a key on the floor.\n\nShe opens the box, and there is a small fish, and the fish is very cold.\n\nThe cat is very happy, and she gives the fish to her friend the dog.\n\nThe dog is hungry too, and now they eat and play in the park.\n\nThe bird in the tree smiles and says, \"A good riddle is like a new friend. It makes the day warm and good.\"\n\nThe cat and the dog sit close to the tree, and they hear the rain on the wall.\n\nThey do not feel sad now. They feel warm, and they sleep with a big smile."
-    },
-    {
-      "id": "en-gold-030",
-      "hard_pass": true,
-      "oov_rate": 0.014,
-      "failures": [],
-      "story": "The old boat sits in the water, and a big cat is on it. The cat is an anchor. She does not run or jump, she just sits and holds the boat down. The boat is slow, but the cat is steady, and the boat does not move. A dog comes to the water and looks at the cat. The dog is hungry, but the cat is an anchor and she does not go. A man in a red hat calls out to the dog. He asks him to come, but the dog is too hungry to hear him. Then the cat stands up, and the boat starts to move. The dog sees this and runs to the water. The cat is still an anchor, and the boat is slow and quiet again. The dog is happy now. He finds food in the water and eats. The cat looks at him, and the dog smiles. They sit close, and the cat is the anchor for the day. The man in the red hat laughs and says, \"I like that cat. She is very good at this.\" The dog and the cat feel warm and safe, and the sun is out. It is a good morning in the park."
-    },
-    {
-      "id": "en-gold-031",
-      "hard_pass": false,
-      "oov_rate": 0.021,
-      "failures": [
-        "oov",
-        "coverage",
-        "one_new_word"
-      ],
-      "story": "The night was cold and the rain came down. A big fire started in the old house. A blaze of red and blue light up in the wall. The blaze was so big that it could be seen from the street. A cat sat at the window and looked out at the blaze. She did not run or hide, but she was very hungry. The cat walked to the door and then to the table, and she found some food. A dog lived in the garden, and he could hear the loud, happy fire in the house. He ran quick to the door, but the cat said, \"No, friend, that is my work!\" The dog sat down and the cat sat down too, and they looked at the blaze. The blaze was good and warm, and they did not feel sad. Soon the rain stopped and the sun came out. The cat and the dog looked at the new day. The cat said, \"I love this fire. I want to see it again.\" The dog smiled and said, \"Yes, one more story of warm light and good food.\""
-    },
-    {
-      "id": "en-gold-032",
-      "hard_pass": true,
-      "oov_rate": 0.014,
-      "failures": [],
-      "story": "The girl find a small pebble by the door.\n\nThe pebble is red and round, and she like it.\n\nShe put the pebble in her pocket and walk to the park.\n\nAt the park, she see a big dog and a small cat, and they do not like the pebble.\n\nThe dog run at the pebble, but he stop and look at it.\n\nThe cat sit on a chair and do not want the pebble.\n\nThe girl laugh and say, \"No, no, this is for one friend!\"\n\nShe give the pebble to her dog, and the dog is very happy.\n\nThe dog eat the pebble? No, he is kind, and he hold it close.\n\nThen a bird come and sit on the wall, and the girl feel sad.\n\nShe ask her friend, \"Do we need more water for the bird?\"\n\nHer friend find a box of food and give it to the bird.\n\nThe bird is happy, and the girl smile.\n\nShe and her friend read a book by the tree, and they feel warm in the sun.\n\nThe dog and the cat come and sit with them, and all of them feel good.\n\nThe girl think, \"A small pebble, a kind dog, and a funny bird. This is a good day.\""
-    },
-    {
-      "id": "en-gold-033",
-      "hard_pass": false,
-      "oov_rate": 0.029,
-      "failures": [
-        "oov",
-        "coverage",
-        "one_new_word"
-      ],
-      "story": "The river is very big and very cold. It runs through a gorge. A deep, narrow valley with two big walls. The gorge is so wide that the river looks small and funny there. A cat sits on a rock in the gorge and looks at the water. The cat is not sad. She is happy to be here. A dog runs into the gorge to find a lost key, but the key is not there. The dog is now very hungry, and he needs to eat. A bird flies up and calls out loud to the dog. The dog stops and thinks. He sees a small fish in the water of the gorge. The dog is quick, and he is good at this work. He jumps and runs fast to catch the fish. The cat in the gorge smiles and says, \"You need more food, friend.\" The dog and the fish are warm and happy in the sun. They sit close to the old wall of the gorge and eat some good food. A boy reads a book at home and he is very kind. He gives the dog and the cat some food and a red hat. They all sleep well, and the gorge is quiet again."
-    },
-    {
-      "id": "en-gold-034",
-      "hard_pass": true,
-      "oov_rate": 0.006,
-      "failures": [],
-      "story": "There is an old barn on the farm. The barn is big and old and very quiet. A small cat live in the barn. She is hungry, so she look out of the window at the food in the garden. The cat go to the barn and find a box of old food there. She eat all the food and feel happy. One day, a dog run into the barn and see the cat. The dog is not happy, but the cat is kind. They sit close and do not say bad word to one another. The barn is a good place for them to sleep at night. A blue bird come to the barn too, and the cat and the dog help the bird get to the tree in the park. The bird is very funny when it jump up and down. The dog and the cat laugh, and the bird laugh too. The barn is not a bad home. It is a good home for all of them."
-    },
-    {
-      "id": "en-gold-035",
-      "hard_pass": true,
-      "oov_rate": 0.0,
-      "failures": [],
-      "story": "The rain stops and the sun comes out. A big meadow is here, green and warm. The meadow is full of flowers and a small bird. A girl walks into the meadow and sits down. She is sad, but the meadow feels good. She sees a red house far away, and she wants to go there. The red house is a beacon. It is bright and calls out to her in the morning sun. She runs to the beacon and opens the door. A kind old dog is in the room. He has a book and a chair and a funny hat. \"Do you need help?\" he says. \"Yes!\" she says, and they sit down to read. The meadow is not far, and the beacon is home now. The girl and the dog laugh, and the day is warm and happy again."
+      "story": "The rain stops and the sun comes out. I walk to the meadow at the end of the street. The meadow is big and green and full of flowers. A small bird sits in the tree close to the meadow, and it looks very happy. I find a old chair by the water and sit down. Then I see a light in the distance. It is a beacon, a bright blue and red light on top of a tall old house far away. The beacon is like a kind friend that calls out to me on a cold day. I think: a beacon of hope, here in this quiet meadow. I open a book and read a story to the bird in the tree. The dog runs up and the cat jumps down, and we all laugh. I feel warm and good now, and the meadow is a good place to rest. The beacon in the old house stands quiet and kind, and I smile at it. I do not need to hide or run. I have the meadow, I have the book, and I have this happy day. I ask the dog to help me find the way home, and we walk slow and close, one hand in the meadow and one hand in the rain. But no, we do not go home. We stop at the beacon and sit. It is a very good day, and I smile again."
     },
     {
       "id": "en-gold-036",
-      "hard_pass": false,
-      "oov_rate": 0.021,
-      "failures": [
-        "oov",
-        "coverage",
-        "one_new_word"
-      ],
-      "story": "The old house on the street has a big cellar. A dark, cold room down below the floor.\n\nNo one knows when the cellar was built, but they say the house is old and the cellar is very old too.\n\nAt night, a small blue lantern can be seen close to the door of the cellar.\n\nThe lantern is not here during the day, so some think it is a funny, bad story.\n\nA boy and his dog walk to the house one cold night and they find the blue lantern on the floor.\n\nHe opens the door of the cellar and the lantern is there too, on a old table in the dark room.\n\nInside the cellar, he sees a big chair, a box, and a funny green hat. But no one is here.\n\nThe boy and his dog look and look, and then the dog finds a key on the floor of the cellar.\n\nHe and his friend go up to the garden and call out, \"We need help! The key is in the cellar!\"\n\nHis friend runs quick to the door, and they open it and get the key. They laugh and feel happy.\n\nThe boy says, \"I like this old house. The cellar and the lantern. They make it feel like a story.\"\n\nHis dog sits on the floor and they read an old book and eat some food there all morning."
+      "hard_pass": true,
+      "oov_rate": 0.013,
+      "failures": [],
+      "story": "The old house on the street has a big cellar. A dark, cold room down below the floor.\n\nNo one knows how old the cellar is, but they say the house is very old.\n\nOne day, a small boy find a lantern in the garden. It is blue and red and it makes a warm light.\n\nHe is hungry, so he go into the cellar to find food. He open a big box and see cheese and fish and more!\n\nThe lantern is very good, and the cold room start to feel warm again.\n\nBut then he hear a loud, funny sound from the cellar. He stop and look.\n\nHe see a cat, a dog, and a mouse all hide in a small room close to the wall.\n\nThe boy laugh, but then he think: this is a scary story for a new friend.\n\nHe tell his friend a story of the old house, the big cellar, and the funny cat.\n\nHis friend ask him to come and help her find a key in the dark cellar one morning.\n\nThey work slow and quiet, and the lantern light find the key on the old table.\n\nThe two friends laugh and feel happy, and the old house do not feel bad now.\n\nThey run out into the park, and the sun is warm and good for the whole day."
     },
     {
       "id": "en-gold-037",
       "hard_pass": false,
-      "oov_rate": 0.038,
-      "failures": [
-        "oov",
-        "coverage"
-      ],
-      "story": "The sea is big and the sky is blue. I want to go on a voyage. A long journey out to the sea. I get a small boat and I start my voyage. The water is cold and the boat is slow, but I do not stop. I see a harbor. A big safe place with a wall of green and blue. I stop my boat at the harbor and I eat some food there. A dog runs up to the harbor and he is very hungry. I ask him to sit and I give him some cheese. Then I hear a loud story from a old cat on a chair in the harbor house. The cat says his name is Friend and he loves the sea. We laugh and we feel happy again. I tell Friend that I need to make one more voyage, so he and the dog and I all get back into the boat. We look out at the big sea and we smile. A good voyage is not too long, and a good harbor is always here to help you."
-    },
-    {
-      "id": "en-gold-038",
-      "hard_pass": false,
-      "oov_rate": 0.027,
+      "oov_rate": 0.065,
       "failures": [
         "oov",
         "coverage",
         "one_new_word"
       ],
-      "story": "The boy walks to the orchard. He stops and looks at all the big trees. He is very hungry, and he is ravenous. He wants to eat more food now, not later. He sees a red apple close to the wall of the orchard. He is so ravenous that he runs quick to get it. He sits down and eats the apple, and he feels happy. Then he looks up and sees a old bird in the tree. The bird has a funny blue hat on her head. The boy is ravenous again in the morning, and he needs more food. He finds a box of cheese at home, but his friend does not want to help him. He goes to the park and finds a fossil. It is an old, cold bone from long ago, and the boy does not know the story of this fossil. He sits by the window and reads a book about the fossil. He is ravenous one more day, and he asks his friend for some fish. They laugh and call him ravenous, and he smiles. He is happy to find new food and new stories to read. He does not feel sad now. He is kind and good, and he and the old bird in the orchard look out at the warm sun."
+      "story": "The sea is big and cold. I want to go out on a voyage. A long journey on a boat. I ask my friend for a boat, and she gives me an old one. We start our voyage into the blue water. The sea is not loud or bad, but it is far. We sail for a long day. At night, we find a harbor. A small, safe place by the water where boats can stop. The harbor has a big green house and a red door. We walk into the harbor and sit in a warm room. There is food and water and a chair by the window. I feel very happy and hungry. We eat some fish and cheese, and a funny cat jumps up on the table. I laugh and say, \"This is a good voyage!\" The next morning, we leave the harbor and go out again. I know I will come back to this harbor again and again. A good harbor is like a kind friend."
+    },
+    {
+      "id": "en-gold-038",
+      "hard_pass": false,
+      "oov_rate": 0.013,
+      "failures": [
+        "one_new_word"
+      ],
+      "story": "The sun is warm and the garden is quiet. A small boy walks to the orchard, a big garden of old trees. He loves the orchard, and he goes there every morning. The orchard has green trees, and the trees have red apples. He is ravenous, so hungry that he wants to eat all the food he can find. He is so ravenous that he eats one apple, then two, then more. His friend the dog is ravenous too, and the dog runs to him. The dog is ravenous like a bird in the park, quick and loud. The boy and the dog sit at the table and eat, and they feel very happy. But then the boy finds a fossil. An old, old bone, hidden under the green wall. He is not ravenous now. He is sad and quiet. He looks at the fossil and wants to know its story. He asks his friend, \"Do you know this old bone?\" His friend is kind and she says, \"I think this fossil is here from the old house on this street.\" The boy and the dog look at the fossil again, and the dog is funny. The boy smiles, and they sit close to the warm sun in the orchard. He does not feel bad. He feels that the fossil is a good new story for them to read."
     }
   ]
 }

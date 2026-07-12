@@ -5,32 +5,32 @@ Held-out scenarios: **8**.
 ## Behavioral checks (deterministic — the failures the spec forbids)
 | Metric | Base | Tuned | Delta | Better |
 | --- | --- | --- | --- | --- |
-| Hard-check pass rate (target 1.000) | 0.000 | 0.375 | +0.375 | tuned |
-| OOV rate (target <=0.02) | 0.309 | 0.035 | -0.273 | tuned |
-| <=1 new word/sentence (target 1.000) | 0.000 | 0.875 | +0.875 | tuned |
+| Hard-check pass rate (target 1.000) | 0.000 | 0.125 | +0.125 | tuned |
+| OOV rate (target <=0.02) | 0.309 | 0.045 | -0.263 | tuned |
+| <=1 new word/sentence (target 1.000) | 0.000 | 0.625 | +0.625 | tuned |
 | Recurrence satisfied (target 1.000) | 0.750 | 1.000 | +0.250 | tuned |
-| Inferability (cloze; target 1.000) | 0.250 | 0.250 | +0.000 | base |
+| Inferability (cloze; target 1.000) | 0.125 | 0.000 | -0.125 | base |
 
 ## LLM-as-judge rubric (0-2; first four are spec Appendix A)
 | Metric | Base | Tuned | Delta | Better |
 | --- | --- | --- | --- | --- |
 | spec_adherence (target >=1.5) | 0.500 | 1.000 | +0.500 | tuned |
-| robustness (target >=1.5) | 0.750 | 1.625 | +0.875 | tuned |
+| robustness (target >=1.5) | 0.750 | 1.500 | +0.750 | tuned |
 | task_quality (target >=1.5) | 1.000 | 0.875 | -0.125 | base |
 | consistency (target >=1.5) | 1.500 | 1.625 | +0.125 | tuned |
-| inferability (target >=1.5) | 1.875 | 2.000 | +0.125 | tuned |
-| seductive_detail_control (target >=1.5) | 1.625 | 1.500 | -0.125 | base |
-| coherence (target >=1.5) | 1.125 | 1.000 | -0.125 | base |
-| interestingness (target >=1.5) | 0.875 | 0.500 | -0.375 | base |
+| inferability (target >=1.5) | 2.000 | 1.750 | -0.250 | base |
+| seductive_detail_control (target >=1.5) | 1.875 | 1.500 | -0.375 | base |
+| coherence (target >=1.5) | 1.125 | 0.875 | -0.250 | base |
+| interestingness (target >=1.5) | 0.875 | 0.875 | +0.000 | base |
 
 ## Win condition (spec)
 Beats base on Spec adherence AND Robustness: **PASS** (spec-adherence up (judge_spec_adherence), robustness up).
 
 ## Error analysis (tuned, held-out)
-5/8 outputs failed a check. Most common:
-- `oov`: 5
-- `coverage`: 5
-- `one_new_word`: 1
+7/8 outputs failed a check. Most common:
+- `oov`: 7
+- `coverage`: 7
+- `one_new_word`: 3
 
 _Fill in: are the remaining failures a data problem (e.g. under-represented targets, themes that tempt off-vocab words)? What data change would fix them?_
 ---
