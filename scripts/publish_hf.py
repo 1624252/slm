@@ -109,9 +109,8 @@ model = PeftModel.from_pretrained(model, "{repo}")
 ```
 """
     (adapter / "README.md").write_text(card, encoding="utf-8")
-    # Upload ONLY the final adapter — not the checkpoint-*/ scratch dirs (optimizer/RNG state, huge
-    # and useless for inference). `delete_patterns` also removes any stale checkpoints already on the
-    # repo, so the published model is just the best adapter.
+    # Upload ONLY the final adapter — not the checkpoint-*/ scratch (optimizer/RNG state, huge and
+    # useless for inference). delete_patterns also strips any stale checkpoints already on the repo.
     api.upload_folder(
         folder_path=str(adapter),
         repo_id=repo,
