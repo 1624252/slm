@@ -3,13 +3,13 @@
 Run this once your HF account is verified (the earlier create_repo 500s were an account-level block,
 almost certainly an unverified email — confirm at https://huggingface.co/settings/account first).
 
-    # dataset only (decompresses the gz splits and uploads them + stats + data card):
-    HF_TOKEN=... python scripts/publish_hf.py dataset --repo <user>/islm-i-plus-1-stories
+    # dataset (defaults to repo i0445/islm-stories; created on first push):
+    HF_TOKEN=... python scripts/publish_hf.py dataset
 
-    # model/adapter only (point --adapter at the downloaded LoRA dir):
-    HF_TOKEN=... python scripts/publish_hf.py model \
-        --repo <user>/islm-i-plus-1-qwen3-4b --adapter path/to/qwen3_4b_v2_multi \
-        --base Qwen/Qwen3-4B-Instruct-2507
+    # model/adapter (defaults to repo i0445/islm; point --adapter at the LoRA dir):
+    HF_TOKEN=... python scripts/publish_hf.py model --adapter path/to/qwen3_4b_v2_multi
+
+    # override either default with --repo <namespace>/<name>.
 
 `HF_TOKEN` is read from the environment or `.env` (never hard-code it). Both subcommands create the
 repo if missing and are safe to re-run (uploads overwrite).
@@ -109,9 +109,9 @@ def main() -> None:
     p = argparse.ArgumentParser(description="Publish dataset/model to the HF Hub.")
     sub = p.add_subparsers(dest="what", required=True)
     d = sub.add_parser("dataset")
-    d.add_argument("--repo", required=True, help="e.g. <user>/islm-i-plus-1-stories")
+    d.add_argument("--repo", default="i0445/islm-stories", help="HF dataset repo")
     m = sub.add_parser("model")
-    m.add_argument("--repo", required=True, help="e.g. <user>/islm-i-plus-1-qwen3-4b")
+    m.add_argument("--repo", default="i0445/islm", help="HF model repo (default: i0445/islm)")
     m.add_argument("--adapter", type=Path, required=True, help="local LoRA adapter dir")
     m.add_argument("--base", default="Qwen/Qwen3-4B-Instruct-2507")
     args = p.parse_args()
