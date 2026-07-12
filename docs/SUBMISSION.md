@@ -6,7 +6,7 @@ lives in this repo and what's left. Legend: ✅ done · ⚠️ needs a step · �
 | # | Deliverable | Status | Where / how |
 | --- | --- | --- | --- |
 | 1 | **Dataset, published** | ⚠️ | In-repo: `data/dataset_v2/` (1610 stories, gz + `stats.json`) + `docs/DATA_CARD.md`. **To publish to HF:** verify HF account, then `python scripts/publish_hf.py dataset --repo <user>/islm-i-plus-1-stories`. |
-| 2 | **Model on HF Hub + inference demo** | ⚠️ | Adapter is on Drive (`MyDrive/islm_v2_multi/qwen3_4b_v2_multi`). **To publish:** download it, then `python scripts/publish_hf.py model --repo <user>/... --adapter <dir>`. Demo = `scripts/try_model.py` (CLI); optional Gradio not built. |
+| 2 | **Model on HF Hub + inference demo** | ✅ | Model: **https://huggingface.co/i0445/islm**. Upload cell is Step 7 of `train_colab_v2_multi.ipynb`. Demo: `notebooks/demo_colab.ipynb` (loads the adapter from the Hub). |
 | 3 | **Eval harness + results table (base vs tuned)** | ✅ | Harness: `src/islm/eval/`. Tables: `evals/LEADERBOARD.md` + `evals/RESULTS_LOG.md` (current, incl. v2-multi). Behavior metric = the judge rubric + deterministic checks. |
 | 4 | **Brainlift** | ✅ | `docs/brainlift.md` — thesis + research tree + the new "Did data → behavior hold?" section with final evidence. |
 | 5 | **3–5 min demo video** | ❌ | Script + shot list ready in `docs/DEMO_SCRIPT.md`. Recording is yours. |
@@ -29,9 +29,9 @@ board in `evals/LEADERBOARD.md`.
    `python scripts/try_model.py --mode en --base-path <base> --adapter <dir> --no-think --find-passing 20`
    → note a seed tagged `IDEAL (base FAIL, tuned PASS)`; repeat for `jp`.
 3. **Record the demo** following `docs/DEMO_SCRIPT.md` / run `notebooks/demo_colab.ipynb`.
-4. **(HF is down — do when it's back)** Verify the HF account, then:
-   `python scripts/publish_hf.py dataset --repo <user>/islm-i-plus-1-stories` and
-   `python scripts/publish_hf.py model --repo <user>/islm-i-plus-1-qwen3-4b --adapter <dir>`.
+4. **Model: published** to https://huggingface.co/i0445/islm (Step 7 of the train notebook re-uploads
+   the fresh adapter each run). **Dataset:** still to publish — `python scripts/publish_hf.py dataset
+   --repo i0445/islm-stories` (or any repo you make).
 
 ### Why the demo "wasn't passing" (resolved)
 Two causes, both fixed: (a) the baseline word-lists were too small, so basic words (`what`, `my`;
