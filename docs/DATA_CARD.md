@@ -15,6 +15,14 @@ one story that, for a given known-vocabulary list `K` and target words `T`, stay
 - **Format:** JSONL, one record per line (schema below); chat-formatted for SFT.
 - **Unit / label:** the assistant story is the target; the system+user messages are the input.
 
+**Two versions, two HF configs.** The published dataset ships both:
+
+- **`default`** — the curated **v2** set (1,610 stories). The recommended set; what the final model
+  trains on.
+- **`v1`** — the pre-v2 **templated** corpus (144,748 stories). Superseded, included for the
+  before/after comparison the project's thesis rests on. Load with
+  `load_dataset("i0445/islm-stories", "v1")`.
+
 ## How it's generated (two passes)
 
 ### Pass 1 — generation (`islm.datagen.pipeline`)

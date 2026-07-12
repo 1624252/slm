@@ -21,11 +21,13 @@ import argparse
 import gzip
 import json
 import os
+import shutil
 import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 DATA = ROOT / "data" / "dataset_v2"
+DATA_V1 = ROOT / "data" / "dataset_v1"
 
 
 def _token() -> str:
@@ -47,26 +49,64 @@ def _api(token: str):
     return HfApi(token=token)
 
 
+def _normalize_record(rec: dict) -> str:
+    """Make one record HF/Arrow-safe: a stable metadata schema across every row. The v1 corpus
+    stores `target_recurrence` as a dict keyed by per-record target words, which gives each row a
+    different struct type and breaks parquet conversion (the same failure v2 fixed by stringifying
+    it). Serialize any dict-valued metadata field to a JSON string so the column type stays fixed.
+    """
+    meta = rec.get("metadata", {})
+    for key in ("target_recurrence", "judge_scores"):
+        if isinstance(meta.get(key), dict):
+            meta[key] = json.dumps(meta[key], ensure_ascii=False)
+    return json.dumps(rec, ensure_ascii=False)
+
+
+def _stage_split(src_dir: Path, split: str, dest: Path, normalize: bool = False) -> None:
+    """Read a split (plain .jsonl or .jsonl.gz) from src_dir and write it into dest, optionally
+    normalizing each record's metadata for a stable Arrow schema."""
+    plain, gz = src_dir / f"{split}.jsonl", src_dir / f"{split}.jsonl.gz"
+    if plain.exists():
+        text = plain.read_text(encoding="utf-8")
+    elif gz.exists():
+        text = gzip.decompress(gz.read_bytes()).decode("utf-8")
+    else:
+        raise SystemExit(f"missing split: {split} in {src_dir}")
+    if normalize:
+        lines = [_normalize_record(json.loads(ln)) for ln in text.splitlines() if ln.strip()]
+        text = "\n".join(lines) + "\n"
+    dest.write_text(text, encoding="utf-8")
+
+
 def publish_dataset(repo: str, token: str) -> None:
     api = _api(token)
     api.create_repo(repo, repo_type="dataset", exist_ok=True)
-    # Decompress the shipped gz splits into a temp staging dir, upload with stats + data card.
+    # Stage two configs: `default` = the curated v2 splits at the repo root; `v1` = the pre-v2
+    # (templated) corpus under v1/, kept as its own browsable config so the viewer stays working
+    # and the curated set stays front-and-center. v1 records normalized (dict metadata -> string).
     stage = ROOT / ".hf_stage_dataset"
-    stage.mkdir(exist_ok=True)
+    if stage.exists():
+        shutil.rmtree(stage)
+    stage.mkdir()
+    (stage / "v1").mkdir()
     for split in ("train", "val", "test"):
-        gz = DATA / f"{split}.jsonl.gz"
-        (stage / f"{split}.jsonl").write_text(
-            gzip.decompress(gz.read_bytes()).decode("utf-8"), encoding="utf-8"
-        )
+        _stage_split(DATA, split, stage / f"{split}.jsonl")
+        _stage_split(DATA_V1, split, stage / "v1" / f"{split}.jsonl", normalize=True)
+
     stats_raw = (DATA / "stats.json").read_text(encoding="utf-8")
     (stage / "stats.json").write_text(stats_raw, encoding="utf-8")
+    (stage / "v1" / "stats.json").write_text(
+        (DATA_V1 / "stats.json").read_text(encoding="utf-8"), encoding="utf-8"
+    )
     stats = json.loads(stats_raw)
     total = stats.get("total_elements", "?")
     by_split = stats.get("by_split", {})
     by_lang = stats.get("by_language", {})
+    v1_stats = json.loads((DATA_V1 / "stats.json").read_text(encoding="utf-8"))
+    v1_total = v1_stats.get("total_elements", "?")
 
-    # README front-matter: license/language/tags + a configs block naming the split files, so the
-    # Hub page shows the split-size panel (how many rows in train/validation/test).
+    # README front-matter: license/language/tags + a configs block. Two configs: `default` (v2,
+    # curated) and `v1` (pre-v2, templated) so the Hub viewer shows both with their own splits.
     fm = [
         "---",
         "license: mit",
@@ -77,9 +117,14 @@ def publish_dataset(repo: str, token: str) -> None:
         "configs:",
         "  - config_name: default",
         "    data_files:",
-        '      - {split: train, path: train.jsonl}',
-        '      - {split: validation, path: val.jsonl}',
-        '      - {split: test, path: test.jsonl}',
+        "      - {split: train, path: train.jsonl}",
+        "      - {split: validation, path: val.jsonl}",
+        "      - {split: test, path: test.jsonl}",
+        "  - config_name: v1",
+        "    data_files:",
+        "      - {split: train, path: v1/train.jsonl}",
+        "      - {split: validation, path: v1/val.jsonl}",
+        "      - {split: test, path: v1/test.jsonl}",
         "---",
         "",
     ]
@@ -87,18 +132,28 @@ def publish_dataset(repo: str, token: str) -> None:
     glance = [
         "## Dataset at a glance",
         "",
+        "**`default` config — curated v2 (the recommended set):**",
+        "",
         f"- **Total examples:** {total}",
         "- **Splits:** " + ", ".join(f"{k} {v}" for k, v in by_split.items()),
         "- **By language:** " + ", ".join(f"{k} {v}" for k, v in by_lang.items()),
+        "",
+        "**`v1` config — pre-v2 (templated, superseded):**",
+        "",
+        f"- **Total examples:** {v1_total}",
+        "- **Splits:** " + ", ".join(f"{k} {v}" for k, v in v1_stats.get("by_split", {}).items()),
+        "- **By language:** "
+        + ", ".join(f"{k} {v}" for k, v in v1_stats.get("by_language", {}).items()),
+        "",
+        "> v1 is the programmatic/templated corpus that the project's thesis argues against; v2 is"
+        " the curated fix. Included for before/after comparison, not for training the final model.",
         "",
     ]
     body = (ROOT / "docs" / "DATA_CARD.md").read_text(encoding="utf-8")
     readme = "\n".join(fm) + "\n".join(glance) + "\n" + body
     (stage / "README.md").write_text(readme, encoding="utf-8")
     api.upload_folder(folder_path=str(stage), repo_id=repo, repo_type="dataset")
-    for f in stage.iterdir():
-        f.unlink()
-    stage.rmdir()
+    shutil.rmtree(stage)
     print(f"dataset published -> https://huggingface.co/datasets/{repo}")
 
 
