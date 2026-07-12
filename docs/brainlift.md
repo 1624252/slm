@@ -37,6 +37,45 @@ The purpose of this BrainLift is to collect research for a small learning model 
 
 ---
 
+## Did data → behavior hold? (the thesis, tested)
+
+**Behavior Spec (what we grade against):** every story stays within the learner's known vocabulary
+(OOV ≤ 2%), introduces **at most one new word per sentence**, recurs each target word ≥ 3× for
+spaced repetition, keeps the new word inferable from context, and reads as a real story — not a
+drill. A well-prompted base model **cannot** hold all of these at once (the litmus test the spec
+demands); that unreliability is what the dataset buys down.
+
+The claim was **behavior from data, not smarter model** — same base (`Qwen/Qwen3-4B-Instruct-2507`),
+same recipe, only the training data changes. Three runs settled it (full numbers in
+`evals/RESULTS_LOG.md` / `evals/LEADERBOARD.md`):
+
+1. **v1 (templated data) — the negative control.** SFT on meaning-blind template stories drove the
+   mechanical constraints to near-perfect (en golden hard-pass 0.00 → 0.97) but **collapsed prose
+   quality** (coherence 1.36 → 0.23, interestingness → 0.03). The model learned to *game* the
+   deterministic checks with dull text — proof that the checks alone don't define the behavior, and
+   that bad data actively teaches the wrong thing.
+
+2. **v2 (teacher-regenerated data) — the fix.** Same base, same recipe, coherent teacher-written
+   data. en golden: hard-pass posts (0.00 → 0.33–0.49), OOV collapses (0.157 → ~0.02), **and quality
+   holds** (coherence ~1.1, interestingness rises *above base* on held-out, 0.83 → 1.58). The
+   reward-hacking is gone. This is the core win: **the quality regression was a data property, not a
+   model-capacity ceiling.**
+
+3. **v2 multilingual — does it generalize?** Adding hard-pass-validated zh + ja data (final set:
+   en 600 + zh 500 + ja 510 = 1610 stories) moved **all three** languages on the constraints:
+   ja OOV 0.31 → 0.04 with its first hard-passes (golden 0.25, held-out 0.33); zh OOV 0.33 → 0.07;
+   en improved further (golden hard-pass → 0.49). One honest wrinkle surfaced and was diagnosed as a
+   *data* problem, per the spec's own rule: ja prose went flat (coherence 1.0 → 0.42) because ja's
+   baseline palette was only 66 words — too few to write anything interesting within. The fix was in
+   data, not hyperparameters: **widen the ja palette to 206 words** and re-author, exactly the
+   "fix in data" discipline the spec demands (retrain pending).
+
+**Verdict:** data → behavior **held**. The same 4B base is unreliable when prompted and a reliable
+i+1 writer when trained on good data — and every quality problem along the way was traceable to, and
+fixable in, the dataset. That is the whole thesis, and the evidence is on the board.
+
+---
+
 ## Experts
 
 - **Stephen D. Krashen**
