@@ -59,10 +59,18 @@ def publish_dataset(repo: str, token: str) -> None:
         )
     stats = (DATA / "stats.json").read_text(encoding="utf-8")
     (stage / "stats.json").write_text(stats, encoding="utf-8")
-    # README = the data card, so the Hub dataset page is populated.
-    (stage / "README.md").write_text(
-        (ROOT / "docs" / "DATA_CARD.md").read_text(encoding="utf-8"), encoding="utf-8"
+    # README = YAML front-matter (so the Hub page shows license/language/tags) + the data card.
+    front = (
+        "---\n"
+        "license: mit\n"
+        "language: [en, zh, ja]\n"
+        "task_categories: [text-generation]\n"
+        "tags: [comprehensible-input, language-learning, i-plus-1, story-generation]\n"
+        "pretty_name: i+1 Story Dataset (en/zh/ja)\n"
+        "---\n\n"
     )
+    body = (ROOT / "docs" / "DATA_CARD.md").read_text(encoding="utf-8")
+    (stage / "README.md").write_text(front + body, encoding="utf-8")
     api.upload_folder(folder_path=str(stage), repo_id=repo, repo_type="dataset")
     for f in stage.iterdir():
         f.unlink()
