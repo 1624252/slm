@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import json
 from collections.abc import Callable
 from dataclasses import dataclass
 
@@ -50,7 +51,10 @@ class Example:
                 "oov_rate": round(self.report.coverage.oov_rate, 4),
                 "coverage": round(self.report.coverage.coverage, 4),
                 "max_new_words_per_sentence": self.report.one_new_word.max_new_words,
-                "target_recurrence": self.report.recurrence.counts,
+                # JSON string, not a dict: the keys are the (per-record) target words, so a dict
+                # column gives every record a different struct schema and breaks HF/Arrow parquet
+                # conversion. A string keeps the column type stable.
+                "target_recurrence": json.dumps(self.report.recurrence.counts, ensure_ascii=False),
                 "rewrite_passes": self.rewrite_passes,
                 "judge_scores": self.judge,
                 "hard_pass": self.report.hard_pass,

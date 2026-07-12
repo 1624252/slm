@@ -19,6 +19,7 @@ from __future__ import annotations
 
 import argparse
 import gzip
+import json
 import os
 import sys
 from pathlib import Path
@@ -57,20 +58,43 @@ def publish_dataset(repo: str, token: str) -> None:
         (stage / f"{split}.jsonl").write_text(
             gzip.decompress(gz.read_bytes()).decode("utf-8"), encoding="utf-8"
         )
-    stats = (DATA / "stats.json").read_text(encoding="utf-8")
-    (stage / "stats.json").write_text(stats, encoding="utf-8")
-    # README = YAML front-matter (so the Hub page shows license/language/tags) + the data card.
-    front = (
-        "---\n"
-        "license: mit\n"
-        "language: [en, zh, ja]\n"
-        "task_categories: [text-generation]\n"
-        "tags: [comprehensible-input, language-learning, i-plus-1, story-generation]\n"
-        "pretty_name: i+1 Story Dataset (en/zh/ja)\n"
-        "---\n\n"
-    )
+    stats_raw = (DATA / "stats.json").read_text(encoding="utf-8")
+    (stage / "stats.json").write_text(stats_raw, encoding="utf-8")
+    stats = json.loads(stats_raw)
+    total = stats.get("total_elements", "?")
+    by_split = stats.get("by_split", {})
+    by_lang = stats.get("by_language", {})
+
+    # README front-matter: license/language/tags + a configs block naming the split files, so the
+    # Hub page shows the split-size panel (how many rows in train/validation/test).
+    fm = [
+        "---",
+        "license: mit",
+        "language: [en, zh, ja]",
+        "task_categories: [text-generation]",
+        "tags: [comprehensible-input, language-learning, i-plus-1, story-generation]",
+        "pretty_name: i+1 Story Dataset (en/zh/ja)",
+        "configs:",
+        "  - config_name: default",
+        "    data_files:",
+        '      - {split: train, path: train.jsonl}',
+        '      - {split: validation, path: val.jsonl}',
+        '      - {split: test, path: test.jsonl}',
+        "---",
+        "",
+    ]
+    # A human-readable "at a glance" block built from stats.json, above the full data card.
+    glance = [
+        "## Dataset at a glance",
+        "",
+        f"- **Total examples:** {total}",
+        "- **Splits:** " + ", ".join(f"{k} {v}" for k, v in by_split.items()),
+        "- **By language:** " + ", ".join(f"{k} {v}" for k, v in by_lang.items()),
+        "",
+    ]
     body = (ROOT / "docs" / "DATA_CARD.md").read_text(encoding="utf-8")
-    (stage / "README.md").write_text(front + body, encoding="utf-8")
+    readme = "\n".join(fm) + "\n".join(glance) + "\n" + body
+    (stage / "README.md").write_text(readme, encoding="utf-8")
     api.upload_folder(folder_path=str(stage), repo_id=repo, repo_type="dataset")
     for f in stage.iterdir():
         f.unlink()
