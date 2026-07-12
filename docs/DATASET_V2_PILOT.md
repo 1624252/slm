@@ -65,8 +65,8 @@ stays in the tree and does not run away."*
 still exists at `data/generated/teacher_en/` if needed. Exam generation source:
 `data/generated/teacher_en_exam/`.)
 
-**zh/ja scaled up (2026-07-11).** `data/dataset_v2/` is now **multilingual**: en 600 + **zh 350** +
-**ja 385** = 1335 stories. zh/ja have no exam vocab, so their targets are the graded concrete-noun
+**zh/ja scaled up (2026-07-11).** `data/dataset_v2/` is now **multilingual**: en 600 + **zh 500** +
+**ja 510** = 1610 stories. zh/ja have no exam vocab, so their targets are the graded concrete-noun
 pools (`synth.TARGET_POOLS`: lighthouse, rainbow, castle, treasure, robot, …). These were
 **model-authored without the OpenAI API** (batched via parallel subagents — zero contention with a
 running Colab eval) and every story validated through the same deterministic pipeline via
@@ -74,9 +74,11 @@ running Colab eval) and every story validated through the same deterministic pip
 (OOV, ≤1-new-word/sentence, recurrence ≥3×), then deduped and re-purged. **The validator is
 authoritative — subagent output is never trusted directly; anything that fails hard-pass or duplicates
 an existing story is dropped on append.** Final corpus: 0 dups, 0 hard-fails, **zh 52 / ja 48 unique
-targets**, 0 story leakage across splits; a 50-record random re-validation of the merged set is 50/50.
-(CJK has no em-dash tell, so no humanizer pass is needed there.) Train on the multilingual set with
-`notebooks/train_colab_v2_multi.ipynb`.
+targets**, 0 story leakage across splits; a 60-record random re-validation of the merged set is 60/60.
+(CJK has no em-dash tell, so no humanizer pass is needed there.) To fix the earlier ja prose-flatness
+(v2-multi run: ja coherence 1.0 → 0.42), the **ja baseline palette was widened 66 → 206** (added 140
+common N5 words) so ja stories have room for texture (店/道/音楽/部屋/窓 …) while staying
+beginner-level. Train on the multilingual set with `notebooks/train_colab_v2_multi.ipynb`.
 
 ## Validate it actually improved — the comparison train (A/B)
 

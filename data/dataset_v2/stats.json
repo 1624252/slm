@@ -1,44 +1,42 @@
 {
  "name": "islm i+1 story dataset v2 (teacher-regen; en exam + zh/ja authored graded)",
- "total_elements": 1335,
+ "total_elements": 1610,
  "by_split": {
-  "train": 1068,
-  "val": 133,
-  "test": 134
+  "train": 1288,
+  "val": 161,
+  "test": 161
  },
  "by_language": {
-  "ja": 385,
+  "ja": 510,
   "en": 600,
-  "zh": 350
+  "zh": 500
  },
  "target_source": {
   "en": "exam (GRE/SAT/ACT, data/vocab/en/exam.csv)",
   "zh": "graded concrete nouns (synth TARGET_POOLS)",
-  "ja": "graded concrete nouns (synth TARGET_POOLS)"
+  "ja": "graded concrete nouns (synth TARGET_POOLS); baseline palette widened to 206 (N5)"
  },
  "added_this_pass": {
   "zh": {
-   "kept": 350,
+   "kept": 500,
    "splits": {
-    "train": 280,
-    "val": 35,
-    "test": 35
+    "train": 400,
+    "val": 50,
+    "test": 50
    },
-   "unique_targets": 52,
-   "avg_targets": 2.0
+   "unique_targets": 52
   },
   "ja": {
-   "kept": 385,
+   "kept": 510,
    "splits": {
-    "train": 308,
-    "val": 38,
-    "test": 39
+    "train": 408,
+    "val": 51,
+    "test": 51
    },
-   "unique_targets": 48,
-   "avg_targets": 2.0
+   "unique_targets": 48
   }
  },
- "provenance": "en: islm.datagen.teacher --targets exam + humanizer + 2nd-pass validate. zh/ja: hand/model-authored coherent i+1 stories (batched via subagents), each validated through scripts/author_cjk.py (compact-known scoping + deterministic hard-pass: coverage/OOV, <=1-new-word/sentence, recurrence>=3x) then deduped and re-purged. No LLM API used for zh/ja generation.",
+ "provenance": "en: islm.datagen.teacher --targets exam + humanizer + 2nd-pass validate. zh/ja: model-authored coherent i+1 stories (batched via subagents), each validated through scripts/author_cjk.py (compact-known scoping + deterministic hard-pass: coverage/OOV, <=1-new-word/sentence, recurrence>=3x) then deduped and re-purged. No LLM API used for zh/ja.",
  "leakage_stories_shared_across_splits": 0,
  "all_spec_passing": true,
  "schema": "chat records system+user+assistant; metadata has hard_pass, target_recurrence, source"
