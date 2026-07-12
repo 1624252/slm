@@ -6,22 +6,22 @@ Held-out scenarios: **8**.
 | Metric | Base | Tuned | Delta | Better |
 | --- | --- | --- | --- | --- |
 | Hard-check pass rate (target 1.000) | 0.000 | 0.000 | +0.000 | base |
-| OOV rate (target <=0.02) | 0.328 | 0.074 | -0.254 | tuned |
-| <=1 new word/sentence (target 1.000) | 0.000 | 0.250 | +0.250 | tuned |
+| OOV rate (target <=0.02) | 0.328 | 0.076 | -0.252 | tuned |
+| <=1 new word/sentence (target 1.000) | 0.000 | 0.375 | +0.375 | tuned |
 | Recurrence satisfied (target 1.000) | 1.000 | 1.000 | +0.000 | base |
-| Inferability (cloze; target 1.000) | 0.625 | 0.375 | -0.250 | base |
+| Inferability (cloze; target 1.000) | 0.625 | 0.250 | -0.375 | base |
 
 ## LLM-as-judge rubric (0-2; first four are spec Appendix A)
 | Metric | Base | Tuned | Delta | Better |
 | --- | --- | --- | --- | --- |
-| spec_adherence (target >=1.5) | 0.875 | 1.375 | +0.500 | tuned |
+| spec_adherence (target >=1.5) | 0.875 | 1.250 | +0.375 | tuned |
 | robustness (target >=1.5) | 1.125 | 1.750 | +0.625 | tuned |
 | task_quality (target >=1.5) | 1.500 | 1.000 | -0.500 | base |
-| consistency (target >=1.5) | 1.625 | 1.875 | +0.250 | tuned |
-| inferability (target >=1.5) | 2.000 | 2.000 | +0.000 | base |
-| seductive_detail_control (target >=1.5) | 1.875 | 1.625 | -0.250 | base |
+| consistency (target >=1.5) | 1.625 | 1.750 | +0.125 | tuned |
+| inferability (target >=1.5) | 1.875 | 2.000 | +0.125 | tuned |
+| seductive_detail_control (target >=1.5) | 1.875 | 1.250 | -0.625 | base |
 | coherence (target >=1.5) | 1.375 | 1.000 | -0.375 | base |
-| interestingness (target >=1.5) | 1.375 | 0.875 | -0.500 | base |
+| interestingness (target >=1.5) | 1.375 | 0.750 | -0.625 | base |
 
 ## Win condition (spec)
 Beats base on Spec adherence AND Robustness: **PASS** (spec-adherence up (judge_spec_adherence), robustness up).
@@ -30,7 +30,7 @@ Beats base on Spec adherence AND Robustness: **PASS** (spec-adherence up (judge_
 8/8 outputs failed a check. Most common:
 - `oov`: 8
 - `coverage`: 8
-- `one_new_word`: 6
+- `one_new_word`: 5
 
 _Fill in: are the remaining failures a data problem (e.g. under-represented targets, themes that tempt off-vocab words)? What data change would fix them?_
 ---

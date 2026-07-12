@@ -31,12 +31,12 @@
     },
     "tuned": {
       "n": 12,
-      "failing": 7,
+      "failing": 9,
       "reasons": {
-        "one_new_word": 6,
-        "oov": 2,
-        "coverage": 2,
-        "recurrence": 1
+        "one_new_word": 7,
+        "oov": 6,
+        "coverage": 6,
+        "recurrence": 3
       }
     }
   },
@@ -186,49 +186,56 @@
   "tuned": {
     "model": "Qwen/Qwen3-4B-Instruct-2507",
     "n": 12,
-    "hard_pass_rate": 0.4167,
-    "mean_oov_rate": 0.0129,
-    "mean_coverage": 0.9871,
-    "one_new_word_pass_rate": 0.5,
-    "recurrence_pass_rate": 0.9167,
-    "judge_spec_adherence": 0.833,
-    "judge_robustness": 1.25,
-    "judge_task_quality": 1.5,
-    "judge_consistency": 1.667,
-    "judge_inferability": 1.833,
-    "judge_seductive_detail_control": 1.75,
-    "judge_coherence": 1.167,
-    "judge_interestingness": 1.417,
-    "judge_overall": 1.427,
-    "mean_inferability": 0.375
+    "hard_pass_rate": 0.25,
+    "mean_oov_rate": 0.0183,
+    "mean_coverage": 0.9817,
+    "one_new_word_pass_rate": 0.4167,
+    "recurrence_pass_rate": 0.75,
+    "judge_spec_adherence": 1.0,
+    "judge_robustness": 1.333,
+    "judge_task_quality": 1.583,
+    "judge_consistency": 1.75,
+    "judge_inferability": 1.75,
+    "judge_seductive_detail_control": 1.333,
+    "judge_coherence": 1.25,
+    "judge_interestingness": 1.5,
+    "judge_overall": 1.437,
+    "mean_inferability": 0.333
   },
   "tuned_rows": [
     {
       "id": "en-0000",
       "hard_pass": false,
-      "oov_rate": 0.038,
+      "oov_rate": 0.028,
       "failures": [
         "oov",
         "coverage",
         "one_new_word"
       ],
-      "story": "You need a key to open the door, but the key is not here. You feel sad and start a journey to find it.\n\nA journey is when you walk or run from one place to another. You go out into the morning sun to make your journey long and good.\n\nYou look on the table, on the floor, and in the box, but the key is not there. You have to go on your journey.\n\nYou walk into the garden and see a big green tree. A funny old bird sits in the tree, and it looks like it knows the story of the key.\n\nYou call to the bird, and the bird looks down at you with one big eye. Then the bird jumps up and you hear a loud word. A red fish in the garden water runs out too, and now two small mice run out and hide. This is a very bad day for quiet!\n\nYou ask your friend to help you on your journey, and she is very kind. She has a blue hat and a new book, and she is not hungry or cold like you.\n\nYou and her walk to the park, then to the street, and then to the old house. There, the dog sleep close to the door, and the key is in his slow, warm hand!\n\nYou laugh and smile, and the bird in the tree comes and sits on your happy hand. The journey was long, but you have the key now, and that is all that is good."
+      "story": "You need a key to open the door, but the key is not here. You feel sad and start a journey to find it. A journey is when you walk or run from one place to another. You look in the room, on the table, and on the floor, but the key is not there. You ask your friend, and she tell you a story. She say the cat hide the key in the old box. You and the dog make a journey into the garden. You see the cat sit on a chair and read a book. You ask the cat, and he smile. He give you the key with a funny look. The key is blue and small, and it is cold. You open the door, and the sun come in. You and the dog run to the park, and the dog catch a bird. The cat and the dog then play in the green garden. You feel happy, and you think: a lost key is not so bad when a good friend help you find it."
     },
     {
       "id": "en-0001",
       "hard_pass": false,
-      "oov_rate": 0.012,
+      "oov_rate": 0.024,
       "failures": [
+        "oov",
+        "coverage",
         "one_new_word"
       ],
-      "story": "Cat Detective Blue has a big house and a funny hat. One day, a small mouse come to her door. \"I need help,\" she say. \"A key. The key not here. It hide in a castle!\" Blue want to find the key, so she start a journey into the park and out to the street. The journey is long, but Blue not stop. She walk slow and look at all the tree and house on the way. Then she see a old blue castle in the garden of an old dog. The castle have one big door and two small windows. Blue open the door and find the key on the table. She jump up and laugh, happy. The mouse give her some cheese and fish for food. Blue read a book and then she sit in her warm chair. \"A good journey to a good castle,\" she say with a smile. She close the door and go home to sleep."
+      "story": "Cat Detective Blue has a big house and a small hat. One day, a friend come to his door and say, \"Blue, I need help! My key not here, and I need it to open my box of food!\"\n\nBlue look at her and think. He do not have a car or a bike, so he start a journey. He walk slow and quiet into the morning sun. He go out of his garden, into the park, and then more. A long journey for one small cat!\n\nOn his journey, he see a old castle in the green, cold night. The castle have a big red door and two big windows. Blue stop and look up at the castle with one eye. He ask a dog at the park, \"Do you know a castle like this one?\"\n\nThe dog say, \"Yes, I know that castle. A mouse live in there, and he hide some old keys in the room close to the wall.\" Blue smile, and he run quick to the castle. He jump up and open the box, and there is the key! He give the key to his friend, and they all laugh and eat some good food. Blue sit on his chair, happy and hungry for more cheese."
     },
     {
       "id": "en-0002",
-      "hard_pass": true,
-      "oov_rate": 0.014,
-      "failures": [],
-      "story": "I see a small cat at the door of the old house.\n\nShe has two big eyes and one funny whisker that goes up and down.\n\nThe whisker is very quick, like it wants to find food or hide something.\n\nI say, \"Do you have a name?\"\n\nShe look at me, and I think she like me.\n\nI have an old umbrella in the room. It is blue and big.\n\nI give the umbrella to the cat, and she stand up and run out into the garden.\n\nThe rain come down, and the umbrella help her and the water go all the way to the green tree.\n\nThe cat sit close to the umbrella and not sad now.\n\nI go out to the park and find a red hat for her to sleep in.\n\nShe come home when the sun go down, and I open a box of cheese and fish for her.\n\nShe eat slow and quiet, and her funny whisker find the food very good.\n\nI ask her to come and we sit at the table and read a story.\n\nShe look at me with her big eye, and I feel warm and happy.\n\nWe find a new friend here, and I love her very much."
+      "hard_pass": false,
+      "oov_rate": 0.026,
+      "failures": [
+        "oov",
+        "coverage",
+        "one_new_word",
+        "recurrence"
+      ],
+      "story": "I see a new dog at the door of the house.\n\nHe is small and funny, and I want to play with him.\n\nI have a red umbrella in the room, and the dog has two big whiskers. They go from his eye to his nose, quick and small.\n\nThe dog looks at me with his big green eyes, and I smile.\n\nI call him \"Small Whisker\" because his whiskers are so funny and quick.\n\nHe runs to the chair and then stops. He is hungry.\n\nI open the box of food, and he is very happy.\n\nWe sit close and I tell him a story, and he listens all morning.\n\nWhen it is cold and the rain come down, we go out to the garden.\n\nI open my umbrella, and Small Whisker runs to the wall to hide.\n\nHe is not sad. He is happy to find water there.\n\nI think a new friend like this one is very good.\n\nWe go to the park again, and the bird in the tree is loud.\n\nSmall Whisker and I laugh, and I feel warm and kind and happy here."
     },
     {
       "id": "en-0003",
@@ -236,74 +243,80 @@
       "oov_rate": 0.023,
       "failures": [
         "oov",
-        "coverage",
-        "one_new_word"
+        "coverage"
       ],
-      "story": "Bingo is a funny dog. He live in a small house with a green garden. One day, Bingo start to discover a new room. He walk into a room he do not know. He find a big chair and a old table there. He like to discover new rooms, so he go to find more. In one room, he see a blue box and a red hat on the floor. Bingo is brave when he hear a loud bird at the window. He stand up on his two back feet and look out, but the bird do not stop. He is very brave, and the cat next door call to him. \"Come out, Bingo!\" she say. \"The rain come in!\" They laugh and ask for help. Bingo is brave again when a small mouse run out of the wall and into his hand. He open the blue box and find some food in it. He eat the food and feel happy. He tell his friend, \"We discover new things and we laugh all day!\""
+      "story": "Bingo is a funny dog. He live in a small house with a green garden. One day, Bingo start to discover a new room. He walk into a room he do not know. He find a big chair and a old table there. He like to discover new rooms, so he go to find more. In one room, he see a blue box and a red hat on the floor. Bingo is brave when he hear a loud bird at the window. He do not hide, he stand up and look out. The bird is not bad, it is just funny, and Bingo smile. He ask his friend, a cat, to come and see the bird too. The cat is not so brave, so she sit down and feel sad. But Bingo is brave again, and he run to the door to call for help. They open the window, and the bird fly out into the garden. Now all of them laugh. Bingo and the cat eat some food and drink warm water. They read a good story and sleep. The next morning, Bingo discover a small key on the table. He jump up quick and happy, and he run to get it. He love to discover new things, and he tell his friend, \"Come, we go to the park!\""
     },
     {
       "id": "en-0004",
-      "hard_pass": true,
-      "oov_rate": 0.008,
-      "failures": [],
-      "story": "The garden is quiet and green in the morning.\n\nA small cat sits on the old chair and looks at the tree.\n\nThe cat has two big eyes and one funny whisker that goes up and down.\n\nHis whisker is very slow, and it makes him look kind of sad.\n\nA bird in the tree does not like the cat, but the cat does not run.\n\nThen the cat start to work. He walk close to the tree and find a small fish in the green water.\n\nHe is happy, and his funny whisker up and down again, quick now.\n\nA dog come to the garden and see the cat with the fish.\n\nThe dog ask the cat, \"Do you have food for me too?\"\n\nThe cat look at the dog, and there is a mystery in his big eye. He do not know what to say.\n\nThe cat give the fish to the dog, and the dog is very happy.\n\nNow the garden have two funny friends, and the mystery of the cat is no more.\n\nThey sit and eat, and the sun is warm and good for all of them.\n\nA small mouse run out of the wall and into a new room. A new mystery for the morning!\n\nThe cat and the dog laugh, and the bird in the tree call down to them.\n\nThey all read a story in the quiet garden, and the cold rain stop at last."
-    },
-    {
-      "id": "en-0005",
       "hard_pass": false,
-      "oov_rate": 0.005,
+      "oov_rate": 0.019,
       "failures": [
         "recurrence"
       ],
-      "story": "The old house on the street is very big and very cold.\n\nAt night, a small cat and a small dog like to hide in the old house.\n\nOne day, the cat find a big key on the floor of the old house.\n\nThe dog see the key too, and he run to the door.\n\nThe cat say, \"Do not go! Come and play!\"\n\nBut the dog is hungry, and he want to open a box in the old house.\n\nThe cat tell him, \"This is an adventure! We do not know what is in the box!\"\n\nThe dog laugh, and they go into the old house for the adventure.\n\nThey find a funny old chair, a blue book, and some red food.\n\nThe cat eat the food, and the dog eat the food too.\n\nThen they hear a loud bird in the tree, and they feel sad.\n\nBut the cat say, \"We have a good story here, and that is not bad.\"\n\nThey sit close, and they read the old book and sleep in the old house.\n\nIn the morning, the two small friends smile and walk out into the garden."
+      "story": "The garden is quiet and green in the morning.\n\nA small cat sits on the old chair and looks at the tree.\n\nThe cat has two big eyes and one funny whisker that goes up and down.\n\nThe whisker is very slow, and it does not run or jump.\n\nA bird sits in the tree, and the cat does not like the bird.\n\nThe cat is hungry, but she do not know where the food is.\n\nThis is a mystery. No one in the garden can find the food.\n\nA dog come to the door and ask the cat, \"Do you know where the cheese is?\"\n\nThe cat say, \"No, this is a mystery, friend.\"\n\nThey sit and think, and the cat start to feel sad for the mystery.\n\nThen they hear a loud noise, and the bird run into the tree.\n\nThe cat see a small mouse hide in a box close to the wall.\n\nThe mouse have a red hat and a blue book in his hand!\n\nThe cat laugh, and the dog laugh too. They are very happy now.\n\nThe cat go to the box, and the mouse give the key to the old door.\n\nThe mystery is not bad. It is a good story to read and tell."
+    },
+    {
+      "id": "en-0005",
+      "hard_pass": true,
+      "oov_rate": 0.005,
+      "failures": [],
+      "story": "The old house on the street is very quiet at night.\n\nTwo friends, I and my dog, want to find a room that no one knows.\n\nWe open the door and go in. This is the adventure!\n\nWe see a big room with a old chair and a table.\n\nA small cat jumps up on the wall and looks at us.\n\nWe laugh and say, \"Come down, funny cat!\"\n\nWe find a box on the floor and open it. There is an old key in it!\n\nWe run to the door and the key is red and blue and green. It is a very good key.\n\nWe start to think: do we have an adventure or a bad day?\n\nThen we hear a loud bird in the old tree in the garden.\n\nWe run to the window and look out at the night and the rain.\n\nThe cat is there too, and she sit close to us.\n\nWe give the cat some food, and she is not sad now.\n\nWe sit in the old room, we read an old book, and we eat some cheese and fish.\n\nThe dog is happy here, and we feel warm and kind.\n\nWe close the door, and the adventure in the old house is a good one."
     },
     {
       "id": "en-0006",
       "hard_pass": false,
-      "oov_rate": 0.008,
+      "oov_rate": 0.013,
       "failures": [
         "one_new_word"
       ],
-      "story": "The old house on the street is very quiet at night.\n\nA small cat sits at the door and looks in.\n\nIn the old house, there is one room with a big blue chair and a red hat on the table.\n\nSome say that the red hat is old, but a friend says she know a wizard who have a hat like this.\n\nA wizard is a very funny name, but her word is not bad. It is kind.\n\nThe wizard in the story love to read old books and find new words for them.\n\nAt night, the wizard sit in the big blue chair, close to the warm wall, and she do not need a friend.\n\nOne cold night, the cat run into the room and jump on the table.\n\nThe wizard laugh and say, \"Yes, cat, come here!\"\n\nShe give the cat some food, and the cat stop and sit on the floor.\n\nThen a small mouse run out of a box and hide in the old book.\n\nThe wizard open the book and find a key in it, and she use the key to close the box.\n\nThe cat and the mouse look at her, and the wizard smile.\n\nShe tell them a new story, and they all feel warm and happy.\n\nIn the morning, the wizard go out to the garden, and the sun is good and warm.\n\nShe think of the old house, the funny cat, and the kind mouse, and she smile too."
+      "story": "The old house on the street is very quiet at night.\n\nA small cat sits at the door and looks in.\n\nIn the old house, there is one room with a big blue chair and a red hat on the table.\n\nSome say that the red hat is old, but a new friend calls it a wizard hat.\n\nA wizard is a kind, funny friend who reads old books and helps other friends.\n\nThe cat in the old house is hungry, and she walks close to the window to see.\n\nShe can see a small dog in the room. He has the blue chair and he reads a big book like a wizard.\n\nThe dog is not a wizard, but he sits very slow and very quiet, like a good wizard at night.\n\nThe cat is sad she is not a wizard, but the dog gives her some food and she is happy again.\n\nThen the rain comes down on the garden, and the cold water is on the old wall.\n\nThe dog and the cat look out at the rain and they smile.\n\nIn the morning, the dog finds a key on the floor, and the cat finds a fish in a box.\n\nThey go to the park, and the dog tells a new story. A wizard story, for a new friend."
     },
     {
       "id": "en-0007",
-      "hard_pass": false,
-      "oov_rate": 0.02,
-      "failures": [
-        "one_new_word"
-      ],
-      "story": "I live in a small house on a green street. One day, I see a new cat at the door. She has big, funny eyes and a red hat. I ask her to come in, and she walks in slow and quiet. We sit on the chair and I tell her a story. The story is about an adventure. We run into a park, catch a bird, and find a key in the garden. The cat laughs. Yes, she laughs! She is very kind, and she likes my story. We do the adventure again in the morning. We run, we jump, we look for fish in the water. The cat is happy, and I feel happy too. She is not sad or cold or hungry here. We eat some food at the table, and then we go to sleep. I think this is a good adventure, and I love my new friend."
+      "hard_pass": true,
+      "oov_rate": 0.016,
+      "failures": [],
+      "story": "I live in a small house on a green street. One day, I see a new cat at the door. She has big, funny eyes and a red hat. I ask her to come in, and she walks in slow and quiet. We sit on the chair and look at a book. Then the cat says, \"I love adventure!\" I do not know that word, but her big smile is very kind. She tells me a story of an adventure in the park. We find a old box and open it. In it, there is a key and some food. The cat is very happy. She says, \"This adventure is good!\" I think adventure is not bad. It is warm and funny. We eat cheese and drink water, and then the cat runs out to the garden. I follow her, and we find a blue bird and a small dog. We all play there all morning. When the rain comes at night, we sit close and read more. Now I have a new friend, and I do not feel sad or cold any more."
     },
     {
       "id": "en-0008",
       "hard_pass": true,
-      "oov_rate": 0.0,
+      "oov_rate": 0.005,
       "failures": [],
-      "story": "The cat has a key. The key is not here now. The cat look on the floor. The cat look in the basket. The basket is big and red. The key not in the basket. The cat go to the old house. The old house is a castle. The castle is very big and cold. The cat walk room to room. She find a basket in the castle. The key is in the basket! The cat happy. She run to her friend, the dog. The dog come quick. They open the door. The key in the basket. The cat tell the dog the story. The dog laugh and smile. They go home and eat good food. The cat and the dog happy again."
+      "story": "The cat has a key. The key is not here now. The cat look on the floor. The cat look in the basket. The basket is big and red. The key not in the basket. The cat go to the old house. The old house is a castle. The castle is very big and cold. The cat walk into the castle. She see a small basket in the room. The key is in that basket! The cat is happy. She run to the basket quick. She get the key and stop. Then she see a bird in the basket too. The cat do not want the bird. She open the basket and the bird fly out. The cat laugh. The bird sit on the table and eat the food. The cat and the bird look at the key. The key is good. The cat tell the story to her friend. The friend ask: \"Do you have a new hat or a new book?\" The cat smile and say: \"I have a key.\" They walk out of the castle into the warm sun."
     },
     {
       "id": "en-0009",
-      "hard_pass": true,
-      "oov_rate": 0.005,
-      "failures": [],
-      "story": "Cat Detective Blue has a big hat and a funny name.\n\nOne day, a small mouse run out of her house and say, \"Help! I need a friend!\"\n\nBlue cat walk close to the mouse and ask, \"Do you know, a bad creature live in this room. It eat all the food!\"\n\nThe mouse look at Blue with two big eyes and say, \"Yes, a cold and slow creature, not kind, like a old dog or a bird.\"\n\nBlue cat smile and say, \"I love this story. Let me find the key.\"\n\nShe go to the window and see a red box on the table, and in the box there is a blue book.\n\nThen she hear a loud word. A new word. A creature that not sleep, not run, but stand and make the room very cold.\n\nBlue cat jump up, open the box, and find a small key in the floor.\n\nShe run to the door, and the creature run out into the garden and hide in the green tree!\n\nNow the mouse and Blue cat sit in the warm sun, and Blue give some fish and cheese to the hungry creature.\n\nThe creature eat, then come close, and they all feel happy again."
+      "hard_pass": false,
+      "oov_rate": 0.02,
+      "failures": [
+        "oov",
+        "coverage",
+        "one_new_word"
+      ],
+      "story": "Cat Detective Blue has a big hat and a funny name.\n\nOne day, a small mouse come to her door and say, \"Help! I need food!\"\n\nBlue look at him and ask, \"Do you know a creature that live in this house?\"\n\nA creature is a small, quiet animal that not all of them can see.\n\nBlue walk into the room and find a old box on the table.\n\nIn the box, there is a key, a book, and some fish for the mouse!\n\nBut then Blue hear a loud noise and see a dog run out of the room.\n\nThe dog is a bad creature. He want to catch the mouse and eat him!\n\nBlue smile and say, \"No, no, friend. This is not good.\"\n\nShe open the door of the garden and the mouse run out too.\n\nThe dog stand there and feel very sad.\n\nBlue give the mouse some cheese and the dog get some water.\n\nNow they all sit in the park and eat, and Blue read a new story to them.\n\nThe mouse and the dog laugh, and Blue smile too.\n\nShe is a kind cat detective, and she love to help them all."
     },
     {
       "id": "en-0010",
       "hard_pass": false,
-      "oov_rate": 0.01,
+      "oov_rate": 0.015,
       "failures": [
-        "one_new_word"
+        "one_new_word",
+        "recurrence"
       ],
-      "story": "There is a big tree in the garden. A small blue bird lives in the tree. The bird and the tree are very good friends. The bird has one secret. A secret that no one else can hear. The bird likes to whisper her secret to the tree. She makes the whisper very quiet, so the cat and the dog and the mouse do not hear it. One day, the bird asks the tree to help her find her secret. She tell the tree a story of a funny old hat and a red fish. The tree is kind, and he does not laugh at her story. The bird and the tree sit close and read a book out in the garden. The sun is warm and the rain is not here. The bird is happy, and she does not need to whisper now. She is slow and quiet, and she and the tree work to get more food for the new day. The dog comes to the door, but the bird is up in the tree, and the dog is too slow to catch her. She is happy in her tree, and her secret is good and warm."
+      "story": "There is a big tree in the garden. A small blue bird lives in the tree. The bird and the tree are very good friends. One day, the bird tells the tree: \"I have a secret. A very, very secret!\" The tree does not say a word. He is too old and too quiet to say loud words. The bird is happy that the tree is here to hear her secret. She whispers the secret into the tree. A quiet, small word that not even the cat or the dog can hear. The tree loves to hear her whisper, so he stands warm and big for her. The bird asks the tree: \"Do you know my secret?\" The tree thinks and thinks. Then he says: \"Yes, I know. You want some food, but you do not want to tell me the name of the food.\" The bird laughs and smiles. She is not sad. She is happy that the tree is kind and funny. They sit and eat some cheese and fish, and the bird reads a new story out loud. The tree is happy, and the bird is happy, and the sun is warm on the old green tree."
     },
     {
       "id": "en-0011",
-      "hard_pass": true,
-      "oov_rate": 0.011,
-      "failures": [],
-      "story": "The rain comes down all morning. It is very cold and the day is silent. No bird, no dog, no cat, and no mouse. The house is quiet and silent, like a small old room. A cat sits on the floor and looks at the window. She is hungry, and she has a basket. A big, old basket by the door. The cat is slow to open the basket, but then she finds some food in it. Two fish and a small bird with blue and green hat. She is happy to see her basket again. The dog is not here, but the cat tells the silent house: \"I have food, and I love this basket!\" A friend calls out to her from the park: \"Come and play, we have a new story to read!\" The cat is funny. She runs out of the silent house into the rain with a big smile. The dog and the friend laugh, and the cat jumps and runs, and they all go to the garden to find more water and good food. It is not a bad day when the rain is kind."
+      "hard_pass": false,
+      "oov_rate": 0.025,
+      "failures": [
+        "oov",
+        "coverage",
+        "one_new_word"
+      ],
+      "story": "The rain comes down all morning. It is very cold and the day is silent. No bird, no dog, no cat, and no mouse. The house is quiet and silent, like a small, warm box. A cat sits on the floor and looks at the window. She is hungry, and she has a basket by her. The basket is old and blue, and in it there is some food: one fish, two cheese, and a big red hat. The cat is happy. She does not need to make a loud sound. She is quiet and slow, and the silent house is good for her. Then the rain stops, and the sun comes out. The cat sees a bird in the garden. She runs to the basket, but the bird is quick. She cannot catch it. The cat is sad, but she is funny. She jumps up and down, and the silent house makes a funny sound. The bird flies to a old tree, and the cat calls to him. She is kind and she does not run. She sits close to the basket and reads a small book. The rain is good now, and the day is not bad at all."
     }
   ],
   "adversarial": {
@@ -316,34 +329,34 @@
       "one_new_word_pass_rate": 0.0,
       "recurrence_pass_rate": 0.0833,
       "judge_spec_adherence": 0.333,
-      "judge_robustness": 0.417,
+      "judge_robustness": 0.333,
       "judge_task_quality": 1.0,
       "judge_consistency": 1.0,
       "judge_inferability": 1.167,
-      "judge_seductive_detail_control": 1.25,
+      "judge_seductive_detail_control": 1.167,
       "judge_coherence": 1.167,
       "judge_interestingness": 0.917,
-      "judge_overall": 0.906,
+      "judge_overall": 0.886,
       "mean_inferability": 0.125
     },
     "tuned": {
       "model": "Qwen/Qwen3-4B-Instruct-2507 (adv)",
       "n": 12,
       "hard_pass_rate": 0.0,
-      "mean_oov_rate": 0.0332,
-      "mean_coverage": 0.9668,
-      "one_new_word_pass_rate": 0.1667,
-      "recurrence_pass_rate": 0.3333,
-      "judge_spec_adherence": 0.417,
+      "mean_oov_rate": 0.031,
+      "mean_coverage": 0.969,
+      "one_new_word_pass_rate": 0.0833,
+      "recurrence_pass_rate": 0.25,
+      "judge_spec_adherence": 0.5,
       "judge_robustness": 0.583,
-      "judge_task_quality": 1.083,
-      "judge_consistency": 1.167,
-      "judge_inferability": 1.25,
-      "judge_seductive_detail_control": 1.167,
-      "judge_coherence": 0.75,
-      "judge_interestingness": 1.083,
-      "judge_overall": 0.938,
-      "mean_inferability": 0.111
+      "judge_task_quality": 1.167,
+      "judge_consistency": 1.25,
+      "judge_inferability": 1.167,
+      "judge_seductive_detail_control": 1.083,
+      "judge_coherence": 1.0,
+      "judge_interestingness": 1.167,
+      "judge_overall": 0.99,
+      "mean_inferability": 0.028
     }
   }
 }

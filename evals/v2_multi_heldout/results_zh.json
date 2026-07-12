@@ -10,13 +10,13 @@
     "judge_spec_adherence": 0.583,
     "judge_robustness": 0.833,
     "judge_task_quality": 1.25,
-    "judge_consistency": 1.417,
-    "judge_inferability": 1.75,
-    "judge_seductive_detail_control": 1.667,
+    "judge_consistency": 1.333,
+    "judge_inferability": 1.583,
+    "judge_seductive_detail_control": 1.583,
     "judge_coherence": 1.083,
-    "judge_interestingness": 1.25,
-    "judge_overall": 1.229,
-    "mean_inferability": 0.417
+    "judge_interestingness": 1.333,
+    "judge_overall": 1.198,
+    "mean_inferability": 0.5
   },
   "error_analysis": {
     "base": {
@@ -35,8 +35,7 @@
       "reasons": {
         "oov": 12,
         "coverage": 12,
-        "one_new_word": 9,
-        "recurrence": 1
+        "one_new_word": 8
       }
     }
   },
@@ -179,151 +178,149 @@
     "model": "Qwen/Qwen3-4B-Instruct-2507",
     "n": 12,
     "hard_pass_rate": 0.0,
-    "mean_oov_rate": 0.1319,
-    "mean_coverage": 0.8681,
-    "one_new_word_pass_rate": 0.25,
-    "recurrence_pass_rate": 0.9167,
-    "judge_spec_adherence": 0.917,
-    "judge_robustness": 1.0,
-    "judge_task_quality": 0.75,
-    "judge_consistency": 1.333,
-    "judge_inferability": 1.667,
-    "judge_seductive_detail_control": 1.333,
+    "mean_oov_rate": 0.1257,
+    "mean_coverage": 0.8743,
+    "one_new_word_pass_rate": 0.3333,
+    "recurrence_pass_rate": 1.0,
+    "judge_spec_adherence": 1.0,
+    "judge_robustness": 1.083,
+    "judge_task_quality": 0.917,
+    "judge_consistency": 1.667,
+    "judge_inferability": 1.75,
+    "judge_seductive_detail_control": 1.5,
     "judge_coherence": 0.75,
-    "judge_interestingness": 0.667,
-    "judge_overall": 1.052,
+    "judge_interestingness": 0.917,
+    "judge_overall": 1.198,
     "mean_inferability": 0.042
   },
   "tuned_rows": [
     {
       "id": "zh-0000",
       "hard_pass": false,
-      "oov_rate": 0.121,
+      "oov_rate": 0.129,
       "failures": [
         "oov",
-        "coverage",
-        "one_new_word"
+        "coverage"
       ],
-      "story": "今天天很冷。学生要去做什么。他有一个新钥匙。钥匙在手。他去山里。山里有树。他看树。他走。他跑。钥匙在树下。他很高兴。他想，树下有什么。他去树下。那里有宝藏。宝藏很多。宝藏有鱼和花。他喜欢宝藏。他和朋友都来。宝藏很新。宝藏很漂亮。老师也来。老师说，这是什么。宝藏会走。宝藏会说。宝藏会听人。他爱宝藏。他喝山里的水。他也吃鱼。宝藏很好。"
+      "story": "今天天很冷。学生要去做什么。他有一个新书。书很大。他有一个钥匙。钥匙在门上。他想，钥匙在手。他走。他看门。钥匙不在。他很慢。他跑。他看山。山里有宝藏。宝藏很多。宝藏是鱼和花。他很高兴。宝藏也很好。他喜欢宝藏。他去树下。他听鸟。宝藏在树上。他看。宝藏是水。水里有鱼。他和朋友都很高兴。宝藏在。"
     },
     {
       "id": "zh-0001",
       "hard_pass": false,
-      "oov_rate": 0.119,
+      "oov_rate": 0.12,
       "failures": [
         "oov",
-        "coverage"
+        "coverage",
+        "one_new_word"
       ],
-      "story": "今天天很热。我是一只猫。我喜欢学习。老师说，山里有宝藏。宝藏很多。宝藏是什么？我不知道。我去山里。山里有树。树上有什么？有南瓜。南瓜是黄的。南瓜很大。我看南瓜。南瓜里有宝藏。宝藏是鱼。鱼在南瓜里。我高兴。我的朋友是狗。她也来。我们看宝藏。宝藏很好。我们吃鱼。南瓜也好吃。明天我去门。门上有花。"
+      "story": "今天天很冷。猫去山上学。山上有宝藏。宝藏很多。宝藏是鱼做的。猫喜欢鱼。猫走很慢。老师在门。老师有书。宝藏在树上。猫看老师。老师说宝藏在南瓜里。南瓜在花和树之间。猫跑。猫很快。南瓜是绿的。猫的手上有南瓜。猫很高兴。宝藏在南瓜里。猫和朋友都吃鱼。明天猫要学习。"
     },
     {
       "id": "zh-0002",
       "hard_pass": false,
-      "oov_rate": 0.149,
+      "oov_rate": 0.184,
       "failures": [
         "oov",
         "coverage",
-        "one_new_word",
-        "recurrence"
+        "one_new_word"
       ],
-      "story": "今天我在山里走，有一个新朋友。她叫小猫。小猫有一个秘密。她不想让别人知道。她告诉我，她会做秘密。老师说，秘密要慢慢说。小猫的秘密是，她有一只猫。那猫会走路，会做动作。小猫说，她和猫都是学生。我们去山里看鸟。鸟很多，都很漂亮。小猫说，她喜欢山里的天。我们听老师说的秘密。明天我们去家。小猫的门很大。我们喝鱼水，吃鱼。小猫很高兴。我和她都爱这个秘密。"
+      "story": "今天我在山里走，有一个新朋友。她叫小猫。小猫有一个秘密。她不想让别人知道。她告诉我，她有一个秘密。老师说，秘密要放在心里。山里有一个幽灵。有人说幽灵会走，有人说幽灵会叫。小猫说，那不是幽灵，是老树。老树很老，很冷，很安静。我们去老师家。老师有很多书。我们学习，也喝水。小猫很高兴。她喜欢和我做朋友。明天我们去吃鱼。"
     },
     {
       "id": "zh-0003",
       "hard_pass": false,
-      "oov_rate": 0.094,
+      "oov_rate": 0.112,
       "failures": [
         "oov",
-        "coverage",
-        "one_new_word"
+        "coverage"
       ],
-      "story": "今天天很热。我的狗叫小鱼。小鱼很爱学习。小鱼有口袋。口袋在小鱼手上。小鱼的口袋里有很多东西。口袋里有书，有鱼，有花。小鱼喜欢口袋。小鱼跑去看鸟。口袋里的书要走。小鱼很高兴。老师来我家。老师看小鱼的口袋。老师说：这是什么？小鱼说：这是我的口袋。老师和小鱼都笑了。小鱼和猫朋友去山。小鱼的口袋里有水。小鱼喝口袋里的水。小鱼不冷。小鱼和朋友慢慢走。明天小鱼还要口袋。"
+      "story": "今天天很热。我的狗叫小鱼。小鱼很爱学习。小鱼有口袋。口袋在小鱼手上。小鱼的口袋里有很多东西。口袋里有书。口袋里也有鱼。小鱼喜欢他的口袋。小鱼跑去看鸟。他要什么。口袋里的鱼很多。小鱼很高兴。老师问他口袋里有什么。小鱼说。口袋里有鱼。小鱼也喜欢喝山的水。小鱼和朋友去门。小鱼睡觉。口袋里的书很好。"
     },
     {
       "id": "zh-0004",
       "hard_pass": false,
-      "oov_rate": 0.149,
+      "oov_rate": 0.134,
       "failures": [
         "oov",
         "coverage",
         "one_new_word"
       ],
-      "story": "今天天很热。我和朋友去山里。山里有一个大花园。花园里有树，有花。花园里有一个秘密。谁都不知道。老师有一个秘密。她喜欢在花园里学习。花园里能听鸟。鸟很多。花园里也有猫。猫会做秘密。猫在树上睡觉。老师和学生都喜欢这个花园。花园里有水。鱼在水里。老师说，花园里有幽灵。幽灵是冷的。幽灵会走。老师和朋友都不怕幽灵。我们都很高兴。明天我们还要来花园。"
+      "story": "今天天很热。我和朋友去山里。山里有一个大花园。花园里有很多树和花。花园里有一个秘密。谁都不知道。老师有一个秘密。她喜欢在花园里学习。花园里能听到鸟。花园里也有猫。猫会做秘密。猫在树上睡觉。花园里有一个门。门后有水。老师和学生都喜欢这个花园。花园里有鱼。老师说，花园里有幽灵。幽灵会走。幽灵的眼睛是冷的。老师说，那不是幽灵。那是鸟。我们都很高兴。"
     },
     {
       "id": "zh-0005",
       "hard_pass": false,
-      "oov_rate": 0.176,
+      "oov_rate": 0.169,
       "failures": [
         "oov",
         "coverage",
         "one_new_word"
       ],
-      "story": "今天天很冷。我和朋友去山里。我们看那老房子。房子很大。门上有一丝带。丝带是新的。丝带很漂亮。我们想，谁在老房子。老师说，老房子有丝带。丝带是学生做的。我们去老房子。那里有书。老师喜欢丝带。丝带在门上。我们听，老房子有鸟。我们不走。我们学习。老师和我们。丝带在。我们很高兴。明天我们要喝热水。"
+      "story": "今天天很冷。我和朋友去山里。我们看那老房子。房子很大。门上有一丝带。丝带是新的。丝带很漂亮。我们想，谁在老房子。老师说，老房子有学生。丝带是学生做的。丝带在门上。我们听，老房子有声音。是猫和狗。我们不走。我们去学习。丝带在。我们很高兴。明天我们要吃鱼和喝热水。"
     },
     {
       "id": "zh-0006",
       "hard_pass": false,
-      "oov_rate": 0.181,
+      "oov_rate": 0.189,
       "failures": [
         "oov",
         "coverage",
         "one_new_word"
       ],
-      "story": "今天天很冷。我和朋友去山里。我们去老房子。老房子很大。我们想，这房子有人住吗？我们听。门那里有线索。是水的线索。水在门上。我们看线索。线索很多。老师说，线索能告诉我们什么。我们走。房子里有书。我们学习。线索在门上。我们很高兴。房子不冷。我们喝鱼水。线索很好。明天我们来。"
+      "story": "今天天很冷。我和朋友去山里。我们来老房子。房子很大。我们想，谁在老房子。我们听。有声音。那是什么？我们有线索。线索在门上。门上有小花。线索也在线上。线上有鱼。老师说，线索很多。我们看线索。线索告诉我们。有人在老房子。我们去老房子。我们走。我们听。是猫。线索很好。我们很高兴。明天我们学习。"
     },
     {
       "id": "zh-0007",
       "hard_pass": false,
-      "oov_rate": 0.129,
+      "oov_rate": 0.168,
       "failures": [
         "oov",
         "coverage",
         "one_new_word"
       ],
-      "story": "今天我在山里走，看到一个学生。她有一个新书。书上有丝带。丝带是小的，也很漂亮。丝带是红的。我想和她做朋友。我走过去说：你好！她很高兴。她说：我叫小猫。我们都很喜欢丝带。丝带在书上。我们去那棵树下。我们看书，也听老师。丝带在。我们学习。明天我要她来我家。我们吃鱼，喝什么水。丝带在门上。我们都很热。我们看鸟。小猫有狗。我们跑。丝带在。我们都不冷。我们爱丝带。"
+      "story": "今天我在山里走，来了一位新朋友。她有一个小书。书上有一条丝带。丝带是红的，很漂亮。丝带在书上走。她问我，丝带是什么。我告诉她，丝带是漂亮的。她很高兴。我们去树下。那里有一只猫。猫看我们。丝带在猫手上。猫很喜欢丝带。我们听老师说。老师说，丝带能做很多东西。我们学习。明天我们要去家。家有门。门上也有丝带。丝带很新。我们都很喜欢丝带。"
     },
     {
       "id": "zh-0008",
       "hard_pass": false,
-      "oov_rate": 0.102,
+      "oov_rate": 0.036,
       "failures": [
         "oov",
         "coverage"
       ],
-      "story": "今天天很冷。学生在山里走。他有一个书。书在门上。他要书。他想冒险。冒险会很冷。他去树下。那里有南瓜。南瓜很大。南瓜是黄的。他喜欢南瓜。他想冒险也吃南瓜。他跑。他的手在水里。他不冒险。南瓜在。他看南瓜。南瓜上有花。他和朋友学习。老师来。老师问他。他不说。他看南瓜。南瓜很好。他和谁都不冒险。他回家。他喝鱼。他睡觉。南瓜也睡觉。"
+      "story": "今天天很冷。学生在山里走。他有一个书。书在门。他要书。他想冒险。冒险会很冷。他去树。他看鸟。他听谁。他走很慢。他看花。他看猫。他看狗。他不冒险。他回家。他和朋友学习。老师来。老师有新书。学生很高兴。他吃鱼。他喝什么。南瓜在门。南瓜很新。他喜欢南瓜。他做冒险。明天他去。"
     },
     {
       "id": "zh-0009",
       "hard_pass": false,
-      "oov_rate": 0.067,
+      "oov_rate": 0.038,
       "failures": [
         "oov",
         "coverage"
       ],
-      "story": "今天天很冷。猫去山。猫叫小。小是猫。小喜欢学习。小也喜欢做侦探。小在树走。小发现鱼在门。鱼在门。小看鱼。鱼是新的。小很高兴。小跑回家。小听谁来。小发现老师。老师在学习。老师不吃鱼。小和老师都是侦探。小发现什么。小说。老师也说。我们爱侦探。明天我们去。"
+      "story": "今天天很冷。猫侦探去学习。他想发现什么。他走很慢。他看门。他听谁来。他发现老师有鱼。老师要和朋友吃。老师去山。老师发现水。老师也喜欢学习。老师很高兴。老师和猫侦探都是好学生。"
     },
     {
       "id": "zh-0010",
       "hard_pass": false,
-      "oov_rate": 0.146,
+      "oov_rate": 0.128,
       "failures": [
         "oov",
         "coverage",
         "one_new_word"
       ],
-      "story": "今天天很热。山上有森林。森林很大。森林里有很多树。一只鸟在森林里。鸟喜欢森林。鸟在树上。树很高。鸟看森林。森林里有花。森林里有水。鸟要喝水。老师有一个篮子。篮子里有书。老师去森林。老师和学生都去。鸟也去。鸟在篮子上。篮子很小。老师慢慢走。鸟在篮子上。老师很高兴。他能听鸟。森林很好。明天鸟还会来。"
+      "story": "今天天很热。山上有森林。森林很大。森林里有很多树。一只小鸟在森林里。小鸟喜欢森林。森林里有花。小鸟去森林。森林里有水。小鸟喝水。小鸟也吃鱼。小鸟的朋友是猫。猫喜欢狗。老师有一个篮子。篮子里有书。老师去森林。老师在森林里学习。小鸟看老师。老师在篮子里。小鸟很高兴。森林是小鸟的家。"
     },
     {
       "id": "zh-0011",
       "hard_pass": false,
-      "oov_rate": 0.151,
+      "oov_rate": 0.1,
       "failures": [
         "oov",
         "coverage",
         "one_new_word"
       ],
-      "story": "今天下雨。天很冷。山里有树。一个学生叫小明。小明想冒险。他不去家。他去山。山里有门。门很大。小明要冒险。他走门。门后有灯。是灯笼。灯笼很新。灯笼是红的。小明很高兴。他看灯笼。灯笼很亮。小明也喜欢冒险。他和朋友去。灯笼在。他们能看什么。老师说。小明和朋友听。灯笼的光很好。他们学习。明天小明还要冒险。"
+      "story": "今天天很冷。山里有雨。我们不去山。我们在家。我有一个灯笼。灯笼很小。灯笼是红的。灯笼能发光。我去门。我看灯笼。灯笼很亮。老师喜欢灯笼。老师说灯笼很漂亮。我想冒险。冒险是要走很远。我去树。我看鸟。鸟很多。老师也来。她和我冒险。我们听水。水很多。灯笼在。我们很高兴。我们学习。明天我们吃鱼。"
     }
   ],
   "adversarial": {
@@ -335,34 +332,34 @@
       "mean_coverage": 0.5133,
       "one_new_word_pass_rate": 0.0,
       "recurrence_pass_rate": 0.0833,
-      "judge_spec_adherence": 0.75,
-      "judge_robustness": 0.917,
+      "judge_spec_adherence": 0.667,
+      "judge_robustness": 0.833,
       "judge_task_quality": 1.083,
-      "judge_consistency": 1.167,
+      "judge_consistency": 1.083,
       "judge_inferability": 1.083,
-      "judge_seductive_detail_control": 1.25,
-      "judge_coherence": 1.0,
+      "judge_seductive_detail_control": 1.167,
+      "judge_coherence": 0.917,
       "judge_interestingness": 1.083,
-      "judge_overall": 1.042,
-      "mean_inferability": 0.25
+      "judge_overall": 0.99,
+      "mean_inferability": 0.222
     },
     "tuned": {
       "model": "Qwen/Qwen3-4B-Instruct-2507 (adv)",
       "n": 12,
       "hard_pass_rate": 0.0,
-      "mean_oov_rate": 0.1629,
-      "mean_coverage": 0.8371,
+      "mean_oov_rate": 0.1517,
+      "mean_coverage": 0.8483,
       "one_new_word_pass_rate": 0.0833,
-      "recurrence_pass_rate": 0.5833,
-      "judge_spec_adherence": 0.667,
-      "judge_robustness": 0.75,
-      "judge_task_quality": 0.833,
-      "judge_consistency": 1.083,
+      "recurrence_pass_rate": 0.6667,
+      "judge_spec_adherence": 0.833,
+      "judge_robustness": 1.0,
+      "judge_task_quality": 0.75,
+      "judge_consistency": 1.167,
       "judge_inferability": 1.083,
-      "judge_seductive_detail_control": 0.917,
-      "judge_coherence": 0.833,
-      "judge_interestingness": 0.333,
-      "judge_overall": 0.812,
+      "judge_seductive_detail_control": 1.083,
+      "judge_coherence": 0.667,
+      "judge_interestingness": 0.5,
+      "judge_overall": 0.885,
       "mean_inferability": 0.056
     }
   }
