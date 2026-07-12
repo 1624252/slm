@@ -94,6 +94,60 @@ def build_scenario(mode: str, seed: int) -> Scenario:
     return scenario
 
 
+def score(scenario: Scenario, story: str) -> None:
+    """Grade the story with the same deterministic validators the eval uses, and spell out exactly
+    what failed — which words are OOV, which sentences add >1 new word, which targets under-recur.
+    Uses compact-known scoping (known = the story's own content words minus targets), matching how
+    the dataset is built and evaluated, so a genuinely i+1 story can pass by construction."""
+    from islm.config import DEFAULT_THRESHOLDS as T
+    from islm.validators import validate_story
+    from islm.vocab.lemmatize import get_analyzer
+
+    analyzer = get_analyzer(scenario.language)
+    targets = {t.lower() for t in scenario.target_words}
+    # Grade against the palette the model was TOLD it could use — the promise to the learner,
+    # and the honest test of whether the story is actually i+1 for that learner.
+    known = scenario.known_set()
+    rep = validate_story(story, known, targets, analyzer, T, language=scenario.language)
+    c, onew, rec = rep.coverage, rep.one_new_word, rep.recurrence
+
+    print("SCORE (deterministic i+1 checks):")
+    print(f"  HARD PASS: {'YES' if rep.hard_pass else 'NO'}")
+
+    # 1. OOV / coverage
+    ok = c.oov_rate <= T.max_oov_rate and c.coverage >= T.min_coverage
+    print(
+        f"\n  [{'OK ' if ok else 'BAD'}] vocabulary — OOV {c.oov_rate:.1%} "
+        f"(limit {T.max_oov_rate:.0%}), coverage {c.coverage:.1%} (need {T.min_coverage:.0%})"
+    )
+    if c.oov_words:
+        print(f"        {c.oov} out-of-vocab word(s) the learner was NOT given:")
+        print(f"        {', '.join(c.oov_words)}")
+
+    # 2. <=1 new word per sentence
+    print(
+        f"\n  [{'OK ' if onew.passed else 'BAD'}] pacing — at most "
+        f"{T.max_new_words_per_sentence} new word per sentence (max seen: {onew.max_new_words})"
+    )
+    if not onew.passed:
+        for s in onew.per_sentence:
+            if s.index in onew.violations:
+                words = ", ".join(s.new_words)
+                print(f"        sentence {s.index + 1} adds {len(s.new_words)} new words: {words}")
+
+    # 3. recurrence >=3x
+    print(
+        f"\n  [{'OK ' if rec.passed else 'BAD'}] recurrence — each target appears "
+        f">= {rec.min_required}x"
+    )
+    print(f"        counts: {dict(rec.counts)}")
+    if rec.below:
+        under = ", ".join(f"'{w}' only {rec.counts[w]}x" for w in rec.below)
+        print(f"        UNDER {rec.min_required}x: {under}")
+    if rec.absent:
+        print(f"        MISSING entirely: {', '.join(rec.absent)}")
+
+
 def main() -> None:
     p = argparse.ArgumentParser(description="Manually test a trained i+1 story model.")
     p.add_argument("--mode", required=True, choices=list(MODES), help="en | en-exam | zh | jp")
@@ -132,7 +186,9 @@ def main() -> None:
     print("GENERATED STORY:\n")
     print(story)
     print("-" * 70)
-    print(f"(seed={seed} — pass --seed {seed} to reproduce this exact selection)")
+
+    score(scenario, story)
+    print(f"\n(seed={seed} — pass --seed {seed} to reproduce this exact selection)")
 
 
 if __name__ == "__main__":
