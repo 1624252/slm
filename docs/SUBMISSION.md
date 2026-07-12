@@ -5,11 +5,11 @@ lives in this repo and what's left. Legend: ✅ done · ⚠️ needs a step · �
 
 | # | Deliverable | Status | Where / how |
 | --- | --- | --- | --- |
-| 1 | **Dataset, published** | ⚠️ | In-repo: `data/dataset_v2/` (1610 stories, gz + `stats.json`) + `docs/DATA_CARD.md`. **To publish to HF:** verify HF account, then `python scripts/publish_hf.py dataset --repo <user>/islm-i-plus-1-stories`. |
+| 1 | **Dataset, published** | ✅ | Published: **https://huggingface.co/datasets/i0445/islm-stories** (1610 stories, `stats.json`, data card). In-repo mirror: `data/dataset_v2/` (gz splits) + `docs/DATA_CARD.md`. Re-publish with `python scripts/publish_hf.py dataset`. |
 | 2 | **Model on HF Hub + inference demo** | ✅ | Model: **https://huggingface.co/i0445/islm**. Upload cell is Step 7 of `train_colab_v2_multi.ipynb`. Demo: `notebooks/demo_colab.ipynb` (loads the adapter from the Hub). |
-| 3 | **Eval harness + results table (base vs tuned)** | ✅ | Harness: `src/islm/eval/`. Tables: `evals/LEADERBOARD.md` + `evals/RESULTS_LOG.md` (current, incl. v2-multi). Behavior metric = the judge rubric + deterministic checks. |
-| 4 | **Brainlift** | ✅ | `docs/brainlift.md` — thesis + research tree + the new "Did data → behavior hold?" section with final evidence. |
-| 5 | **3–5 min demo video** | ❌ | Script + shot list ready in `docs/DEMO_SCRIPT.md`. Recording is yours. |
+| 3 | **Eval harness + results table (base vs tuned)** | ✅ | Harness: `src/islm/eval/`. Tables: `evals/LEADERBOARD.md` + `evals/BASE_VS_BEST.md` + `evals/RESULTS_LOG.md` (current, incl. v2-multi). Behavior metric = the judge rubric + deterministic checks. |
+| 4 | **Brainlift** | ✅ | `docs/brainlift.md` — thesis + research tree + the "Did data → behavior hold?" section with final evidence. |
+| 5 | **3–5 min demo video** | ✅ | Recorded. Script + shot list: `docs/DEMO_SCRIPT.md`. Add the final link/file location to the submission form (the repo doesn't need the video file itself). |
 
 ## The behavior thesis (one-liner for graders)
 
